@@ -1,0 +1,14 @@
+<div [ngSwitch]="(getUserInfo() | async)?.role">
+    <app-landing-presentation-super-admin
+        *ngSwitchCase="UserType.SuperAdmin"
+    ></app-landing-presentation-super-admin>
+    <app-landing-presentation-admin
+        *ngSwitchCase="UserType.Admin"
+    ></app-landing-presentation-admin>
+    <app-landing-presentation-student
+        *ngSwitchCase="UserType.Student"
+    ></app-landing-presentation-student>
+    <app-landing-presentation-guest
+        *ngSwitchDefault
+    ></app-landing-presentation-guest>
+</div>

@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-content>
+        <app-user-edit-control
+            (searchChange)="applyFilter($event)"
+            SearchPlaceHolder="{{ 'Search' | translate }}"
+        >
+        </app-user-edit-control>
+        <app-data-grid-view
+            [gridDataSource]="dataSource"
+            [displayedColumns]="['userId', 'userName', 'roleName']"
+            (onPagination)="onActionRowGrid($event)"
+            [lengthData]="length"
+            [PaginatorIndex]="paginationIndex"
+            (onEditRow)="onActionRowGrid($event)"
+        >
+        </app-data-grid-view>
+    </mat-card-content>
+</mat-card>
