@@ -7,6 +7,10 @@ assignees: ''
 
 ---
 
+## Desired Use Case
+
+_Describe what this **should** implement._
+
 ## Actual/Current Behavior
 
 _Describe what is currently happening._
