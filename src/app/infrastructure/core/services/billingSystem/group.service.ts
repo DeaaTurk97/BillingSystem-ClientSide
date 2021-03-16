@@ -10,9 +10,15 @@ import { ApiService } from '../api/api.service';
 export class GroupService {
     constructor(private apiService: ApiService) {}
 
+    getAllGroups(): Observable<any> {
+        return this.apiService.get(
+            `${environment.apiRoute}/Groups/GetAllGroups`,
+        );
+    }
+
     getGroups(pageIndex: number, PageSize: number): Observable<any> {
         return this.apiService.get(
-            `${environment.apiRoute}/Groups/Get` +
+            `${environment.apiRoute}/Groups/GetGroups` +
                 '?pageIndex=' +
                 pageIndex +
                 '&pageSize=' +
@@ -20,23 +26,29 @@ export class GroupService {
         );
     }
 
+    getGroupId(groupId: number): Observable<any> {
+        return this.apiService.get(
+            `${environment.apiRoute}/Groups/getGroupId` + '?groupId=' + groupId,
+        );
+    }
+
     addGroup(groupModel: GroupModel): Observable<any> {
         return this.apiService.post(
-            `${environment.apiRoute}/Groups`,
+            `${environment.apiRoute}/Groups/AddGroup`,
             groupModel,
         );
     }
 
-    updateGroup(id: number, JobsForm: any): Observable<any> {
+    updateGroup(groupModel: GroupModel): Observable<GroupModel> {
         return this.apiService.put(
-            `${environment.apiRoute}/Groups` + '?id=' + id,
-            JobsForm,
+            `${environment.apiRoute}/Groups/UpdateGroup`,
+            groupModel,
         );
     }
 
     deleteGroup(id: number): Observable<any> {
         return this.apiService.delete(
-            `${environment.apiRoute}/Groups?id=` + id,
+            `${environment.apiRoute}/Groups/DeleteGroup?id=` + id,
         );
     }
 }

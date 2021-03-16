@@ -17,6 +17,8 @@ import { AddJobComponent } from '../addJob/add-job.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 import { NotificationService } from '@core/services/notification.service';
+import { catchError, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-jobs-list',
@@ -68,7 +70,7 @@ export class JobsListComponent implements OnInit {
     onEditControlClick(resultClick: State) {
         switch (resultClick) {
             case State.Add:
-                this.AddNewRecord();
+                this.onAddRecord();
                 break;
         }
     }
@@ -96,46 +98,66 @@ export class JobsListComponent implements OnInit {
         }
     }
 
-    AddNewRecord() {
-        this.dialog
-            .open(AddJobComponent, this.getConfigDialog(null))
+    onAddRecord() {
+        const dialog = this.dialog.open(
+            AddJobComponent,
+            this.getConfigDialog(null),
+        );
+
+        return dialog
             .afterClosed()
-            .subscribe(
-                (result) => {
-                    if (result) {
+            .pipe(
+                switchMap((dialogResult: string) => {
+                    if (dialogResult) {
                         this.LoadJobs(1, this.pageSize);
                         this.dataSource.paginator = this.paginator;
-                        this.notify.showTranslateMessage('AddedSuccessfully');
+                        this.notify.showTranslateMessage(
+                            'AddedSuccessfully',
+                            false,
+                        );
+                        return of({});
                     } else {
                         this.notify.showTranslateMessage('CancelAdd');
+                        return of({});
                     }
-                },
-                (error) => {
-                    this.notify.showTranslateMessage('ErrorOnAdd');
-                },
-            );
+                }),
+                catchError((): any => {
+                    this.notify.showTranslateMessage('ErrorOnAdd', true);
+                }),
+            )
+            .subscribe((result) => {});
     }
 
     onEdit(jobModel: JobModel) {
-        this.dialog
-            .open(AddJobComponent, this.getConfigDialog(jobModel))
+        const dialog = this.dialog.open(
+            AddJobComponent,
+            this.getConfigDialog(jobModel),
+        );
+
+        return dialog
             .afterClosed()
-            .subscribe(
-                (result) => {
-                    if (result) {
+            .pipe(
+                switchMap((dialogResult: string) => {
+                    if (dialogResult) {
                         this.LoadJobs(1, this.pageSize);
-                        this.notify.showTranslateMessage('UpdatedSuccessfully');
+                        this.notify.showTranslateMessage(
+                            'UpdatedSuccessfully',
+                            false,
+                        );
+                        return of({});
                     } else {
                         this.notify.showTranslateMessage('CancelUpdate');
+                        return of({});
                     }
-                },
-                (error) => {
+                }),
+                catchError((): any => {
                     this.notify.showTranslateMessage('ErrorOnUpdate');
-                },
-            );
+                }),
+            )
+            .subscribe((result) => {});
     }
 
-    onDelete(row: JobModel) {
+    onDelete(jobModel: JobModel) {
         return this.dialog
             .open(ConfirmDialogComponent, {
                 width: '27em',
@@ -150,26 +172,22 @@ export class JobsListComponent implements OnInit {
                 },
             })
             .afterClosed()
+            .pipe(
+                switchMap((dialogResult: string) => {
+                    if (dialogResult) {
+                        return this.jobsService.deleteJob(jobModel.id);
+                    } else {
+                        this.notify.showTranslateMessage('CancelDelete');
+                        return of({});
+                    }
+                }),
+                catchError((): any => {
+                    this.notify.showTranslateMessage('ErrorOnDelete');
+                }),
+            )
             .subscribe((result) => {
-                if (result) {
-                    this.jobsService.deleteJob(row.id).subscribe(
-                        (data) => {
-                            if (data) {
-                                this.LoadJobs(1, this.pageSize);
-                                this.notify.showTranslateMessage(
-                                    'DeletedSuccessfully',
-                                );
-                            } else {
-                                this.notify.showTranslateMessage(
-                                    'CancelDelete',
-                                );
-                            }
-                        },
-                        (error) => {
-                            this.notify.showTranslateMessage('ErrorOnDelete');
-                        },
-                    );
-                }
+                this.LoadJobs(1, this.pageSize);
+                this.notify.showTranslateMessage('DeletedSuccessfully');
             });
     }
 }
