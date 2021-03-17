@@ -9,6 +9,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobModel } from '@models/project/JobModel';
 import { MatDialogRef } from '@angular/material/dialog';
 import { JobsService } from '@app/infrastructure/core/services/billingSystem/job.service';
+import { mergeMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-add-job',
@@ -21,7 +23,7 @@ export class AddJobComponent implements OnInit {
     public isInProgress = false;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) public jobModel: any,
+        @Inject(MAT_DIALOG_DATA) public jobModel: JobModel,
         private formBuilder: FormBuilder,
         private jobsService: JobsService,
         private dialogRef: MatDialogRef<AddJobComponent>,
@@ -39,44 +41,37 @@ export class AddJobComponent implements OnInit {
     ngInitialControlForm() {
         this.frmAddNew = this.formBuilder.group({
             Id: [0],
-            JobName: ['', Validators.required],
+            JobNameAr: ['', Validators.required],
+            JobNameEn: ['', Validators.required],
         });
     }
 
     setJobDetails() {
         if (this.jobModel) {
             this.frmAddNew.controls.Id.setValue(this.jobModel.id);
-            this.frmAddNew.controls.JobName.setValue(this.jobModel.jobName);
+            this.frmAddNew.controls.JobNameAr.setValue(this.jobModel.jobNameAr);
+            this.frmAddNew.controls.JobNameEn.setValue(this.jobModel.jobNameEn);
         }
     }
 
-    OnSubmit() {
+    onSubmit() {
         this.isInProgress = true;
-        if (this.ID === 0) {
-            this.jobsService.addJob(this.frmAddNew.value).subscribe(
-                (Id: any) => {
-                    if (Id) {
-                        this.frmAddNew.controls.Id.setValue(Id);
-                        this.dialogRef.close(this.frmAddNew.value);
-                        this.frmAddNew.reset();
-                    }
-                },
-                () => {
-                    this.dialogRef.close(this.frmAddNew.value);
-                },
-            );
-        } else {
-            this.jobsService.updateJob(this.ID, this.frmAddNew.value).subscribe(
-                (next) => {
+
+        var initialObservable = of({});
+        initialObservable
+            .pipe(
+                mergeMap(() => {
+                    return this.ID === 0
+                        ? this.jobsService.addJob(this.frmAddNew.value)
+                        : this.jobsService.updateJob(this.frmAddNew.value);
+                }),
+            )
+            .subscribe((id) => {
+                if (id) {
                     this.dialogRef.close(this.frmAddNew.value);
                     this.frmAddNew.reset();
-                },
-                () => {
-                    this.dialogRef.close(this.frmAddNew.value);
-                },
-            );
-        }
-        this.resetFormBuilder();
+                }
+            });
     }
 
     resetFormBuilder() {

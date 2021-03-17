@@ -87,15 +87,18 @@ export class GroupsListComponent implements OnInit {
     }
 
     LoadGroups(pageIndex: number, pageSize: number) {
-        this.groupService.getGroups(pageIndex, pageSize).pipe(
-            map((paginationRecord) => {
-                this.dataSource.data = paginationRecord.dataRecord;
-                this.length = paginationRecord.countRecord;
-            }),
-            catchError((error): any => {
-                this.notify.showTranslateMessage('ErrorOnLoadData');
-            }),
-        );
+        this.groupService
+            .getGroups(pageIndex, pageSize)
+            .pipe(
+                map((paginationRecord) => {
+                    this.dataSource.data = paginationRecord.dataRecord;
+                    this.length = paginationRecord.countRecord;
+                }),
+                catchError((error): any => {
+                    this.notify.showTranslateMessage('ErrorOnLoadData');
+                }),
+            )
+            .subscribe((result) => {});
     }
 
     onAddRecord() {
@@ -103,6 +106,7 @@ export class GroupsListComponent implements OnInit {
             AddGroupComponent,
             this.getConfigDialog(null),
         );
+
         return dialog
             .afterClosed()
             .pipe(
@@ -121,15 +125,19 @@ export class GroupsListComponent implements OnInit {
                     }
                 }),
                 catchError((): any => {
-                    this.notify.showTranslateMessage('ErrorOnAdd');
+                    this.notify.showTranslateMessage('ErrorOnAdd', true);
                 }),
             )
             .subscribe((result) => {});
     }
 
     onEdit(groupModel: GroupModel) {
-        this.dialog
-            .open(AddGroupComponent, this.getConfigDialog(groupModel))
+        const dialog = this.dialog.open(
+            AddGroupComponent,
+            this.getConfigDialog(groupModel),
+        );
+
+        return dialog
             .afterClosed()
             .pipe(
                 switchMap((dialogResult: string) => {

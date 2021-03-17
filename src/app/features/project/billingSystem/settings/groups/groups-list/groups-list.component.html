@@ -8,7 +8,7 @@
         </app-user-edit-control>
         <app-data-grid-view
             [gridDataSource]="dataSource"
-            [displayedColumns]="['id', 'jobName']"
+            [displayedColumns]="['id', 'groupNameAr','groupNameEn']"
             (onEditRow)="onActionRowGrid($event)"
             (onDeleteRow)="onActionRowGrid($event)"
             (onPagination)="onActionRowGrid($event)"

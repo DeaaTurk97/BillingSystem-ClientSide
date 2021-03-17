@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         this.isInProgress = true;
         this.authService.login(this.loginForm.value).subscribe(
             (next) => {
-                this.router.navigateByUrl('landing/jobs-list');
+                this.router.navigateByUrl('landing/landing-presentation');
             },
             (error) => {
                 this.isInProgress = false;

@@ -10,9 +10,13 @@ import { JobModel } from '@models/project/JobModel';
 export class JobsService {
     constructor(private apiService: ApiService) {}
 
+    getAllJobs(): Observable<any> {
+        return this.apiService.get(`${environment.apiRoute}/Jobs/getAllJobs`);
+    }
+
     getJobs(pageIndex: number, PageSize: number): Observable<any> {
         return this.apiService.get(
-            `${environment.apiRoute}/Jobs/Get` +
+            `${environment.apiRoute}/Jobs/GetJobs` +
                 '?pageIndex=' +
                 pageIndex +
                 '&pageSize=' +
@@ -20,18 +24,29 @@ export class JobsService {
         );
     }
 
-    addJob(JobsForm: JobModel): Observable<any> {
-        return this.apiService.post(`${environment.apiRoute}/Jobs`, JobsForm);
+    getJobId(jobId: number): Observable<any> {
+        return this.apiService.get(
+            `${environment.apiRoute}/Jobs/GetJobId` + '?jobId=' + jobId,
+        );
     }
 
-    updateJob(id: number, JobsForm: any): Observable<any> {
+    addJob(JobsForm: JobModel): Observable<any> {
+        return this.apiService.post(
+            `${environment.apiRoute}/Jobs/AddJob`,
+            JobsForm,
+        );
+    }
+
+    updateJob(JobsForm: JobModel): Observable<JobModel> {
         return this.apiService.put(
-            `${environment.apiRoute}/Jobs` + '?id=' + id,
+            `${environment.apiRoute}/Jobs/UpdateJob`,
             JobsForm,
         );
     }
 
     deleteJob(id: number): Observable<any> {
-        return this.apiService.delete(`${environment.apiRoute}/Jobs?id=` + id);
+        return this.apiService.delete(
+            `${environment.apiRoute}/Jobs/DeleteJob?id=` + id,
+        );
     }
 }

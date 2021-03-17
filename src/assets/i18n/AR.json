@@ -121,6 +121,8 @@
     "Operators": "المزودين",
     "Groups": "المجموعات",
     "Jobs": "الوظائف",
-    "jobName": "الوظيفة/عربي",
-    "test": "test"
+    "jobNameAr": "الوظيفة/عربي",
+    "jobNameEn": "الوظيفة/إنجليزي",
+    "groupNameAr": "المجموعة/عربي",
+    "groupNameEn": "المجموعة/إنجليزي"
 }

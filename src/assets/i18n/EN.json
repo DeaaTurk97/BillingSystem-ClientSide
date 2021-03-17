@@ -119,5 +119,8 @@
     "Operators": "Operators",
     "Groups": "Groups",
     "Jobs": "Jobs",
-    "jobName": "jobName/Aarbic"
+    "jobNameAr": "job/Aarbic",
+    "jobNameEn": "job/English",
+    "groupNameAr": "group/Arabic",
+    "groupNameEn": "group/English"
 }

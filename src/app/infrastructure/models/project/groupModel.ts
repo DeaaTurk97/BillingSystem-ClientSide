@@ -1,4 +1,5 @@
 export interface GroupModel {
     id: number;
-    groupName: string;
+    groupNameAr: string;
+    groupNameEn: string;
 }
