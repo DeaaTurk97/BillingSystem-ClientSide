@@ -124,5 +124,9 @@
     "jobNameAr": "الوظيفة/عربي",
     "jobNameEn": "الوظيفة/إنجليزي",
     "groupNameAr": "المجموعة/عربي",
-    "groupNameEn": "المجموعة/إنجليزي"
+    "groupNameEn": "المجموعة/إنجليزي",
+    "operatorNameAr": "المزود/عربي",
+    "operatorNameEn": "المزود/إنجليزي",
+    "operatorKey": "الرقم المفتاحي",
+    "id": "التسلسل"
 }

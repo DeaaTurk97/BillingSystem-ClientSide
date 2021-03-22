@@ -122,5 +122,9 @@
     "jobNameAr": "job/Aarbic",
     "jobNameEn": "job/English",
     "groupNameAr": "group/Arabic",
-    "groupNameEn": "group/English"
+    "groupNameEn": "group/English",
+    "operatorNameAr": "operator Name/Arabic",
+    "operatorNameEn": "operator Name/English",
+    "operatorKey": "Key number",
+    "id": "SerialNo."
 }
