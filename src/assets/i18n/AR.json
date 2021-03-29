@@ -133,5 +133,8 @@
     "countryNameAr": "الدولة/عربي",
     "countryNameEn": "الدولة/إنجليزي",
     "countryKey": "مفتاح الدولة",
-    "pricePerMinute": "سعر الدقيقة"
+    "pricePerMinute": "سعر الدقيقة",
+    "Governorates": "المحافظات",
+    "governorateNameAr": "المحافظة/عربي",
+    "governorateNameEn": "المحافظة/إنجليزي"
 }

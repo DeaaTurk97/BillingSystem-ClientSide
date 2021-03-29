@@ -113,6 +113,11 @@ const MENUITEMS = [
                 type: 'link',
             },
             {
+                state: 'governorates-list',
+                name: 'Governorates',
+                type: 'link',
+            },
+            {
                 state: 'operators-list',
                 name: 'Operators',
                 type: 'link',

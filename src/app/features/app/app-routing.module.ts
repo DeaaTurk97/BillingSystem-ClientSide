@@ -83,6 +83,15 @@ const routes: Routes = [
             ).then((m) => m.GroupModule),
     },
     {
+        path: 'settings',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/billingSystem/settings/governorates/governorate.module'
+            ).then((m) => m.GovernorateModule),
+    },
+    {
         path: '**',
         component: NotFoundComponent,
         data: { title: 'Not Found' },
