@@ -128,5 +128,10 @@
     "operatorNameAr": "المزود/عربي",
     "operatorNameEn": "المزود/إنجليزي",
     "operatorKey": "الرقم المفتاحي",
-    "id": "التسلسل"
+    "id": "التسلسل",
+    "Countries": "الدول",
+    "countryNameAr": "الدولة/عربي",
+    "countryNameEn": "الدولة/إنجليزي",
+    "countryKey": "مفتاح الدولة",
+    "pricePerMinute": "سعر الدقيقة"
 }

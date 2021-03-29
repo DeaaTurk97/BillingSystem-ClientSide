@@ -74,6 +74,15 @@ const routes: Routes = [
             ).then((m) => m.OperatorModule),
     },
     {
+        path: 'settings',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/billingSystem/settings/countries/country.module'
+            ).then((m) => m.GroupModule),
+    },
+    {
         path: '**',
         component: NotFoundComponent,
         data: { title: 'Not Found' },
