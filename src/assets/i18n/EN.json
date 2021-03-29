@@ -126,5 +126,10 @@
     "operatorNameAr": "operator Name/Arabic",
     "operatorNameEn": "operator Name/English",
     "operatorKey": "Key number",
-    "id": "SerialNo."
+    "id": "SerialNo.",
+    "Countries": "Countries",
+    "countryNameAr": "country/Arabic",
+    "countryNameEn": "country/English",
+    "countryKey": "country Key",
+    "pricePerMinute": "price per minute"
 }

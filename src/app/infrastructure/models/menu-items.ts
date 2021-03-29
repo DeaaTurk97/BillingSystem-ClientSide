@@ -108,8 +108,8 @@ const MENUITEMS = [
         icon: 'bubble_chart',
         children: [
             {
-                state: 'country-key-list',
-                name: 'CountryKey',
+                state: 'countries-list',
+                name: 'Countries',
                 type: 'link',
             },
             {
