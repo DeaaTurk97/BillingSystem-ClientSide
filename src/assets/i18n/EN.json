@@ -131,5 +131,8 @@
     "countryNameAr": "country/Arabic",
     "countryNameEn": "country/English",
     "countryKey": "country Key",
-    "pricePerMinute": "price per minute"
+    "pricePerMinute": "price per minute",
+    "Governorates": "Governorates",
+    "governorateNameAr": "governorate/Arabic",
+    "governorateNameEn": "governorate/English"
 }
