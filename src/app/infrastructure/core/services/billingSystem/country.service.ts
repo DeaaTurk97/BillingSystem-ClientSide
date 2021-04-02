@@ -26,9 +26,9 @@ export class CountryService {
         );
     }
 
-    getCountryId(groupId: number): Observable<any> {
+    GetCountryId(groupId: number): Observable<any> {
         return this.apiService.get(
-            `${environment.apiRoute}/Countries/getCountryId` +
+            `${environment.apiRoute}/Countries/GetCountryId` +
                 '?groupId=' +
                 groupId,
         );
