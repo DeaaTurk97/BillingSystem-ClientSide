@@ -15,16 +15,14 @@
                             fxFlex="100"
                         >
                             <ng-template>
-                                <mat-card-actions>
-                                    <mat-form-field style="width: 100%">
-                                        <input
-                                            matInput
-                                            placeholder="Id"
-                                            formControlName="Id"
-                                            type="text"
-                                        />
-                                    </mat-form-field>
-                                </mat-card-actions>
+                                <mat-form-field style="width: 100%">
+                                    <input
+                                        matInput
+                                        placeholder="Id"
+                                        formControlName="Id"
+                                        type="text"
+                                    />
+                                </mat-form-field>
                             </ng-template>
                         </div>
 
@@ -34,17 +32,17 @@
                             fxFlex.gt-xs="100"
                             fxFlex="100"
                         >
-                            <mat-card-actions>
-                                <mat-form-field style="width: 100%">
-                                    <input
-                                        matInput
-                                        placeholder="{{'countryNameAr' | translate}}"
-                                        formControlName="CountryNameAr"
-                                        type="text"
-                                        autocomplete="off"
-                                    />
-                                </mat-form-field>
-                            </mat-card-actions>
+                            <mat-form-field style="width: 100%">
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'countryNameAr' | translate
+                                    }}"
+                                    formControlName="CountryNameAr"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
                         </div>
 
                         <div
@@ -53,17 +51,17 @@
                             fxFlex.gt-xs="100"
                             fxFlex="100"
                         >
-                            <mat-card-actions>
-                                <mat-form-field style="width: 100%">
-                                    <input
-                                        matInput
-                                        placeholder="{{'countryNameEn' | translate}}"
-                                        formControlName="CountryNameEn"
-                                        type="text"
-                                        autocomplete="off"
-                                    />
-                                </mat-form-field>
-                            </mat-card-actions>
+                            <mat-form-field style="width: 100%">
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'countryNameEn' | translate
+                                    }}"
+                                    formControlName="CountryNameEn"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
                         </div>
 
                         <div
@@ -72,17 +70,15 @@
                             fxFlex.gt-xs="100"
                             fxFlex="100"
                         >
-                            <mat-card-actions>
-                                <mat-form-field style="width: 100%">
-                                    <input
-                                        matInput
-                                        placeholder="{{'countryKey' | translate}}"
-                                        formControlName="CountryKey"
-                                        type="number"
-                                        autocomplete="off"
-                                    />
-                                </mat-form-field>
-                            </mat-card-actions>
+                            <mat-form-field style="width: 100%">
+                                <input
+                                    matInput
+                                    placeholder="{{ 'countryKey' | translate }}"
+                                    formControlName="CountryKey"
+                                    type="number"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
                         </div>
 
                         <div
@@ -91,17 +87,17 @@
                             fxFlex.gt-xs="100"
                             fxFlex="100"
                         >
-                            <mat-card-actions>
-                                <mat-form-field style="width: 100%">
-                                    <input
-                                        matInput
-                                        placeholder="{{'pricePerMinute' | translate}}"
-                                        formControlName="PricePerMinute"
-                                        type="number"
-                                        autocomplete="off"
-                                    />
-                                </mat-form-field>
-                            </mat-card-actions>
+                            <mat-form-field style="width: 100%">
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'pricePerMinute' | translate
+                                    }}"
+                                    formControlName="PricePerMinute"
+                                    type="number"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
                         </div>
 
                         <div
@@ -110,15 +106,14 @@
                             fxFlex.gt-xs="15"
                             fxFlex="100"
                         >
-                            <mat-card-actions>
-                                <button
-                                    mat-raised-button
-                                    [mat-dialog-close]="false"
-                                    color="warn"
-                                >
-                                    <mat-icon>close</mat-icon> {{'Close' | translate}}
-                                </button>
-                            </mat-card-actions>
+                            <button
+                                mat-raised-button
+                                [mat-dialog-close]="false"
+                                color="warn"
+                            >
+                                <mat-icon>close</mat-icon>
+                                {{ 'Close' | translate }}
+                            </button>
                         </div>
 
                         <div
@@ -128,18 +123,14 @@
                             fxFlex="100"
                             [hidden]="frmAddNew.controls['Id'].value != 0"
                         >
-                            <mat-card-actions>
-                                <button
-                                    mat-raised-button
-                                    type="submit"
-                                    color="primary"
-                                    [disabled]="
-                                        !frmAddNew.valid || isInProgress
-                                    "
-                                >
-                                    <mat-icon>add</mat-icon> {{'Add' | translate}}
-                                </button>
-                            </mat-card-actions>
+                            <button
+                                mat-raised-button
+                                type="submit"
+                                color="primary"
+                                [disabled]="!frmAddNew.valid || isInProgress"
+                            >
+                                <mat-icon>add</mat-icon> {{ 'Add' | translate }}
+                            </button>
                         </div>
 
                         <div
@@ -149,18 +140,15 @@
                             fxFlex="100"
                             [hidden]="frmAddNew.controls['Id'].value == 0"
                         >
-                            <mat-card-actions>
-                                <button
-                                    mat-raised-button
-                                    type="submit"
-                                    color="primary"
-                                    [disabled]="
-                                        !frmAddNew.valid || isInProgress
-                                    "
-                                >
-                                    <mat-icon>save</mat-icon> {{'Save' | translate}}
-                                </button>
-                            </mat-card-actions>
+                            <button
+                                mat-raised-button
+                                type="submit"
+                                color="primary"
+                                [disabled]="!frmAddNew.valid || isInProgress"
+                            >
+                                <mat-icon>save</mat-icon>
+                                {{ 'Save' | translate }}
+                            </button>
                         </div>
                     </div>
                 </form>

@@ -1,28 +1,1094 @@
-<mat-card-actions>
-    <button
-        mat-raised-button
-        type="submit"
-        color="primary"
-        (click)="saveSettings()"
-    >
-        <mat-icon>save</mat-icon> Save
-    </button>
-</mat-card-actions>
+<mat-card>
+    <mat-card-actions>
+        <div class="p-10" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+            <button
+                mat-raised-button
+                type="submit"
+                color="primary"
+                [disabled]="!frmGeneralSettings.valid || isInProgress"
+                (click)="saveSettings()"
+            >
+                <mat-icon>save</mat-icon>
+                {{ 'save' | translate }}
+            </button>
+        </div>
+    </mat-card-actions></mat-card
+>
+<mat-card>
+    <mat-card-actions>
+        <mat-tab-group animationDuration="1ms">
+            <form novalidate [formGroup]="frmGeneralSettings">
+                <mat-tab label="{{ 'defaultValues' | translate }}">
+                    <div fxLayout="row wrap">
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'DefaultValueForNewNumber' | translate
+                                }}</mat-label>
+                                <mat-select
+                                    placeholder="{{
+                                        'DefaultStatusNumber' | translate
+                                    }}"
+                                    [(value)]="selectedStatus"
+                                    formControlName="DefaultStatusNumber"
+                                >
+                                    <mat-option
+                                        *ngFor="
+                                            let status of keys(
+                                                DefaultStatusNumber
+                                            );
+                                            let i = index
+                                        "
+                                        [value]="i"
+                                    >
+                                        {{
+                                            DefaultStatusNumber[status]
+                                                | translate
+                                        }}</mat-option
+                                    >
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'DefaultPassword' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [type]="
+                                        isHidePassword ? 'password' : 'text'
+                                    "
+                                    placeholder="{{
+                                        'DefaultPassword' | translate
+                                    }}"
+                                    formControlName="DefaultPassword"
+                                    type="Password"
+                                    autocomplete="off"
+                                />
+                                <mat-icon
+                                    matSuffix
+                                    (click)="isHidePassword = !isHidePassword"
+                                    >{{
+                                        isHidePassword
+                                            ? 'visibility_off'
+                                            : 'visibility'
+                                    }}</mat-icon
+                                >
+                            </mat-form-field>
+                        </div>
 
-<app-file-upload
-    class="inline-block"
-    [fileConfig]="fileConfig"
-    [fileListFormControl]="fileListFormControl"
-    [form]="form"
-    [formConfig]="formConfig"
-    title="{{ 'DocumentUpload' | translate }}"
-    [validationMessageList]="validationMessageList"
-    (emitFileSelect)="onFileSelect($event)"
-    (emitSubmit)="uploadDocument()"
-></app-file-upload>
-<img
-    [src]="imageBase64 | async"
-    alt="Fatawa default image"
-    width="200"
-    class="inline-block"
-/>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ValueOfAllowedCallsToTheEmployee'
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ValueOfAllowedCallsToTheEmployee'
+                                            | translate
+                                    }}"
+                                    formControlName="ValueOfAllowedCallsToTheEmployee"
+                                    type="number"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'TheNumberOfDaysGrantedToTheEmployeeToSendTheBill'
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'TheNumberOfDaysGrantedToTheEmployeeToSendTheBill'
+                                            | translate
+                                    }}"
+                                    formControlName="TheNumberOfDaysGrantedToTheEmployeeToSendTheBill"
+                                    type="number"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'FractionNumbers' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'FractionNumbers' | translate
+                                    }}"
+                                    formControlName="FractionNumbers"
+                                    type="number"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <div
+                                class="p-10"
+                                fxFlex.gt-sm="100"
+                                fxFlex.gt-xs="100"
+                                fxFlex="100"
+                            >
+                                <mat-radio-group
+                                    formControlName="IsDefaultPassword"
+                                >
+                                    <mat-label>{{
+                                        'PasswordStorageWhenAddingAnewNumber'
+                                            | translate
+                                    }}</mat-label
+                                    >&nbsp;
+                                    <mat-radio-button
+                                        color="primary"
+                                        [value]="true"
+                                        >{{
+                                            'DefaultPasswordInput' | translate
+                                        }}</mat-radio-button
+                                    >&nbsp;
+                                    <mat-radio-button
+                                        color="primary"
+                                        [value]="false"
+                                        >{{
+                                            'CreateFromSystem' | translate
+                                        }}</mat-radio-button
+                                    >
+                                </mat-radio-group>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-checkbox
+                                formControlName="IsSendPasswordByEmail"
+                                >{{
+                                    'SendPasswordByEmail' | translate
+                                }}</mat-checkbox
+                            >
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-checkbox
+                                formControlName="IsViewCallsThatHaveApriceEqualZero"
+                                >{{
+                                    'ViewCallsThatHaveApriceEqualZero'
+                                        | translate
+                                }}</mat-checkbox
+                            >
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-checkbox
+                                formControlName="IsAbilityOfTheAdministratorToControlEmployeeBills"
+                                >{{
+                                    'AbilityOfTheAdministratorToControlEmployeeBills'
+                                        | translate
+                                }}</mat-checkbox
+                            >
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-checkbox formControlName="IsReminderByEmail">{{
+                                'ReminderByEmail' | translate
+                            }}</mat-checkbox>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-checkbox
+                                formControlName="IsReminderBySystem"
+                                >{{
+                                    'ReminderBySystem' | translate
+                                }}</mat-checkbox
+                            >
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="{{ 'EmailsTemplates' | translate }}">
+                    <div fxLayout="row wrap">
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ImportCC' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'ImportCC' | translate }}"
+                                    formControlName="ImportCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ImportSubject' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ImportSubject' | translate
+                                    }}"
+                                    formControlName="ImportSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ImportBody' | translate
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{ 'ImportBody' | translate }}"
+                                    formControlName="ImportBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- ReminderEmail -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderIdentifyNewNumbersCC' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderIdentifyNewNumbersCC'
+                                            | translate
+                                    }}"
+                                    formControlName="ReminderIdentifyNewNumbersCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderIdentifyNewNumbersSubject'
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderIdentifyNewNumbersSubject'
+                                            | translate
+                                    }}"
+                                    formControlName="ReminderIdentifyNewNumbersSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderIdentifyNewNumbersBody' | translate
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderIdentifyNewNumbersBody'
+                                            | translate
+                                    }}"
+                                    formControlName="ReminderIdentifyNewNumbersBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- Rejection Number -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'RejectionNumberCC' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RejectionNumberCC' | translate
+                                    }}"
+                                    formControlName="RejectionNumberCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'RejectionNumberSubject' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'RejectionNumberSubject' | translate
+                                    }}"
+                                    formControlName="RejectionNumberSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'RejectionNumberBody' | translate
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{
+                                        'RejectionNumberBody' | translate
+                                    }}"
+                                    formControlName="RejectionNumberBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- PaidCC -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'PaidCC' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'PaidCC' | translate }}"
+                                    formControlName="PaidCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'PaidSubject' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'PaidSubject' | translate
+                                    }}"
+                                    formControlName="PaidSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'PaidBody' | translate
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{ 'PaidBody' | translate }}"
+                                    formControlName="PaidBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+                        <!-- UnPaidCC -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'UnPaidCC' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'UnPaidCC' | translate }}"
+                                    formControlName="UnPaidCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'UnPaidSubject' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'UnPaidSubject' | translate
+                                    }}"
+                                    formControlName="UnPaidSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'UnPaidBody' | translate
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{ 'UnPaidBody' | translate }}"
+                                    formControlName="UnPaidBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+                        <!-- SubmittedCC -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'SubmittedCC' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SubmittedCC' | translate
+                                    }}"
+                                    formControlName="SubmittedCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'SubmittedSubject' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SubmittedSubject' | translate
+                                    }}"
+                                    formControlName="SubmittedSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'SubmittedBody' | translate
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{
+                                        'SubmittedBody' | translate
+                                    }}"
+                                    formControlName="SubmittedBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+                        <!-- ReminderTotalDueCC -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderTotalDueCC' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderTotalDueCC' | translate
+                                    }}"
+                                    formControlName="ReminderTotalDueCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderTotalDueSubject' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderTotalDueSubject' | translate
+                                    }}"
+                                    formControlName="ReminderTotalDueSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderTotalDueBody' | translate
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderTotalDueBody' | translate
+                                    }}"
+                                    formControlName="ReminderTotalDueBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+                        <!-- ReminderPeriodStartForIdentifyNumbersCC -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderPeriodStartForIdentifyNumbersCC'
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderPeriodStartForIdentifyNumbersCC'
+                                            | translate
+                                    }}"
+                                    formControlName="ReminderPeriodStartForIdentifyNumbersCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderPeriodStartForIdentifyNumberSubject'
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderPeriodStartForIdentifyNumberSubject'
+                                            | translate
+                                    }}"
+                                    formControlName="ReminderPeriodStartForIdentifyNumberSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderPeriodStartForIdentifyNumbersBody'
+                                        | translate
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderPeriodStartForIdentifyNumbersBody'
+                                            | translate
+                                    }}"
+                                    formControlName="ReminderPeriodStartForIdentifyNumbersBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+                        <!-- ReminderEndPeriodIdentifyNumbersCC -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderEndPeriodIdentifyNumbersCC'
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderEndPeriodIdentifyNumbersCC'
+                                            | translate
+                                    }}"
+                                    formControlName="ReminderEndPeriodIdentifyNumbersCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderEndPeriodIdentifyNumbersSubject'
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderEndPeriodIdentifyNumbersSubject'
+                                            | translate
+                                    }}"
+                                    formControlName="ReminderEndPeriodIdentifyNumbersSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ReminderEndPeriodIdentifyNumbersBody'
+                                        | translate
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{
+                                        'ReminderEndPeriodIdentifyNumbersBody'
+                                            | translate
+                                    }}"
+                                    formControlName="ReminderEndPeriodIdentifyNumbersBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- Email Test -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'EmailTestCC' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'EmailTestCC' | translate
+                                    }}"
+                                    formControlName="EmailTestCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'EmailTestSubject' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'EmailTestSubject' | translate
+                                    }}"
+                                    formControlName="EmailTestSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'EmailTestBody' | translate
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{
+                                        'EmailTestBody' | translate
+                                    }}"
+                                    formControlName="EmailTestBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="{{ 'SMTPSettings' | translate }}">
+                    <div fxLayout="row wrap">
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'SMTPServer' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'SMTPServer' | translate }}"
+                                    formControlName="SMTPServer"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'SMTPUserEmail' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'SMTPUserEmail' | translate
+                                    }}"
+                                    formControlName="SMTPUserEmail"
+                                    type="email"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'SMTPUserPassword' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    [type]="
+                                        isHidePassword ? 'password' : 'text'
+                                    "
+                                    placeholder="{{
+                                        'SMTPUserPassword' | translate
+                                    }}"
+                                    formControlName="SMTPUserPassword"
+                                    type="Password"
+                                    autocomplete="off"
+                                />
+                                <mat-icon
+                                    matSuffix
+                                    (click)="isHidePassword = !isHidePassword"
+                                    >{{
+                                        isHidePassword
+                                            ? 'visibility_off'
+                                            : 'visibility'
+                                    }}</mat-icon
+                                >
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'SMTPPortNo' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'SMTPPortNo' | translate }}"
+                                    formControlName="SMTPPortNo"
+                                    type="number"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-checkbox formControlName="IsUseSSL">{{
+                                'UseSSL' | translate
+                            }}</mat-checkbox>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-checkbox
+                                formControlName="IsRequiresAuthentication"
+                                >{{
+                                    'RequiresAuthentication' | translate
+                                }}</mat-checkbox
+                            >
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'EmailForTest' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'EmailForTest' | translate
+                                    }}"
+                                    formControlName="EmailForTest"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <button
+                                mat-raised-button
+                                color="primary"
+                                [disabled]="!frmGeneralSettings.valid"
+                            >
+                                <mat-icon>email</mat-icon>
+                                {{ 'SendTest' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </mat-tab>
+            </form>
+        </mat-tab-group>
+    </mat-card-actions>
+</mat-card>
