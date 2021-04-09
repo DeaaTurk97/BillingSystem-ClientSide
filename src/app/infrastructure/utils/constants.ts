@@ -12,6 +12,54 @@ export interface IConstant {
     MAXFILESIZE: number;
     MAXFILENAMELENGTH: number;
     Default_Image_Setting_Name: string;
+    DefaultStatusNumber: string;
+    DefaultPassword: string;
+    ValueOfAllowedCallsToTheEmployee: string;
+    TheNumberOfDaysGrantedToTheEmployeeToSendTheBill: string;
+    FractionNumbers: string;
+    IsDefaultPassword: string;
+    IsSendPasswordByEmail: string;
+    IsViewCallsThatHaveApriceEqualZero: string;
+    IsAbilityOfTheAdministratorToControlEmployeeBills: string;
+    IsReminderByEmail: string;
+    IsReminderBySystem: string;
+    SMTPServer: string;
+    SMTPUserEmail: string;
+    SMTPUserPassword: string;
+    SMTPPortNo: string;
+    IsUseSSL: string;
+    IsRequiresAuthentication: string;
+    EmailForTest: string;
+    ImportCC: string;
+    ImportSubject: string;
+    ImportBody: string;
+    ReminderIdentifyNewNumbersCC: string;
+    ReminderIdentifyNewNumbersSubject: string;
+    ReminderIdentifyNewNumbersBody: string;
+    RejectionNumberCC: string;
+    RejectionNumberSubject: string;
+    RejectionNumberBody: string;
+    PaidCC: string;
+    PaidSubject: string;
+    PaidBody: string;
+    UnPaidCC: string;
+    UnPaidSubject: string;
+    UnPaidBody: string;
+    SubmittedCC: string;
+    SubmittedSubject: string;
+    SubmittedBody: string;
+    ReminderTotalDueCC: string;
+    ReminderTotalDueSubject: string;
+    ReminderTotalDueBody: string;
+    ReminderPeriodStartForIdentifyNumbersCC: string;
+    ReminderPeriodStartForIdentifyNumberSubject: string;
+    ReminderPeriodStartForIdentifyNumbersBody: string;
+    ReminderEndPeriodIdentifyNumbersCC: string;
+    ReminderEndPeriodIdentifyNumbersSubject: string;
+    ReminderEndPeriodIdentifyNumbersBody: string;
+    EmailTestCC: string;
+    EmailTestSubject: string;
+    EmailTestBody: string;
 }
 
 export const Constants: IConstant = {
@@ -27,4 +75,59 @@ export const Constants: IConstant = {
     Default_Image_Setting_Name: 'default_image',
     DefaultLanguageId: 1,
     DefaultLanguageDirection: 'rtl',
+    DefaultStatusNumber: 'DefaultStatusNumber',
+    DefaultPassword: 'DefaultPassword',
+    ValueOfAllowedCallsToTheEmployee: 'ValueOfAllowedCallsToTheEmployee',
+    TheNumberOfDaysGrantedToTheEmployeeToSendTheBill:
+        'TheNumberOfDaysGrantedToTheEmployeeToSendTheBill',
+    FractionNumbers: 'FractionNumbers',
+    IsDefaultPassword: 'IsDefaultPassword',
+    IsSendPasswordByEmail: 'IsSendPasswordByEmail',
+    IsViewCallsThatHaveApriceEqualZero: 'IsViewCallsThatHaveApriceEqualZero',
+    IsAbilityOfTheAdministratorToControlEmployeeBills:
+        'IsAbilityOfTheAdministratorToControlEmployeeBills',
+    IsReminderByEmail: 'IsReminderByEmail',
+    IsReminderBySystem: 'IsReminderBySystem',
+    SMTPServer: 'SMTPServer',
+    SMTPUserEmail: 'SMTPUserEmail',
+    SMTPUserPassword: 'SMTPUserPassword',
+    SMTPPortNo: 'SMTPPortNo',
+    IsUseSSL: 'IsUseSSL',
+    IsRequiresAuthentication: 'IsRequiresAuthentication',
+    EmailForTest: 'EmailForTest',
+    ImportCC: 'ImportCC',
+    ImportSubject: 'ImportSubject',
+    ImportBody: 'ImportBody',
+    ReminderIdentifyNewNumbersCC: 'ReminderIdentifyNewNumbersCC',
+    ReminderIdentifyNewNumbersSubject: 'ReminderIdentifyNewNumbersSubject',
+    ReminderIdentifyNewNumbersBody: 'ReminderIdentifyNewNumbersBody',
+    RejectionNumberCC: 'RejectionNumberCC',
+    RejectionNumberSubject: 'RejectionNumberSubject',
+    RejectionNumberBody: 'RejectionNumberBody',
+    PaidCC: 'PaidCC',
+    PaidSubject: 'PaidSubject',
+    PaidBody: 'PaidBody',
+    UnPaidCC: 'UnPaidCC',
+    UnPaidSubject: 'UnPaidSubject',
+    UnPaidBody: 'UnPaidBody',
+    SubmittedCC: 'SubmittedCC',
+    SubmittedSubject: 'SubmittedSubject',
+    SubmittedBody: 'SubmittedBody',
+    ReminderTotalDueCC: 'ReminderTotalDueCC',
+    ReminderTotalDueSubject: 'ReminderTotalDueSubject',
+    ReminderTotalDueBody: 'ReminderTotalDueBody',
+    ReminderPeriodStartForIdentifyNumbersCC:
+        'ReminderPeriodStartForIdentifyNumbersCC',
+    ReminderPeriodStartForIdentifyNumberSubject:
+        'ReminderPeriodStartForIdentifyNumberSubject',
+    ReminderPeriodStartForIdentifyNumbersBody:
+        'ReminderPeriodStartForIdentifyNumbersBody',
+    ReminderEndPeriodIdentifyNumbersCC: 'ReminderEndPeriodIdentifyNumbersCC',
+    ReminderEndPeriodIdentifyNumbersSubject:
+        'ReminderEndPeriodIdentifyNumbersSubject',
+    ReminderEndPeriodIdentifyNumbersBody:
+        'ReminderEndPeriodIdentifyNumbersBody',
+    EmailTestCC: 'EmailTestCC',
+    EmailTestSubject: 'EmailTestSubject',
+    EmailTestBody: 'EmailTestBody',
 };
