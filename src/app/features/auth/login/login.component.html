@@ -15,9 +15,10 @@
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                             <mat-form-field>
+                                <mat-label>{{ 'Email' | translate }}</mat-label>
                                 <input
                                     matInput
-                                    placeholder="{{'Email' | translate}}"
+                                    placeholder="{{ 'Email' | translate }}"
                                     formControlName="Email"
                                 />
                             </mat-form-field>
@@ -34,12 +35,15 @@
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                             <mat-form-field>
+                                <mat-label>{{
+                                    'Password' | translate
+                                }}</mat-label>
                                 <input
                                     matInput
                                     [type]="
                                         isHidePassword ? 'password' : 'text'
                                     "
-                                    placeholder="{{'Password' | translate}}"
+                                    placeholder="{{ 'Password' | translate }}"
                                     formControlName="Password"
                                 />
                                 <mat-icon
@@ -62,7 +66,7 @@
                                 >{{ 'PasswordRequired' | translate }}</small
                             >
                         </div>
-                       
+
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                             <button

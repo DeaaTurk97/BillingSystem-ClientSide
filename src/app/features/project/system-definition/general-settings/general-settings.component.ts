@@ -56,13 +56,7 @@ export class GeneralSettingsComponent implements OnInit {
             ],
             IsReminderByEmail: [false, Validators.required],
             IsReminderBySystem: [false, Validators.required],
-            SMTPServer: ['', Validators.required],
-            SMTPUserEmail: ['', [Validators.required, Validators.email]],
-            SMTPUserPassword: ['', Validators.required],
-            SMTPPortNo: ['', Validators.required],
-            IsUseSSL: [false, Validators.required],
-            IsRequiresAuthentication: [false, Validators.required],
-            EmailForTest: ['', [Validators.required, Validators.email]],
+
             ImportCC: ['', [Validators.email]],
             ImportSubject: ['', Validators.required],
             ImportBody: ['', Validators.required],
@@ -108,6 +102,15 @@ export class GeneralSettingsComponent implements OnInit {
             EmailTestCC: ['', [Validators.email]],
             EmailTestSubject: ['', Validators.required],
             EmailTestBody: ['', Validators.required],
+
+            SMTPServer: ['', Validators.required],
+            SMTPUserEmail: ['', [Validators.required, Validators.email]],
+            SMTPUserPassword: ['', Validators.required],
+            SMTPPortNo: ['', Validators.required],
+            IsUseSSL: [false, Validators.required],
+            IsRequiresAuthentication: [false, Validators.required],
+            EmailForTest: ['', [Validators.required, Validators.email]],
+            DisplayNameEmail: ['', Validators.required],
         });
     }
 
@@ -535,7 +538,7 @@ export class GeneralSettingsComponent implements OnInit {
                                     Constants.ReminderEndPeriodIdentifyNumbersBody,
                             )?.settingValue,
                         );
-                        
+
                         this.frmGeneralSettings.controls.EmailTestCC.setValue(
                             generalSettings.find(
                                 (generalSetting: GeneralSettingsModel) =>
@@ -560,7 +563,13 @@ export class GeneralSettingsComponent implements OnInit {
                             )?.settingValue,
                         );
 
-
+                        this.frmGeneralSettings.controls.DisplayNameEmail.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.DisplayNameEmail,
+                            )?.settingValue,
+                        );
                     }
                     this.generalSettingsListCurrent = generalSettings;
                 }),
@@ -851,21 +860,23 @@ export class GeneralSettingsComponent implements OnInit {
             this.generalSettingsListNew.push(generalSettingsModel);
 
             generalSettingsModel = new GeneralSettingsModel();
-            (generalSettingsModel.settingName =
-                Constants.EmailTestCC),
+            (generalSettingsModel.settingName = Constants.EmailTestCC),
                 (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.EmailTestCC.value);
             this.generalSettingsListNew.push(generalSettingsModel);
 
             generalSettingsModel = new GeneralSettingsModel();
-            (generalSettingsModel.settingName =
-                Constants.EmailTestSubject),
+            (generalSettingsModel.settingName = Constants.EmailTestSubject),
                 (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.EmailTestSubject.value);
             this.generalSettingsListNew.push(generalSettingsModel);
 
             generalSettingsModel = new GeneralSettingsModel();
-            (generalSettingsModel.settingName =
-                Constants.EmailTestBody),
+            (generalSettingsModel.settingName = Constants.EmailTestBody),
                 (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.EmailTestBody.value);
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName = Constants.DisplayNameEmail),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.DisplayNameEmail.value);
             this.generalSettingsListNew.push(generalSettingsModel);
 
             return this.generalSettingsService
@@ -880,5 +891,20 @@ export class GeneralSettingsComponent implements OnInit {
                     }
                 });
         }
+    }
+
+    public SendEmail() {
+        this.generalSettingsService
+            .sendTestEmail()
+            .pipe(
+                map((data) => {
+                    if (data) {
+                        this.notify.showTranslateMessage(
+                            'EmailSentSuccessfully',
+                        );
+                    }
+                }),
+            )
+            .subscribe((result) => {});
     }
 }

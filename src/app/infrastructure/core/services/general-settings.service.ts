@@ -22,4 +22,11 @@ export class GeneralSettingsService {
             generalSettings,
         );
     }
+
+    sendTestEmail(): Observable<any> {
+        return this.apiService.post(
+            `${environment.apiRoute}/Emails/SendTestEmail`,
+            null,
+        );
+    }
 }

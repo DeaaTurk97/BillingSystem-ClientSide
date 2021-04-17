@@ -931,8 +931,8 @@
                     <div fxLayout="row wrap">
                         <div
                             class="p-10"
-                            fxFlex.gt-sm="50"
-                            fxFlex.gt-xs="50"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
                             fxFlex="100"
                         >
                             <mat-form-field>
@@ -951,8 +951,8 @@
 
                         <div
                             class="p-10"
-                            fxFlex.gt-sm="50"
-                            fxFlex.gt-xs="50"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
                             fxFlex="100"
                         >
                             <mat-form-field>
@@ -966,6 +966,28 @@
                                     }}"
                                     formControlName="SMTPUserEmail"
                                     type="email"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'DisplayNameEmail' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'DisplayNameEmail' | translate
+                                    }}"
+                                    formControlName="DisplayNameEmail"
+                                    type="text"
                                     autocomplete="off"
                                 />
                             </mat-form-field>
@@ -1081,6 +1103,7 @@
                                 mat-raised-button
                                 color="primary"
                                 [disabled]="!frmGeneralSettings.valid"
+                                (click)="SendEmail()"
                             >
                                 <mat-icon>email</mat-icon>
                                 {{ 'SendTest' | translate }}
