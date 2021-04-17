@@ -85,19 +85,13 @@ export class GeneralSettingsComponent implements OnInit {
             ReminderTotalDueSubject: ['', Validators.required],
             ReminderTotalDueBody: ['', Validators.required],
 
-            ReminderPeriodStartForIdentifyNumbersCC: ['', [Validators.email]],
-            ReminderPeriodStartForIdentifyNumberSubject: [
-                '',
-                Validators.required,
-            ],
-            ReminderPeriodStartForIdentifyNumbersBody: [
-                '',
-                Validators.required,
-            ],
+            ReminderStartPeriodSubmittBillCC: ['', [Validators.email]],
+            ReminderStartPeriodSubmittBillSubject: ['', Validators.required],
+            ReminderStartPeriodSubmittBillBody: ['', Validators.required],
 
-            ReminderEndPeriodIdentifyNumbersCC: ['', [Validators.email]],
-            ReminderEndPeriodIdentifyNumbersSubject: ['', Validators.required],
-            ReminderEndPeriodIdentifyNumbersBody: ['', Validators.required],
+            ReminderEndPeriodSubmittBillCC: ['', [Validators.email]],
+            ReminderEndPeriodSubmittBillSubject: ['', Validators.required],
+            ReminderEndPeriodSubmittBillBody: ['', Validators.required],
 
             EmailTestCC: ['', [Validators.email]],
             EmailTestSubject: ['', Validators.required],
@@ -491,51 +485,51 @@ export class GeneralSettingsComponent implements OnInit {
                             )?.settingValue,
                         );
 
-                        this.frmGeneralSettings.controls.ReminderPeriodStartForIdentifyNumbersCC.setValue(
+                        this.frmGeneralSettings.controls.ReminderStartPeriodSubmittBillCC.setValue(
                             generalSettings.find(
                                 (generalSetting: GeneralSettingsModel) =>
                                     generalSetting.settingName ===
-                                    Constants.ReminderPeriodStartForIdentifyNumbersCC,
+                                    Constants.ReminderStartPeriodSubmittBillCC,
                             )?.settingValue,
                         );
 
-                        this.frmGeneralSettings.controls.ReminderPeriodStartForIdentifyNumberSubject.setValue(
+                        this.frmGeneralSettings.controls.ReminderStartPeriodSubmittBillSubject.setValue(
                             generalSettings.find(
                                 (generalSetting: GeneralSettingsModel) =>
                                     generalSetting.settingName ===
-                                    Constants.ReminderPeriodStartForIdentifyNumberSubject,
+                                    Constants.ReminderStartPeriodSubmittBillSubject,
                             )?.settingValue,
                         );
 
-                        this.frmGeneralSettings.controls.ReminderPeriodStartForIdentifyNumbersBody.setValue(
+                        this.frmGeneralSettings.controls.ReminderStartPeriodSubmittBillBody.setValue(
                             generalSettings.find(
                                 (generalSetting: GeneralSettingsModel) =>
                                     generalSetting.settingName ===
-                                    Constants.ReminderPeriodStartForIdentifyNumbersBody,
+                                    Constants.ReminderStartPeriodSubmittBillBody,
                             )?.settingValue,
                         );
 
-                        this.frmGeneralSettings.controls.ReminderEndPeriodIdentifyNumbersCC.setValue(
+                        this.frmGeneralSettings.controls.ReminderEndPeriodSubmittBillCC.setValue(
                             generalSettings.find(
                                 (generalSetting: GeneralSettingsModel) =>
                                     generalSetting.settingName ===
-                                    Constants.ReminderEndPeriodIdentifyNumbersCC,
+                                    Constants.ReminderEndPeriodSubmittBillCC,
                             )?.settingValue,
                         );
 
-                        this.frmGeneralSettings.controls.ReminderEndPeriodIdentifyNumbersSubject.setValue(
+                        this.frmGeneralSettings.controls.ReminderEndPeriodSubmittBillSubject.setValue(
                             generalSettings.find(
                                 (generalSetting: GeneralSettingsModel) =>
                                     generalSetting.settingName ===
-                                    Constants.ReminderEndPeriodIdentifyNumbersSubject,
+                                    Constants.ReminderEndPeriodSubmittBillSubject,
                             )?.settingValue,
                         );
 
-                        this.frmGeneralSettings.controls.ReminderEndPeriodIdentifyNumbersBody.setValue(
+                        this.frmGeneralSettings.controls.ReminderEndPeriodSubmittBillBody.setValue(
                             generalSettings.find(
                                 (generalSetting: GeneralSettingsModel) =>
                                     generalSetting.settingName ===
-                                    Constants.ReminderEndPeriodIdentifyNumbersBody,
+                                    Constants.ReminderEndPeriodSubmittBillBody,
                             )?.settingValue,
                         );
 
@@ -825,38 +819,38 @@ export class GeneralSettingsComponent implements OnInit {
 
             generalSettingsModel = new GeneralSettingsModel();
             (generalSettingsModel.settingName =
-                Constants.ReminderPeriodStartForIdentifyNumbersCC),
-                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderPeriodStartForIdentifyNumbersCC.value);
+                Constants.ReminderStartPeriodSubmittBillCC),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderStartPeriodSubmittBillCC.value);
             this.generalSettingsListNew.push(generalSettingsModel);
 
             generalSettingsModel = new GeneralSettingsModel();
             (generalSettingsModel.settingName =
-                Constants.ReminderPeriodStartForIdentifyNumberSubject),
-                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderPeriodStartForIdentifyNumberSubject.value);
+                Constants.ReminderStartPeriodSubmittBillSubject),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderStartPeriodSubmittBillSubject.value);
             this.generalSettingsListNew.push(generalSettingsModel);
 
             generalSettingsModel = new GeneralSettingsModel();
             (generalSettingsModel.settingName =
-                Constants.ReminderPeriodStartForIdentifyNumbersBody),
-                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderPeriodStartForIdentifyNumbersBody.value);
+                Constants.ReminderStartPeriodSubmittBillBody),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderStartPeriodSubmittBillBody.value);
             this.generalSettingsListNew.push(generalSettingsModel);
 
             generalSettingsModel = new GeneralSettingsModel();
             (generalSettingsModel.settingName =
-                Constants.ReminderEndPeriodIdentifyNumbersCC),
-                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderEndPeriodIdentifyNumbersCC.value);
+                Constants.ReminderEndPeriodSubmittBillCC),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderEndPeriodSubmittBillCC.value);
             this.generalSettingsListNew.push(generalSettingsModel);
 
             generalSettingsModel = new GeneralSettingsModel();
             (generalSettingsModel.settingName =
-                Constants.ReminderEndPeriodIdentifyNumbersSubject),
-                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderEndPeriodIdentifyNumbersSubject.value);
+                Constants.ReminderEndPeriodSubmittBillSubject),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderEndPeriodSubmittBillSubject.value);
             this.generalSettingsListNew.push(generalSettingsModel);
 
             generalSettingsModel = new GeneralSettingsModel();
             (generalSettingsModel.settingName =
-                Constants.ReminderEndPeriodIdentifyNumbersBody),
-                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderEndPeriodIdentifyNumbersBody.value);
+                Constants.ReminderEndPeriodSubmittBillBody),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ReminderEndPeriodSubmittBillBody.value);
             this.generalSettingsListNew.push(generalSettingsModel);
 
             generalSettingsModel = new GeneralSettingsModel();

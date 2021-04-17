@@ -51,12 +51,12 @@ export interface IConstant {
     ReminderTotalDueCC: string;
     ReminderTotalDueSubject: string;
     ReminderTotalDueBody: string;
-    ReminderPeriodStartForIdentifyNumbersCC: string;
-    ReminderPeriodStartForIdentifyNumberSubject: string;
-    ReminderPeriodStartForIdentifyNumbersBody: string;
-    ReminderEndPeriodIdentifyNumbersCC: string;
-    ReminderEndPeriodIdentifyNumbersSubject: string;
-    ReminderEndPeriodIdentifyNumbersBody: string;
+    ReminderStartPeriodSubmittBillCC: string;
+    ReminderStartPeriodSubmittBillSubject: string;
+    ReminderStartPeriodSubmittBillBody: string;
+    ReminderEndPeriodSubmittBillCC: string;
+    ReminderEndPeriodSubmittBillSubject: string;
+    ReminderEndPeriodSubmittBillBody: string;
     EmailTestCC: string;
     EmailTestSubject: string;
     EmailTestBody: string;
@@ -117,17 +117,13 @@ export const Constants: IConstant = {
     ReminderTotalDueCC: 'ReminderTotalDueCC',
     ReminderTotalDueSubject: 'ReminderTotalDueSubject',
     ReminderTotalDueBody: 'ReminderTotalDueBody',
-    ReminderPeriodStartForIdentifyNumbersCC:
-        'ReminderPeriodStartForIdentifyNumbersCC',
-    ReminderPeriodStartForIdentifyNumberSubject:
-        'ReminderPeriodStartForIdentifyNumberSubject',
-    ReminderPeriodStartForIdentifyNumbersBody:
-        'ReminderPeriodStartForIdentifyNumbersBody',
-    ReminderEndPeriodIdentifyNumbersCC: 'ReminderEndPeriodIdentifyNumbersCC',
-    ReminderEndPeriodIdentifyNumbersSubject:
-        'ReminderEndPeriodIdentifyNumbersSubject',
-    ReminderEndPeriodIdentifyNumbersBody:
-        'ReminderEndPeriodIdentifyNumbersBody',
+    ReminderStartPeriodSubmittBillCC: 'ReminderStartPeriodSubmittBillCC',
+    ReminderStartPeriodSubmittBillSubject:
+        'ReminderStartPeriodSubmittBillSubject',
+    ReminderStartPeriodSubmittBillBody: 'ReminderStartPeriodSubmittBillBody',
+    ReminderEndPeriodSubmittBillCC: 'ReminderEndPeriodSubmittBillCC',
+    ReminderEndPeriodSubmittBillSubject: 'ReminderEndPeriodSubmittBillSubject',
+    ReminderEndPeriodSubmittBillBody: 'ReminderEndPeriodSubmittBillBody',
     EmailTestCC: 'EmailTestCC',
     EmailTestSubject: 'EmailTestSubject',
     EmailTestBody: 'EmailTestBody',
