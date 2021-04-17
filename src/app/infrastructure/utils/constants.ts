@@ -60,6 +60,7 @@ export interface IConstant {
     EmailTestCC: string;
     EmailTestSubject: string;
     EmailTestBody: string;
+    DisplayNameEmail: string;
 }
 
 export const Constants: IConstant = {
@@ -130,4 +131,5 @@ export const Constants: IConstant = {
     EmailTestCC: 'EmailTestCC',
     EmailTestSubject: 'EmailTestSubject',
     EmailTestBody: 'EmailTestBody',
+    DisplayNameEmail: 'DisplayNameEmail',
 };

@@ -178,5 +178,8 @@
     "FractionNumbers": "Fraction Numbers",
     "EmailTestCC": "Email Test CC",
     "EmailTestSubject": "Email Test Subject",
-    "EmailTestBody": "Email Test Body"
+    "EmailTestBody": "Email Test Body",
+    "BillingDefaultImage": "Default Image",
+    "DisplayNameEmail": "Display Name Email",
+    "EmailSentSuccessfully": "Email Sent Successfully"
 }
