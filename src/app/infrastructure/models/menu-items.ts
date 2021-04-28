@@ -56,19 +56,14 @@ const MENUITEMS = [
     },
 
     {
-        state: 'PhoneBook',
+        state: 'settings',
         name: 'PhonesBook',
         type: 'sub',
         icon: 'bubble_chart',
         children: [
             {
-                state: '',
-                name: 'OfficialPhoneBook',
-                type: 'link',
-            },
-            {
-                state: '',
-                name: 'PersonalPhoneBook',
+                state: 'phonesBook-list',
+                name: 'PhonesBook',
                 type: 'link',
             },
         ],

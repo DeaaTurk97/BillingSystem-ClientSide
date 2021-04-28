@@ -143,7 +143,7 @@
     "defaultValues": "القيم الإفتراضية",
     "SMTPSettings": "إعدادات SMTP",
     "EmailsTemplates": "نماذج الإيميلات",
-    "DefaultValueForNewNumber": "القيمة الإفتراضية للرقم الجديد",
+    "TypeNewNumber": "نوع الرقم الجديد",
     "DefaultPassword": "الرقم السري الإفتراضي",
     "PasswordStorageWhenAddingAnewNumber": "ألية تخزين الرقم السري عند إضافة مستخدم جديد",
     "CreateFromSystem": "إنشائه من النظام",
@@ -196,5 +196,15 @@
     "EmailTestBody": "Email Test Body",
     "BillingDefaultImage": "الصورة الإفتراضية",
     "DisplayNameEmail": "Display Name Email",
-    "EmailSentSuccessfully": "تم إرسال البريد الإلكتروني بنجاح"
+    "EmailSentSuccessfully": "تم إرسال البريد الإلكتروني بنجاح",
+    "phoneNumber": "رقم الهاتف",
+    "phoneName": "الرقم بإسم",
+    "typePhoneNumberName": "نوع الرقم",
+    "statusNumberName": "حالة الرقم",
+    "Available": "متوفر",
+    "Submit": "مرسل",
+    "InprogressToApproved": "جار العمل عليه",
+    "Approved": "معتمد",
+    "Rejected": "مرفوض",
+    "NumberAlreadyExist": "الرقم موجود مسبقا"
 }

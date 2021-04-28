@@ -181,5 +181,15 @@
     "EmailTestBody": "Email Test Body",
     "BillingDefaultImage": "Default Image",
     "DisplayNameEmail": "Display Name Email",
-    "EmailSentSuccessfully": "Email Sent Successfully"
+    "EmailSentSuccessfully": "Email Sent Successfully",
+    "phoneNumber": "Phone Number",
+    "phoneName": "Phone Name",
+    "typePhoneNumberName": "Type Number",
+    "statusNumberName": "Status Number",
+    "Available": "Available",
+    "Submit": "Submit",
+    "InprogressToApproved": "Inprogress",
+    "Approved": "Approved",
+    "Rejected": "Rejected",
+    "NumberAlreadyExist": "Number Already Exist"
 }

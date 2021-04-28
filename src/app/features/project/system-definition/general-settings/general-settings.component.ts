@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { Constants } from '@app/infrastructure/utils/constants';
-import { DefaultStatusNumber } from '@app/infrastructure/models/SystemEnum';
+import { TypePhonesNumber } from '@app/infrastructure/models/SystemEnum';
 
 @Component({
     templateUrl: './general-settings.component.html',
@@ -20,10 +20,10 @@ export class GeneralSettingsComponent implements OnInit {
     public isHidePassword: boolean = true;
 
     keys = Object.keys;
-    DefaultStatusNumber = Object.keys(DefaultStatusNumber)
+    typePhonesNumber = Object.keys(TypePhonesNumber)
         .filter((f) => !isNaN(Number(f)))
-        .map((key) => DefaultStatusNumber[key]);
-    selectedStatus = 1;
+        .map((key) => TypePhonesNumber[key]);
+    selectedTypeNumber = 1;
 
     constructor(
         private generalSettingsService: GeneralSettingsService,
@@ -39,7 +39,7 @@ export class GeneralSettingsComponent implements OnInit {
     ngInitialControlForm() {
         this.frmGeneralSettings = this.formBuilder.group({
             Id: [0],
-            DefaultStatusNumber: ['', Validators.required],
+            TypePhoneNumber: ['', Validators.required],
             DefaultPassword: ['', Validators.required],
             ValueOfAllowedCallsToTheEmployee: ['', Validators.required],
             TheNumberOfDaysGrantedToTheEmployeeToSendTheBill: [
@@ -117,12 +117,12 @@ export class GeneralSettingsComponent implements OnInit {
             .pipe(
                 map((generalSettings: GeneralSettingsModel[]) => {
                     if (generalSettings) {
-                        this.frmGeneralSettings.controls.DefaultStatusNumber.setValue(
+                        this.frmGeneralSettings.controls.TypePhoneNumber.setValue(
                             Number(
                                 generalSettings.find(
                                     (generalSetting: GeneralSettingsModel) =>
                                         generalSetting.settingName ===
-                                        Constants.DefaultStatusNumber,
+                                        Constants.TypePhoneNumber,
                                 )?.settingValue,
                             ),
                         );
@@ -575,9 +575,9 @@ export class GeneralSettingsComponent implements OnInit {
         let generalSettingsModel: GeneralSettingsModel = new GeneralSettingsModel();
         this.generalSettingsListNew = [];
         if (this.frmGeneralSettings.value) {
-            (generalSettingsModel.settingName = Constants.DefaultStatusNumber),
+            (generalSettingsModel.settingName = Constants.TypePhoneNumber),
                 (generalSettingsModel.settingValue = String(
-                    this.frmGeneralSettings.controls.DefaultStatusNumber.value,
+                    this.frmGeneralSettings.controls.TypePhoneNumber.value,
                 ));
             this.generalSettingsListNew.push(generalSettingsModel);
 
