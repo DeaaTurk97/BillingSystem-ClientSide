@@ -187,7 +187,7 @@ export class PhoneBookListComponent implements OnInit {
                         );
                     } else {
                         this.notify.showTranslateMessage('CancelDelete');
-                        return of({});
+                        return of(false);
                     }
                 }),
                 catchError((): any => {
@@ -195,8 +195,11 @@ export class PhoneBookListComponent implements OnInit {
                 }),
             )
             .subscribe((result) => {
-                this.LoadPhonesBook(1, this.pageSize);
-                this.notify.showTranslateMessage('DeletedSuccessfully');
+                debugger;
+                if (result) {
+                    this.LoadPhonesBook(1, this.pageSize);
+                    this.notify.showTranslateMessage('DeletedSuccessfully');
+                }
             });
     }
 }
