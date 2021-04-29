@@ -195,7 +195,6 @@ export class PhoneBookListComponent implements OnInit {
                 }),
             )
             .subscribe((result) => {
-                debugger;
                 if (result) {
                     this.LoadPhonesBook(1, this.pageSize);
                     this.notify.showTranslateMessage('DeletedSuccessfully');
