@@ -13,6 +13,14 @@ export enum State {
     Chatting,
 }
 
+export enum ResultActions {
+    Added,
+    Updated,
+    Deleted,
+    CancelAdd,
+    AlreadyExist,
+}
+
 export interface ActionRowGrid {
     type: State;
     row: any;

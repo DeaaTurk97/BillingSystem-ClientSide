@@ -1,0 +1,27 @@
+<mat-card>
+    <mat-card-content>
+        <app-user-edit-control
+            (notify)="onEditControlClick($event)"
+            (searchChange)="applyFilter($event)"
+            SearchPlaceHolder="{{ 'Search' | translate }}"
+        >
+        </app-user-edit-control>
+        <app-data-grid-view
+            [gridDataSource]="dataSource"
+            [displayedColumns]="[
+                'id',
+                'phoneNumber',
+                'phoneName',
+                'typePhoneNumberName',
+                'userName',
+                'statusNumberName'
+            ]"
+            (onEditRow)="onActionRowGrid($event)"
+            (onDeleteRow)="onActionRowGrid($event)"
+            (onPagination)="onActionRowGrid($event)"
+            [lengthData]="length"
+            [PaginatorIndex]="paginationIndex"
+        >
+        </app-data-grid-view>
+    </mat-card-content>
+</mat-card>

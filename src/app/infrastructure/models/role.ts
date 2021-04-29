@@ -12,7 +12,7 @@ export class RoleDTO implements IRoleDTO {
             UserType.SuperAdmin,
             UserType.Admin,
             UserType.AdminGroup,
-            UserType.Student,
+            UserType.Employee,
             UserType.Guest,
         ];
         return roleTypeList.includes(role);
@@ -34,7 +34,7 @@ export class RoleDTO implements IRoleDTO {
     }
 
     static isStudentRoleType(role: UserType): role is UserType {
-        const typeList: UserType[] = [UserType.Student];
+        const typeList: UserType[] = [UserType.Employee];
         return typeList.includes(role);
     }
 

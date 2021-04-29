@@ -28,26 +28,26 @@
                         >
                             <mat-form-field>
                                 <mat-label>{{
-                                    'DefaultValueForNewNumber' | translate
+                                    'TypeNewNumber' | translate
                                 }}</mat-label>
                                 <mat-select
                                     placeholder="{{
-                                        'DefaultStatusNumber' | translate
+                                        'TypeNewNumber' | translate
                                     }}"
-                                    [(value)]="selectedStatus"
-                                    formControlName="DefaultStatusNumber"
+                                    [(value)]="selectedTypeNumber"
+                                    formControlName="TypePhoneNumber"
                                 >
                                     <mat-option
                                         *ngFor="
-                                            let status of keys(
-                                                DefaultStatusNumber
+                                            let typeNumber of keys(
+                                                typePhonesNumber
                                             );
                                             let i = index
                                         "
                                         [value]="i"
                                     >
                                         {{
-                                            DefaultStatusNumber[status]
+                                            typePhonesNumber[typeNumber]
                                                 | translate
                                         }}</mat-option
                                     >
@@ -797,8 +797,7 @@
                         >
                             <mat-form-field>
                                 <mat-label>{{
-                                    'ReminderEndPeriodSubmittBillCC'
-                                        | translate
+                                    'ReminderEndPeriodSubmittBillCC' | translate
                                 }}</mat-label>
                                 <input
                                     matInput

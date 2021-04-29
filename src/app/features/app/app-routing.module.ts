@@ -92,6 +92,15 @@ const routes: Routes = [
             ).then((m) => m.GovernorateModule),
     },
     {
+        path: 'settings',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/billingSystem/settings/phonesBook/phoneBook.module'
+            ).then((m) => m.PhoneBookModule),
+    },
+    {
         path: '**',
         component: NotFoundComponent,
         data: { title: 'Not Found' },
