@@ -14,6 +14,7 @@ export enum State {
 }
 
 export enum ResultActions {
+    Non,
     Added,
     Updated,
     Deleted,

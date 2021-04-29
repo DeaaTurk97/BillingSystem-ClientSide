@@ -2,11 +2,7 @@
     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
         <div fxLayout="row" fxLayoutWrap="wrap">
             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
-                <form
-                    novalidate
-                    [formGroup]="frmAddNew"
-                    (ngSubmit)="onSubmit()"
-                >
+                <form novalidate [formGroup]="frmAddNew">
                     <div fxLayout="row wrap">
                         <div
                             class="p-12"
@@ -168,6 +164,7 @@
                                 type="submit"
                                 color="primary"
                                 [disabled]="!frmAddNew.valid || isInProgress"
+                                (click)="onAdd()"
                             >
                                 <mat-icon>add</mat-icon> {{ 'Add' | translate }}
                             </button>
@@ -185,6 +182,7 @@
                                 type="submit"
                                 color="primary"
                                 [disabled]="!frmAddNew.valid || isInProgress"
+                                (click)="onEdit()"
                             >
                                 <mat-icon>save</mat-icon>
                                 {{ 'Save' | translate }}
