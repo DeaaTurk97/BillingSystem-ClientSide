@@ -15,7 +15,7 @@ import {
 } from '@app/infrastructure/models/SystemEnum';
 import { ResultActions } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-add-phone-book',
@@ -83,39 +83,49 @@ export class AddPhoneBookComponent implements OnInit {
         }
     }
 
-    onSubmit() {
+    onAdd() {
         this.isInProgress = true;
 
-        var initialObservable = of({});
-        initialObservable
+        this.phoneBookService
+            .isNumberAdded(this.frmAddNew.controls.PhoneNumber.value)
             .pipe(
-                mergeMap(() => {
-                    return this.phoneBookService.isNumberAdded(
-                        this.frmAddNew.controls.PhoneNumber.value,
-                    );
-                }),
                 mergeMap((data) => {
-                    if (data) {
-                        return this.ID === 0
-                            ? this.phoneBookService.addPhoneBook(
-                                  this.frmAddNew.value,
-                              )
-                            : this.phoneBookService.updatePhoneBook(
-                                  this.frmAddNew.value,
-                              );
+                    if (!data) {
+                        return this.phoneBookService.addPhoneBook(
+                            this.frmAddNew.value,
+                        );
                     } else {
-                        return of(ResultActions.AlreadyExist);
+                        this.dialogRef.close(ResultActions.AlreadyExist);
+                        return of(false);
                     }
+                }),
+                catchError((error): any => {
+                    this.notify.showTranslateMessage('ErrorAdded');
                 }),
             )
             .subscribe((result) => {
-                if ((result = ResultActions.AlreadyExist)) {
-                    this.dialogRef.close(result);
-                } else {
+                if (result) {
                     this.dialogRef.close(ResultActions.Added);
                 }
+                this.resetFormBuilder();
+            });
+    }
 
-                this.frmAddNew.reset();
+    onEdit() {
+        this.isInProgress = true;
+        this.phoneBookService
+            .updatePhoneBook(this.frmAddNew.value)
+            .pipe(
+                mergeMap((data) => {
+                    return of(data);
+                }),
+                catchError((error): any => {
+                    this.notify.showTranslateMessage('ErrorUpdate');
+                }),
+            )
+            .subscribe((result) => {
+                this.dialogRef.close(ResultActions.Updated);
+                this.resetFormBuilder();
             });
     }
 

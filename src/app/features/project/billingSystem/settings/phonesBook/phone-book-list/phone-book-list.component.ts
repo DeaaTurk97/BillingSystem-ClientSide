@@ -112,24 +112,16 @@ export class PhoneBookListComponent implements OnInit {
             .afterClosed()
             .pipe(
                 switchMap((dialogResult: ResultActions) => {
-                    if (dialogResult == ResultActions.AlreadyExist) {
-                        this.notify.showTranslateMessage(
-                            'NumberAlreadyExist',
-                            true,
-                        );
-                        return of('');
-                    }
-
-                    if (
-                        dialogResult ===
-                        (ResultActions.AlreadyExist as ResultActions)
-                    ) {
+                    if (dialogResult === ResultActions.Added) {
                         this.LoadPhonesBook(1, this.pageSize);
                         this.dataSource.paginator = this.paginator;
                         this.notify.showTranslateMessage(
                             'AddedSuccessfully',
                             false,
                         );
+                        return of({});
+                    } else if (dialogResult === ResultActions.AlreadyExist) {
+                        this.notify.showTranslateMessage('NumberAlreadyExist');
                         return of({});
                     } else {
                         this.notify.showTranslateMessage('CancelAdd');
@@ -152,8 +144,8 @@ export class PhoneBookListComponent implements OnInit {
         return dialog
             .afterClosed()
             .pipe(
-                switchMap((dialogResult: string) => {
-                    if (dialogResult) {
+                switchMap((dialogResult: ResultActions) => {
+                    if (dialogResult === ResultActions.Updated) {
                         this.LoadPhonesBook(1, this.pageSize);
                         this.notify.showTranslateMessage(
                             'UpdatedSuccessfully',
