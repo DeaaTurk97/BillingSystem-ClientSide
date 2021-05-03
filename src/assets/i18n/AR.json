@@ -206,5 +206,6 @@
     "InprogressToApproved": "جار العمل عليه",
     "Approved": "معتمد",
     "Rejected": "مرفوض",
-    "NumberAlreadyExist": "الرقم موجود مسبقا"
+    "NumberAlreadyExist": "الرقم موجود مسبقا",
+    "createdDate": "تاريخ الإنشاء"
 }
