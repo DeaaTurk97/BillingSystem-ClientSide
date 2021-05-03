@@ -10,12 +10,19 @@
 
             <ng-container *ngIf="column == 'id'">
                 <mat-cell *matCellDef="let element; let serialNo = index">
-                    {{ serialNo + 1 }}
+                    {{
+                        paginator.pageIndex * paginator.pageSize +
+                            (serialNo + 1)
+                    }}
                 </mat-cell>
             </ng-container>
             <ng-container *ngIf="column != 'id'">
                 <mat-cell *matCellDef="let element">
-                    {{ element[column] }}
+                    {{
+                        column === 'createdDate' || column === 'updatedDate'
+                            ? (element[column] | date: 'dd - MM - yyyy')
+                            : element[column]
+                    }}
                 </mat-cell>
             </ng-container>
         </ng-container>
