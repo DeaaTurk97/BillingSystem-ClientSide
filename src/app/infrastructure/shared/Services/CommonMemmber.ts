@@ -11,6 +11,7 @@ export enum State {
     ExcelAll,
     Pagination,
     Chatting,
+    Check,
 }
 
 export enum ResultActions {

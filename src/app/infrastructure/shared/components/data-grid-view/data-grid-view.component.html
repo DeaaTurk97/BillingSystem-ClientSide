@@ -51,6 +51,25 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="Selection">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox
+                    (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                >
+                </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <mat-checkbox
+                    (click)="$event.stopPropagation(); onSelectedRow(row)"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                >
+                </mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
         <ng-container
             *ngFor="let additionalColumn of additionalColumns; let i = index"
         >
@@ -106,7 +125,15 @@
 
         <mat-header-row *matHeaderRowDef="getDisplayColumns()">
         </mat-header-row>
-        <mat-row *matRowDef="let row; columns: getDisplayColumns()"> </mat-row>
+        <mat-row
+            *matRowDef="let row; columns: getDisplayColumns()"
+            [ngClass]="{
+                hovered: row.hovered
+            }"
+            (mouseover)="row.hovered = true"
+            (mouseout)="row.hovered = false"
+        >
+        </mat-row>
     </mat-table>
 
     <mat-paginator
