@@ -40,7 +40,7 @@ export class DataGridViewComponent implements OnInit, AfterViewInit {
         row: '',
     });
     // tslint:disable-next-line:no-output-on-prefix
-    @Output() onSelectRow = new BehaviorSubject<ActionRowGrid>({
+    @Output() onCheckRow = new BehaviorSubject<ActionRowGrid>({
         type: State.Non,
         row: '',
     });
@@ -132,6 +132,6 @@ export class DataGridViewComponent implements OnInit, AfterViewInit {
             type: State.Check,
             row: rowSelected,
         };
-        this.onSelectRow.next(actionGrid);
+        this.onCheckRow.next(actionGrid);
     }
 }
