@@ -13,6 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { DynamicColumn } from '@app/infrastructure/models/gridAddColumns-model';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
     selector: 'app-data-grid-view',
@@ -38,18 +39,26 @@ export class DataGridViewComponent implements OnInit, AfterViewInit {
         type: State.Non,
         row: '',
     });
+    // tslint:disable-next-line:no-output-on-prefix
+    @Output() onSelectRow = new BehaviorSubject<ActionRowGrid>({
+        type: State.Non,
+        row: '',
+    });
     @ViewChild(MatSort, { static: true }) sort: MatSort;
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @Input() lengthData: number;
     @Input() PaginatorIndex: number;
     @Input() additionalColumns: DynamicColumn[] = [];
     @Input() isShowMainActionControls = true;
+    @Input() isShowBoxSelectAll = false;
     @Output() onInStatusRow = new BehaviorSubject<ActionRowGrid>({
         type: State.Non,
         row: '',
     });
     pageIndex = 1;
     pageSize = 10;
+    selection = new SelectionModel<any>(true, []);
+
     constructor() {}
     ngOnInit(): void {}
 
@@ -85,13 +94,44 @@ export class DataGridViewComponent implements OnInit, AfterViewInit {
     }
 
     getDisplayColumns() {
-        if (!this.isShowMainActionControls) {
+        const selectionLastColumn = this.isShowBoxSelectAll
+            ? 'Selection'
+            : 'Actions';
+
+        if (!this.isShowMainActionControls && !this.isShowBoxSelectAll) {
             return this.displayedColumns.concat(
                 ...this.additionalColumns.map((e) => e.headerName),
             );
         }
         return this.displayedColumns
             .concat(...this.additionalColumns.map((e) => e.headerName))
-            .concat(...['Actions']);
+            .concat(...[`${selectionLastColumn}`]);
+    }
+
+    isAllSelected() {
+        const numSelected = this.selection.selected.length;
+        const numRows = this.gridDataSource.data.length;
+        return numSelected === numRows;
+    }
+
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+    masterToggle() {
+        if (this.isAllSelected()) {
+            this.selection.clear();
+            this.onSelectedRow([]);
+        } else {
+            this.gridDataSource.data.forEach((row) => {
+                this.selection.select(row);
+            });
+            this.onSelectedRow(this.gridDataSource.data);
+        }
+    }
+
+    onSelectedRow(rowSelected) {
+        const actionGrid: ActionRowGrid = {
+            type: State.Check,
+            row: rowSelected,
+        };
+        this.onSelectRow.next(actionGrid);
     }
 }
