@@ -32,6 +32,13 @@ export class IncomingPhoneNumbersService {
         );
     }
 
+    inprogressPhoneNumbers(phoneNumbersIds: number[]) {
+        return this.apiService.put(
+            `${environment.apiRoute}/ComingNumbers/InprogressPhoneNumbers`,
+            phoneNumbersIds,
+        );
+    }
+
     rejectPhoneNumbers(phoneNumbersIds: number[]) {
         return this.apiService.put(
             `${environment.apiRoute}/ComingNumbers/RejectPhoneNumbers`,

@@ -214,5 +214,8 @@
     "PhoneNumbersApproved": "تم إعتماد الأرقام بنجاح",
     "ErrorOnPhoneNumbersApproved": "حدث خطأ عند إعتماد الأرقام",
     "PhoneNumbersRejected": "تم رفض الأرقام بنجاح",
-    "ErrorOnPhoneNumbersRejected": "حدث خطأ عند رفض الأرقام"
+    "ErrorOnPhoneNumbersRejected": "حدث خطأ عند رفض الأرقام",
+    "Inprogress": "جار العمل عليه",
+    "PhoneNumbersInprogressed": "تم إجراء العمل على الأرقام",
+    "ErrorOnPhoneNumbersInprogress": "حدث خطأ عند جار العمل على الأرقام"
 }

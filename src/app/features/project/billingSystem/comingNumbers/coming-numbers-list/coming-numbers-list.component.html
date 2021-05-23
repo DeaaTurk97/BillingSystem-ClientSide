@@ -41,6 +41,16 @@
                     {{ 'Reject' | translate }}
                 </button>
             </div>
+            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+                <button
+                    mat-raised-button
+                    type="submit"
+                    color="primary"
+                    (click)="onInprogressRow()"
+                >
+                    {{ 'Inprogress' | translate }}
+                </button>
+            </div>
         </div>
         <app-data-grid-view
             [gridDataSource]="dataSource"

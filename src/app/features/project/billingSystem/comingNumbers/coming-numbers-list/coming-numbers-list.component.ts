@@ -119,6 +119,25 @@ export class ComingNumbersListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
+    onInprogressRow() {
+        this.incomingPhoneNumbersService
+            .inprogressPhoneNumbers(this.phoneNumbersStatus)
+            .pipe(
+                mergeMap((data) => {
+                    this.notify.showTranslateMessage('PhoneNumbersInprogressed');
+                    this.LoadComingNumbers(1, this.pageSize);
+                    this.sharedDataGridView.rowsSelection = [];
+                    return of({});
+                }),
+                catchError((error): any => {
+                    this.notify.showTranslateMessage(
+                        'ErrorOnPhoneNumbersInprogress',
+                    );
+                }),
+            )
+            .subscribe((result) => {});
+    }
+
     onRejectRow() {
         this.incomingPhoneNumbersService
             .rejectPhoneNumbers(this.phoneNumbersStatus)
