@@ -47,58 +47,67 @@ const routes: Routes = [
             ).then((m) => m.LanguageModule),
     },
     {
-        path: 'settings',
+        path: 'system-definition',
         canActivate: [SuperAdminAuthGuard],
         canActivateChild: [SuperAdminAuthGuard],
         loadChildren: () =>
-            import('../project/billingSystem/settings/jobs/job.module').then(
+            import('../project/system-definition/jobs/job.module').then(
                 (m) => m.JobModule,
             ),
     },
     {
-        path: 'settings',
+        path: 'system-definition',
         canActivate: [SuperAdminAuthGuard],
         canActivateChild: [SuperAdminAuthGuard],
         loadChildren: () =>
-            import(
-                '../project/billingSystem/settings/groups/group.module'
-            ).then((m) => m.GroupModule),
+            import('../project/system-definition/groups/group.module').then(
+                (m) => m.GroupModule,
+            ),
     },
     {
-        path: 'settings',
+        path: 'system-definition',
         canActivate: [SuperAdminAuthGuard],
         canActivateChild: [SuperAdminAuthGuard],
         loadChildren: () =>
             import(
-                '../project/billingSystem/settings/operators/operator.module'
+                '../project/system-definition/operators/operator.module'
             ).then((m) => m.OperatorModule),
     },
     {
-        path: 'settings',
+        path: 'system-definition',
         canActivate: [SuperAdminAuthGuard],
         canActivateChild: [SuperAdminAuthGuard],
         loadChildren: () =>
             import(
-                '../project/billingSystem/settings/countries/country.module'
+                '../project/system-definition/countries/country.module'
             ).then((m) => m.GroupModule),
     },
     {
-        path: 'settings',
+        path: 'system-definition',
         canActivate: [SuperAdminAuthGuard],
         canActivateChild: [SuperAdminAuthGuard],
         loadChildren: () =>
             import(
-                '../project/billingSystem/settings/governorates/governorate.module'
+                '../project/system-definition/governorates/governorate.module'
             ).then((m) => m.GovernorateModule),
     },
     {
-        path: 'settings',
+        path: 'bills',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import('../project/billingSystem/phonesBook/phoneBook.module').then(
+                (m) => m.PhoneBookModule,
+            ),
+    },
+    {
+        path: 'bills',
         canActivate: [SuperAdminAuthGuard],
         canActivateChild: [SuperAdminAuthGuard],
         loadChildren: () =>
             import(
-                '../project/billingSystem/settings/phonesBook/phoneBook.module'
-            ).then((m) => m.PhoneBookModule),
+                '../project/billingSystem/comingNumbers/coming-numbers.module'
+            ).then((m) => m.ComingNumbersModule),
     },
     {
         path: '**',

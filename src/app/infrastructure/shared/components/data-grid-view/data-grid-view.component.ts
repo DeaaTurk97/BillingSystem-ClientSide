@@ -58,6 +58,7 @@ export class DataGridViewComponent implements OnInit, AfterViewInit {
     pageIndex = 1;
     pageSize = 10;
     selection = new SelectionModel<any>(true, []);
+    rowsSelection = [];
 
     constructor() {}
     ngOnInit(): void {}
@@ -114,24 +115,62 @@ export class DataGridViewComponent implements OnInit, AfterViewInit {
         return numSelected === numRows;
     }
 
-    /** Selects all rows if they are not all selected; otherwise clear selection. */
+    //Selects all rows if they are not all selected; otherwise clear selection.
     masterToggle() {
         if (this.isAllSelected()) {
             this.selection.clear();
-            this.onSelectedRow([]);
+            //deleting elements from (rowsSelection) array.
+            this.onSelectedRow(this.gridDataSource.data, false, false);
         } else {
             this.gridDataSource.data.forEach((row) => {
                 this.selection.select(row);
             });
-            this.onSelectedRow(this.gridDataSource.data);
+            //Adding elements selected from source to destination
+            this.onSelectedRow(this.gridDataSource.data, false, true);
         }
     }
 
-    onSelectedRow(rowSelected) {
+    onSelectedRow(row, isCheckedRow: boolean, isCheckedAll: boolean) {
+        if (isCheckedAll) {
+            this.gridDataSource.data.forEach((element) => {
+                this.rowsSelection.push(element.id);
+            });
+        } else if (isCheckedRow) {
+            //using some Property to return true or false
+            !this.rowsSelection.some((x) => x == row.id)
+                ? this.rowsSelection.push(row.id)
+                : this.rowsSelection.forEach((element, index) => {
+                      if (element == row.id)
+                          this.rowsSelection.splice(index, 1);
+                  });
+        } else if (!isCheckedRow && !isCheckedAll) {
+            this.gridDataSource.data.forEach((elementSource) => {
+                this.rowsSelection.splice(
+                    this.rowsSelection.findIndex((x) => x == elementSource),
+                    1,
+                );
+            });
+        }
+
         const actionGrid: ActionRowGrid = {
             type: State.Check,
-            row: rowSelected,
+            row: this.rowsSelection,
         };
         this.onCheckRow.next(actionGrid);
+    }
+
+    setSelection() {
+        //adding this function to select row when click on pagination if this before checked.
+        if (this.isShowBoxSelectAll)
+            this.rowsSelection.forEach((element) => {
+                if (this.gridDataSource.data.some((x) => x.id == element))
+                    this.selection.select(
+                        this.gridDataSource.data[
+                            this.gridDataSource.data.findIndex(
+                                (x) => x.id == element,
+                            )
+                        ],
+                    );
+            });
     }
 }

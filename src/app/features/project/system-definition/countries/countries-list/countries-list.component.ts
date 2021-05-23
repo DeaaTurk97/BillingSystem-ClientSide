@@ -8,9 +8,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { GovernorateService } from '@app/infrastructure/core/services/billingSystem/governorate.service';
+import { CountryService } from '@app/infrastructure/core/services/billingSystem/country.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
-import { GovernorateModel } from '@app/infrastructure/models/project/governorate';
+import { CountryModel } from '@app/infrastructure/models/project/CountryModel';
 import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 import {
     ActionRowGrid,
@@ -18,28 +18,31 @@ import {
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { AddGovernorateComponent } from '../add-governorate/add-governorate.component';
+import { AddCountryComponent } from '../add-country/add-country.component';
 
 @Component({
-    selector: 'app-governorate-list',
-    templateUrl: './governorate-list.component.html',
-    styleUrls: ['./governorate-list.component.scss'],
+    selector: 'app-countries-list',
+    templateUrl: './countries-list.component.html',
+    styleUrls: ['./countries-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GovernorateListComponent implements OnInit {
-    @ViewChild(MatSort, { static: true }) sort: MatSort;
+export class CountriesListComponent implements OnInit {
+    constructor(
+        private countryService: CountryService,
+        private dialog: MatDialog,
+        private notify: NotificationService,
+    ) {}
+
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
     public paginationIndex = 0;
     public pageIndex = 1;
     public pageSize = 10;
     public length = 0;
-    public dataSource = new MatTableDataSource<GovernorateModel>([]);
+    public dataSource = new MatTableDataSource<CountryModel>([]);
 
-    constructor(
-        private governorateService: GovernorateService,
-        private dialog: MatDialog,
-        private notify: NotificationService,
-    ) {}
+    ngOnInit(): void {
+        this.LoadCountries(this.pageIndex, this.pageSize);
+    }
 
     getConfigDialog(data, isAddGridHeader?: boolean): MatDialogConfig {
         const dialogConfig = new MatDialogConfig();
@@ -49,10 +52,6 @@ export class GovernorateListComponent implements OnInit {
         dialogConfig.width = '60%';
         dialogConfig.data = data;
         return dialogConfig;
-    }
-
-    ngOnInit(): void {
-        this.LoadGovernorates(this.pageIndex, this.pageSize);
     }
 
     onEditControlClick(resultClick: State) {
@@ -78,7 +77,7 @@ export class GovernorateListComponent implements OnInit {
                 this.onDelete(ActionGrid.row);
                 break;
             case State.Pagination:
-                this.LoadGovernorates(
+                this.LoadCountries(
                     ActionGrid.row.pageIndex,
                     ActionGrid.row.pageSize,
                 );
@@ -86,9 +85,9 @@ export class GovernorateListComponent implements OnInit {
         }
     }
 
-    LoadGovernorates(pageIndex: number, pageSize: number) {
-        this.governorateService
-            .getGovernorates(pageIndex, pageSize)
+    LoadCountries(pageIndex: number, pageSize: number) {
+        this.countryService
+            .getCountries(pageIndex, pageSize)
             .pipe(
                 map((paginationRecord) => {
                     this.dataSource.data = paginationRecord.dataRecord;
@@ -103,7 +102,7 @@ export class GovernorateListComponent implements OnInit {
 
     onAddRecord() {
         const dialog = this.dialog.open(
-            AddGovernorateComponent,
+            AddCountryComponent,
             this.getConfigDialog(null),
         );
 
@@ -112,7 +111,7 @@ export class GovernorateListComponent implements OnInit {
             .pipe(
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
-                        this.LoadGovernorates(1, this.pageSize);
+                        this.LoadCountries(1, this.pageSize);
                         this.dataSource.paginator = this.paginator;
                         this.notify.showTranslateMessage(
                             'AddedSuccessfully',
@@ -131,10 +130,10 @@ export class GovernorateListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    onEdit(governorateModel: GovernorateModel) {
+    onEdit(countryModel: CountryModel) {
         const dialog = this.dialog.open(
-            AddGovernorateComponent,
-            this.getConfigDialog(governorateModel),
+            AddCountryComponent,
+            this.getConfigDialog(countryModel),
         );
 
         return dialog
@@ -142,7 +141,7 @@ export class GovernorateListComponent implements OnInit {
             .pipe(
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
-                        this.LoadGovernorates(1, this.pageSize);
+                        this.LoadCountries(1, this.pageSize);
                         this.notify.showTranslateMessage(
                             'UpdatedSuccessfully',
                             false,
@@ -160,7 +159,7 @@ export class GovernorateListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    onDelete(governorateModel: GovernorateModel) {
+    onDelete(countryModel: CountryModel) {
         return this.dialog
             .open(ConfirmDialogComponent, {
                 width: '27em',
@@ -178,8 +177,8 @@ export class GovernorateListComponent implements OnInit {
             .pipe(
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
-                        return this.governorateService.deleteGovernorate(
-                            governorateModel.id,
+                        return this.countryService.deleteCountry(
+                            countryModel.id,
                         );
                     } else {
                         this.notify.showTranslateMessage('CancelDelete');
@@ -191,7 +190,7 @@ export class GovernorateListComponent implements OnInit {
                 }),
             )
             .subscribe((result) => {
-                this.LoadGovernorates(1, this.pageSize);
+                this.LoadCountries(1, this.pageSize);
                 this.notify.showTranslateMessage('DeletedSuccessfully');
             });
     }

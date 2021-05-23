@@ -39,15 +39,15 @@
                                 >
                                     <mat-option
                                         *ngFor="
-                                            let typeNumber of keys(
+                                            let typeNumber of 
                                                 typePhonesNumber
-                                            );
+                                            ;
                                             let i = index
                                         "
                                         [value]="i"
                                     >
                                         {{
-                                            typePhonesNumber[typeNumber]
+                                            typeNumber
                                                 | translate
                                         }}</mat-option
                                     >

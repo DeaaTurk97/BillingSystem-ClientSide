@@ -36,7 +36,7 @@ export class AddPhoneBookComponent implements OnInit {
     statusCycleBills = Object.keys(StatusCycleBills)
         .filter((f) => !isNaN(Number(f)))
         .map((key) => StatusCycleBills[key]);
-    selectedStatusNumber = 1;
+    selectedStatusNumber = 3;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public phoneBookModel: PhoneBookModel,

@@ -62,11 +62,10 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let row">
                 <mat-checkbox
-                    (click)="$event.stopPropagation(); onSelectedRow(row)"
-                    (change)="$event ? selection.toggle(row) : null"
+                    (click)="$event.stopPropagation()"
+                    (change)="onSelectedRow(row, true, false)"
                     [checked]="selection.isSelected(row)"
-                >
-                </mat-checkbox>
+                ></mat-checkbox>
             </mat-cell>
         </ng-container>
 

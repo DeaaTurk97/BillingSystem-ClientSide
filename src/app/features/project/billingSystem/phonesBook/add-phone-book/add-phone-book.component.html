@@ -84,16 +84,13 @@
                                     >
                                         <mat-option
                                             *ngFor="
-                                                let typeNumber of keys(
-                                                    typePhonesNumber
-                                                );
+                                                let typeNumber of typePhonesNumber;
                                                 let i = index
                                             "
                                             [value]="i + 1"
                                         >
                                             {{
-                                                typePhonesNumber[typeNumber]
-                                                    | translate
+                                                typeNumber | translate
                                             }}</mat-option
                                         >
                                     </mat-select>
@@ -119,16 +116,13 @@
                                     >
                                         <mat-option
                                             *ngFor="
-                                                let satusNumber of keys(
-                                                    statusCycleBills
-                                                );
+                                                let satusNumber of statusCycleBills;
                                                 let i = index
                                             "
                                             [value]="i + 1"
                                         >
                                             {{
-                                                statusCycleBills[satusNumber]
-                                                    | translate
+                                                satusNumber | translate
                                             }}</mat-option
                                         >
                                     </mat-select>
