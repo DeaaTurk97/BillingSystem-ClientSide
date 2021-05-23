@@ -8,41 +8,42 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { CountryService } from '@app/infrastructure/core/services/billingSystem/country.service';
+import { PhoneBookService } from '@app/infrastructure/core/services/billingSystem/phone-book.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
-import { CountryModel } from '@app/infrastructure/models/project/CountryModel';
+import { PhoneBookModel } from '@app/infrastructure/models/project/phoneBook';
 import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 import {
     ActionRowGrid,
+    ResultActions,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { AddCountryComponent } from '../add-country/add-country.component';
+import { AddPhoneBookComponent } from '../add-phone-book/add-phone-book.component';
 
 @Component({
-    selector: 'app-countries-list',
-    templateUrl: './countries-list.component.html',
-    styleUrls: ['./countries-list.component.scss'],
+    selector: 'app-phone-book-list',
+    templateUrl: './phone-book-list.component.html',
+    styleUrls: ['./phone-book-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CountriesListComponent implements OnInit {
-    constructor(
-        private countryService: CountryService,
-        private dialog: MatDialog,
-        private notify: NotificationService,
-    ) {}
-
+export class PhoneBookListComponent implements OnInit {
     @ViewChild(MatSort, { static: true }) sort: MatSort;
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
     public paginationIndex = 0;
     public pageIndex = 1;
     public pageSize = 10;
     public length = 0;
-    public dataSource = new MatTableDataSource<CountryModel>([]);
+    public dataSource = new MatTableDataSource<PhoneBookModel>([]);
+
+    constructor(
+        private phoneBookService: PhoneBookService,
+        private dialog: MatDialog,
+        private notify: NotificationService,
+    ) {}
 
     ngOnInit(): void {
-        this.LoadCountries(this.pageIndex, this.pageSize);
+        this.LoadPhonesBook(this.pageIndex, this.pageSize);
     }
 
     getConfigDialog(data, isAddGridHeader?: boolean): MatDialogConfig {
@@ -78,7 +79,7 @@ export class CountriesListComponent implements OnInit {
                 this.onDelete(ActionGrid.row);
                 break;
             case State.Pagination:
-                this.LoadCountries(
+                this.LoadPhonesBook(
                     ActionGrid.row.pageIndex,
                     ActionGrid.row.pageSize,
                 );
@@ -86,9 +87,9 @@ export class CountriesListComponent implements OnInit {
         }
     }
 
-    LoadCountries(pageIndex: number, pageSize: number) {
-        this.countryService
-            .getCountries(pageIndex, pageSize)
+    LoadPhonesBook(pageIndex: number, pageSize: number) {
+        this.phoneBookService
+            .getPhonesBook(pageIndex, pageSize)
             .pipe(
                 map((paginationRecord) => {
                     this.dataSource.data = paginationRecord.dataRecord;
@@ -103,21 +104,24 @@ export class CountriesListComponent implements OnInit {
 
     onAddRecord() {
         const dialog = this.dialog.open(
-            AddCountryComponent,
+            AddPhoneBookComponent,
             this.getConfigDialog(null),
         );
 
         return dialog
             .afterClosed()
             .pipe(
-                switchMap((dialogResult: string) => {
-                    if (dialogResult) {
-                        this.LoadCountries(1, this.pageSize);
+                switchMap((dialogResult: ResultActions) => {
+                    if (dialogResult === ResultActions.Added) {
+                        this.LoadPhonesBook(1, this.pageSize);
                         this.dataSource.paginator = this.paginator;
                         this.notify.showTranslateMessage(
                             'AddedSuccessfully',
                             false,
                         );
+                        return of({});
+                    } else if (dialogResult === ResultActions.AlreadyExist) {
+                        this.notify.showTranslateMessage('NumberAlreadyExist');
                         return of({});
                     } else {
                         this.notify.showTranslateMessage('CancelAdd');
@@ -131,18 +135,18 @@ export class CountriesListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    onEdit(countryModel: CountryModel) {
+    onEdit(phoneBookModel: PhoneBookModel) {
         const dialog = this.dialog.open(
-            AddCountryComponent,
-            this.getConfigDialog(countryModel),
+            AddPhoneBookComponent,
+            this.getConfigDialog(phoneBookModel),
         );
 
         return dialog
             .afterClosed()
             .pipe(
-                switchMap((dialogResult: string) => {
-                    if (dialogResult) {
-                        this.LoadCountries(1, this.pageSize);
+                switchMap((dialogResult: ResultActions) => {
+                    if (dialogResult === ResultActions.Updated) {
+                        this.LoadPhonesBook(1, this.pageSize);
                         this.notify.showTranslateMessage(
                             'UpdatedSuccessfully',
                             false,
@@ -160,7 +164,7 @@ export class CountriesListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    onDelete(countryModel: CountryModel) {
+    onDelete(phoneBookModel: PhoneBookModel) {
         return this.dialog
             .open(ConfirmDialogComponent, {
                 width: '27em',
@@ -178,12 +182,12 @@ export class CountriesListComponent implements OnInit {
             .pipe(
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
-                        return this.countryService.deleteCountry(
-                            countryModel.id,
+                        return this.phoneBookService.deletePhoneBook(
+                            phoneBookModel.id,
                         );
                     } else {
                         this.notify.showTranslateMessage('CancelDelete');
-                        return of({});
+                        return of(false);
                     }
                 }),
                 catchError((): any => {
@@ -191,8 +195,10 @@ export class CountriesListComponent implements OnInit {
                 }),
             )
             .subscribe((result) => {
-                this.LoadCountries(1, this.pageSize);
-                this.notify.showTranslateMessage('DeletedSuccessfully');
+                if (result) {
+                    this.LoadPhonesBook(1, this.pageSize);
+                    this.notify.showTranslateMessage('DeletedSuccessfully');
+                }
             });
     }
 }

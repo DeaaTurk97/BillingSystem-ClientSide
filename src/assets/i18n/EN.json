@@ -192,5 +192,12 @@
     "Approved": "Approved",
     "Rejected": "Rejected",
     "NumberAlreadyExist": "Number Already Exist",
-    "createdDate": "created Date"
+    "createdDate": "created Date",
+    "ComingPhoneNumbers": "Incoming Phone Numbers",
+    "Approve": "Approve",
+    "Reject": "Reject",
+    "PhoneNumbersApproved": "Phone Numbers is Approved",
+    "ErrorOnPhoneNumbersApproved": "Error On Phone Numbers Approved",
+    "PhoneNumbersRejected": "Phone Numbers is Rejected",
+    "ErrorOnPhoneNumbersRejected": "Error On Phone Numbers Rejected"
 }

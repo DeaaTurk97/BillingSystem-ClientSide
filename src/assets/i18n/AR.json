@@ -207,5 +207,12 @@
     "Approved": "معتمد",
     "Rejected": "مرفوض",
     "NumberAlreadyExist": "الرقم موجود مسبقا",
-    "createdDate": "تاريخ الإنشاء"
+    "createdDate": "تاريخ الإنشاء",
+    "ComingPhoneNumbers": "أرقام الهواتف الواردة",
+    "Approve": "إعتماد",
+    "Reject": "رفض",
+    "PhoneNumbersApproved": "تم إعتماد الأرقام بنجاح",
+    "ErrorOnPhoneNumbersApproved": "حدث خطأ عند إعتماد الأرقام",
+    "PhoneNumbersRejected": "تم رفض الأرقام بنجاح",
+    "ErrorOnPhoneNumbersRejected": "حدث خطأ عند رفض الأرقام"
 }

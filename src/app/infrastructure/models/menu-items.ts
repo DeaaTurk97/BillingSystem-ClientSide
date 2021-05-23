@@ -56,7 +56,7 @@ const MENUITEMS = [
     },
 
     {
-        state: 'settings',
+        state: 'bills',
         name: 'PhonesBook',
         type: 'sub',
         icon: 'bubble_chart',
@@ -64,6 +64,11 @@ const MENUITEMS = [
             {
                 state: 'phonesBook-list',
                 name: 'PhonesBook',
+                type: 'link',
+            },
+            {
+                state: 'comingNumbers-list',
+                name: 'ComingPhoneNumbers',
                 type: 'link',
             },
         ],
@@ -96,12 +101,51 @@ const MENUITEMS = [
         children: [{ state: 'users-list', name: 'Users', type: 'link' }],
     },
 
+    // {
+    //     state: 'settings',
+    //     name: 'ToolsSettings',
+    //     type: 'sub',
+    //     icon: 'bubble_chart',
+    //     children: [
+    //         {
+    //             state: 'countries-list',
+    //             name: 'Countries',
+    //             type: 'link',
+    //         },
+    //         {
+    //             state: 'governorates-list',
+    //             name: 'Governorates',
+    //             type: 'link',
+    //         },
+    //         {
+    //             state: 'operators-list',
+    //             name: 'Operators',
+    //             type: 'link',
+    //         },
+    //         {
+    //             state: 'groups-list',
+    //             name: 'Groups',
+    //             type: 'link',
+    //         },
+    //         {
+    //             state: 'jobs-list',
+    //             name: 'Jobs',
+    //             type: 'link',
+    //         },
+    //     ],
+    // },
+
     {
-        state: 'settings',
-        name: 'ToolsSettings',
+        state: 'system-definition',
+        name: 'SystemSettings',
         type: 'sub',
         icon: 'bubble_chart',
         children: [
+            {
+                state: 'languages-settings',
+                name: 'languagesSettings',
+                type: 'link',
+            },
             {
                 state: 'countries-list',
                 name: 'Countries',
@@ -125,20 +169,6 @@ const MENUITEMS = [
             {
                 state: 'jobs-list',
                 name: 'Jobs',
-                type: 'link',
-            },
-        ],
-    },
-
-    {
-        state: 'system-definition',
-        name: 'SystemSettings',
-        type: 'sub',
-        icon: 'bubble_chart',
-        children: [
-            {
-                state: 'languages-settings',
-                name: 'languagesSettings',
                 type: 'link',
             },
             {

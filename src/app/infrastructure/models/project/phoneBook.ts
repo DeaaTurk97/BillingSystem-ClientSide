@@ -1,4 +1,5 @@
 export interface PhoneBookModel {
+    isChecked?: boolean;
     id: number;
     phoneNumber: string;
     phoneName: string;
