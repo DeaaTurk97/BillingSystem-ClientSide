@@ -110,6 +110,15 @@ const routes: Routes = [
             ).then((m) => m.ComingNumbersModule),
     },
     {
+        path: 'bills',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/billingSystem/uploadBills/upload-bills.module'
+            ).then((m) => m.UploadBillsModule),
+    },
+    {
         path: '**',
         component: NotFoundComponent,
         data: { title: 'Not Found' },

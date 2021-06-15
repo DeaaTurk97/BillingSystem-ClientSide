@@ -117,7 +117,7 @@
     "OfficialPhoneBook": "دليل الهاتف (الرسمي)",
     "PersonalPhoneBook": "دليل الهاتف (الشخصي)",
     "Bills": "الفواتير",
-    "UploadBills": "إحضار الفواتير",
+    "UploadBills": "تحميل الفواتير",
     "BillingSystem": "نظام الفوترة",
     "ToolsSettings": "الأدوات والضبط",
     "CountryKey": "الدول",
@@ -217,5 +217,9 @@
     "ErrorOnPhoneNumbersRejected": "حدث خطأ عند رفض الأرقام",
     "Inprogress": "جار العمل عليه",
     "PhoneNumbersInprogressed": "تم إجراء العمل على الأرقام",
-    "ErrorOnPhoneNumbersInprogress": "حدث خطأ عند جار العمل على الأرقام"
+    "ErrorOnPhoneNumbersInprogress": "حدث خطأ عند جار العمل على الأرقام",
+    "CanBeUploded": "مرفق صحيح يمكن تحميله",
+    "NotAllowedFileType": "نوع الملف غير مسموح به , الأنواع المسموح بها هي :  ",
+    "FileUploadedSuccessfully": "تم تحميل الفاتورة بنجاح",
+    "FileUploadedNotSuccessfully": "لم يتم تحميل المرفق بنجاح"
 }

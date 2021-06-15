@@ -46,7 +46,7 @@ const MENUITEMS = [
     },
 
     {
-        state: 'Bills',
+        state: 'bills',
         name: 'Bills',
         type: 'sub',
         icon: 'bubble_chart',
