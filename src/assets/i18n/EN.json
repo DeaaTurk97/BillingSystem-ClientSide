@@ -202,5 +202,8 @@
     "PhoneNumbersRejected": "Phone Numbers is Rejected",
     "ErrorOnPhoneNumbersRejected": "Error On Phone Numbers Rejected",
     "PhoneNumbersInprogressed": "Phone Numbers is Inprogressed",
-    "ErrorOnPhoneNumbersInprogress": "Error On Phone Numbers Inprogress"
+    "ErrorOnPhoneNumbersInprogress": "Error On Phone Numbers Inprogress",
+    "CanBeUploded": "Can Be Uploded",
+    "FileUploadedSuccessfully": "File Uploaded Successfully",
+    "FileUploadedNotSuccessfully": "File Uploaded Not Successfully"
 }

@@ -71,7 +71,7 @@ export const Constants: IConstant = {
         PASSWORD_REGEX: /(?=.*\d)(?=.*[a-z]).{8}/,
     },
     // 10MB
-    MAXFILESIZE: 10e6,
+    MAXFILESIZE: 1000000e6,
     MAXFILENAMELENGTH: 100,
     Default_Image_Setting_Name: 'default_image',
     DefaultLanguageId: 1,

@@ -1,0 +1,69 @@
+<mat-card>
+    <mat-card-content>
+        <button
+            mat-raised-button
+            type="submit"
+            color="primary"
+            (click)="uploadBill()"
+            [disabled]="fileListFormControl.errors || isSubmitted"
+        >
+            <mat-icon>upload</mat-icon> {{ 'UploadBills' | translate }}
+        </button>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+                        <div fxLayout="row wrap">
+                            <div
+                                class="p-12"
+                                fxFlex.gt-sm="100"
+                                fxFlex.gt-xs="100"
+                                fxFlex="100"
+                            >
+                                <mat-radio-group>
+                                    <mat-radio-button
+                                        [value]="true"
+                                        [checked]="IsMTNBills"
+                                        (change)="IsMTNBills = $event.value"
+                                        >MTN</mat-radio-button
+                                    >
+                                    <mat-radio-button
+                                        [value]="false"
+                                        (change)="IsMTNBills = $event.value"
+                                        >SyriaTel</mat-radio-button
+                                    >
+                                </mat-radio-group>
+                            </div>
+
+                            <div
+                                class="p-12"
+                                fxFlex.gt-sm="100"
+                                fxFlex.gt-xs="100"
+                                fxFlex="100"
+                            >
+                                <app-file-upload
+                                    class="inline-block"
+                                    [fileConfig]="fileConfig"
+                                    [fileListFormControl]="fileListFormControl"
+                                    [form]="formGroup"
+                                    [formConfig]="formConfig"
+                                    title="{{ 'DocumentUpload' | translate }}"
+                                    [validationMessageList]="
+                                        validationMessageList
+                                    "
+                                    (emitFileSelect)="onFileSelect($event)"
+                                    (emitSubmit)="uploadDocument()"
+                                ></app-file-upload>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
