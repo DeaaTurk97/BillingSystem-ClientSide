@@ -92,6 +92,15 @@ const routes: Routes = [
             ).then((m) => m.GovernorateModule),
     },
     {
+        path: 'system-definition',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/system-definition/ServicesTypes/ServiceType.module'
+            ).then((m) => m.ServiceTypeModule),
+    },
+    {
         path: 'bills',
         canActivate: [SuperAdminAuthGuard],
         canActivateChild: [SuperAdminAuthGuard],

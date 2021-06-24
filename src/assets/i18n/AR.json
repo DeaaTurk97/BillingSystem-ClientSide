@@ -221,5 +221,9 @@
     "CanBeUploded": "مرفق صحيح يمكن تحميله",
     "NotAllowedFileType": "نوع الملف غير مسموح به , الأنواع المسموح بها هي :  ",
     "FileUploadedSuccessfully": "تم تحميل الفاتورة بنجاح",
-    "FileUploadedNotSuccessfully": "لم يتم تحميل المرفق بنجاح"
+    "FileUploadedNotSuccessfully": "لم يتم تحميل المرفق بنجاح",
+    "ServicesTypes": "أنواع الخدمات",
+    "serviceTypeNameAr": "نوع الخدمة/عربي",
+    "serviceTypeNameEn": "نوع الخدمة/إنجليزي",
+    "isCalculatedValue": "يتم إحتساب القيمة"
 }

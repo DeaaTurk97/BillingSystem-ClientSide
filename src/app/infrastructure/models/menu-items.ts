@@ -172,6 +172,11 @@ const MENUITEMS = [
                 type: 'link',
             },
             {
+                state: 'servicesTypes-list',
+                name: 'ServicesTypes',
+                type: 'link',
+            },
+            {
                 state: 'general-settings',
                 name: 'GeneralSettings',
                 type: 'link',

@@ -1,16 +1,10 @@
-import {
-    Component,
-    OnInit,
-    ChangeDetectionStrategy,
-    ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { GovernorateService } from '@app/infrastructure/core/services/billingSystem/governorate.service';
+import { ServiceTypeService } from '@app/infrastructure/core/services/billingSystem/service-type.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
-import { GovernorateModel } from '@app/infrastructure/models/project/governorate';
+import { ServiceTypeModel } from '@app/infrastructure/models/project/serviceTypeModel';
 import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 import {
     ActionRowGrid,
@@ -18,24 +12,23 @@ import {
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { AddGovernorateComponent } from '../add-governorate/add-governorate.component';
+import { AddServiceTypeComponent } from '../add-service-type/add-service-type.component';
 
 @Component({
-    selector: 'app-governorate-list',
-    templateUrl: './governorate-list.component.html',
-    styleUrls: ['./governorate-list.component.scss'],
+    selector: 'app-service-type-list',
+    templateUrl: './service-type-list.component.html',
+    styleUrls: ['./service-type-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GovernorateListComponent implements OnInit {
-    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+export class ServiceTypeListComponent implements OnInit {
     public paginationIndex = 0;
     public pageIndex = 1;
     public pageSize = 10;
     public length = 0;
-    public dataSource = new MatTableDataSource<GovernorateModel>([]);
+    public dataSource = new MatTableDataSource<ServiceTypeModel>([]);
 
     constructor(
-        private governorateService: GovernorateService,
+        private sericeTypeService: ServiceTypeService,
         private dialog: MatDialog,
         private notify: NotificationService,
     ) {}
@@ -51,7 +44,7 @@ export class GovernorateListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.LoadGovernorates(this.pageIndex, this.pageSize);
+        this.LoadServicesTypes(this.pageIndex, this.pageSize);
     }
 
     onEditControlClick(resultClick: State) {
@@ -77,7 +70,7 @@ export class GovernorateListComponent implements OnInit {
                 this.onDelete(ActionGrid.row);
                 break;
             case State.Pagination:
-                this.LoadGovernorates(
+                this.LoadServicesTypes(
                     ActionGrid.row.pageIndex,
                     ActionGrid.row.pageSize,
                 );
@@ -85,9 +78,9 @@ export class GovernorateListComponent implements OnInit {
         }
     }
 
-    LoadGovernorates(pageIndex: number, pageSize: number) {
-        this.governorateService
-            .getGovernorates(pageIndex, pageSize)
+    LoadServicesTypes(pageIndex: number, pageSize: number) {
+        this.sericeTypeService
+            .getServicesTypes(pageIndex, pageSize)
             .pipe(
                 map((paginationRecord) => {
                     this.dataSource.data = paginationRecord.dataRecord;
@@ -102,7 +95,7 @@ export class GovernorateListComponent implements OnInit {
 
     onAddRecord() {
         const dialog = this.dialog.open(
-            AddGovernorateComponent,
+            AddServiceTypeComponent,
             this.getConfigDialog(null),
         );
 
@@ -111,8 +104,7 @@ export class GovernorateListComponent implements OnInit {
             .pipe(
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
-                        this.LoadGovernorates(1, this.pageSize);
-                        this.dataSource.paginator = this.paginator;
+                        this.LoadServicesTypes(1, this.pageSize);
                         this.notify.showTranslateMessage(
                             'AddedSuccessfully',
                             false,
@@ -130,10 +122,10 @@ export class GovernorateListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    onEdit(governorateModel: GovernorateModel) {
+    onEdit(serviceTypeModel: ServiceTypeModel) {
         const dialog = this.dialog.open(
-            AddGovernorateComponent,
-            this.getConfigDialog(governorateModel),
+            AddServiceTypeComponent,
+            this.getConfigDialog(serviceTypeModel),
         );
 
         return dialog
@@ -141,7 +133,7 @@ export class GovernorateListComponent implements OnInit {
             .pipe(
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
-                        this.LoadGovernorates(1, this.pageSize);
+                        this.LoadServicesTypes(1, this.pageSize);
                         this.notify.showTranslateMessage(
                             'UpdatedSuccessfully',
                             false,
@@ -159,7 +151,7 @@ export class GovernorateListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    onDelete(governorateModel: GovernorateModel) {
+    onDelete(serviceTypeModel: ServiceTypeModel) {
         return this.dialog
             .open(ConfirmDialogComponent, {
                 width: '28em',
@@ -177,8 +169,8 @@ export class GovernorateListComponent implements OnInit {
             .pipe(
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
-                        return this.governorateService.deleteGovernorate(
-                            governorateModel.id,
+                        return this.sericeTypeService.deleteServiceType(
+                            serviceTypeModel.id,
                         );
                     } else {
                         this.notify.showTranslateMessage('CancelDelete');
@@ -190,7 +182,7 @@ export class GovernorateListComponent implements OnInit {
                 }),
             )
             .subscribe((result) => {
-                this.LoadGovernorates(1, this.pageSize);
+                this.LoadServicesTypes(1, this.pageSize);
                 this.notify.showTranslateMessage('DeletedSuccessfully');
             });
     }
