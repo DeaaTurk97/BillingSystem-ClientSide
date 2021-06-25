@@ -20,7 +20,7 @@ import { LanguageModel } from '@app/infrastructure/models/project/LanguageModel'
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit, OnDestroy {
-    public title: string = 'Team Work';
+    public title: string = 'Billing-System';
 
     private routerEventsSubscription: Subscription;
 

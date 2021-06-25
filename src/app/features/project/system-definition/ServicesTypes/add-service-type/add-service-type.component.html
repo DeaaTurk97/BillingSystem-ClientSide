@@ -1,0 +1,139 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+                <form
+                    novalidate
+                    [formGroup]="frmAddNew"
+                    (ngSubmit)="onSubmit()"
+                >
+                    <div fxLayout="row wrap">
+                        <div
+                            class="p-12"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <ng-template>
+                                <mat-form-field style="width: 100%">
+                                    <input
+                                        matInput
+                                        placeholder="Id"
+                                        formControlName="Id"
+                                        type="text"
+                                    />
+                                </mat-form-field>
+                            </ng-template>
+                        </div>
+
+                        <div
+                            class="p-12"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'serviceTypeNameAr' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'serviceTypeNameAr' | translate
+                                    }}"
+                                    formControlName="ServiceTypeNameAr"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-12"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'serviceTypeNameEn' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'serviceTypeNameEn' | translate
+                                    }}"
+                                    formControlName="ServiceTypeNameEn"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-checkbox formControlName="IsCalculatedValue">{{
+                                'isCalculatedValue' | translate
+                            }}</mat-checkbox>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="15"
+                            fxFlex.gt-xs="15"
+                            fxFlex="100"
+                        >
+                            <button
+                                mat-raised-button
+                                [mat-dialog-close]="false"
+                                color="warn"
+                            >
+                                <mat-icon>close</mat-icon>
+                                {{ 'Close' | translate }}
+                            </button>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="15"
+                            fxFlex.gt-xs="15"
+                            fxFlex="100"
+                            [hidden]="frmAddNew.controls['Id'].value != 0"
+                        >
+                            <button
+                                mat-raised-button
+                                type="submit"
+                                color="primary"
+                                [disabled]="!frmAddNew.valid || isInProgress"
+                            >
+                                <mat-icon>add</mat-icon> {{ 'Add' | translate }}
+                            </button>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="15"
+                            fxFlex.gt-xs="15"
+                            fxFlex="100"
+                            [hidden]="frmAddNew.controls['Id'].value == 0"
+                        >
+                            <button
+                                mat-raised-button
+                                type="submit"
+                                color="primary"
+                                [disabled]="!frmAddNew.valid || isInProgress"
+                            >
+                                <mat-icon>save</mat-icon>
+                                {{ 'Save' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

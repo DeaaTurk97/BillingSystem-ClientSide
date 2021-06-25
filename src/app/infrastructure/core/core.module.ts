@@ -22,6 +22,7 @@ import { SharedModule } from '@shared/shared.module';
             useClass: GlobalErrorHandlerService,
         },
     ],
+    declarations: [],
 })
 export class CoreModule {
     constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

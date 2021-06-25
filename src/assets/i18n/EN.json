@@ -205,5 +205,9 @@
     "ErrorOnPhoneNumbersInprogress": "Error On Phone Numbers Inprogress",
     "CanBeUploded": "Can Be Uploded",
     "FileUploadedSuccessfully": "File Uploaded Successfully",
-    "FileUploadedNotSuccessfully": "File Uploaded Not Successfully"
+    "FileUploadedNotSuccessfully": "File Uploaded Not Successfully",
+    "ServicesTypes": "Services Types",
+    "serviceTypeNameAr": "service Type/Arabic",
+    "serviceTypeNameEn": "service Type/English",
+    "isCalculatedValue": "is Calculated Value"
 }
