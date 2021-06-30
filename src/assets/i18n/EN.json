@@ -207,7 +207,7 @@
     "FileUploadedSuccessfully": "File Uploaded Successfully",
     "FileUploadedNotSuccessfully": "File Uploaded Not Successfully",
     "ServicesTypes": "Services Types",
-    "serviceTypeNameAr": "service Type/Arabic",
-    "serviceTypeNameEn": "service Type/English",
-    "isCalculatedValue": "is Calculated Value"
+    "CallsSummaryReport": "Calls Summary Report",
+    "FinanceReport": "Finance Report",
+    "CallsDetailsReport": "Calls Details Report"
 }

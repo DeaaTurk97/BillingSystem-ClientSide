@@ -223,7 +223,7 @@
     "FileUploadedSuccessfully": "تم تحميل الفاتورة بنجاح",
     "FileUploadedNotSuccessfully": "لم يتم تحميل المرفق بنجاح",
     "ServicesTypes": "أنواع الخدمات",
-    "serviceTypeNameAr": "نوع الخدمة/عربي",
-    "serviceTypeNameEn": "نوع الخدمة/إنجليزي",
-    "isCalculatedValue": "يتم إحتساب القيمة"
+    "CallsSummaryReport": "تقرير ملخص المكالمات",
+    "FinanceReport": "التقرير المالي",
+    "CallsDetailsReport": "تقرير تفاصيل المكالمات"
 }

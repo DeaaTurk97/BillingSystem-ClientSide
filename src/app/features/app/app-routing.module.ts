@@ -128,6 +128,33 @@ const routes: Routes = [
             ).then((m) => m.UploadBillsModule),
     },
     {
+        path: 'reports',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/reports/calls-details-report/calls-details-report.module'
+            ).then((m) => m.CallsDetailsReportModule),
+    },
+    {
+        path: 'reports',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/reports/calls-summary-report/calls-summary-report.module'
+            ).then((m) => m.CallsSummaryReportModule),
+    },
+    {
+        path: 'reports',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/reports/finance-report/finance-report-routing.module'
+            ).then((m) => m.FinanceReportRoutingModule),
+    },
+    {
         path: '**',
         component: NotFoundComponent,
         data: { title: 'Not Found' },
