@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FinanceReportListComponent } from './finance-report-list/finance-report-list.component';
-
+import { LandingLayoutComponent } from '@app/features/landing';
 const routes: Routes = [
     {
         path: '',
-        component: FinanceReportListComponent,
+        component: LandingLayoutComponent,
         children: [
             {
                 path: '',

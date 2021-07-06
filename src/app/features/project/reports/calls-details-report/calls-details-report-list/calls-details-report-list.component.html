@@ -1,5 +1,29 @@
 <mat-card>
     <mat-card-content>
-        <div>hiiiiiiiii</div>
+        <!-- <app-user-edit-control
+            (notify)="onEditControlClick($event)"
+            (searchChange)="applyFilter($event)"
+            SearchPlaceHolder="{{ 'Search' | translate }}"
+        >
+        </app-user-edit-control> -->
+        <app-data-grid-view
+            [gridDataSource]="dataSource"
+            [displayedColumns]="[
+                'userName',
+                'phoneNumber',
+                'groupNameEn',
+                'dialledNumber',
+                'callDateTime',
+                'callDuration',
+                'callDiscountPrice',
+                'callRetailPrice',
+                'serviceNameEn'
+            ]"
+            (onPagination)="onActionRowGrid($event)"
+            [lengthData]="length"
+            [PaginatorIndex]="paginationIndex"
+            [isShowMainActionControls]="false"
+        >
+        </app-data-grid-view>
     </mat-card-content>
 </mat-card>

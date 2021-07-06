@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CallsDetailsReportListComponent } from './calls-details-report-list/calls-details-report-list.component';
+import { LandingLayoutComponent } from '@app/features/landing';
 
 const routes: Routes = [
     {
         path: '',
-        component: CallsDetailsReportListComponent,
+        component: LandingLayoutComponent,
         children: [
             {
                 path: '',

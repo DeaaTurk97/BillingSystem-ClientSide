@@ -8,9 +8,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { PhoneBookService } from '@app/infrastructure/core/services/billingSystem/phone-book.service';
+import { CallsDetailsReportService } from '@app/infrastructure/core/services/billingSystem/calls-details-report.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
-import { PhoneBookModel } from '@app/infrastructure/models/project/phoneBook';
+import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
+import { CallsDetailsReportModel } from '@app/infrastructure/models/project/callsDetailsReportModel';
 import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 import { DataGridViewComponent } from '@app/infrastructure/shared/components/data-grid-view/data-grid-view.component';
 import {
@@ -28,11 +29,49 @@ import { catchError, map, switchMap } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CallsDetailsReportListComponent implements OnInit {
+    @ViewChild(MatSort, { static: true }) sort: MatSort;
+    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+    public paginationIndex = 0;
+    public pageIndex = 1;
+    public pageSize = 10;
+    public length = 0;
+    public reportFilterModel: ReportFilterModel = new ReportFilterModel();
+    public dataSource = new MatTableDataSource<CallsDetailsReportModel>([]);
     constructor(
-        private phoneBookService: PhoneBookService,
-        private dialog: MatDialog,
+        private callsDetailsReportService: CallsDetailsReportService,
         private notify: NotificationService,
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.LoadReport(this.pageIndex, this.pageSize);
+    }
+
+    onActionRowGrid(ActionGrid: ActionRowGrid) {
+        switch (ActionGrid.type) {
+            case State.Pagination:
+                this.LoadReport(
+                    ActionGrid.row.pageIndex,
+                    ActionGrid.row.pageSize,
+                );
+                break;
+        }
+    }
+
+    LoadReport(pageIndex: number, pageSize: number) {
+        //this.reportFilterModel.userId = 1;
+        this.reportFilterModel.pageIndex = pageIndex;
+        this.reportFilterModel.pageSize = pageSize;
+        this.callsDetailsReportService
+            .getReport(this.reportFilterModel)
+            .pipe(
+                map((paginationRecord) => {
+                    this.dataSource.data = paginationRecord.dataRecord;
+                    this.length = paginationRecord.countRecord;
+                }),
+                catchError((error): any => {
+                    this.notify.showTranslateMessage('ErrorOnLoadData');
+                }),
+            )
+            .subscribe((result) => {});
+    }
 }

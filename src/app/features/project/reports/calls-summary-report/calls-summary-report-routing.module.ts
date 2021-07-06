@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CallsSummaryReportListComponent } from './calls-summary-report-list/calls-summary-report-list.component';
-
+import { LandingLayoutComponent } from '@app/features/landing';
 const routes: Routes = [
     {
         path: '',
-        component: CallsSummaryReportListComponent,
+        component: LandingLayoutComponent,
         children: [
             {
                 path: '',
