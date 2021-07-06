@@ -128,6 +128,24 @@ const routes: Routes = [
             ).then((m) => m.UploadBillsModule),
     },
     {
+        path: 'bills',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/billingSystem/billsSummary/bills-summary.module'
+            ).then((m) => m.BillsSummaryModule),
+    },
+    {
+        path: 'bills',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/billingSystem/billsDetails/bills-Details.module'
+            ).then((m) => m.BillsDetailsModule),
+    },
+    {
         path: '**',
         component: NotFoundComponent,
         data: { title: 'Not Found' },

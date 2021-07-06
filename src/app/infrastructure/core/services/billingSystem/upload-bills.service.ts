@@ -17,7 +17,6 @@ export class UploadBillsService {
     }
 
     uploadMTNBills(filesUploaded: IUploadedDocument[]): Observable<any> {
-        debugger;
         console.log(filesUploaded);
         return this.apiService.post(
             `${environment.apiRoute}/Bills/UploadMTNBills`,
@@ -26,7 +25,6 @@ export class UploadBillsService {
     }
 
     uploadSyriaTelBills(filesUploaded: IUploadedDocument[]): Observable<any> {
-        debugger;
         console.log(filesUploaded);
         return this.apiService.post(
             `${environment.apiRoute}/Bills/UploadSyriaTelBills`,

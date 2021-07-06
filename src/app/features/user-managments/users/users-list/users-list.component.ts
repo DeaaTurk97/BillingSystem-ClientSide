@@ -20,6 +20,7 @@ import { UsersRolesComponent } from '../users-roles/users-roles.component';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { RoleModel } from '@app/infrastructure/models/RoleModel';
 import { of } from 'rxjs';
+import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-users-list',
@@ -77,6 +78,9 @@ export class UsersListComponent implements OnInit {
             case State.Edit:
                 this.onEdit(ActionGrid.row);
                 break;
+            case State.Delete:
+                this.onDelete(ActionGrid.row);
+                break;
         }
     }
 
@@ -130,5 +134,46 @@ export class UsersListComponent implements OnInit {
                 }),
             )
             .subscribe((result) => {});
+    }
+
+    onDelete(userModel: UserModel) {
+        debugger;
+        return this.dialog
+            .open(ConfirmDialogComponent, {
+                width: '28em',
+                height: '11em',
+                panelClass: 'confirm-dialog-container',
+                position: { top: '5em' },
+                disableClose: true,
+                data: {
+                    messageList: ['SureWantDelete'],
+                    action: 'Delete',
+                    showCancel: true,
+                },
+            })
+            .afterClosed()
+            .pipe(
+                switchMap((dialogResult: string) => {
+                    if (dialogResult) {
+                        return this.userService.deleteUser(
+                            Number(userModel.userId),
+                        );
+                    } else {
+                        this.notify.showTranslateMessage('CancelDelete');
+                        return of(null);
+                    }
+                }),
+                catchError((): any => {
+                    this.notify.showTranslateMessage('ErrorOnDelete');
+                    return of(null);
+                }),
+            )
+            .subscribe((result) => {
+                debugger;
+                if (result) {
+                    this.loadUsers(1, this.pageSize);
+                    this.notify.showTranslateMessage('DeletedSuccessfully');
+                }
+            });
     }
 }
