@@ -28,29 +28,22 @@
                         >
                             <mat-form-field>
                                 <mat-label>{{
-                                    'TypeNewNumber' | translate
+                                    'typePhoneNumberName' | translate
                                 }}</mat-label>
                                 <mat-select
                                     placeholder="{{
-                                        'TypeNewNumber' | translate
+                                        'typePhoneNumberName' | translate
                                     }}"
-                                    [(value)]="selectedTypeNumber"
-                                    formControlName="TypePhoneNumber"
+                                    formControlName="TypePhoneNumberId"
                                 >
                                     <mat-option
                                         *ngFor="
-                                            let typeNumber of 
-                                                typePhonesNumber
-                                            ;
-                                            let i = index
+                                            let typeNumber of typePhonesNumbers
                                         "
-                                        [value]="i"
+                                        [value]="typeNumber.id"
                                     >
-                                        {{
-                                            typeNumber
-                                                | translate
-                                        }}</mat-option
-                                    >
+                                        {{ typeNumber.typeNameAr }}
+                                    </mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>

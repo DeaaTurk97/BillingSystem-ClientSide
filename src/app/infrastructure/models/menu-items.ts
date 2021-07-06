@@ -52,6 +52,8 @@ const MENUITEMS = [
         icon: 'bubble_chart',
         children: [
             { state: 'upload-bills', name: 'UploadBills', type: 'link' },
+            { state: 'billsSummary-list', name: 'BillsSummary', type: 'link' },
+            { state: 'billsDetails-list', name: 'BillDetails', type: 'link' },
         ],
     },
 

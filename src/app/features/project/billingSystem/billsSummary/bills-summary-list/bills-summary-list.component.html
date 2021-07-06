@@ -1,0 +1,30 @@
+<mat-card>
+    <mat-card-content>
+        <app-user-edit-control
+            (searchChange)="applyFilter($event)"
+            SearchPlaceHolder="{{ 'Search' | translate }}"
+            [IsShowAddButton]="false"
+        >
+        </app-user-edit-control>
+        <app-data-grid-view
+            [gridDataSource]="dataSource"
+            [displayedColumns]="[
+                'id',
+                'billMonth',
+                'billYear',
+                'isPaid',
+                'billStatus',
+                'billNote'
+            ]"
+            (onCheckRow)="onActionRowGrid($event)"
+            (onPagination)="onActionRowGrid($event)"
+            (onInStatusRow)="onActionRowGrid($event)"
+            [lengthData]="length"
+            [PaginatorIndex]="paginationIndex"
+            [isShowMainActionControls]="false"
+            [isShowBoxSelectAll]="false"
+            [additionalColumns]="initialAdditionalColumns()"
+        >
+        </app-data-grid-view>
+    </mat-card-content>
+</mat-card>

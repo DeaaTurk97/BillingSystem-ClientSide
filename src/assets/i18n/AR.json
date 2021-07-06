@@ -225,5 +225,14 @@
     "ServicesTypes": "أنواع الخدمات",
     "serviceTypeNameAr": "نوع الخدمة/عربي",
     "serviceTypeNameEn": "نوع الخدمة/إنجليزي",
-    "isCalculatedValue": "يتم إحتساب القيمة"
+    "isCalculatedValue": "يتم إحتساب القيمة",
+    "BillsSummary": "ملخص الفواتير",
+    "billMonth": "الشهر",
+    "billYear": "السنة",
+    "isPaid": "مدفوعة",
+    "billNote": "الملاحظات",
+    "billStatus": "حالة الفاتورة",
+    "BillDetails": "تفاصيل الفاتورة",
+    "Pay": "دفع",
+    "AlreadyPaid": "الفاتورة مدفوعة مسبقاً"
 }

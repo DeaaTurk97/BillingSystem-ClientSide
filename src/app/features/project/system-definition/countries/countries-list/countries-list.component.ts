@@ -33,7 +33,6 @@ export class CountriesListComponent implements OnInit {
         private notify: NotificationService,
     ) {}
 
-    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
     public paginationIndex = 0;
     public pageIndex = 1;
     public pageSize = 10;
@@ -112,7 +111,6 @@ export class CountriesListComponent implements OnInit {
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
                         this.LoadCountries(1, this.pageSize);
-                        this.dataSource.paginator = this.paginator;
                         this.notify.showTranslateMessage(
                             'AddedSuccessfully',
                             false,
