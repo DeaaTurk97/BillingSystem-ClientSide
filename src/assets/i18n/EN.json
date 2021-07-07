@@ -210,4 +210,16 @@
     "CallsSummaryReport": "Calls Summary Report",
     "FinanceReport": "Finance Report",
     "CallsDetailsReport": "Calls Details Report"
+    "serviceTypeNameAr": "service Type/Arabic",
+    "serviceTypeNameEn": "service Type/English",
+    "isCalculatedValue": "is Calculated Value",
+    "BillsSummary": "Bills Summary",
+    "billMonth": "bill Month",
+    "billYear": "bill Year",
+    "isPaid": "is Paid",
+    "billNote": "bill Note",
+    "billStatus": "bill Status",
+    "BillDetails": "Bill Details",
+    "Pay": "Pay",
+    "AlreadyPaid": "bill Already Paid"
 }

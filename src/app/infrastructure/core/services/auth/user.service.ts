@@ -29,8 +29,10 @@ export class UserService {
         );
     }
 
-    deleteUser(id: number): Observable<any> {
-        return this.apiService.delete(`${environment.apiRoute}/User?id=${id}`);
+    deleteUser(userId: number): Observable<any> {
+        return this.apiService.delete(
+            `${environment.apiRoute}/User?userId=${userId}`,
+        );
     }
 
     getAllSuperAdminsAsync(): Observable<UserModel[]> {

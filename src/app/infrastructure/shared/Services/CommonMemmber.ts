@@ -12,6 +12,8 @@ export enum State {
     Pagination,
     Chatting,
     Check,
+    BillDetails,
+    Pay,
 }
 
 export enum ResultActions {

@@ -7,15 +7,14 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PhoneBookService } from '@app/infrastructure/core/services/billingSystem/phone-book.service';
+import { TypePhoneNumberService } from '@app/infrastructure/core/services/billingSystem/type-phone-number.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { PhoneBookModel } from '@app/infrastructure/models/project/phoneBook';
-import {
-    StatusCycleBills,
-    TypePhonesNumber,
-} from '@app/infrastructure/models/SystemEnum';
+import { TypePhoneNumber } from '@app/infrastructure/models/project/TypePhoneNumberModel';
+import { StatusCycleBills } from '@app/infrastructure/models/SystemEnum';
 import { ResultActions } from '@app/infrastructure/shared/Services/CommonMemmber';
-import { of } from 'rxjs';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { of, pipe } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-add-phone-book',
@@ -26,12 +25,7 @@ import { catchError, mergeMap } from 'rxjs/operators';
 export class AddPhoneBookComponent implements OnInit {
     public isInProgress = false;
     public frmAddNew: FormGroup;
-
-    keys = Object.keys;
-    typePhonesNumber = Object.keys(TypePhonesNumber)
-        .filter((f) => !isNaN(Number(f)))
-        .map((key) => TypePhonesNumber[key]);
-    selectedTypeNumber = 1;
+    public typePhonesNumbers: TypePhoneNumber[] = [];
 
     statusCycleBills = Object.keys(StatusCycleBills)
         .filter((f) => !isNaN(Number(f)))
@@ -44,6 +38,7 @@ export class AddPhoneBookComponent implements OnInit {
         private phoneBookService: PhoneBookService,
         private dialogRef: MatDialogRef<AddPhoneBookComponent>,
         private notify: NotificationService,
+        private typePhoneNumberService: TypePhoneNumberService,
     ) {}
 
     get ID() {
@@ -52,7 +47,8 @@ export class AddPhoneBookComponent implements OnInit {
 
     ngOnInit(): void {
         this.ngInitialControlForm();
-        this.setCountryDetails();
+        this.getAllTypePhonNumber();
+        this.setPhoneBookDetails();
     }
 
     ngInitialControlForm() {
@@ -60,12 +56,12 @@ export class AddPhoneBookComponent implements OnInit {
             Id: [0],
             PhoneNumber: ['', Validators.required],
             PhoneName: ['', Validators.required],
-            TypePhoneNumberId: [this.selectedTypeNumber, Validators.required],
+            TypePhoneNumberId: ['', Validators.required],
             statusNumberId: [this.selectedStatusNumber, Validators.required],
         });
     }
 
-    setCountryDetails() {
+    setPhoneBookDetails() {
         if (this.phoneBookModel) {
             this.frmAddNew.controls.Id.setValue(this.phoneBookModel.id);
             this.frmAddNew.controls.PhoneNumber.setValue(
@@ -81,6 +77,19 @@ export class AddPhoneBookComponent implements OnInit {
                 this.phoneBookModel.statusNumberId,
             );
         }
+    }
+    getAllTypePhonNumber() {
+        this.typePhoneNumberService
+            .getAllTypesPhoneNumber()
+            .pipe(
+                map((data) => {
+                    this.typePhonesNumbers = data;
+                }),
+                catchError((error): any => {
+                    this.notify.showTranslateMessage('ErrorOnLoadData');
+                }),
+            )
+            .subscribe((result) => {});
     }
 
     onAdd() {

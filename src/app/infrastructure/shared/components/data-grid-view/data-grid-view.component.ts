@@ -6,12 +6,13 @@ import {
     Output,
     AfterViewInit,
     ViewChild,
+    ChangeDetectorRef,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { State, ActionRowGrid } from '../../Services/CommonMemmber';
 import { BehaviorSubject } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { DynamicColumn } from '@app/infrastructure/models/gridAddColumns-model';
 import { SelectionModel } from '@angular/cdk/collections';
 
@@ -60,7 +61,8 @@ export class DataGridViewComponent implements OnInit, AfterViewInit {
     selection = new SelectionModel<any>(true, []);
     rowsSelection = [];
 
-    constructor() {}
+    constructor(private changeDetectorRef: ChangeDetectorRef) {}
+
     ngOnInit(): void {}
 
     ngAfterViewInit(): void {
@@ -172,5 +174,27 @@ export class DataGridViewComponent implements OnInit, AfterViewInit {
                         ],
                     );
             });
+    }
+
+    onFirstPage() {
+        this.paginator.firstPage();
+        this.changeDetectorRef.detectChanges();
+    }
+
+    onLastPage() {
+        this.paginator.lastPage();
+        this.changeDetectorRef.detectChanges();
+    }
+
+    onSelectPageIndex(pageIndex: number) {
+        this.paginator.pageIndex = pageIndex - 1;
+
+        const event: PageEvent = {
+            length: this.paginator.length,
+            pageIndex: this.paginator.pageIndex,
+            pageSize: this.paginator.pageSize,
+        };
+
+        this.paginator.page.next(event);
     }
 }

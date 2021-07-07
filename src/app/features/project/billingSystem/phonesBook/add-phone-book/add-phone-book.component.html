@@ -79,20 +79,16 @@
                                         placeholder="{{
                                             'typePhoneNumberName' | translate
                                         }}"
-                                        [(value)]="selectedTypeNumber"
                                         formControlName="TypePhoneNumberId"
                                     >
                                         <mat-option
                                             *ngFor="
-                                                let typeNumber of typePhonesNumber;
-                                                let i = index
+                                                let typeNumber of typePhonesNumbers
                                             "
-                                            [value]="i + 1"
+                                            [value]="typeNumber.id"
                                         >
-                                            {{
-                                                typeNumber | translate
-                                            }}</mat-option
-                                        >
+                                            {{ typeNumber.typeNameAr }}
+                                        </mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>

@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GeneralSettingsService } from '@app/infrastructure/core/services/general-settings.service';
 import { GeneralSettingsModel } from '@models/project/general-settings';
 import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { Constants } from '@app/infrastructure/utils/constants';
-import { TypePhonesNumber } from '@app/infrastructure/models/SystemEnum';
+import { TypePhoneNumber } from '@app/infrastructure/models/project/TypePhoneNumberModel';
+import { TypePhoneNumberService } from '@app/infrastructure/core/services/billingSystem/type-phone-number.service';
 
 @Component({
     templateUrl: './general-settings.component.html',
@@ -18,17 +19,13 @@ export class GeneralSettingsComponent implements OnInit {
     public isInProgress = false;
     public frmGeneralSettings: FormGroup;
     public isHidePassword: boolean = true;
-
-    keys = Object.keys;
-    typePhonesNumber = Object.keys(TypePhonesNumber)
-        .filter((f) => !isNaN(Number(f)))
-        .map((key) => TypePhonesNumber[key]);
-    selectedTypeNumber = 1;
+    public typePhonesNumbers: TypePhoneNumber[] = [];
 
     constructor(
         private generalSettingsService: GeneralSettingsService,
         private notify: NotificationService,
         private formBuilder: FormBuilder,
+        private typePhoneNumberService: TypePhoneNumberService,
     ) {}
 
     public ngOnInit(): void {
@@ -39,7 +36,7 @@ export class GeneralSettingsComponent implements OnInit {
     ngInitialControlForm() {
         this.frmGeneralSettings = this.formBuilder.group({
             Id: [0],
-            TypePhoneNumber: ['', Validators.required],
+            TypePhoneNumberId: ['', Validators.required],
             DefaultPassword: ['', Validators.required],
             ValueOfAllowedCallsToTheEmployee: ['', Validators.required],
             TheNumberOfDaysGrantedToTheEmployeeToSendTheBill: [
@@ -112,17 +109,21 @@ export class GeneralSettingsComponent implements OnInit {
     public generalSettingsListNew: GeneralSettingsModel[] = [];
 
     public getGeneralSettingsInfo() {
-        return this.generalSettingsService
-            .getGeneralSettings()
+        this.typePhoneNumberService
+            .getAllTypesPhoneNumber()
             .pipe(
+                switchMap((typeNumber: TypePhoneNumber[]) => {
+                    this.typePhonesNumbers = typeNumber;
+                    return this.generalSettingsService.getGeneralSettings();
+                }),
                 map((generalSettings: GeneralSettingsModel[]) => {
                     if (generalSettings) {
-                        this.frmGeneralSettings.controls.TypePhoneNumber.setValue(
+                        this.frmGeneralSettings.controls.TypePhoneNumberId.setValue(
                             Number(
                                 generalSettings.find(
                                     (generalSetting: GeneralSettingsModel) =>
                                         generalSetting.settingName ===
-                                        Constants.TypePhoneNumber,
+                                        Constants.TypePhoneNumberId,
                                 )?.settingValue,
                             ),
                         );
@@ -566,6 +567,7 @@ export class GeneralSettingsComponent implements OnInit {
                         );
                     }
                     this.generalSettingsListCurrent = generalSettings;
+                    return this.typePhoneNumberService.getAllTypesPhoneNumber();
                 }),
             )
             .subscribe((result) => {});
@@ -575,9 +577,9 @@ export class GeneralSettingsComponent implements OnInit {
         let generalSettingsModel: GeneralSettingsModel = new GeneralSettingsModel();
         this.generalSettingsListNew = [];
         if (this.frmGeneralSettings.value) {
-            (generalSettingsModel.settingName = Constants.TypePhoneNumber),
+            (generalSettingsModel.settingName = Constants.TypePhoneNumberId),
                 (generalSettingsModel.settingValue = String(
-                    this.frmGeneralSettings.controls.TypePhoneNumber.value,
+                    this.frmGeneralSettings.controls.TypePhoneNumberId.value,
                 ));
             this.generalSettingsListNew.push(generalSettingsModel);
 

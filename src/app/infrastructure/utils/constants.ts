@@ -12,7 +12,7 @@ export interface IConstant {
     MAXFILESIZE: number;
     MAXFILENAMELENGTH: number;
     Default_Image_Setting_Name: string;
-    TypePhoneNumber: string;
+    TypePhoneNumberId: string;
     DefaultPassword: string;
     ValueOfAllowedCallsToTheEmployee: string;
     TheNumberOfDaysGrantedToTheEmployeeToSendTheBill: string;
@@ -76,7 +76,7 @@ export const Constants: IConstant = {
     Default_Image_Setting_Name: 'default_image',
     DefaultLanguageId: 1,
     DefaultLanguageDirection: 'rtl',
-    TypePhoneNumber: 'TypePhoneNumber',
+    TypePhoneNumberId: 'TypePhoneNumberId',
     DefaultPassword: 'DefaultPassword',
     ValueOfAllowedCallsToTheEmployee: 'ValueOfAllowedCallsToTheEmployee',
     TheNumberOfDaysGrantedToTheEmployeeToSendTheBill:
