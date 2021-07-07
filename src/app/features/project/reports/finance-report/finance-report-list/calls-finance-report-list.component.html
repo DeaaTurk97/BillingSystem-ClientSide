@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-content>
+        <app-data-grid-view
+            [gridDataSource]="dataSource"
+            [displayedColumns]="[
+                'id',
+                'phoneNumber',
+                'userName',
+                'userEmail',
+                'groupNameEn',
+                'freeSum',
+                'officialSum',
+                'personalSum',
+                'unknownSum'
+            ]"
+            (onPagination)="onActionRowGrid($event)"
+            [lengthData]="length"
+            [PaginatorIndex]="paginationIndex"
+            [isShowMainActionControls]="false"
+        >
+        </app-data-grid-view>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-content>
+        <app-data-grid-view
+            [gridDataSource]="dataSource"
+            [displayedColumns]="[
+                'id',
+                'userName',
+                'phoneNumber',
+                'groupNameEn',
+                'dialledNumber',
+                'callDateTime',
+                'callDuration',
+                'callDiscountPrice',
+                'callRetailPrice',
+                'serviceNameEn'
+            ]"
+            (onPagination)="onActionRowGrid($event)"
+            [lengthData]="length"
+            [PaginatorIndex]="paginationIndex"
+            [isShowMainActionControls]="false"
+        >
+        </app-data-grid-view>
+    </mat-card-content>
+</mat-card>

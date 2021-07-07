@@ -77,19 +77,24 @@ const MENUITEMS = [
     },
 
     {
-        state: 'system-Reports',
+        state: 'reports',
         name: 'SystemReports',
         type: 'sub',
         icon: 'bubble_chart',
         children: [
             {
-                state: 'general-settings',
-                name: 'GeneralSettings',
+                state: 'calls-summary-report',
+                name: 'CallsSummaryReport',
                 type: 'link',
             },
             {
-                state: 'languages-settings',
-                name: 'languagesSettings',
+                state: 'calls-details-report',
+                name: 'CallsDetailsReport',
+                type: 'link',
+            },
+            {
+                state: 'finance-report',
+                name: 'FinanceReport',
                 type: 'link',
             },
         ],
