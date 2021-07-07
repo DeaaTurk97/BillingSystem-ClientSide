@@ -4,23 +4,19 @@ import {
     ChangeDetectionStrategy,
     ViewChild,
 } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { CallsDetailsReportService } from '@app/infrastructure/core/services/billingSystem/calls-details-report.service';
+import { CallDetailsService } from '@app/infrastructure/core/services/billingSystem/call-details-service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
-import { CallsDetailsReportModel } from '@app/infrastructure/models/project/callsDetailsReportModel';
-import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
-import { DataGridViewComponent } from '@app/infrastructure/shared/components/data-grid-view/data-grid-view.component';
+import { CallDetailsModel } from '@app/infrastructure/models/project/callDetailsModel';
 import {
     ActionRowGrid,
-    ResultActions,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
-import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-calls-details-report-list',
@@ -36,9 +32,9 @@ export class CallsDetailsReportListComponent implements OnInit {
     public pageSize = 10;
     public length = 0;
     public reportFilterModel: ReportFilterModel = new ReportFilterModel();
-    public dataSource = new MatTableDataSource<CallsDetailsReportModel>([]);
+    public dataSource = new MatTableDataSource<CallDetailsModel>([]);
     constructor(
-        private callsDetailsReportService: CallsDetailsReportService,
+        private CallDetailsService: CallDetailsService,
         private notify: NotificationService,
     ) {}
 
@@ -61,8 +57,7 @@ export class CallsDetailsReportListComponent implements OnInit {
         //this.reportFilterModel.userId = 1;
         this.reportFilterModel.pageIndex = pageIndex;
         this.reportFilterModel.pageSize = pageSize;
-        this.callsDetailsReportService
-            .getReport(this.reportFilterModel)
+        this.CallDetailsService.getCallDetails(this.reportFilterModel)
             .pipe(
                 map((paginationRecord) => {
                     this.dataSource.data = paginationRecord.dataRecord;

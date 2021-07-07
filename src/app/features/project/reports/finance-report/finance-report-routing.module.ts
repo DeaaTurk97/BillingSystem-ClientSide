@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FinanceReportListComponent } from './finance-report-list/finance-report-list.component';
+import { CallsFinanceReportListComponent } from './finance-report-list/calls-finance-report-list.component';
 import { LandingLayoutComponent } from '@app/features/landing';
 const routes: Routes = [
     {
@@ -14,7 +14,7 @@ const routes: Routes = [
             },
             {
                 path: 'finance-report',
-                component: FinanceReportListComponent,
+                component: CallsFinanceReportListComponent,
             },
         ],
     },
@@ -26,4 +26,4 @@ const routes: Routes = [
 })
 export class FinanceReportRoutingModule {}
 
-export const components = [FinanceReportListComponent];
+export const components = [CallsFinanceReportListComponent];

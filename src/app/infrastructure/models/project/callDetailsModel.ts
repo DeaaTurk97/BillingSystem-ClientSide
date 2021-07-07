@@ -1,4 +1,5 @@
-export interface CallsDetailsReportModel {
+export interface CallDetailsModel {
+    id: number;
     userId: number;
     userName: string;
     phoneNumber: string;

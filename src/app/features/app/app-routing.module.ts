@@ -151,8 +151,8 @@ const routes: Routes = [
         canActivateChild: [SuperAdminAuthGuard],
         loadChildren: () =>
             import(
-                '../project/reports/finance-report/finance-report-routing.module'
-            ).then((m) => m.FinanceReportRoutingModule),
+                '../project/reports/finance-report/finance-report.module'
+            ).then((m) => m.FinanceReportModule),
     },
     {
         path: '**',

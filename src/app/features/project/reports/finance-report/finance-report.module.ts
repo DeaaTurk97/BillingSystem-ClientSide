@@ -9,6 +9,6 @@ import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
     declarations: [FinanceReportComponent],
-    imports: [CommonModule, FinanceReportRoutingModule, SharedModule],
+    imports: [FinanceReportRoutingModule, SharedModule],
 })
 export class FinanceReportModule {}

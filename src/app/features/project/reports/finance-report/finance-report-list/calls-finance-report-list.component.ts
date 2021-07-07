@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CallDetailsService } from '@app/infrastructure/core/services/billingSystem/call-details-service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
-import { CallSummaryModel } from '@app/infrastructure/models/project/CallSummaryModel';
+import { CallFinanceModel } from '@app/infrastructure/models/project/callFinanceModel';
 import {
     ActionRowGrid,
     State,
@@ -19,20 +19,18 @@ import {
 import { catchError, map } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-calls-summary-report-list',
-    templateUrl: './calls-summary-report-list.component.html',
-    styleUrls: ['./calls-summary-report-list.component.scss'],
+    selector: 'app-calls-finance-report-list',
+    templateUrl: './calls-finance-report-list.component.html',
+    styleUrls: ['./calls-finance-report-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CallsSummaryReportListComponent implements OnInit {
-    @ViewChild(MatSort, { static: true }) sort: MatSort;
-    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+export class CallsFinanceReportListComponent implements OnInit {
     public paginationIndex = 0;
     public pageIndex = 1;
     public pageSize = 10;
     public length = 0;
     public reportFilterModel: ReportFilterModel = new ReportFilterModel();
-    public dataSource = new MatTableDataSource<CallSummaryModel>([]);
+    public dataSource = new MatTableDataSource<CallFinanceModel>([]);
     constructor(
         private CallDetailsService: CallDetailsService,
         private notify: NotificationService,
@@ -54,10 +52,9 @@ export class CallsSummaryReportListComponent implements OnInit {
     }
 
     LoadReport(pageIndex: number, pageSize: number) {
-        //this.reportFilterModel.userId = 1;
         this.reportFilterModel.pageIndex = pageIndex;
         this.reportFilterModel.pageSize = pageSize;
-        this.CallDetailsService.getCallSummary(this.reportFilterModel)
+        this.CallDetailsService.getCallFinance(this.reportFilterModel)
             .pipe(
                 map((paginationRecord) => {
                     this.dataSource.data = paginationRecord.dataRecord;

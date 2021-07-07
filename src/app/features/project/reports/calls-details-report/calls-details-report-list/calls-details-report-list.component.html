@@ -1,14 +1,9 @@
 <mat-card>
     <mat-card-content>
-        <!-- <app-user-edit-control
-            (notify)="onEditControlClick($event)"
-            (searchChange)="applyFilter($event)"
-            SearchPlaceHolder="{{ 'Search' | translate }}"
-        >
-        </app-user-edit-control> -->
         <app-data-grid-view
             [gridDataSource]="dataSource"
             [displayedColumns]="[
+                'id',
                 'userName',
                 'phoneNumber',
                 'groupNameEn',

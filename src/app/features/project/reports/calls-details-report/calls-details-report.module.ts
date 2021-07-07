@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LandingLayoutComponent } from '@app/features/landing';
 
 import {
     CallsDetailsReportRoutingModule,
