@@ -1,6 +1,6 @@
 export class ReportFilterModel {
-    fromDate: boolean;
-    toDate: number;
+    fromDate: string;
+    toDate: string;
     userId: number;
     groupId: number;
     serviceTypeId: number;

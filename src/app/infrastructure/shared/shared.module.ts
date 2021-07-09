@@ -7,6 +7,7 @@ import { directives } from './directives';
 import { pipes } from './pipes';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
+
 /**
  * Connects modules, pipes, directives, components, and more that do not need to be singleton instances.
  */

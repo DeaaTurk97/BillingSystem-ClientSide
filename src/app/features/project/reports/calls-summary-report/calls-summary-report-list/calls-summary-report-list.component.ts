@@ -39,24 +39,32 @@ export class CallsSummaryReportListComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.LoadReport(this.pageIndex, this.pageSize);
+        this.LoadReport(null);
     }
 
     onActionRowGrid(ActionGrid: ActionRowGrid) {
         switch (ActionGrid.type) {
             case State.Pagination:
-                this.LoadReport(
-                    ActionGrid.row.pageIndex,
-                    ActionGrid.row.pageSize,
-                );
+                this.pageSize = ActionGrid.row.pageSize;
+                this.pageIndex = ActionGrid.row.pageIndex;
+                ActionGrid.row.pageSize, this.LoadReport(null);
                 break;
         }
     }
 
-    LoadReport(pageIndex: number, pageSize: number) {
-        //this.reportFilterModel.userId = 1;
-        this.reportFilterModel.pageIndex = pageIndex;
-        this.reportFilterModel.pageSize = pageSize;
+    onSearch(model: any) {
+        console.log(model);
+        this.LoadReport(model);
+    }
+
+    LoadReport(model: ReportFilterModel) {
+        // alert( model?.fromDate);
+        debugger;
+        this.reportFilterModel.fromDate = model != null ? model.fromDate : null;
+        this.reportFilterModel.toDate = model != null ? model.toDate : null;
+        this.reportFilterModel.pageIndex = this.pageIndex;
+        this.reportFilterModel.pageSize = this.pageSize;
+
         this.CallDetailsService.getCallSummary(this.reportFilterModel)
             .pipe(
                 map((paginationRecord) => {
