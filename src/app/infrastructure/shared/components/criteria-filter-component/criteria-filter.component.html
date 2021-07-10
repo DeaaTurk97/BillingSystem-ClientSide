@@ -1,0 +1,69 @@
+<mat-card>
+    <mat-card-content>
+        <form novalidate [formGroup]="frmFilter" (ngSubmit)="onSearch()">
+            <div fxLayout="row wrap">
+                <div
+                    class="p-12"
+                    fxFlex.gt-sm="50"
+                    fxFlex.gt-xs="50"
+                    fxFlex="100"
+                >
+                    <mat-form-field style="width: 100%">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Enter a date range</mat-label>
+                            <mat-date-range-input
+                                [formGroup]="frmFilter"
+                                [rangePicker]="picker"
+                            >
+                                <input
+                                    matStartDate
+                                    formControlName="fromDate"
+                                    placeholder="Start date"
+                                />
+                                <input
+                                    matEndDate
+                                    formControlName="toDate"
+                                    placeholder="End date"
+                                />
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle
+                                matSuffix
+                                [for]="picker"
+                            ></mat-datepicker-toggle>
+                            <mat-date-range-picker
+                                #picker
+                            ></mat-date-range-picker>
+                            <mat-error
+                                *ngIf="
+                                    frmFilter.controls.fromDate.hasError(
+                                        'matStartDateInvalid'
+                                    )
+                                "
+                                >Invalid start date</mat-error
+                            >
+                            <mat-error
+                                *ngIf="
+                                    frmFilter.controls.toDate.hasError(
+                                        'matEndDateInvalid'
+                                    )
+                                "
+                                >Invalid end date</mat-error
+                            >
+                        </mat-form-field>
+                    </mat-form-field>
+                </div>
+                <div
+                    class="p-10"
+                    fxFlex.gt-sm="15"
+                    fxFlex.gt-xs="15"
+                    fxFlex="100"
+                >
+                    <button mat-raised-button type="submit" color="primary">
+                        <mat-icon>search</mat-icon>
+                        {{ 'Search' | translate }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

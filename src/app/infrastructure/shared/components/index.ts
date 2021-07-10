@@ -11,6 +11,8 @@ import { DataGridViewComponent } from './data-grid-view/data-grid-view.component
 import { SpinnerComponent } from './spinner/spinner.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ChattingComponent } from './chatting/chatting.component';
+import { CriteriaFilterComponent } from './criteria-filter-component/criteria-filter.component';
+
 /**
  * Add components that do not need to be specifically referenced.
  */
@@ -28,4 +30,5 @@ export const components = [
     SpinnerComponent,
     FileUploadComponent,
     ChattingComponent,
+    CriteriaFilterComponent,
 ];

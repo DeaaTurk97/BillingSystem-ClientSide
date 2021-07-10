@@ -20,6 +20,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 
 @NgModule({
     imports: [
@@ -44,6 +46,9 @@ import { MatBadgeModule } from '@angular/material/badge';
         MatListModule,
         MatSlideToggleModule,
         MatBadgeModule,
+        MatDatepickerModule,
+        MatRippleModule,
+        MatNativeDateModule,
     ],
     exports: [
         MatButtonModule,
@@ -67,6 +72,9 @@ import { MatBadgeModule } from '@angular/material/badge';
         MatListModule,
         MatSlideToggleModule,
         MatBadgeModule,
+        MatDatepickerModule,
+        MatRippleModule,
+        MatNativeDateModule,
     ],
 })
 export class MaterialModule {}

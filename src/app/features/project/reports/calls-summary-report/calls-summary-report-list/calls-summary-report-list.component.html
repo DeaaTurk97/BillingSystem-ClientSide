@@ -1,5 +1,11 @@
 <mat-card>
     <mat-card-content>
+        <app-criteria-filter
+            [showDateRange]="true"
+            (emitSearch)="onSearch($event)"
+        >
+        </app-criteria-filter>
+
         <app-data-grid-view
             [gridDataSource]="dataSource"
             [displayedColumns]="[
