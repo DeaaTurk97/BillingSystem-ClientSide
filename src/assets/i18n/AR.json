@@ -237,5 +237,10 @@
     "billStatus": "حالة الفاتورة",
     "BillDetails": "تفاصيل الفاتورة",
     "Pay": "دفع",
-    "AlreadyPaid": "الفاتورة مدفوعة مسبقاً"
+    "AlreadyPaid": "الفاتورة مدفوعة مسبقاً",
+    "all": "الكل",
+    "groupName": "اسم المجموعة",
+    "serviceTypes": "أنواع الخدمات",
+    "excludeCountries": "استبعاد الدول",
+    "isSubmitted": "الفواتير المقدمة فقط"
 }

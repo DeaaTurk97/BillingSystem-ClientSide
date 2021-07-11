@@ -12,11 +12,13 @@ import { CallDetailsService } from '@app/infrastructure/core/services/billingSys
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
 import { CallFinanceModel } from '@app/infrastructure/models/project/callFinanceModel';
+import { GroupModel } from '@app/infrastructure/models/project/groupModel';
 import {
     ActionRowGrid,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { catchError, map } from 'rxjs/operators';
+import { GroupService } from '@app/infrastructure/core/services/billingSystem/group.service';
 
 @Component({
     selector: 'app-calls-finance-report-list',
@@ -30,30 +32,37 @@ export class CallsFinanceReportListComponent implements OnInit {
     public pageSize = 10;
     public length = 0;
     public reportFilterModel: ReportFilterModel = new ReportFilterModel();
+    public groupsModel: GroupModel[] = [];
     public dataSource = new MatTableDataSource<CallFinanceModel>([]);
     constructor(
         private CallDetailsService: CallDetailsService,
         private notify: NotificationService,
+        private groupService: GroupService,
     ) {}
 
     ngOnInit(): void {
-        this.LoadReport(this.pageIndex, this.pageSize);
+        this.LoadReport();
+        this.LoadGroups();
     }
 
     onActionRowGrid(ActionGrid: ActionRowGrid) {
         switch (ActionGrid.type) {
             case State.Pagination:
-                this.LoadReport(
-                    ActionGrid.row.pageIndex,
-                    ActionGrid.row.pageSize,
-                );
+                this.pageSize = ActionGrid.row.pageSize;
+                this.pageIndex = ActionGrid.row.pageIndex;
+                this.LoadReport();
                 break;
         }
     }
 
-    LoadReport(pageIndex: number, pageSize: number) {
-        this.reportFilterModel.pageIndex = pageIndex;
-        this.reportFilterModel.pageSize = pageSize;
+    onSearch(model: any) {
+        this.reportFilterModel = model;
+        this.LoadReport();
+    }
+
+    LoadReport() {
+        this.reportFilterModel.pageSize = this.pageSize;
+        this.reportFilterModel.pageIndex = this.pageIndex;
         this.CallDetailsService.getCallFinance(this.reportFilterModel)
             .pipe(
                 map((paginationRecord) => {
@@ -62,6 +71,19 @@ export class CallsFinanceReportListComponent implements OnInit {
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage('ErrorOnLoadData');
+                }),
+            )
+            .subscribe((result) => {});
+    }
+
+    LoadGroups() {
+        this.groupService
+            .getGroupsByUser()
+            .pipe(
+                map((data) => {
+                    if (data) {
+                        this.groupsModel = data;
+                    }
                 }),
             )
             .subscribe((result) => {});

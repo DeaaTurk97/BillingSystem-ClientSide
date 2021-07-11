@@ -7,6 +7,7 @@ export class ReportFilterModel {
     countryId: number;
     countryIdExclude: number;
     phoneTypeId: number;
+    isSubmitted: boolean;
     pageSize: number;
     pageIndex: number;
 }

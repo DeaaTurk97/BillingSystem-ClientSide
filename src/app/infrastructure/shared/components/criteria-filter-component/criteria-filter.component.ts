@@ -13,8 +13,12 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
+import { CountryModel } from '@app/infrastructure/models/project/CountryModel';
+import { GroupModel } from '@app/infrastructure/models/project/groupModel';
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
-import { BehaviorSubject } from 'rxjs';
+import { ServiceTypeModel } from '@app/infrastructure/models/project/serviceTypeModel';
+import { TypePhoneNumber } from '@app/infrastructure/models/project/TypePhoneNumberModel';
+import { UserModel } from '@app/infrastructure/models/project/UserModel';
 
 @Component({
     selector: 'app-criteria-filter',
@@ -25,7 +29,20 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CriteriaFilterComponent implements OnInit {
     @Input() public showDateRange: boolean = false;
-    @Input() public model: boolean = false;
+    @Input() public showGroups: boolean = false;
+    @Input() public showUsers: boolean = false;
+    @Input() public showServiceType: boolean = false;
+    @Input() public showCountries: boolean = false;
+    @Input() public showExcludeCountries: boolean = false;
+    @Input() public showTypesPhoneNumber: boolean = false;
+    @Input() public showIsSubmitted: boolean = false;
+
+    @Input() public groupData: GroupModel[] = [];
+    @Input() public userData: UserModel[] = [];
+    @Input() public serviceTypeData: ServiceTypeModel[] = [];
+    @Input() public countryData: CountryModel[] = [];
+    @Input() public countryExcludeData: CountryModel[] = [];
+    @Input() public typesPhoneNumberData: TypePhoneNumber[] = [];
 
     @Output() public emitSearch = new EventEmitter<ReportFilterModel>();
 
@@ -41,12 +58,13 @@ export class CriteriaFilterComponent implements OnInit {
         this.frmFilter = this.formBuilder.group({
             fromDate: [],
             toDate: [],
-            userId: [],
             groupId: [],
+            userId: [],
             serviceTypeId: [],
             countryId: [],
             countryIdExclude: [],
             phoneTypeId: [],
+            isSubmitted: [],
         });
     }
 

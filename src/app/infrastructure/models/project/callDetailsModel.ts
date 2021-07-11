@@ -13,6 +13,6 @@ export interface CallDetailsModel {
     callDiscountPrice: number;
     typePhoneNumberId: number;
     serviceTypeId: number;
-    serviceNameAr: string;
-    serviceNameEn: string;
+    serviceTypeNameAr: string;
+    serviceTypeNameEn: string;
 }

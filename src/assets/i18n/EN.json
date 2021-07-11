@@ -221,5 +221,10 @@
     "billStatus": "bill Status",
     "BillDetails": "Bill Details",
     "Pay": "Pay",
-    "AlreadyPaid": "bill Already Paid"
+    "AlreadyPaid": "bill Already Paid",
+    "all": "All",
+    "groupName": "Group Name",
+    "serviceTypes": "Service Types",
+    "excludeCountries": "Exclude Countries",
+    "isSubmitted": "is Submitted"
 }
