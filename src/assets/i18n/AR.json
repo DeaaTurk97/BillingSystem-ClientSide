@@ -242,5 +242,14 @@
     "groupName": "اسم المجموعة",
     "serviceTypes": "أنواع الخدمات",
     "excludeCountries": "استبعاد الدول",
-    "isSubmitted": "الفواتير المقدمة فقط"
+    "isSubmitted": "الفواتير المقدمة فقط",
+    "freeSum": "مجموع المكالمات المجانية",
+    "officialSum": "مجموع المكالمات الرسمية",
+    "personalSum": "مجموع المكالمات الشخصية",
+    "unknownSum": "مجموع المكالمات الغير معرفة",
+    "dialledNumber": "رقم الاتصال",
+    "callDateTime": "وقت الاتصال",
+    "callDuration": "مدة الاتصال",
+    "callDiscountPrice": "سعر الخصم",
+    "callRetailPrice": "سعر الاتصال"
 }

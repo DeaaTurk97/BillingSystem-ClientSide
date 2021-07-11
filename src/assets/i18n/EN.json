@@ -226,5 +226,14 @@
     "groupName": "Group Name",
     "serviceTypes": "Service Types",
     "excludeCountries": "Exclude Countries",
-    "isSubmitted": "is Submitted"
+    "isSubmitted": "is Submitted",
+    "freeSum": "Total free calls",
+    "officialSum": "Total official calls",
+    "personalSum": "Total personal calls",
+    "unknownSum": "Total unknown calls",
+    "dialledNumber": "dialled Number",
+    "callDateTime": "Call date",
+    "callDuration": "Call duration",
+    "callDiscountPrice": "Call discount price",
+    "callRetailPrice": "Call retail price"
 }

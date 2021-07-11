@@ -63,13 +63,12 @@ export class CriteriaFilterComponent implements OnInit {
             serviceTypeId: [],
             countryId: [],
             countryIdExclude: [],
-            phoneTypeId: [],
+            typePhoneNumberId: [],
             isSubmitted: [],
         });
     }
 
     onSearch(): void {
-        debugger;
         this.frmFilter.value.fromDate =
             this.frmFilter.value.fromDate != null
                 ? this.datePipe.transform(
