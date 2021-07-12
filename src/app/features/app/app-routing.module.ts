@@ -101,7 +101,7 @@ const routes: Routes = [
             ).then((m) => m.ServiceTypeModule),
     },
     {
-        path: 'bills',
+        path: 'phonesBook',
         canActivate: [SuperAdminAuthGuard],
         canActivateChild: [SuperAdminAuthGuard],
         loadChildren: () =>
@@ -110,7 +110,7 @@ const routes: Routes = [
             ),
     },
     {
-        path: 'bills',
+        path: 'phonesBook',
         canActivate: [SuperAdminAuthGuard],
         canActivateChild: [SuperAdminAuthGuard],
         loadChildren: () =>

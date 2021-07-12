@@ -58,8 +58,6 @@ export class CallsSummaryReportListComponent implements OnInit {
     }
 
     LoadReport(model: ReportFilterModel) {
-        // alert( model?.fromDate);
-        debugger;
         this.reportFilterModel.fromDate = model != null ? model.fromDate : null;
         this.reportFilterModel.toDate = model != null ? model.toDate : null;
         this.reportFilterModel.pageIndex = this.pageIndex;

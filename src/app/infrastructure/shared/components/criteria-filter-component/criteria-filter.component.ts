@@ -51,7 +51,6 @@ export class CriteriaFilterComponent implements OnInit {
     }
 
     onSearch(): void {
-        debugger;
         this.frmFilter.value.fromDate =
             this.frmFilter.value.fromDate != null
                 ? this.datePipe.transform(

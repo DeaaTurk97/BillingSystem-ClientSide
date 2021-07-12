@@ -58,7 +58,7 @@ const MENUITEMS = [
     },
 
     {
-        state: 'bills',
+        state: 'phonesBook',
         name: 'PhonesBook',
         type: 'sub',
         icon: 'bubble_chart',
