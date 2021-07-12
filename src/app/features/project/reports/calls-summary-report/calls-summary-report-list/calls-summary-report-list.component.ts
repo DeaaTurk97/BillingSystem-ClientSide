@@ -62,9 +62,11 @@ export class CallsSummaryReportListComponent implements OnInit {
         this.LoadReport();
     }
 
-    LoadReport() {
-        this.reportFilterModel.pageSize = this.pageSize;
+    LoadReport(model: ReportFilterModel) {
+        this.reportFilterModel.fromDate = model != null ? model.fromDate : null;
+        this.reportFilterModel.toDate = model != null ? model.toDate : null;
         this.reportFilterModel.pageIndex = this.pageIndex;
+      
         this.CallDetailsService.getCallSummary(this.reportFilterModel)
             .pipe(
                 map((paginationRecord) => {

@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { BillsSummaryService } from '@app/infrastructure/core/services/billingSystem/bills-summary.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { DynamicColumn } from '@app/infrastructure/models/gridAddColumns-model';
@@ -20,8 +21,8 @@ import { catchError, map } from 'rxjs/operators';
 export class BillsSummaryListComponent implements OnInit {
     constructor(
         private billsSummaryService: BillsSummaryService,
-        private dialog: MatDialog,
         private notify: NotificationService,
+        private router: Router,
     ) {}
 
     public paginationIndex = 0;
@@ -89,7 +90,7 @@ export class BillsSummaryListComponent implements OnInit {
 
     LoadBillsSummary(pageIndex: number, pageSize: number) {
         this.billsSummaryService
-            .getCountries(pageIndex, pageSize)
+            .getbillSummary(pageIndex, pageSize)
             .pipe(
                 map((paginationRecord) => {
                     this.dataSource.data = paginationRecord.dataRecord;
@@ -103,7 +104,7 @@ export class BillsSummaryListComponent implements OnInit {
     }
 
     billDetails(billId: number) {
-        console.log(billId);
+        this.router.navigateByUrl('/bills/billsDetails-list/' + billId);
     }
 
     billPay(billId: number, isPaid: boolean) {

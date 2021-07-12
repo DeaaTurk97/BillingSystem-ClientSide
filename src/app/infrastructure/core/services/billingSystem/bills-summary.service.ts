@@ -9,7 +9,7 @@ import { ApiService } from '../api/api.service';
 export class BillsSummaryService {
     constructor(private apiService: ApiService) {}
 
-    getCountries(pageIndex: number, PageSize: number): Observable<any> {
+    getbillSummary(pageIndex: number, PageSize: number): Observable<any> {
         return this.apiService.get(
             `${environment.apiRoute}/BillsSummary/GetBillsSummary` +
                 '?pageIndex=' +

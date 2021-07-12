@@ -1,4 +1,5 @@
 export class ReportFilterModel {
+    billId: number;
     fromDate: string;
     toDate: string;
     userId: number;

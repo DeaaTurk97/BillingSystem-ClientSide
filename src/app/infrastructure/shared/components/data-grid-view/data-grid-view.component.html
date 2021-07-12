@@ -19,8 +19,11 @@
             <ng-container *ngIf="column != 'id'">
                 <mat-cell *matCellDef="let element">
                     {{
-                        column === 'createdDate' || column === 'updatedDate'
-                            ? (element[column] | date: 'dd - MM - yyyy')
+                        column === 'createdDate' ||
+                        column === 'updatedDate' ||
+                        column === 'callDateTime'
+                            ? (element[column]
+                              | date: 'dd - MM - yyyy h:mm:ss a')
                             : element[column]
                     }}
                 </mat-cell>
