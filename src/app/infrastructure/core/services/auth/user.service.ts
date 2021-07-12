@@ -87,4 +87,10 @@ export class UserService {
     setLanguageDir(languageDir: string): void {
         sessionStorage.setItem('languageDir', languageDir);
     }
+
+    getUsersByCurrentRole(): Observable<any> {
+        return this.apiService.get(
+            `${environment.apiRoute}/User/GetUsersByCurrentRole`,
+        );
+    }
 }

@@ -2,6 +2,9 @@
     <mat-card-content>
         <app-criteria-filter
             [showDateRange]="true"
+            [showGroups]="true"
+            [showIsSubmitted]="true"
+            [groupData]="groupsModel"
             (emitSearch)="onSearch($event)"
         >
         </app-criteria-filter>

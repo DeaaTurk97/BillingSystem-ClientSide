@@ -1,5 +1,20 @@
 <mat-card>
     <mat-card-content>
+        <app-criteria-filter
+            [showDateRange]="true"
+            [showGroups]="true"
+            [showUsers]="true"
+            [showServiceType]="true"
+            [showCountries]="true"
+            [showTypesPhoneNumber]="true"
+            [groupData]="groupsModel"
+            [userData]="usersModel"
+            [serviceTypeData]="serviceTypesModel"
+            [countryData]="countryModel"
+            [typesPhoneNumberData]="typePhoneNumberModel"
+            (emitSearch)="onSearch($event)"
+        >
+        </app-criteria-filter>
         <app-data-grid-view
             [gridDataSource]="dataSource"
             [displayedColumns]="[
@@ -12,7 +27,7 @@
                 'callDuration',
                 'callDiscountPrice',
                 'callRetailPrice',
-                'serviceNameEn'
+                'serviceTypeNameEn'
             ]"
             (onPagination)="onActionRowGrid($event)"
             [lengthData]="length"

@@ -51,4 +51,10 @@ export class GroupService {
             `${environment.apiRoute}/Groups/DeleteGroup?id=` + id,
         );
     }
+
+    getGroupsByUser(): Observable<any> {
+        return this.apiService.get(
+            `${environment.apiRoute}/Groups/GetGroupsByUser`,
+        );
+    }
 }

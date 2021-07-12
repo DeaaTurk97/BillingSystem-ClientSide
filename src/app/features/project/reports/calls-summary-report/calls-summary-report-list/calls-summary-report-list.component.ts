@@ -12,11 +12,13 @@ import { CallDetailsService } from '@app/infrastructure/core/services/billingSys
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
 import { CallSummaryModel } from '@app/infrastructure/models/project/CallSummaryModel';
+import { GroupModel } from '@app/infrastructure/models/project/groupModel';
 import {
     ActionRowGrid,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { catchError, map } from 'rxjs/operators';
+import { GroupService } from '@app/infrastructure/core/services/billingSystem/group.service';
 
 @Component({
     selector: 'app-calls-summary-report-list',
@@ -32,14 +34,17 @@ export class CallsSummaryReportListComponent implements OnInit {
     public pageSize = 10;
     public length = 0;
     public reportFilterModel: ReportFilterModel = new ReportFilterModel();
+    public groupsModel: GroupModel[] = [];
     public dataSource = new MatTableDataSource<CallSummaryModel>([]);
     constructor(
         private CallDetailsService: CallDetailsService,
         private notify: NotificationService,
+        private groupService: GroupService,
     ) {}
 
     ngOnInit(): void {
-        this.LoadReport(null);
+        this.LoadReport();
+        this.LoadGroups();
     }
 
     onActionRowGrid(ActionGrid: ActionRowGrid) {
@@ -47,22 +52,21 @@ export class CallsSummaryReportListComponent implements OnInit {
             case State.Pagination:
                 this.pageSize = ActionGrid.row.pageSize;
                 this.pageIndex = ActionGrid.row.pageIndex;
-                ActionGrid.row.pageSize, this.LoadReport(null);
+                this.LoadReport();
                 break;
         }
     }
 
     onSearch(model: any) {
-        console.log(model);
-        this.LoadReport(model);
+        this.reportFilterModel = model;
+        this.LoadReport();
     }
 
     LoadReport(model: ReportFilterModel) {
         this.reportFilterModel.fromDate = model != null ? model.fromDate : null;
         this.reportFilterModel.toDate = model != null ? model.toDate : null;
         this.reportFilterModel.pageIndex = this.pageIndex;
-        this.reportFilterModel.pageSize = this.pageSize;
-
+      
         this.CallDetailsService.getCallSummary(this.reportFilterModel)
             .pipe(
                 map((paginationRecord) => {
@@ -71,6 +75,19 @@ export class CallsSummaryReportListComponent implements OnInit {
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage('ErrorOnLoadData');
+                }),
+            )
+            .subscribe((result) => {});
+    }
+
+    LoadGroups() {
+        this.groupService
+            .getGroupsByUser()
+            .pipe(
+                map((data) => {
+                    if (data) {
+                        this.groupsModel = data;
+                    }
                 }),
             )
             .subscribe((result) => {});
