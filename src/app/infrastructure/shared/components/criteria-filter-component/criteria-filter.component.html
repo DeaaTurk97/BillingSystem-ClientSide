@@ -7,6 +7,7 @@
                     fxFlex.gt-sm="50"
                     fxFlex.gt-xs="50"
                     fxFlex="100"
+                    *ngIf="showDateRange"
                 >
                     <mat-form-field style="width: 100%">
                         <mat-form-field appearance="fill">
@@ -54,14 +55,185 @@
                 </div>
                 <div
                     class="p-10"
-                    fxFlex.gt-sm="15"
-                    fxFlex.gt-xs="15"
+                    fxFlex.gt-sm="50"
+                    fxFlex.gt-xs="50"
                     fxFlex="100"
+                    *ngIf="showGroups"
                 >
-                    <button mat-raised-button type="submit" color="primary">
-                        <mat-icon>search</mat-icon>
-                        {{ 'Search' | translate }}
-                    </button>
+                    <mat-form-field>
+                        <mat-label>{{ 'groupName' | translate }}</mat-label>
+                        <mat-select
+                            placeholder="{{ 'groupName' | translate }}"
+                            formControlName="groupId"
+                        >
+                            <mat-option [value]="0">{{
+                                'all' | translate
+                            }}</mat-option>
+                            <mat-option
+                                *ngFor="let group of groupData"
+                                [value]="group.id"
+                            >
+                                {{ group.groupNameAr }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div
+                    class="p-10"
+                    fxFlex.gt-sm="50"
+                    fxFlex.gt-xs="50"
+                    fxFlex="100"
+                    *ngIf="showUsers"
+                >
+                    <mat-form-field>
+                        <mat-label>{{ 'users' | translate }}</mat-label>
+                        <mat-select
+                            placeholder="{{ 'users' | translate }}"
+                            formControlName="userId"
+                        >
+                            <mat-option [value]="0">{{
+                                'all' | translate
+                            }}</mat-option>
+                            <mat-option
+                                *ngFor="let user of userData"
+                                [value]="user.userId"
+                            >
+                                {{ user.userName }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div
+                    class="p-10"
+                    fxFlex.gt-sm="50"
+                    fxFlex.gt-xs="50"
+                    fxFlex="100"
+                    *ngIf="showServiceType"
+                >
+                    <mat-form-field>
+                        <mat-label>{{ 'serviceTypes' | translate }}</mat-label>
+                        <mat-select
+                            placeholder="{{ 'serviceTypes' | translate }}"
+                            formControlName="serviceTypeId"
+                        >
+                            <mat-option [value]="0">{{
+                                'all' | translate
+                            }}</mat-option>
+                            <mat-option
+                                *ngFor="let serviceType of serviceTypeData"
+                                [value]="serviceType.id"
+                            >
+                                {{ serviceType.serviceTypeNameEn }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div
+                    class="p-10"
+                    fxFlex.gt-sm="50"
+                    fxFlex.gt-xs="50"
+                    fxFlex="100"
+                    *ngIf="showCountries"
+                >
+                    <mat-form-field>
+                        <mat-label>{{ 'Countries' | translate }}</mat-label>
+                        <mat-select
+                            placeholder="{{ 'Countries' | translate }}"
+                            formControlName="countryId"
+                        >
+                            <mat-option [value]="0">{{
+                                'all' | translate
+                            }}</mat-option>
+                            <mat-option
+                                *ngFor="let country of countryData"
+                                [value]="country.id"
+                            >
+                                {{ country.countryNameEn }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div
+                    class="p-10"
+                    fxFlex.gt-sm="50"
+                    fxFlex.gt-xs="50"
+                    fxFlex="100"
+                    *ngIf="showExcludeCountries"
+                >
+                    <mat-form-field>
+                        <mat-label>{{
+                            'ExcludeCountries' | translate
+                        }}</mat-label>
+                        <mat-select
+                            placeholder="{{ 'ExcludeCountries' | translate }}"
+                            formControlName="countryIdExclude"
+                        >
+                            <mat-option [value]="0">{{
+                                'all' | translate
+                            }}</mat-option>
+                            <mat-option
+                                *ngFor="let country of countryExcludeData"
+                                [value]="country.id"
+                            >
+                                {{ country.countryNameEn }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div
+                    class="p-10"
+                    fxFlex.gt-sm="50"
+                    fxFlex.gt-xs="50"
+                    fxFlex="100"
+                    *ngIf="showTypesPhoneNumber"
+                >
+                    <mat-form-field>
+                        <mat-label>{{
+                            'typePhoneNumberName' | translate
+                        }}</mat-label>
+                        <mat-select
+                            placeholder="{{
+                                'typePhoneNumberName' | translate
+                            }}"
+                            formControlName="typePhoneNumberId"
+                        >
+                            <mat-option [value]="0">{{
+                                'all' | translate
+                            }}</mat-option>
+                            <mat-option
+                                *ngFor="
+                                    let typePhoneNumber of typesPhoneNumberData
+                                "
+                                [value]="typePhoneNumber.id"
+                            >
+                                {{ typePhoneNumber.typeNameEn }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div
+                    class="p-10"
+                    fxFlex.gt-sm="50"
+                    fxFlex.gt-xs="50"
+                    fxFlex="100"
+                    *ngIf="showIsSubmitted"
+                >
+                    <mat-checkbox formControlName="isSubmitted">{{
+                        'isSubmitted' | translate
+                    }}</mat-checkbox>
+                </div>
+                <div fxLayout="row wrap">
+                    <div
+                        class="p-10"
+                        fxFlex.gt-sm="50"
+                        fxFlex.gt-xs="50"
+                        fxFlex="100"
+                    >
+                        <button mat-raised-button type="submit" color="primary">
+                            <mat-icon>search</mat-icon>
+                            {{ 'Search' | translate }}
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>

@@ -137,7 +137,6 @@ export class UsersListComponent implements OnInit {
     }
 
     onDelete(userModel: UserModel) {
-        debugger;
         return this.dialog
             .open(ConfirmDialogComponent, {
                 width: '28em',
@@ -169,7 +168,6 @@ export class UsersListComponent implements OnInit {
                 }),
             )
             .subscribe((result) => {
-                debugger;
                 if (result) {
                     this.loadUsers(1, this.pageSize);
                     this.notify.showTranslateMessage('DeletedSuccessfully');
