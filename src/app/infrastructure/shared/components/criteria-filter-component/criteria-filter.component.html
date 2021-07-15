@@ -3,15 +3,17 @@
         <form novalidate [formGroup]="frmFilter" (ngSubmit)="onSearch()">
             <div fxLayout="row wrap">
                 <div
-                    class="p-12"
-                    fxFlex.gt-sm="50"
-                    fxFlex.gt-xs="50"
+                    class="p-10"
+                    fxFlex.gt-sm="33.333"
+                    fxFlex.gt-xs="33.333"
                     fxFlex="100"
                     *ngIf="showDateRange"
                 >
                     <mat-form-field style="width: 100%">
                         <mat-form-field appearance="fill">
-                            <mat-label>Enter a date range</mat-label>
+                            <mat-label>{{
+                                'EnterAdateRange' | translate
+                            }}</mat-label>
                             <mat-date-range-input
                                 [formGroup]="frmFilter"
                                 [rangePicker]="picker"
@@ -20,19 +22,23 @@
                                     matStartDate
                                     formControlName="fromDate"
                                     placeholder="Start date"
+                                    disabled
                                 />
                                 <input
                                     matEndDate
                                     formControlName="toDate"
                                     placeholder="End date"
+                                    disabled
                                 />
                             </mat-date-range-input>
                             <mat-datepicker-toggle
                                 matSuffix
                                 [for]="picker"
+                                disabled="false"
                             ></mat-datepicker-toggle>
                             <mat-date-range-picker
                                 #picker
+                                disabled="false"
                             ></mat-date-range-picker>
                             <mat-error
                                 *ngIf="
@@ -55,8 +61,8 @@
                 </div>
                 <div
                     class="p-10"
-                    fxFlex.gt-sm="50"
-                    fxFlex.gt-xs="50"
+                    fxFlex.gt-sm="33.333"
+                    fxFlex.gt-xs="33.333"
                     fxFlex="100"
                     *ngIf="showGroups"
                 >
@@ -80,8 +86,8 @@
                 </div>
                 <div
                     class="p-10"
-                    fxFlex.gt-sm="50"
-                    fxFlex.gt-xs="50"
+                    fxFlex.gt-sm="33.333"
+                    fxFlex.gt-xs="33.333"
                     fxFlex="100"
                     *ngIf="showUsers"
                 >
@@ -105,8 +111,8 @@
                 </div>
                 <div
                     class="p-10"
-                    fxFlex.gt-sm="50"
-                    fxFlex.gt-xs="50"
+                    fxFlex.gt-sm="33.333"
+                    fxFlex.gt-xs="33.333"
                     fxFlex="100"
                     *ngIf="showServiceType"
                 >
@@ -130,8 +136,8 @@
                 </div>
                 <div
                     class="p-10"
-                    fxFlex.gt-sm="50"
-                    fxFlex.gt-xs="50"
+                    fxFlex.gt-sm="33.333"
+                    fxFlex.gt-xs="33.333"
                     fxFlex="100"
                     *ngIf="showCountries"
                 >
@@ -155,8 +161,8 @@
                 </div>
                 <div
                     class="p-10"
-                    fxFlex.gt-sm="50"
-                    fxFlex.gt-xs="50"
+                    fxFlex.gt-sm="33.333"
+                    fxFlex.gt-xs="33.333"
                     fxFlex="100"
                     *ngIf="showExcludeCountries"
                 >
@@ -182,8 +188,8 @@
                 </div>
                 <div
                     class="p-10"
-                    fxFlex.gt-sm="50"
-                    fxFlex.gt-xs="50"
+                    fxFlex.gt-sm="33.333"
+                    fxFlex.gt-xs="33.333"
                     fxFlex="100"
                     *ngIf="showTypesPhoneNumber"
                 >
@@ -211,10 +217,57 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
+
                 <div
                     class="p-10"
-                    fxFlex.gt-sm="50"
-                    fxFlex.gt-xs="50"
+                    fxFlex.gt-sm="33.333"
+                    fxFlex.gt-xs="33.333"
+                    fxFlex="100"
+                    *ngIf="showMonthsNames"
+                >
+                    <mat-form-field>
+                        <mat-label>{{ 'months' | translate }}</mat-label>
+                        <mat-select
+                            placeholder="{{ 'months' | translate }}"
+                            formControlName="billMonthId"
+                        >
+                            <mat-option
+                                *ngFor="let month of monthsNames; let i = index"
+                                [value]="i + 1"
+                            >
+                                {{ month | translate }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div
+                    class="p-10"
+                    fxFlex.gt-sm="33.333"
+                    fxFlex.gt-xs="33.333"
+                    fxFlex="100"
+                    *ngIf="showYearsNumbers"
+                >
+                    <mat-form-field>
+                        <mat-label>{{ 'years' | translate }}</mat-label>
+                        <mat-select
+                            placeholder="{{ 'years' | translate }}"
+                            formControlName="billYearId"
+                        >
+                            <mat-option
+                                *ngFor="let year of years"
+                                [value]="year"
+                            >
+                                {{ year }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div
+                    class="p-10"
+                    fxFlex.gt-sm="33.333"
+                    fxFlex.gt-xs="33.333"
                     fxFlex="100"
                     *ngIf="showIsSubmitted"
                 >
@@ -225,8 +278,8 @@
                 <div fxLayout="row wrap">
                     <div
                         class="p-10"
-                        fxFlex.gt-sm="50"
-                        fxFlex.gt-xs="50"
+                        fxFlex.gt-sm="100"
+                        fxFlex.gt-xs="100"
                         fxFlex="100"
                     >
                         <button mat-raised-button type="submit" color="primary">

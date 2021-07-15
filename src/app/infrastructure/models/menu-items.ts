@@ -49,7 +49,7 @@ const MENUITEMS = [
         state: 'bills',
         name: 'Bills',
         type: 'sub',
-        icon: 'bubble_chart',
+        icon: 'uploadfile',
         children: [
             { state: 'upload-bills', name: 'UploadBills', type: 'link' },
             { state: 'billsSummary-list', name: 'BillsSummary', type: 'link' },
@@ -61,7 +61,7 @@ const MENUITEMS = [
         state: 'phonesBook',
         name: 'PhonesBook',
         type: 'sub',
-        icon: 'bubble_chart',
+        icon: 'contacts',
         children: [
             {
                 state: 'phonesBook-list',
@@ -80,7 +80,7 @@ const MENUITEMS = [
         state: 'reports',
         name: 'SystemReports',
         type: 'sub',
-        icon: 'bubble_chart',
+        icon: 'description',
         children: [
             {
                 state: 'calls-summary-report',
@@ -102,51 +102,17 @@ const MENUITEMS = [
 
     {
         state: 'users',
-        name: 'Users',
+        name: 'users',
         type: 'sub',
-        icon: 'bubble_chart',
-        children: [{ state: 'users-list', name: 'Users', type: 'link' }],
+        icon: 'people',
+        children: [{ state: 'users-list', name: 'users', type: 'link' }],
     },
-
-    // {
-    //     state: 'settings',
-    //     name: 'ToolsSettings',
-    //     type: 'sub',
-    //     icon: 'bubble_chart',
-    //     children: [
-    //         {
-    //             state: 'countries-list',
-    //             name: 'Countries',
-    //             type: 'link',
-    //         },
-    //         {
-    //             state: 'governorates-list',
-    //             name: 'Governorates',
-    //             type: 'link',
-    //         },
-    //         {
-    //             state: 'operators-list',
-    //             name: 'Operators',
-    //             type: 'link',
-    //         },
-    //         {
-    //             state: 'groups-list',
-    //             name: 'Groups',
-    //             type: 'link',
-    //         },
-    //         {
-    //             state: 'jobs-list',
-    //             name: 'Jobs',
-    //             type: 'link',
-    //         },
-    //     ],
-    // },
 
     {
         state: 'system-definition',
         name: 'SystemSettings',
         type: 'sub',
-        icon: 'bubble_chart',
+        icon: 'settings',
         children: [
             {
                 state: 'languages-settings',
