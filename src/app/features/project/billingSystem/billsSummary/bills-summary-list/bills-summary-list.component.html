@@ -10,11 +10,12 @@
             [gridDataSource]="dataSource"
             [displayedColumns]="[
                 'id',
+                'userId',
                 'billMonth',
                 'billYear',
                 'isPaid',
                 'billStatus',
-                'billNote'
+                'billNote',                
             ]"
             (onCheckRow)="onActionRowGrid($event)"
             (onPagination)="onActionRowGrid($event)"

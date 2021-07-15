@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
@@ -16,6 +17,18 @@ export class BillsSummaryService {
                 pageIndex +
                 '&pageSize=' +
                 PageSize,
+        );
+    }
+
+    updatePaybill(billId: number): Observable<any> {
+        const params = new HttpParams()
+            .set('billId', String(billId))
+            .set('isPaid', 'true');
+
+        return this.apiService.put(
+            `${environment.apiRoute}/BillsSummary/UpdatePayBill`,
+            null,
+            { params: params },
         );
     }
 }

@@ -6,11 +6,15 @@ import { BillsSummaryService } from '@app/infrastructure/core/services/billingSy
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { DynamicColumn } from '@app/infrastructure/models/gridAddColumns-model';
 import { BillsSummaryModel } from '@app/infrastructure/models/project/billsSummary';
+import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 import {
     ActionRowGrid,
+    MonthsNames,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
-import { catchError, map } from 'rxjs/operators';
+import { NullLogger } from '@aspnet/signalr';
+import { of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-bills-summary-list',
@@ -23,6 +27,7 @@ export class BillsSummaryListComponent implements OnInit {
         private billsSummaryService: BillsSummaryService,
         private notify: NotificationService,
         private router: Router,
+        private dialog: MatDialog,
     ) {}
 
     public paginationIndex = 0;
@@ -80,7 +85,12 @@ export class BillsSummaryListComponent implements OnInit {
                 );
                 break;
             case State.BillDetails:
-                this.billDetails(ActionGrid.row.id);
+                this.billDetails(
+                    ActionGrid.row.id,
+                    ActionGrid.row.billMonth,
+                    ActionGrid.row.billYear,
+                    ActionGrid.row.userId,
+                );
                 break;
             case State.Pay:
                 this.billPay(ActionGrid.row.id, ActionGrid.row.isPaid);
@@ -103,8 +113,22 @@ export class BillsSummaryListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    billDetails(billId: number) {
-        this.router.navigateByUrl('/bills/billsDetails-list/' + billId);
+    billDetails(
+        billId: number,
+        billMonth: number,
+        billYear: number,
+        billUser: number,
+    ) {
+        this.router.navigate([
+            '/bills/billsDetails-list/' +
+                billId +
+                '/' +
+                MonthsNames[billMonth] +
+                '/' +
+                billYear +
+                '/' +
+                billUser,
+        ]);
     }
 
     billPay(billId: number, isPaid: boolean) {
@@ -112,6 +136,39 @@ export class BillsSummaryListComponent implements OnInit {
             this.notify.showTranslateMessage('AlreadyPaid');
             return;
         }
-        console.log(billId + '  ' + isPaid);
+
+        return this.dialog
+            .open(ConfirmDialogComponent, {
+                width: '28em',
+                height: '11em',
+                panelClass: 'confirm-dialog-container',
+                position: { top: '5em' },
+                disableClose: true,
+                data: {
+                    messageList: ['SureWantPaid'],
+                    action: 'Yes',
+                    showCancel: true,
+                },
+            })
+            .afterClosed()
+            .pipe(
+                switchMap((dialogResult: string) => {
+                    if (dialogResult) {
+                        return this.billsSummaryService.updatePaybill(billId);
+                    } else {
+                        this.notify.showTranslateMessage('CancelBillPaid');
+                        return of(null);
+                    }
+                }),
+                catchError((): any => {
+                    this.notify.showTranslateMessage('ErrorOnPaidBill');
+                }),
+            )
+            .subscribe((result) => {
+                if (result) {
+                    this.LoadBillsSummary(this.pageIndex, this.pageSize);
+                    this.notify.showTranslateMessage('PaidSuccessfully');
+                }
+            });
     }
 }

@@ -1,24 +1,80 @@
-<mat-card>
-    <mat-card-content>
-        <app-data-grid-view
-            [gridDataSource]="dataSource"
-            [displayedColumns]="[
-                'id',
-                'userName',
-                'phoneNumber',
-                'groupNameEn',
-                'dialledNumber',
-                'callDateTime',
-                'callDuration',
-                'callDiscountPrice',
-                'callRetailPrice',
-                'serviceNameEn'
-            ]"
-            (onPagination)="onActionRowGrid($event)"
-            [lengthData]="length"
-            [PaginatorIndex]="paginationIndex"
-            [isShowMainActionControls]="false"
+<div fxLayout="row wrap">
+    <div class="p-10" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <app-criteria-filter
+            [showUsers]="true"
+            [showMonthsNames]="true"
+            [showYearsNumbers]="true"
+            [userData]="usersModel"
+            [selectBillMonthId]="billMonthId"
+            [selectBillYearId]="billYearId"
+            [selectUserId]="billUserId"
         >
-        </app-data-grid-view>
-    </mat-card-content>
-</mat-card>
+        </app-criteria-filter>
+    </div>
+    <div class="p-10" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card>
+            <mat-card-content>
+                <div fxLayout="row wrap">
+                    <div
+                        class="p-10"
+                        fxFlex.gt-sm="15"
+                        fxFlex.gt-xs="15"
+                        fxFlex="100"
+                    >
+                        <button mat-raised-button type="submit" color="primary">
+                            {{ 'submitBill' | translate }}
+                        </button>
+                    </div>
+
+                    <div
+                        class="p-10"
+                        fxFlex.gt-sm="15"
+                        fxFlex.gt-xs="15"
+                        fxFlex="100"
+                    >
+                        <button
+                            mat-raised-button
+                            type="submit"
+                            color="primary"
+                            (click)="onSetPhoneNumberType()"
+                        >
+                            {{
+                                'setDescriptionAndTypeUnKnownNumber' | translate
+                            }}
+                        </button>
+                    </div>
+
+                    <div
+                        class="p-10"
+                        fxFlex.gt-sm="100"
+                        fxFlex.gt-xs="100"
+                        fxFlex="100"
+                    >
+                        <app-data-grid-view
+                            [gridDataSource]="dataSource"
+                            [displayedColumns]="[
+                                'id',
+                                'userName',
+                                'phoneNumber',
+                                'dialledNumber',
+                                'typePhoneNumberAr',
+                                'typePhoneNumberEn',
+                                'callDateTime',
+                                'callDuration',
+                                'callDiscountPrice',
+                                'callRetailPrice',
+                                'serviceTypeNameEn'
+                            ]"
+                            (onPagination)="onActionRowGrid($event)"
+                            [lengthData]="length"
+                            [PaginatorIndex]="paginationIndex"
+                            [isShowMainActionControls]="false"
+                            (emitSearch)="onSearch($event)"
+                        >
+                        </app-data-grid-view>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
