@@ -1,3 +1,5 @@
+<app-report-export (emitExport)="onExport($event)"></app-report-export>
+
 <app-criteria-filter
     [showDateRange]="true"
     [showGroups]="true"
@@ -21,13 +23,13 @@
                 'id',
                 'userName',
                 'phoneNumber',
-                'groupNameEn',
+                'groupName',
                 'dialledNumber',
                 'callDateTime',
                 'callDuration',
                 'callDiscountPrice',
                 'callRetailPrice',
-                'serviceTypeNameEn'
+                'serviceTypeName'
             ]"
             (onPagination)="onActionRowGrid($event)"
             [lengthData]="length"

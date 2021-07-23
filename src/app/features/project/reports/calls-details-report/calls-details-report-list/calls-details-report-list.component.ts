@@ -23,6 +23,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { UserService } from '@app/infrastructure/core/services/auth/user.service';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
 import { ServiceTypeService } from '@app/infrastructure/core/services/billingSystem/service-type.service';
+import { ExportReportService } from '@app/infrastructure/core/services/billingSystem//export-report-service';
 import { ServiceTypeModel } from '@app/infrastructure/models/project/serviceTypeModel';
 import { CountryService } from '@app/infrastructure/core/services/billingSystem/country.service';
 import { CountryModel } from '@app/infrastructure/models/project/CountryModel';
@@ -58,6 +59,7 @@ export class CallsDetailsReportListComponent implements OnInit {
         private serviceTypeService: ServiceTypeService,
         private countryService: CountryService,
         private typePhoneNumberService: TypePhoneNumberService,
+        private exportReportService: ExportReportService,
     ) {}
 
     ngOnInit(): void {
@@ -83,6 +85,15 @@ export class CallsDetailsReportListComponent implements OnInit {
     onSearch(model: any) {
         this.reportFilterModel = model;
         this.LoadReport();
+    }
+
+    onExport(reportType: any) {
+        this.reportFilterModel.reportType = reportType;
+        this.exportReportService
+            .exportCallDetails(this.reportFilterModel)
+            .subscribe((result) => {
+                window.open(result.urlPath);
+            });
     }
 
     LoadReport() {

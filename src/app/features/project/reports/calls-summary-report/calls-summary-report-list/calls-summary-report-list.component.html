@@ -1,3 +1,5 @@
+<app-report-export (emitExport)="onExport($event)"></app-report-export>
+
 <app-criteria-filter
     [showDateRange]="true"
     [showGroups]="true"
@@ -15,7 +17,7 @@
                 'phoneNumber',
                 'userName',
                 'userEmail',
-                'groupNameEn',
+                'groupName',
                 'freeSum',
                 'officialSum',
                 'personalSum',
