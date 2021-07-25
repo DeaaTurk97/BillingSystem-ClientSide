@@ -12,7 +12,6 @@ import {
     MonthsNames,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
-import { NullLogger } from '@aspnet/signalr';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 

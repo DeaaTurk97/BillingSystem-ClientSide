@@ -261,6 +261,6 @@
     "PaidSuccessfully": "Paid Successfully",
     "ErrorOnPaidBill": "Error On Bill Paid",
     "CancelBillPaid": "Cancel Bill Paid",
-    "setDescriptionAndTypeUnKnownNumber": "Set Description And Type UnKnown Number",
+    "DefinitionUnknownNumbers": "Definition Unknown Numbers",
     "submitBill": "submit Bill"
 }

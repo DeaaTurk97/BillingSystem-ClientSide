@@ -29,4 +29,12 @@ export class CallDetailsService {
             reportFilterModel,
         );
     }
+
+    GetAllUndefinedNumbers(billId: number): Observable<any> {
+        return this.apiService.get(
+            `${environment.apiRoute}/BillsDetails/GetAllUndefinedNumbers` +
+                '?billId=' +
+                billId,
+        );
+    }
 }
