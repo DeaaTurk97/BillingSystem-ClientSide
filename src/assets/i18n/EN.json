@@ -262,5 +262,7 @@
     "ErrorOnPaidBill": "Error On Bill Paid",
     "CancelBillPaid": "Cancel Bill Paid",
     "DefinitionUnknownNumbers": "Definition Unknown Numbers",
-    "submitBill": "submit Bill"
+    "submitBill": "submit Bill",
+    "export": "Export Report",
+    "serviceTypeName": "Service Type"
 }

@@ -1,0 +1,25 @@
+<div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+    <button
+        mat-raised-button
+        [matMenuTriggerFor]="menu"
+        color="primary"
+        class="btn-block btn-lg"
+    >
+        <mat-icon>insert_drive_file</mat-icon>
+        {{ 'export' | translate }}
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="export('xls')">
+            <!-- <mat-icon>notifications_off</mat-icon> -->
+            <span>EXCEL</span>
+        </button>
+        <button mat-menu-item (click)="export('pdf')">
+            <!-- <mat-icon>picture_as_pdf</mat-icon> -->
+            <span>PDF</span>
+        </button>
+        <button mat-menu-item (click)="export('doc')">
+            <!-- <mat-icon>word</mat-icon> -->
+            <span>WORD</span>
+        </button>
+    </mat-menu>
+</div>

@@ -4,8 +4,7 @@ export interface CallDetailsModel {
     userName: string;
     phoneNumber: string;
     groupId: number;
-    groupNameEn: string;
-    groupNameAr: string;
+    groupName: string;
     dialledNumber: string;
     callDateTime: Date;
     callDuration: string;
@@ -13,6 +12,5 @@ export interface CallDetailsModel {
     callDiscountPrice: number;
     typePhoneNumberId: number;
     serviceTypeId: number;
-    serviceTypeNameAr: string;
-    serviceTypeNameEn: string;
+    serviceTypeName: string;
 }

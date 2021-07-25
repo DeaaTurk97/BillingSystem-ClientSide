@@ -10,6 +10,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CallDetailsService } from '@app/infrastructure/core/services/billingSystem/call-details-service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
+import { ExportReportService } from '@app/infrastructure/core/services/billingSystem//export-report-service';
+import { UserService } from '@app/infrastructure/core/services/auth/user.service';
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
 import { CallSummaryModel } from '@app/infrastructure/models/project/CallSummaryModel';
 import { GroupModel } from '@app/infrastructure/models/project/groupModel';
@@ -19,6 +21,8 @@ import {
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { catchError, map } from 'rxjs/operators';
 import { GroupService } from '@app/infrastructure/core/services/billingSystem/group.service';
+import { HttpResponse } from '@angular/common/http';
+import FileSaver from 'file-saver';
 
 @Component({
     selector: 'app-calls-summary-report-list',
@@ -40,6 +44,8 @@ export class CallsSummaryReportListComponent implements OnInit {
         private CallDetailsService: CallDetailsService,
         private notify: NotificationService,
         private groupService: GroupService,
+        private exportReportService: ExportReportService,
+        private userService: UserService,
     ) {}
 
     ngOnInit(): void {
@@ -60,6 +66,15 @@ export class CallsSummaryReportListComponent implements OnInit {
     onSearch(model: any) {
         this.reportFilterModel = model;
         this.LoadReport();
+    }
+
+    onExport(reportType: any) {
+        this.reportFilterModel.reportType = reportType;
+        this.exportReportService
+            .exportCallSummary(this.reportFilterModel)
+            .subscribe((result) => {
+                window.open(result.urlPath);
+            });
     }
 
     LoadReport() {

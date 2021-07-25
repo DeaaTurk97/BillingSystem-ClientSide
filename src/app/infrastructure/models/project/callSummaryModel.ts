@@ -4,8 +4,7 @@ export interface CallSummaryModel {
     phoneNumber: string;
     userName: string;
     userEmail: string;
-    groupNameEn: string;
-    groupNameAr: string;
+    groupName: string;
     freeSum: number;
     officialSum: number;
     personalSum: number;
