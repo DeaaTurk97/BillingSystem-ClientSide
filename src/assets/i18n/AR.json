@@ -277,7 +277,7 @@
     "PaidSuccessfully": "تم دفع الفاتورة بنجاح",
     "ErrorOnPaidBill": "حصل خطأ في دفع الفاتورة",
     "CancelBillPaid": "إلغاء دفع الفاتورة",
-    "setDescriptionAndTypeUnKnownNumber": "تعيين نوع  ووصف الأرقام الغير معرفة",
+    "DefinitionUnknownNumbers": "تعريف الأرقام الغير معرفة",
     "submitBill": "إرسال الفاتورة",
     "export": "تصدير التقرير",
     "serviceTypeName": "نوع الخدمة"

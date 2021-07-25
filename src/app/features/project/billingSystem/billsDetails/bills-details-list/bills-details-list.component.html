@@ -21,7 +21,12 @@
                         fxFlex.gt-xs="15"
                         fxFlex="100"
                     >
-                        <button mat-raised-button type="submit" color="primary">
+                        <button
+                            mat-raised-button
+                            type="submit"
+                            color="primary"
+                            [disabled]="countDefinedNumbers > 0"
+                        >
                             {{ 'submitBill' | translate }}
                         </button>
                     </div>
@@ -37,10 +42,12 @@
                             type="submit"
                             color="primary"
                             (click)="onSetPhoneNumberType()"
+                            [matBadge]="countDefinedNumbers"
+                            matBadgePosition="after"
+                            matBadgeColor="warn"
+                            [disabled]="countDefinedNumbers === 0"
                         >
-                            {{
-                                'setDescriptionAndTypeUnKnownNumber' | translate
-                            }}
+                            {{ 'DefinitionUnknownNumbers' | translate }}
                         </button>
                     </div>
 

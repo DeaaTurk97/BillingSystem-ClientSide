@@ -14,12 +14,14 @@ import { NotificationService } from '@app/infrastructure/core/services/notificat
 import { DynamicColumn } from '@app/infrastructure/models/gridAddColumns-model';
 import { CallDetailsModel } from '@app/infrastructure/models/project/callDetailsModel';
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
+import { UnDefinedNumberModel } from '@app/infrastructure/models/project/UnDefinedNumberModel';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
 import { DataGridViewComponent } from '@app/infrastructure/shared/components/data-grid-view/data-grid-view.component';
 import {
     ActionRowGrid,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
+import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { DescriptionAndTypeNumberComponent } from '../description-and-type-number/description-and-type-number.component';
 
@@ -42,6 +44,8 @@ export class BillsDetailsListComponent implements OnInit {
     public dataSource = new MatTableDataSource<CallDetailsModel>([]);
     public columns: DynamicColumn[] = [];
     public usersModel: UserModel[] = [];
+    public unDefinedNumberModel: UnDefinedNumberModel[] = [];
+    public countDefinedNumbers: number = 0;
     @ViewChild(DataGridViewComponent) sharedDataGridView: DataGridViewComponent;
 
     constructor(
@@ -73,8 +77,15 @@ export class BillsDetailsListComponent implements OnInit {
                     this.length = dataRoute.billsDetails.countRecord;
                     return this.userService.getUsersByCurrentRole();
                 }),
-                map((userData) => {
+                mergeMap((userData) => {
                     this.usersModel = userData;
+                    return this.callDetailsService.GetAllUndefinedNumbers(
+                        this.billId,
+                    );
+                }),
+                map((unDefinedNumbers) => {
+                    this.unDefinedNumberModel = unDefinedNumbers.dataRecord;
+                    this.countDefinedNumbers = unDefinedNumbers.countRecord;
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage('ErrorOnLoadData');
@@ -89,8 +100,8 @@ export class BillsDetailsListComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.position = { top: '80px' };
-        dialogConfig.width = '80%';
+        dialogConfig.position = { top: '55px' };
+        dialogConfig.width = '70%';
         dialogConfig.data = data;
         return dialogConfig;
     }
@@ -134,7 +145,7 @@ export class BillsDetailsListComponent implements OnInit {
     public onSetPhoneNumberType() {
         const dialog = this.dialog.open(
             DescriptionAndTypeNumberComponent,
-            this.getConfigDialog(this.billId),
+            this.getConfigDialog(this.unDefinedNumberModel),
         );
     }
 }
