@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CallDetailsService } from '@app/infrastructure/core/services/billingSystem/call-details-service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
+import { ExportReportService } from '@app/infrastructure/core/services/billingSystem//export-report-service';
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
 import { CallFinanceModel } from '@app/infrastructure/models/project/callFinanceModel';
 import { GroupModel } from '@app/infrastructure/models/project/groupModel';
@@ -38,6 +39,7 @@ export class CallsFinanceReportListComponent implements OnInit {
         private CallDetailsService: CallDetailsService,
         private notify: NotificationService,
         private groupService: GroupService,
+        private exportReportService: ExportReportService,
     ) {}
 
     ngOnInit(): void {
@@ -53,6 +55,15 @@ export class CallsFinanceReportListComponent implements OnInit {
                 this.LoadReport();
                 break;
         }
+    }
+
+    onExport(reportType: any) {
+        this.reportFilterModel.reportType = reportType;
+        this.exportReportService
+            .exportCallFinance(this.reportFilterModel)
+            .subscribe((result) => {
+                window.open(result.urlPath);
+            });
     }
 
     onSearch(model: any) {

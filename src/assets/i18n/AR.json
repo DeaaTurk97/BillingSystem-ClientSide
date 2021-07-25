@@ -278,5 +278,7 @@
     "ErrorOnPaidBill": "حصل خطأ في دفع الفاتورة",
     "CancelBillPaid": "إلغاء دفع الفاتورة",
     "setDescriptionAndTypeUnKnownNumber": "تعيين نوع  ووصف الأرقام الغير معرفة",
-    "submitBill": "إرسال الفاتورة"
+    "submitBill": "إرسال الفاتورة",
+    "export": "تصدير التقرير",
+    "serviceTypeName": "نوع الخدمة"
 }
