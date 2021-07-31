@@ -3,7 +3,6 @@ import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilt
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 import { ApiService } from '../api/api.service';
-import { CallDetailsModel } from '@app/infrastructure/models/project/callDetailsModel';
 import { HttpParams } from '@angular/common/http';
 
 @Injectable({
