@@ -135,7 +135,9 @@ export class DataGridViewComponent implements OnInit, AfterViewInit {
     onSelectedRow(row, isCheckedRow: boolean, isCheckedAll: boolean) {
         if (isCheckedAll) {
             this.gridDataSource.data.forEach((element) => {
-                this.rowsSelection.push(element.id);
+                if (!this.rowsSelection.includes(element.id)) {
+                    this.rowsSelection.push(element.id);
+                }
             });
         } else if (isCheckedRow) {
             //using some Property to return true or false

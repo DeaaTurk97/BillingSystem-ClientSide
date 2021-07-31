@@ -114,6 +114,8 @@ export class UploadBillsComponent implements OnInit {
                         'FileUploadedSuccessfully',
                         false,
                     );
+                    //To send notifications for all users hase uploded bills
+                    this.notify.invokeApprovalsCycleNumbersAndBills(result);
                 } else {
                     this.notify.showTranslateMessage(
                         'FileUploadedNotSuccessfully',

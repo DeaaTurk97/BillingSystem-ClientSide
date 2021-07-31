@@ -33,7 +33,7 @@ export class RoleDTO implements IRoleDTO {
         return typeList.includes(role);
     }
 
-    static isStudentRoleType(role: UserType): role is UserType {
+    static isEmployeeRoleType(role: UserType): role is UserType {
         const typeList: UserType[] = [UserType.Employee];
         return typeList.includes(role);
     }

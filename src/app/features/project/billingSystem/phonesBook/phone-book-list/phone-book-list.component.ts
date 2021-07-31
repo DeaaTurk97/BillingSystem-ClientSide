@@ -167,8 +167,8 @@ export class PhoneBookListComponent implements OnInit {
     onDelete(phoneBookModel: PhoneBookModel) {
         return this.dialog
             .open(ConfirmDialogComponent, {
-                width: '27em',
-                height: '9em',
+                width: '28em',
+                height: '11em',
                 panelClass: 'confirm-dialog-container',
                 position: { top: '5em' },
                 disableClose: true,
@@ -186,18 +186,21 @@ export class PhoneBookListComponent implements OnInit {
                             phoneBookModel.id,
                         );
                     } else {
-                        this.notify.showTranslateMessage('CancelDelete');
+                        this.notify.showTranslateMessage('CancelDelete', true);
                         return of(false);
                     }
                 }),
                 catchError((): any => {
-                    this.notify.showTranslateMessage('ErrorOnDelete');
+                    this.notify.showTranslateMessage('ErrorOnDelete', true);
                 }),
             )
             .subscribe((result) => {
                 if (result) {
                     this.LoadPhonesBook(1, this.pageSize);
-                    this.notify.showTranslateMessage('DeletedSuccessfully');
+                    this.notify.showTranslateMessage(
+                        'DeletedSuccessfully',
+                        false,
+                    );
                 }
             });
     }

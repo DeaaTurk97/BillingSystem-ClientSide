@@ -26,7 +26,26 @@
                     mat-raised-button
                     type="submit"
                     color="primary"
+                    (click)="onInprogressRow()"
+                    [disabled]="
+                        selectedStatusNumber ==
+                            StatusCycleResult.InprogressToApproved ||
+                        phoneNumbersStatus.length === 0
+                    "
+                >
+                    {{ 'Inprogress' | translate }}
+                </button>
+            </div>
+            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+                <button
+                    mat-raised-button
+                    type="submit"
+                    color="primary"
                     (click)="onApproveRow()"
+                    [disabled]="
+                        selectedStatusNumber == StatusCycleResult.Approved ||
+                        phoneNumbersStatus.length === 0
+                    "
                 >
                     {{ 'Approve' | translate }}
                 </button>
@@ -37,18 +56,12 @@
                     type="submit"
                     color="primary"
                     (click)="onRejectRow()"
+                    [disabled]="
+                        selectedStatusNumber == StatusCycleResult.Rejected ||
+                        phoneNumbersStatus.length === 0
+                    "
                 >
                     {{ 'Reject' | translate }}
-                </button>
-            </div>
-            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
-                <button
-                    mat-raised-button
-                    type="submit"
-                    color="primary"
-                    (click)="onInprogressRow()"
-                >
-                    {{ 'Inprogress' | translate }}
                 </button>
             </div>
         </div>

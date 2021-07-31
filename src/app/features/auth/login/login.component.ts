@@ -28,10 +28,7 @@ export class LoginComponent implements OnInit {
 
     ngInitialControlForm() {
         this.loginForm = this.formBuilder.group({
-            Email: [
-                null,
-                Validators.compose([Validators.required, Validators.email]),
-            ],
+            PhoneNumber: [null, Validators.required],
             Password: [null, Validators.compose([Validators.required])],
         });
     }
@@ -44,7 +41,7 @@ export class LoginComponent implements OnInit {
             },
             (error) => {
                 this.isInProgress = false;
-                this.notify.showTranslateMessage('InvalidEmailMessge');
+                this.notify.showTranslateMessage('InvalidPhoneNumberMessge');
             },
             () => {
                 this.loginForm.reset();

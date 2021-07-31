@@ -32,6 +32,10 @@ export class RegisterComponent implements OnInit {
         return this.registerForm.controls.Email.value;
     }
 
+    get PhoneNumber() {
+        return this.registerForm.controls.PhoneNumber.value;
+    }
+
     ngOnInit(): void {
         this.ngInitialControlForm();
     }
@@ -52,7 +56,7 @@ export class RegisterComponent implements OnInit {
     register() {
         this.isInProgress = true;
         void this.authService
-            .IsUserExists(this.Email)
+            .IsUserExists(this.PhoneNumber)
             .pipe(
                 mergeMap((data) => {
                     if (!data) {
@@ -60,7 +64,9 @@ export class RegisterComponent implements OnInit {
                             this.registerForm.value,
                         );
                     } else {
-                        this.notify.showTranslateMessage('EmailAlreadyExist');
+                        this.notify.showTranslateMessage(
+                            'PhoneNumberAlreadyExist',
+                        );
                     }
                 }),
                 tap((data) => {

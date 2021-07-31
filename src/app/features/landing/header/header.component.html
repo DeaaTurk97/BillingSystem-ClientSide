@@ -43,8 +43,9 @@
         <ul>
             <li>
                 <div class="drop-title">
-                    You have {{ (notificationsList | async)?.length }} new
-                    Notification
+                    {{ 'YouHave' | translate }}
+                    {{ (notificationsList | async)?.length }}
+                    {{ 'NewNotifications' | translate }}
                 </div>
             </li>
             <li>
@@ -62,7 +63,9 @@
                                 class="round {{ notification.SenderId }}"
                             ></div>
                             <div class="mail-content">
-                                <h5>{{ notification.messageText }}</h5>
+                                <h5>
+                                    {{ notification.messageText | translate }}
+                                </h5>
                             </div>
                         </a>
                     </perfect-scrollbar>

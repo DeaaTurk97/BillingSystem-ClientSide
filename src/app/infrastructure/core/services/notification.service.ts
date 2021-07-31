@@ -5,7 +5,7 @@ import { MessageSnackbarComponent } from '@shared/components/message-snackbar/me
 import { Message } from '@app/infrastructure/models/message';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { environment } from '@env/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ApiService } from './api/api.service';
 import { SystemNotification } from '@app/infrastructure/shared/Services/CommonMemmber';
@@ -120,25 +120,40 @@ export class NotificationService {
             this.dataChange.next(data);
         });
 
-        this.hubConnection.on('UnreadchattingMessages', () => {
+        this.hubConnection.on('UnreadChattingMessages', () => {
             this.loadUnreadNotification().subscribe();
         });
 
-        this.hubConnection.on('UnreadNotificationsRefresh', () => {
+        this.hubConnection.on('AddedNewNumbersAndBills', () => {
+            this.loadAddingNewNumbersAndBills().subscribe();
+        });
+
+        this.hubConnection.on('ApprovalsCycleNumbersAndBills', () => {
             this.loadUnreadNotification().subscribe();
         });
     }
 
-    public loadUnreadNotification(): Observable<SystemNotification[]> {
-        return this.apiService
-            .get(
-                `${environment.apiRoute}/Notification/GetAllUnreadNotification`,
-            )
-            .pipe(
-                tap((data: SystemNotification[]) => {
-                    this.notificationSubject.next(data.reverse());
-                }),
-            );
+    public loadAllNotifications(): Observable<
+        [SystemNotification[], SystemNotification[]]
+    > {
+        return combineLatest([
+            this.loadAddingNewNumbersAndBills(),
+            this.loadUnreadNotification(),
+        ]).pipe(
+            tap(
+                ([NumbersAndBills, ApprovalsCycleNumbersAndBills]: [
+                    SystemNotification[],
+                    SystemNotification[],
+                ]) => {
+                    this.notificationSubject.next(
+                        [
+                            ...NumbersAndBills,
+                            ...ApprovalsCycleNumbersAndBills,
+                        ].reverse(),
+                    );
+                },
+            ),
+        );
     }
 
     public invokeNewMessage(data: Message, receivedId: number): Promise<any> {
@@ -149,9 +164,49 @@ export class NotificationService {
         ]);
     }
 
-    updateReadNotifications(notificationInfo: any): Observable<any> {
+    public invokeAddedNewNumbersAndBills(): any {
+        return this.hubConnection.invoke('AddedNewNumbersAndBills');
+    }
+
+    public invokeApprovalsCycleNumbersAndBills(userId: Array<string>): any {
+        return this.hubConnection.invoke(
+            'ApprovalsCycleNumbersAndBills',
+            userId,
+        );
+    }
+
+    public loadUnreadNotification(): Observable<SystemNotification[]> {
+        return this.apiService
+            .get(`${environment.apiRoute}/Notification/GetUnreadNotification`)
+            .pipe(
+                tap((data: SystemNotification[]) => {
+                    this.notificationSubject.next(data.reverse());
+                }),
+            );
+    }
+
+    public loadAddingNewNumbersAndBills(): Observable<SystemNotification[]> {
+        return this.apiService
+            .get(`${environment.apiRoute}/Notification/GetNewNumbersAndBills`)
+            .pipe(
+                tap((data: SystemNotification[]) => {
+                    this.notificationSubject.next(data.reverse());
+                }),
+            );
+    }
+
+    UpdateReadNewNumbersAndBills(notificationInfo: any): Observable<any> {
         return this.apiService.post(
-            `${environment.apiRoute}/Notification/UpdateAllReadNotifications`,
+            `${environment.apiRoute}/Notification/UpdateReadNewNumbersAndBills`,
+            notificationInfo,
+        );
+    }
+
+    updateReadNewNotification(
+        notificationInfo: Partial<SystemNotification>,
+    ): Observable<any> {
+        return this.apiService.post(
+            `${environment.apiRoute}/Notification/UpdateReadNewNotification`,
             notificationInfo,
         );
     }
