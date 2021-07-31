@@ -881,9 +881,12 @@ export class GeneralSettingsComponent implements OnInit {
                 .subscribe((value) => {
                     this.getGeneralSettingsInfo();
                     if (value) {
-                        this.notify.showTranslateMessage('UpdatedSuccessfully');
+                        this.notify.showTranslateMessage(
+                            'UpdatedSuccessfully',
+                            false,
+                        );
                     } else {
-                        this.notify.showTranslateMessage('UpdatedFailed');
+                        this.notify.showTranslateMessage('UpdatedFailed', true);
                     }
                 });
         }

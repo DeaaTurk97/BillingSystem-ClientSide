@@ -3,11 +3,13 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/infrastructure/core/services/auth/auth.service';
 import { UserService } from '@app/infrastructure/core/services/auth/user.service';
+import { BillsSummaryService } from '@app/infrastructure/core/services/billingSystem/bills-summary.service';
 import { LanguagesService } from '@app/infrastructure/core/services/language/language.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { LanguageModel } from '@app/infrastructure/models/project/LanguageModel';
 import { NotificationType } from '@app/infrastructure/models/SystemEnum';
 import { ChattingComponent } from '@app/infrastructure/shared/components/chatting/chatting.component';
+import { MonthsNames } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { TranslateService } from '@ngx-translate/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { of } from 'rxjs';
@@ -33,6 +35,7 @@ export class AppHeaderComponent implements OnInit {
         private languagesService: LanguagesService,
         private userService: UserService,
         public translate: TranslateService,
+        public billsSummaryService: BillsSummaryService,
     ) {}
 
     getConfigDialog(data: any): MatDialogConfig {
@@ -93,7 +96,7 @@ export class AppHeaderComponent implements OnInit {
                 }),
                 mergeMap(() => {
                     if (this.userService.isTokenExist()) {
-                        return this.notificationService.loadUnreadNotification();
+                        return this.notificationService.loadAllNotifications();
                     }
                 }),
                 catchError((): any => {
@@ -116,27 +119,87 @@ export class AppHeaderComponent implements OnInit {
 
     public redirectToSourcePage(notificationInfo: any): void {
         if (
-            NotificationType['Chatting'] == notificationInfo.notificationTypeId
+            NotificationType.PhoneNumbersSubmitted ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.BillSubmitted ==
+                notificationInfo.notificationTypeId
         ) {
             this.notificationService
-                .updateReadNotifications(notificationInfo)
+                .UpdateReadNewNumbersAndBills(notificationInfo)
                 .pipe(
-                    mergeMap(() =>
-                        this.notificationService.loadUnreadNotification(),
-                    ),
+                    mergeMap((data) => {
+                        if (data) {
+                            this.router
+                                .navigateByUrl('/', {
+                                    skipLocationChange: true,
+                                })
+                                .then(() => {
+                                    this.router.navigateByUrl(
+                                        NotificationType.PhoneNumbersSubmitted ===
+                                            notificationInfo.notificationTypeId
+                                            ? 'phonesBook/comingNumbers-list'
+                                            : 'bills/comingBills-list',
+                                    );
+                                });
+                        }
+                        return this.notificationService.loadAddingNewNumbersAndBills();
+                    }),
                     mergeMap(() =>
                         this.notificationService.getConversation(
                             notificationInfo.createdBy,
                         ),
                     ),
-                    mergeMap((data) => {
-                        const dialog = this.dialog.open(
-                            ChattingComponent,
-                            this.getConfigDialog(data),
+                    catchError((): any => {
+                        this.notificationService.showTranslateMessage(
+                            'ErrorOnOpenChattingDialog',
                         );
-                        return dialog.afterClosed();
                     }),
-                    mergeMap(() => of({})),
+                )
+                .subscribe((result) => {});
+        } else if (
+            NotificationType.PhoneNumbersApproved ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.PhoneNumbersIprogress ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.PhoneNumbersRejected ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.BillUploaded == notificationInfo.notificationTypeId
+        ) {
+            this.notificationService
+                .updateReadNewNotification(notificationInfo)
+                .pipe(
+                    mergeMap((data) => {
+                        if (data) {
+                            return this.billsSummaryService.getbillSummaryById(
+                                notificationInfo.referenceMassageId,
+                            );
+                        }
+                    }),
+                    mergeMap((billSummary) => {
+                        if (billSummary) {
+                            this.router
+                                .navigateByUrl('/', {
+                                    skipLocationChange: true,
+                                })
+                                .then(() => {
+                                    this.router.navigate([
+                                        '/bills/billsDetails-list/' +
+                                            billSummary.id +
+                                            '/' +
+                                            MonthsNames[billSummary.billMonth] +
+                                            '/' +
+                                            billSummary.billYear +
+                                            '/' +
+                                            billSummary.userId +
+                                            '/' +
+                                            billSummary.submittedByAdmin,
+                                    ]);
+                                });
+                        } else {
+                            this.router.navigate(['/bills/billsSummary-list']);
+                        }
+                        return this.notificationService.loadUnreadNotification();
+                    }),
                     catchError((): any => {
                         this.notificationService.showTranslateMessage(
                             'ErrorOnOpenChattingDialog',

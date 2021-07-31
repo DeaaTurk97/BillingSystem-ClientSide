@@ -15,7 +15,17 @@
                         <mat-cell
                             *matCellDef="let element; let serialNo = index"
                         >
-                            {{ serialNo + 1 }}
+                            {{ element.id }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="StatusNumberName">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ 'StatusNumberName' | translate }}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ element.statusNumberName | translate }}
                         </mat-cell>
                     </ng-container>
 

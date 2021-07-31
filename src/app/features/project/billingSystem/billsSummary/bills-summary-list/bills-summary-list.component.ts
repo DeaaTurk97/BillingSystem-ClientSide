@@ -89,6 +89,7 @@ export class BillsSummaryListComponent implements OnInit {
                     ActionGrid.row.billMonth,
                     ActionGrid.row.billYear,
                     ActionGrid.row.userId,
+                    ActionGrid.row.submittedByAdmin,
                 );
                 break;
             case State.Pay:
@@ -117,6 +118,7 @@ export class BillsSummaryListComponent implements OnInit {
         billMonth: number,
         billYear: number,
         billUser: number,
+        isSubmittedByAdmin: boolean,
     ) {
         this.router.navigate([
             '/bills/billsDetails-list/' +
@@ -126,7 +128,9 @@ export class BillsSummaryListComponent implements OnInit {
                 '/' +
                 billYear +
                 '/' +
-                billUser,
+                billUser +
+                '/' +
+                isSubmittedByAdmin,
         ]);
     }
 

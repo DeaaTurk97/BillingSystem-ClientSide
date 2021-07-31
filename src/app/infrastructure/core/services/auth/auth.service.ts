@@ -36,11 +36,11 @@ export class AuthService {
             );
     }
 
-    IsUserExists(userEmail: number) {
+    IsUserExists(userPhoneNumber: string) {
         return this.apiService.get(
-            `${environment.apiRoute}/Authintecation/IsUserExists` +
+            `${environment.apiRoute}/Authintecation/IsUserExistsByPhoneNumber` +
                 '?userEmail=' +
-                userEmail,
+                userPhoneNumber,
         );
     }
 

@@ -3,7 +3,7 @@ import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilt
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 import { ApiService } from '../api/api.service';
-import { CallDetailsModel } from '@app/infrastructure/models/project/callDetailsModel';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root',
@@ -35,6 +35,16 @@ export class CallDetailsService {
             `${environment.apiRoute}/BillsDetails/GetAllUndefinedNumbers` +
                 '?billId=' +
                 billId,
+        );
+    }
+
+    updateSubmitedBill(billId: number) {
+        const params = new HttpParams().set('billId', String(billId));
+
+        return this.apiService.put(
+            `${environment.apiRoute}/BillsDetails/UpdateSubmitBill`,
+            null,
+            { params: params },
         );
     }
 }

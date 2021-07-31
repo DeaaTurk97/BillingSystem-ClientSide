@@ -11,12 +11,14 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { TypePhoneNumberService } from '@app/infrastructure/core/services/billingSystem/type-phone-number.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { TypePhoneNumber } from '@app/infrastructure/models/project/TypePhoneNumberModel';
 import { UnDefinedNumberModel } from '@app/infrastructure/models/project/UnDefinedNumberModel';
-import { catchError, map } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-description-and-type-number',
@@ -28,16 +30,20 @@ export class DescriptionAndTypeNumberComponent implements OnInit {
     public typePhonesNumbers: TypePhoneNumber[] = [];
     displayedColumns = [
         'id',
+        'StatusNumberName',
         'dialledNumber',
         'typePhoneNumberId',
         'phoneName',
     ];
-    dataSource: UnDefinedNumberModel[] = this.unDefinedNumberModel;
+    dataSource: UnDefinedNumberModel[] = this.dataRecived[
+        'unDefinedNumberModel'
+    ];
     form: FormGroup;
 
     constructor(
         @Inject(MAT_DIALOG_DATA)
-        public unDefinedNumberModel: UnDefinedNumberModel[],
+        public dataRecived: UnDefinedNumberModel[],
+        private dialogRef: MatDialogRef<DescriptionAndTypeNumberComponent>,
         private typePhoneNumberService: TypePhoneNumberService,
         private notify: NotificationService,
         private fb: FormBuilder,
@@ -55,12 +61,16 @@ export class DescriptionAndTypeNumberComponent implements OnInit {
             this.dataSource.map(
                 (item) =>
                     new FormGroup({
+                        id: new FormControl(item.id),
                         dialledNumber: new FormControl(item.dialledNumber),
                         typePhoneNumberId: new FormControl(
                             item.typePhoneNumberId,
                             Validators.required,
                         ),
-                        phoneName: new FormControl(null, Validators.required),
+                        phoneName: new FormControl(
+                            item.phoneName,
+                            Validators.required,
+                        ),
                     }),
             ),
         );
@@ -82,17 +92,22 @@ export class DescriptionAndTypeNumberComponent implements OnInit {
 
     addingNewNumbers() {
         this.typePhoneNumberService
-            .addingNewNumbers(this.form.controls.unDefinedNumber.value)
+            .addingNewNumbers(
+                this.form.controls.unDefinedNumber.value,
+                Number(this.dataRecived['billId']),
+            )
             .pipe(
-                map((data) => {
+                mergeMap((data) => {
                     if (data) {
-                        this.notify.showTranslateMessage('UpdatedSuccessfully');
+                        return of(data);
                     }
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage('SaveFailed');
                 }),
             )
-            .subscribe((result) => {});
+            .subscribe((result) => {
+                this.dialogRef.close(result);
+            });
     }
 }

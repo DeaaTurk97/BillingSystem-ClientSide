@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SuperAdminAuthGuard } from '@app/infrastructure/core/guards';
+import {
+    AuthGuard,
+    SuperAdminAuthGuard,
+} from '@app/infrastructure/core/guards';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
@@ -102,8 +105,8 @@ const routes: Routes = [
     },
     {
         path: 'phonesBook',
-        canActivate: [SuperAdminAuthGuard],
-        canActivateChild: [SuperAdminAuthGuard],
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
             import('../project/billingSystem/phonesBook/phoneBook.module').then(
                 (m) => m.PhoneBookModule,
@@ -129,8 +132,8 @@ const routes: Routes = [
     },
     {
         path: 'bills',
-        canActivate: [SuperAdminAuthGuard],
-        canActivateChild: [SuperAdminAuthGuard],
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
             import(
                 '../project/billingSystem/billsSummary/bills-summary.module'
@@ -139,8 +142,8 @@ const routes: Routes = [
 
     {
         path: 'bills',
-        canActivate: [SuperAdminAuthGuard],
-        canActivateChild: [SuperAdminAuthGuard],
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
             import(
                 '../project/billingSystem/billsDetails/bills-Details.module'

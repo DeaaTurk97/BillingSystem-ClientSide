@@ -6,10 +6,6 @@
         <mat-card>
             <mat-card-content>
                 <form [formGroup]="registerForm">
-                    <div class="text-center">
-                        <img alt="homepage" src="assets/images/logo-icon.png" />
-                        <h4 class="m-t-0">{{ 'RegisterToApp' | translate }}</h4>
-                    </div>
                     <div fxLayout="row wrap">
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
@@ -204,17 +200,7 @@
                                 >{{ 'PasswordsDonotMatch' | translate }}</small
                             >
                         </div>
-                        <!-- col full-->
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <mat-checkbox class="font-14"
-                                >{{ 'AgreeAll' | translate }}
-                                <a
-                                    href="javascript:void(0)"
-                                    class="link text-info"
-                                    >{{ 'terms' | translate }}</a
-                                >.</mat-checkbox
-                            >
-                        </div>
+
                         <button
                             mat-raised-button
                             color="primary"

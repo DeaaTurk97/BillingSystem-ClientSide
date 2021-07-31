@@ -1,19 +1,19 @@
 <!-- ============================================================== -->
 <!-- sidebar -->
 <!-- ============================================================== -->
-<div
+<!-- <div
     class="user-profile"
     style="background: url(assets/images/background/user-info.jpg) no-repeat"
->
-    <!-- User profile image -->
-    <div class="profile-img">
+> -->
+<!-- User profile image -->
+<!-- <div class="profile-img">
         <img src="assets/images/users/profile.png" alt="user" />
-    </div>
-    <!-- User profile text-->
-    <!-- ============================================================== -->
-    <!-- Profile - style you can find in header.scss -->
-    <!-- ============================================================== -->
-</div>
+    </div> -->
+<!-- User profile text-->
+<!-- ============================================================== -->
+<!-- Profile - style you can find in header.scss -->
+<!-- ============================================================== -->
+<!-- </div> -->
 
 <mat-nav-list appAccordion>
     <mat-list-item
@@ -74,7 +74,7 @@
             class=""
             appAccordionToggle
             href="javascript:;"
-            *ngIf="menuitem.type === 'sub'"
+            *ngIf="menuitem.type === 'sub' && isRoleMatch(menuitem.roles)"
         >
             <mat-icon>{{ menuitem.icon }}</mat-icon>
             <span>{{ menuitem.name | translate }}</span>
@@ -93,7 +93,10 @@
             >
                 <a
                     [routerLink]="['/', menuitem.state, childitem.state]"
-                    *ngIf="childitem.type === 'link'"
+                    *ngIf="
+                        childitem.type === 'link' &&
+                        isRoleMatch(childitem.roles)
+                    "
                     class="relative"
                     routerLinkActive="selected"
                     >{{ childitem.name | translate }}</a

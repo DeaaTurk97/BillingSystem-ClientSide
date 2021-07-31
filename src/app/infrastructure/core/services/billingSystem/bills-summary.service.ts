@@ -20,6 +20,14 @@ export class BillsSummaryService {
         );
     }
 
+    getbillSummaryById(billId: number): Observable<any> {
+        return this.apiService.get(
+            `${environment.apiRoute}/BillsSummary/GetBillSummaryById` +
+                '?billId=' +
+                billId,
+        );
+    }
+
     updatePaybill(billId: number): Observable<any> {
         const params = new HttpParams()
             .set('billId', String(billId))

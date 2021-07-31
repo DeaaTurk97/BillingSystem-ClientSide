@@ -53,9 +53,9 @@ export class TokenService {
         );
     }
 
-    public isStudent(): Observable<boolean> {
+    public isEmployee(): Observable<boolean> {
         return this.getAuthToken().pipe(
-            map((user) => user.role && RoleDTO.isStudentRoleType(user.role)),
+            map((user) => user.role && RoleDTO.isEmployeeRoleType(user.role)),
         );
     }
 

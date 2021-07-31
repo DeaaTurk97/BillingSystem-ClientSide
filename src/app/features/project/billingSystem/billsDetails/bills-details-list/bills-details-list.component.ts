@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '@app/infrastructure/core/services/auth/user.service';
 import { CallDetailsService } from '@app/infrastructure/core/services/billingSystem/call-details-service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
@@ -16,13 +16,14 @@ import { CallDetailsModel } from '@app/infrastructure/models/project/callDetails
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
 import { UnDefinedNumberModel } from '@app/infrastructure/models/project/UnDefinedNumberModel';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
+import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 import { DataGridViewComponent } from '@app/infrastructure/shared/components/data-grid-view/data-grid-view.component';
 import {
     ActionRowGrid,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { DescriptionAndTypeNumberComponent } from '../description-and-type-number/description-and-type-number.component';
 
 @Component({
@@ -40,6 +41,7 @@ export class BillsDetailsListComponent implements OnInit {
     public billMonthId = 0;
     public billYearId = null;
     public billUserId = null;
+    public isSubmitByAdmin: boolean = false;
     public reportFilterModel: ReportFilterModel = new ReportFilterModel();
     public dataSource = new MatTableDataSource<CallDetailsModel>([]);
     public columns: DynamicColumn[] = [];
@@ -55,6 +57,7 @@ export class BillsDetailsListComponent implements OnInit {
         private userService: UserService,
         private changeDetectorRef: ChangeDetectorRef,
         private dialog: MatDialog,
+        private route: Router,
     ) {}
 
     ngOnInit(): void {
@@ -68,6 +71,11 @@ export class BillsDetailsListComponent implements OnInit {
         );
         this.billUserId = Number(
             this.activatedRoute.snapshot.paramMap.get('billUser'),
+        );
+        this.isSubmitByAdmin = Boolean(
+            JSON.parse(
+                this.activatedRoute.snapshot.paramMap.get('isSubmitByAdmin'),
+            ),
         );
 
         this.activatedRoute.data
@@ -145,7 +153,87 @@ export class BillsDetailsListComponent implements OnInit {
     public onSetPhoneNumberType() {
         const dialog = this.dialog.open(
             DescriptionAndTypeNumberComponent,
-            this.getConfigDialog(this.unDefinedNumberModel),
+            this.getConfigDialog({
+                unDefinedNumberModel: this.unDefinedNumberModel,
+                billId: this.billId,
+            }),
         );
+
+        return dialog
+            .afterClosed()
+            .pipe(
+                switchMap((dialogResult) => {
+                    if (dialogResult) {
+                        this.notify.showTranslateMessage(
+                            'UpdatedSuccessfully',
+                            false,
+                        );
+                        //Invoke For SuperAdmin only
+                        this.notify.invokeAddedNewNumbersAndBills();
+
+                        return this.callDetailsService.GetAllUndefinedNumbers(
+                            this.billId,
+                        );
+                    } else {
+                        this.notify.showTranslateMessage('CancelUpdate');
+                        return of(null); //Must return null
+                    }
+                }),
+                mergeMap((unDefinedNumbers) => {
+                    if (unDefinedNumbers) {
+                        this.unDefinedNumberModel = unDefinedNumbers.dataRecord;
+                        this.countDefinedNumbers = unDefinedNumbers.countRecord;
+                    }
+
+                    return of({});
+                }),
+                catchError((): any => {
+                    this.notify.showTranslateMessage('ErrorOnUpdate');
+                }),
+            )
+            .subscribe((result) => {});
+    }
+
+    submitBill() {
+        return this.dialog
+            .open(ConfirmDialogComponent, {
+                width: '28em',
+                height: '11em',
+                panelClass: 'confirm-dialog-container',
+                position: { top: '5em' },
+                disableClose: true,
+                data: {
+                    messageList: ['SureWantSubmitting'],
+                    action: 'Yes',
+                    showCancel: true,
+                },
+            })
+            .afterClosed()
+            .pipe(
+                switchMap((dialogResult: string): any => {
+                    if (dialogResult) {
+                        return this.callDetailsService.updateSubmitedBill(
+                            this.billId,
+                        );
+                    } else {
+                        this.notify.showTranslateMessage('CancelBillSubmit');
+                        return of(null);
+                    }
+                }),
+                catchError((): any => {
+                    this.notify.showTranslateMessage('ErrorOnSubmitBill');
+                }),
+            )
+            .subscribe((result) => {
+                if (result) {
+                    this.notify.showTranslateMessage(
+                        'SubmittedSuccessfully',
+                        false,
+                    );
+
+                    //Invoke For SuperAdmin only
+                    this.notify.invokeAddedNewNumbersAndBills();
+                }
+            });
     }
 }

@@ -13,6 +13,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '@models/menu-items';
 import { AuthService } from '@app/infrastructure/core/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { TokenService } from '@app/infrastructure/core/services/token.service';
+import { UserType } from '@app/infrastructure/models/user';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-sidebar',
@@ -37,6 +40,7 @@ export class AppSidebarComponent implements OnDestroy {
         changeDetectorRef: ChangeDetectorRef,
         media: MediaMatcher,
         public menuItems: MenuItems,
+        private tokenService: TokenService,
     ) {
         this.mobileQuery = media.matchMedia('(min-width: 768px)');
         this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -55,5 +59,22 @@ export class AppSidebarComponent implements OnDestroy {
     public logout(): void {
         this.authService.loggedOut();
         this.router.navigateByUrl('/auth');
+    }
+
+    isRoleMatch(rolesMatch: UserType[]) {
+        let isMatch = false;
+
+        if (rolesMatch) {
+            this.tokenService
+                .isRolesMatch(rolesMatch)
+                .pipe(
+                    map((data) => {
+                        isMatch = data;
+                    }),
+                )
+                .subscribe((result) => {});
+        }
+
+        return isMatch;
     }
 }

@@ -11,12 +11,14 @@ const routes: Routes = [
         component: LandingLayoutComponent,
         children: [
             {
-                path: 'billsDetails-list/:id/:billMonth/:billYear/:billUser',
+                path:
+                    'billsDetails-list/:id/:billMonth/:billYear/:billUser/:isSubmitByAdmin',
                 redirectTo: 'billsDetails-list',
                 pathMatch: 'full',
             },
             {
-                path: 'billsDetails-list/:id/:billMonth/:billYear/:billUser',
+                path:
+                    'billsDetails-list/:id/:billMonth/:billYear/:billUser/:isSubmitByAdmin',
                 component: BillsDetailsListComponent,
                 resolve: {
                     billsDetails: BillDetailsResolveService,

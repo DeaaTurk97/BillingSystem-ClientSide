@@ -32,14 +32,14 @@ export class IncomingPhoneNumbersService {
         );
     }
 
-    inprogressPhoneNumbers(phoneNumbersIds: number[]) {
+    inprogressPhoneNumbers(phoneNumbersIds: number[]): Observable<any> {
         return this.apiService.put(
             `${environment.apiRoute}/ComingNumbers/InprogressPhoneNumbers`,
             phoneNumbersIds,
         );
     }
 
-    rejectPhoneNumbers(phoneNumbersIds: number[]) {
+    rejectPhoneNumbers(phoneNumbersIds: number[]): Observable<any> {
         return this.apiService.put(
             `${environment.apiRoute}/ComingNumbers/RejectPhoneNumbers`,
             phoneNumbersIds,

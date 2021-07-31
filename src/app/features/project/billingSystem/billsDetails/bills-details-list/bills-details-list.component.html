@@ -25,7 +25,10 @@
                             mat-raised-button
                             type="submit"
                             color="primary"
-                            [disabled]="countDefinedNumbers > 0"
+                            [disabled]="
+                                countDefinedNumbers > 0 || isSubmitByAdmin
+                            "
+                            (click)="submitBill()"
                         >
                             {{ 'submitBill' | translate }}
                         </button>

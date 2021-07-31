@@ -15,21 +15,26 @@
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                             <mat-form-field>
-                                <mat-label>{{ 'Email' | translate }}</mat-label>
+                                <mat-label>{{
+                                    'PhoneNumber' | translate
+                                }}</mat-label>
                                 <input
                                     matInput
-                                    placeholder="{{ 'Email' | translate }}"
-                                    formControlName="Email"
+                                    placeholder="{{
+                                        'PhoneNumber' | translate
+                                    }}"
+                                    formControlName="PhoneNumber"
                                 />
                             </mat-form-field>
                             <small
                                 *ngIf="
-                                    loginForm.controls['Email'].hasError(
+                                    loginForm.controls['PhoneNumber'].hasError(
                                         'required'
-                                    ) && loginForm.controls['Email'].touched
+                                    ) &&
+                                    loginForm.controls['PhoneNumber'].touched
                                 "
                                 class="text-danger support-text"
-                                >{{ 'EmailRequired' | translate }}</small
+                                >{{ 'PhoneNumberRequired' | translate }}</small
                             >
                         </div>
                         <!-- col full-->

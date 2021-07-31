@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UnDefinedNumberModel } from '@app/infrastructure/models/project/UnDefinedNumberModel';
 import { environment } from '@env/environment';
@@ -16,10 +17,16 @@ export class TypePhoneNumberService {
         );
     }
 
-    addingNewNumbers(unDefinedNumber: UnDefinedNumberModel[]): Observable<any> {
+    addingNewNumbers(
+        unDefinedNumber: UnDefinedNumberModel[],
+        billId: number,
+    ): Observable<any> {
+        const params = new HttpParams().set('billId', String(billId));
+
         return this.apiService.post(
             `${environment.apiRoute}/BillsDetails/DefinitionNewNumbers`,
             unDefinedNumber,
+            { params: params },
         );
     }
 }
