@@ -64,6 +64,12 @@ const MENUITEMS = [
                 roles: [UserType.SuperAdmin],
             },
             {
+                state: 'comingBills-list',
+                name: 'ComingBills',
+                type: 'link',
+                roles: [UserType.SuperAdmin],
+            },
+            {
                 state: 'billsSummary-list',
                 name: 'BillsSummary',
                 type: 'link',

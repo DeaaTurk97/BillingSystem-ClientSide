@@ -5,9 +5,9 @@ import {
     ViewChild,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { IncomingPhoneNumbersService } from '@app/infrastructure/core/services/billingSystem/incoming-phone-numbers.service';
+import { ComingBillsService } from '@app/infrastructure/core/services/billingSystem/coming-bills.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
-import { PhoneBookModel } from '@app/infrastructure/models/project/phoneBook';
+import { BillsSummaryModel } from '@app/infrastructure/models/project/billsSummary';
 import { StatusCycleBills } from '@app/infrastructure/models/SystemEnum';
 import { DataGridViewComponent } from '@app/infrastructure/shared/components/data-grid-view/data-grid-view.component';
 import {
@@ -18,41 +18,41 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-coming-numbers',
-    templateUrl: './coming-numbers-list.component.html',
-    styleUrls: ['./coming-numbers-list.component.scss'],
+    selector: 'app-coming-bills-list',
+    templateUrl: './coming-bills-list.component.html',
+    styleUrls: ['./coming-bills-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComingNumbersListComponent implements OnInit {
+export class ComingBillsListComponent implements OnInit {
     public paginationIndex = 0;
     public pageIndex = 1;
     public pageSize = 10;
     public length = 0;
-    public dataSource = new MatTableDataSource<PhoneBookModel>([]);
+    public dataSource = new MatTableDataSource<BillsSummaryModel>([]);
     @ViewChild(DataGridViewComponent) sharedDataGridView: DataGridViewComponent;
 
     statusCycleBills = Object.keys(StatusCycleBills)
         .filter((f) => !isNaN(Number(f)))
         .map((key) => StatusCycleBills[key]);
-    selectedStatusNumber = 1;
-    public phoneNumbersStatus: number[] = [];
+    selectedStatusBill = 1;
+    public billsStatus: number[] = [];
 
     public get StatusCycleResult(): typeof StatusCycleBills {
         return StatusCycleBills;
     }
 
     constructor(
-        private incomingPhoneNumbersService: IncomingPhoneNumbersService,
+        private comingBillsService: ComingBillsService,
         private notify: NotificationService,
     ) {}
 
     ngOnInit(): void {
-        this.LoadComingNumbers(this.pageIndex, this.pageSize);
+        this.LoadComingBills(this.pageIndex, this.pageSize);
     }
 
-    LoadComingNumbers(pageIndex: number, pageSize: number) {
-        this.incomingPhoneNumbersService
-            .getComingNumbers(pageIndex, pageSize, 1)
+    LoadComingBills(pageIndex: number, pageSize: number) {
+        this.comingBillsService
+            .getComingBills(pageIndex, pageSize, 1)
             .pipe(
                 map((paginationRecord) => {
                     this.dataSource.data = paginationRecord.dataRecord;
@@ -75,15 +75,15 @@ export class ComingNumbersListComponent implements OnInit {
             case State.Pagination:
                 (this.pageIndex = ActionGrid.row.pageIndex),
                     (this.pageSize = ActionGrid.row.pageSize),
-                    this.changeIncomingNumbers(this.selectedStatusNumber);
+                    this.changeIncomingBills(this.selectedStatusBill);
                 break;
         }
     }
 
-    changeIncomingNumbers(statusId) {
+    changeIncomingBills(statusId) {
         try {
-            this.incomingPhoneNumbersService
-                .getComingNumbers(this.pageIndex, this.pageSize, statusId)
+            this.comingBillsService
+                .getComingBills(this.pageIndex, this.pageSize, statusId)
                 .subscribe(
                     (paginationRecord) => {
                         this.dataSource.data = paginationRecord.dataRecord;
@@ -94,35 +94,35 @@ export class ComingNumbersListComponent implements OnInit {
                     },
                 );
         } catch (error) {
-            this.notify.showTranslateMessage('ErrorWhenChangeQuastions');
+            this.notify.showTranslateMessage('ErrorWhenChangeStatusBill');
         }
     }
 
-    onCheckRow(rowsPhoneNumbers: number[]) {
-        this.phoneNumbersStatus = rowsPhoneNumbers;
+    onCheckRow(rowsBills: number[]) {
+        this.billsStatus = rowsBills;
     }
 
     onApproveRow() {
-        this.incomingPhoneNumbersService
-            .approvePhoneNumbers(this.phoneNumbersStatus)
+        this.comingBillsService
+            .approveBills(this.billsStatus)
             .pipe(
                 mergeMap((usersIdHasNewStatus) => {
                     if (usersIdHasNewStatus) {
                         this.notify.showTranslateMessage(
-                            'PhoneNumbersApproved',
+                            'BillsApproved',
                             false,
                         );
                         this.notify.invokeApprovalsCycleNumbersAndBills(
                             usersIdHasNewStatus,
                         );
-                        this.changeIncomingNumbers(this.selectedStatusNumber);
+                        this.changeIncomingBills(this.selectedStatusBill);
                         this.sharedDataGridView.rowsSelection = [];
                     }
                     return of({});
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage(
-                        'ErrorOnPhoneNumbersApproved',
+                        'ErrorOnBillsApproved',
                         true,
                     );
                 }),
@@ -131,19 +131,19 @@ export class ComingNumbersListComponent implements OnInit {
     }
 
     onInprogressRow() {
-        this.incomingPhoneNumbersService
-            .inprogressPhoneNumbers(this.phoneNumbersStatus)
+        this.comingBillsService
+            .inprogressBills(this.billsStatus)
             .pipe(
                 mergeMap((usersIdHasNewStatus) => {
                     if (usersIdHasNewStatus) {
                         this.notify.showTranslateMessage(
-                            'PhoneNumbersInprogressed',
+                            'BillsInprogressed',
                             false,
                         );
                         this.notify.invokeApprovalsCycleNumbersAndBills(
                             usersIdHasNewStatus,
                         );
-                        this.changeIncomingNumbers(this.selectedStatusNumber);
+                        this.changeIncomingBills(this.selectedStatusBill);
                         this.sharedDataGridView.rowsSelection = [];
                     }
 
@@ -151,7 +151,7 @@ export class ComingNumbersListComponent implements OnInit {
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage(
-                        'ErrorOnPhoneNumbersInprogress',
+                        'ErrorOnBillsInprogress',
                         true,
                     );
                 }),
@@ -160,20 +160,19 @@ export class ComingNumbersListComponent implements OnInit {
     }
 
     onRejectRow() {
-        this.incomingPhoneNumbersService
-            .rejectPhoneNumbers(this.phoneNumbersStatus)
+        this.comingBillsService
+            .rejectBills(this.billsStatus)
             .pipe(
                 mergeMap((usersIdHasNewStatus) => {
                     if (usersIdHasNewStatus) {
                         this.notify.showTranslateMessage(
-                            'PhoneNumbersRejected',
+                            'BillsRejected',
                             false,
                         );
-
                         this.notify.invokeApprovalsCycleNumbersAndBills(
                             usersIdHasNewStatus,
                         );
-                        this.changeIncomingNumbers(this.selectedStatusNumber);
+                        this.changeIncomingBills(this.selectedStatusBill);
                         this.sharedDataGridView.rowsSelection = [];
                     }
 
@@ -181,7 +180,7 @@ export class ComingNumbersListComponent implements OnInit {
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage(
-                        'ErrorOnPhoneNumbersRejected',
+                        'ErrorOnBillsRejected',
                         true,
                     );
                 }),

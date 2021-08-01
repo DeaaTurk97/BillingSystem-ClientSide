@@ -139,7 +139,15 @@ const routes: Routes = [
                 '../project/billingSystem/billsSummary/bills-summary.module'
             ).then((m) => m.BillsSummaryModule),
     },
-
+    {
+        path: 'bills',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/billingSystem/comingBills/coming-bills.module'
+            ).then((m) => m.ComingNumbersModule),
+    },
     {
         path: 'bills',
         canActivate: [AuthGuard],
@@ -151,8 +159,8 @@ const routes: Routes = [
     },
     {
         path: 'reports',
-        canActivate: [SuperAdminAuthGuard],
-        canActivateChild: [SuperAdminAuthGuard],
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
             import(
                 '../project/reports/calls-details-report/calls-details-report.module'
@@ -160,8 +168,8 @@ const routes: Routes = [
     },
     {
         path: 'reports',
-        canActivate: [SuperAdminAuthGuard],
-        canActivateChild: [SuperAdminAuthGuard],
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
             import(
                 '../project/reports/calls-summary-report/calls-summary-report.module'
@@ -169,8 +177,8 @@ const routes: Routes = [
     },
     {
         path: 'reports',
-        canActivate: [SuperAdminAuthGuard],
-        canActivateChild: [SuperAdminAuthGuard],
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
             import(
                 '../project/reports/finance-report/finance-report.module'

@@ -297,5 +297,13 @@
     "ErrorOnSubmitBill": "حدث خطأ أثناء إرسال الفاتورة",
     "SubmittedSuccessfully": "تم إرسال الفاتورة بنجاح",
     "NewBillsWasUploaded": "تم تحميل فاتورة جديدة",
-    "PhoneNumbersSubmittedWasRejected": "تم رفض أرقام الهواتف المرسلة"
+    "PhoneNumbersSubmittedWasRejected": "تم رفض أرقام الهواتف المرسلة",
+    "ComingBills": "الفواتير الواردة",
+    "statusBill": "حالة الفاتورة",
+    "BillsSubmittedWasApproved": "الفواتير المرسلة تم إعتمادها",
+    "BillsSubmittedWasInProgress": "الفواتير المرسلة قيد التنفيذ",
+    "BillsSubmittedWasRejected": "الفواتير المرسلة تم رفضها",
+    "BillsApproved": "تم إعتماد الفاتورة بنجاح",
+    "BillsInprogressed": "الفواتير قيد التنفيذ",
+    "BillsRejected": "تم رفض الفواتير بنجاح"
 }
