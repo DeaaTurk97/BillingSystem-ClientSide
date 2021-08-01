@@ -280,5 +280,10 @@
     "ErrorOnSubmitBill": "Error On Submit Bill",
     "SubmittedSuccessfully": "Submitted Successfully",
     "NewBillsWasUploaded": "NewBillsWasUploaded",
-    "PhoneNumbersSubmittedWasRejected": "Phone Numbers Submitted Was Rejected"
+    "PhoneNumbersSubmittedWasRejected": "Phone Numbers Submitted Was Rejected",
+    "ComingBills": "Coming Bills",
+    "statusBill": "statusBill",
+    "BillsSubmittedWasApproved": "Bills Submitted Was Approved",
+    "BillsSubmittedWasInProgress": "Bills Submitted Was InProgress",
+    "BillsSubmittedWasRejected": "Bills Submitted Was Rejected"
 }
