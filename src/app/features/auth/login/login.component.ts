@@ -2,7 +2,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
+import { TokenService } from '@app/infrastructure/core/services/token.service';
 import { AuthService } from '@core/services/auth/auth.service';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-login',
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
         private authService: AuthService,
         private router: Router,
         private notify: NotificationService,
+        private tokenService: TokenService,
     ) {}
 
     ngOnInit(): void {
@@ -37,7 +40,20 @@ export class LoginComponent implements OnInit {
         this.isInProgress = true;
         this.authService.login(this.loginForm.value).subscribe(
             (next) => {
-                this.router.navigateByUrl('landing/landing-presentation');
+                this.tokenService
+                    .isSuperAdmin()
+                    .pipe(
+                        map((isSupperAdmin) => {
+                            if (isSupperAdmin) {
+                                this.router.navigateByUrl('bills/upload-bills');
+                            } else {
+                                this.router.navigateByUrl(
+                                    'bills/billsSummary-list',
+                                );
+                            }
+                        }),
+                    )
+                    .subscribe(() => {});
             },
             (error) => {
                 this.isInProgress = false;

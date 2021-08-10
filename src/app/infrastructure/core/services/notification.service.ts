@@ -116,13 +116,13 @@ export class NotificationService {
     }
 
     public registerOnServerEvents(): void {
-        this.hubConnection.on('SendNewMessageRefresh', (data: Message) => {
-            this.dataChange.next(data);
-        });
+        // this.hubConnection.on('SendNewMessageRefresh', (data: Message) => {
+        //     this.dataChange.next(data);
+        // });
 
-        this.hubConnection.on('UnreadChattingMessages', () => {
-            this.loadUnreadNotification().subscribe();
-        });
+        // this.hubConnection.on('UnreadChattingMessages', () => {
+        //     this.loadUnreadNotification().subscribe();
+        // });
 
         this.hubConnection.on('AddedNewNumbersAndBills', () => {
             this.loadAddingNewNumbersAndBills().subscribe();
@@ -156,13 +156,13 @@ export class NotificationService {
         );
     }
 
-    public invokeNewMessage(data: Message, receivedId: number): Promise<any> {
-        return Promise.all([
-            //this (SendNewMessageRefresh) invoke from sever,same function name in ChatHub class.
-            this.hubConnection.invoke('SendNewMessageRefresh', data),
-            this.hubConnection.invoke('UnreadchattingMessages', receivedId),
-        ]);
-    }
+    // public invokeNewMessage(data: Message, receivedId: number): Promise<any> {
+    //     return Promise.all([
+    //         //this (SendNewMessageRefresh) invoke from sever,same function name in ChatHub class.
+    //         this.hubConnection.invoke('SendNewMessageRefresh', data),
+    //         this.hubConnection.invoke('UnreadchattingMessages', receivedId),
+    //     ]);
+    // }
 
     public invokeAddedNewNumbersAndBills(): any {
         return this.hubConnection.invoke('AddedNewNumbersAndBills');

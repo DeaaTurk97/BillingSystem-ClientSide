@@ -1,13 +1,4 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    NgZone,
-    OnDestroy,
-    ViewChild,
-    HostListener,
-    Directive,
-    AfterViewInit,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '@models/menu-items';
@@ -20,7 +11,7 @@ import { map } from 'rxjs/operators';
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
-    styleUrls: [],
+    styleUrls: ['./sidebar.component.scss'],
 })
 export class AppSidebarComponent implements OnDestroy {
     public config: PerfectScrollbarConfigInterface = {};

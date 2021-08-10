@@ -14,17 +14,20 @@ export class UserService {
 
     getUsers(pageIndex: number, pageSize: number): Observable<any> {
         return this.apiService.get(
-            `${environment.apiRoute}/User/Get?pageIndex=${pageIndex}&pageSize=${pageSize}`,
+            `${environment.apiRoute}/User/GetUsers?pageIndex=${pageIndex}&pageSize=${pageSize}`,
         );
     }
 
     addUser(usersForm: UserModel): Observable<any> {
-        return this.apiService.post(`${environment.apiRoute}/User`, usersForm);
+        return this.apiService.post(
+            `${environment.apiRoute}/User/AddUser`,
+            usersForm,
+        );
     }
 
-    updateUser(id: number, usersForm: any): Observable<any> {
+    updateUser(usersForm: UserModel): Observable<any> {
         return this.apiService.put(
-            `${environment.apiRoute}/User?id=${id}`,
+            `${environment.apiRoute}/User/UpdateUser`,
             usersForm,
         );
     }

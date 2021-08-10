@@ -6,14 +6,12 @@ import { BillsSummaryService } from '@app/infrastructure/core/services/billingSy
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { DynamicColumn } from '@app/infrastructure/models/gridAddColumns-model';
 import { BillsSummaryModel } from '@app/infrastructure/models/project/billsSummary';
-import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 import {
     ActionRowGrid,
     MonthsNames,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
-import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-bills-summary-list',
@@ -26,7 +24,6 @@ export class BillsSummaryListComponent implements OnInit {
         private billsSummaryService: BillsSummaryService,
         private notify: NotificationService,
         private router: Router,
-        private dialog: MatDialog,
     ) {}
 
     public paginationIndex = 0;
@@ -45,10 +42,6 @@ export class BillsSummaryListComponent implements OnInit {
                     {
                         name: 'BillDetails',
                         status: State.BillDetails,
-                    },
-                    {
-                        name: 'Pay',
-                        status: State.Pay,
                     },
                 ],
             },
@@ -92,9 +85,6 @@ export class BillsSummaryListComponent implements OnInit {
                     ActionGrid.row.submittedByAdmin,
                 );
                 break;
-            case State.Pay:
-                this.billPay(ActionGrid.row.id, ActionGrid.row.isPaid);
-                break;
         }
     }
 
@@ -132,46 +122,5 @@ export class BillsSummaryListComponent implements OnInit {
                 '/' +
                 isSubmittedByAdmin,
         ]);
-    }
-
-    billPay(billId: number, isPaid: boolean) {
-        if (isPaid) {
-            this.notify.showTranslateMessage('AlreadyPaid');
-            return;
-        }
-
-        return this.dialog
-            .open(ConfirmDialogComponent, {
-                width: '28em',
-                height: '11em',
-                panelClass: 'confirm-dialog-container',
-                position: { top: '5em' },
-                disableClose: true,
-                data: {
-                    messageList: ['SureWantPaid'],
-                    action: 'Yes',
-                    showCancel: true,
-                },
-            })
-            .afterClosed()
-            .pipe(
-                switchMap((dialogResult: string) => {
-                    if (dialogResult) {
-                        return this.billsSummaryService.updatePaybill(billId);
-                    } else {
-                        this.notify.showTranslateMessage('CancelBillPaid');
-                        return of(null);
-                    }
-                }),
-                catchError((): any => {
-                    this.notify.showTranslateMessage('ErrorOnPaidBill');
-                }),
-            )
-            .subscribe((result) => {
-                if (result) {
-                    this.LoadBillsSummary(this.pageIndex, this.pageSize);
-                    this.notify.showTranslateMessage('PaidSuccessfully');
-                }
-            });
     }
 }

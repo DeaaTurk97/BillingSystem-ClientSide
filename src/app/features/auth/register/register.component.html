@@ -27,9 +27,7 @@
                                     registerForm.controls['UserName'].touched
                                 "
                                 class="text-danger support-text"
-                                >{{
-                                    'MustIncludeEmailAddress' | translate
-                                }}</small
+                                >{{ 'MustIncludeUserName' | translate }}</small
                             >
                         </div>
                         <!-- col full-->
@@ -211,7 +209,9 @@
                                 !registerForm.valid ||
                                 registerForm.controls['ConfirmPassword']
                                     .value !==
-                                    registerForm.controls['PasswordHash'].value
+                                    registerForm.controls['PasswordHash']
+                                        .value ||
+                                isInProgress
                             "
                         >
                             {{ 'CreateAccount' | translate }}

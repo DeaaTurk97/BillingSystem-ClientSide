@@ -8,7 +8,8 @@ export enum NotificationType {
     BillApproved = 70,
     BillInProgress = 80,
     BillRejected = 90,
-    Chatting = 100,
+    BillPaid = 100,
+    Chatting = 110,
 }
 
 export enum StatusCycleBills {

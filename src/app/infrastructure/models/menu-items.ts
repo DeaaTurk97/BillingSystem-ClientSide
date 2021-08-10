@@ -34,21 +34,21 @@ export interface Menu {
 }
 
 const MENUITEMS = [
-    {
-        state: 'landing',
-        name: 'Landing',
-        type: 'sub',
-        icon: 'apps',
-        roles: [UserType.SuperAdmin],
-        children: [
-            {
-                state: 'landing-presentation',
-                name: 'LandingPresentation',
-                type: 'link',
-                roles: [UserType.SuperAdmin],
-            },
-        ],
-    },
+    // {
+    //     state: 'landing',
+    //     name: 'Landing',
+    //     type: 'sub',
+    //     icon: 'apps',
+    //     roles: [UserType.SuperAdmin],
+    //     children: [
+    //         {
+    //             state: 'landing-presentation',
+    //             name: 'LandingPresentation',
+    //             type: 'link',
+    //             roles: [UserType.SuperAdmin],
+    //         },
+    //     ],
+    // },
 
     {
         state: 'bills',
@@ -58,14 +58,14 @@ const MENUITEMS = [
         roles: [UserType.SuperAdmin, UserType.AdminGroup, UserType.Employee],
         children: [
             {
-                state: 'upload-bills',
-                name: 'UploadBills',
+                state: 'comingBills-list',
+                name: 'ComingBills',
                 type: 'link',
                 roles: [UserType.SuperAdmin],
             },
             {
-                state: 'comingBills-list',
-                name: 'ComingBills',
+                state: 'upload-bills',
+                name: 'UploadBills',
                 type: 'link',
                 roles: [UserType.SuperAdmin],
             },
@@ -73,13 +73,8 @@ const MENUITEMS = [
                 state: 'billsSummary-list',
                 name: 'BillsSummary',
                 type: 'link',
-                roles: [
-                    UserType.SuperAdmin,
-                    UserType.AdminGroup,
-                    UserType.Employee,
-                ],
+                roles: [UserType.Employee],
             },
-            // { state: 'billsDetails-list', name: 'BillDetails', type: 'link' },
         ],
     },
 
@@ -154,17 +149,13 @@ const MENUITEMS = [
         name: 'users',
         type: 'sub',
         icon: 'people',
-        roles: [UserType.SuperAdmin, UserType.AdminGroup, UserType.Employee],
+        roles: [UserType.SuperAdmin],
         children: [
             {
                 state: 'users-list',
                 name: 'users',
                 type: 'link',
-                roles: [
-                    UserType.SuperAdmin,
-                    UserType.Employee,
-                    UserType.AdminGroup,
-                ],
+                roles: [UserType.SuperAdmin],
             },
         ],
     },

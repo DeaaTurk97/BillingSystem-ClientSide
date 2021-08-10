@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NotificationService } from '@core/services/notification.service';
 import { Constants } from '@app/infrastructure/utils/constants';
 import { mergeMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 const passwordPattern: string = '(?=.*d)(?=.*[a-z]).{8}';
 
@@ -66,18 +67,16 @@ export class RegisterComponent implements OnInit {
                     } else {
                         this.notify.showTranslateMessage(
                             'PhoneNumberAlreadyExist',
+                            true,
                         );
                     }
+                    return of(null);
                 }),
                 tap((data) => {
                     if (data) {
                         this.notify.showTranslateMessage(
                             'AddedSuccessfully',
                             false,
-                        );
-                    } else {
-                        this.notify.showTranslateMessage(
-                            'NotAddedSuccessfully',
                         );
                     }
                 }),

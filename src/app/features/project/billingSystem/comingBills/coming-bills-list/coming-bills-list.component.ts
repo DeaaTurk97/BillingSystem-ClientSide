@@ -4,18 +4,21 @@ import {
     ChangeDetectionStrategy,
     ViewChild,
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { BillsSummaryService } from '@app/infrastructure/core/services/billingSystem/bills-summary.service';
 import { ComingBillsService } from '@app/infrastructure/core/services/billingSystem/coming-bills.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { BillsSummaryModel } from '@app/infrastructure/models/project/billsSummary';
 import { StatusCycleBills } from '@app/infrastructure/models/SystemEnum';
+import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 import { DataGridViewComponent } from '@app/infrastructure/shared/components/data-grid-view/data-grid-view.component';
 import {
     ActionRowGrid,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-coming-bills-list',
@@ -44,6 +47,8 @@ export class ComingBillsListComponent implements OnInit {
     constructor(
         private comingBillsService: ComingBillsService,
         private notify: NotificationService,
+        private dialog: MatDialog,
+        private billsSummaryService: BillsSummaryService,
     ) {}
 
     ngOnInit(): void {
@@ -186,5 +191,47 @@ export class ComingBillsListComponent implements OnInit {
                 }),
             )
             .subscribe((result) => {});
+    }
+
+    onPay() {
+        return this.dialog
+            .open(ConfirmDialogComponent, {
+                width: '28em',
+                height: '11em',
+                panelClass: 'confirm-dialog-container',
+                position: { top: '5em' },
+                disableClose: true,
+                data: {
+                    messageList: ['SureWantPaid'],
+                    action: 'Yes',
+                    showCancel: true,
+                },
+            })
+            .afterClosed()
+            .pipe(
+                switchMap((dialogResult: string) => {
+                    if (dialogResult) {
+                        return this.comingBillsService.payBills(
+                            this.billsStatus,
+                        );
+                    } else {
+                        this.notify.showTranslateMessage('CancelBillPaid');
+                        return of(null);
+                    }
+                }),
+                catchError((): any => {
+                    this.notify.showTranslateMessage('ErrorOnPaidBill');
+                }),
+            )
+            .subscribe((usersIdHasNewStatus) => {
+                if (usersIdHasNewStatus) {
+                    this.notify.invokeApprovalsCycleNumbersAndBills(
+                        usersIdHasNewStatus,
+                    );
+                    this.changeIncomingBills(this.selectedStatusBill);
+                    this.sharedDataGridView.rowsSelection = [];
+                    this.notify.showTranslateMessage('PaidSuccessfully');
+                }
+            });
     }
 }
