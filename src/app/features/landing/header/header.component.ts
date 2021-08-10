@@ -169,7 +169,9 @@ export class AppHeaderComponent implements OnInit {
                 notificationInfo.notificationTypeId ||
             NotificationType.BillInProgress ==
                 notificationInfo.notificationTypeId ||
-            NotificationType.BillRejected == notificationInfo.notificationTypeId
+            NotificationType.BillRejected ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.BillPaid == notificationInfo.notificationTypeId
         ) {
             this.notificationService
                 .updateReadNewNotification(notificationInfo)

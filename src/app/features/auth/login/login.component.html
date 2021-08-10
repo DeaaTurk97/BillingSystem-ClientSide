@@ -72,6 +72,18 @@
                             >
                         </div>
 
+                        <div
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            class="text-right"
+                        >
+                            <a
+                                [routerLink]="['/auth/forgot-password']"
+                                class="link"
+                                >{{ 'ForgotPassword' | translate }}</a
+                            >
+                        </div>
+
                         <!-- col full-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                             <button
@@ -86,7 +98,7 @@
                             </button>
                         </div>
                         <!-- col full-->
-                        <div
+                        <!-- <div
                             fxFlex.gt-sm="100"
                             fxFlex.gt-xs="100"
                             fxFlex="100"
@@ -100,7 +112,7 @@
                                     >{{ 'Register' | translate }}</a
                                 >
                             </span>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </mat-card-content>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingLayoutComponent } from '@app/features/landing';
+import { AddUserComponent } from './add-user/add-user.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UsersRolesComponent } from './users-roles/users-roles.component';
 
@@ -28,4 +29,8 @@ const routes: Routes = [
 })
 export class UserRoutingModule {}
 
-export const components = [UsersListComponent, UsersRolesComponent];
+export const components = [
+    UsersListComponent,
+    UsersRolesComponent,
+    AddUserComponent,
+];

@@ -1,0 +1,195 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+                <form [formGroup]="frmAddNew">
+                    <div fxLayout="row wrap">
+                        <!-- col full-->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <input
+                                    matInput
+                                    placeholder="{{ 'userName' | translate }}"
+                                    type="text"
+                                    [formControl]="
+                                        frmAddNew.controls['UserName']
+                                    "
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <!-- col full-->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'EmailAddress' | translate
+                                    }}"
+                                    type="email"
+                                    [formControl]="frmAddNew.controls['Email']"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <!-- col full-->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'PhoneNumber' | translate
+                                    }}"
+                                    type="text"
+                                    [formControl]="
+                                        frmAddNew.controls['PhoneNumber']
+                                    "
+                                    type="number"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'Groups' | translate
+                                }}</mat-label>
+                                <mat-select
+                                    placeholder="{{ 'Groups' | translate }}"
+                                    formControlName="GroupId"
+                                >
+                                    <mat-option
+                                        *ngFor="let group of groupsModel"
+                                        [value]="group.id"
+                                    >
+                                        {{ group.groupNameAr }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'Languages' | translate
+                                }}</mat-label>
+                                <mat-select
+                                    placeholder="{{ 'Languages' | translate }}"
+                                    formControlName="LanguageId"
+                                >
+                                    <mat-option
+                                        *ngFor="let language of languagesModel"
+                                        [value]="language.id"
+                                    >
+                                        {{ language.languageCode }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{ 'Roles' | translate }}</mat-label>
+                                <mat-select
+                                    placeholder="{{ 'Roles' | translate }}"
+                                    formControlName="RoleId"
+                                >
+                                    <mat-option
+                                        *ngFor="let role of rolesModel"
+                                        [value]="role.id"
+                                    >
+                                        {{ role.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="15"
+                            fxFlex.gt-xs="15"
+                            fxFlex="100"
+                        >
+                            <button
+                                mat-raised-button
+                                [mat-dialog-close]="false"
+                                color="warn"
+                            >
+                                <mat-icon>close</mat-icon>
+                                {{ 'Close' | translate }}
+                            </button>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="15"
+                            fxFlex.gt-xs="15"
+                            fxFlex="100"
+                            [hidden]="frmAddNew.controls['Id'].value != 0"
+                        >
+                            <button
+                                mat-raised-button
+                                type="submit"
+                                color="primary"
+                                (click)="onSubmit()"
+                                [disabled]="!frmAddNew.valid || isInProgress"
+                            >
+                                <mat-icon>add</mat-icon> {{ 'Add' | translate }}
+                            </button>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="15"
+                            fxFlex.gt-xs="15"
+                            fxFlex="100"
+                            [hidden]="frmAddNew.controls['Id'].value == 0"
+                        >
+                            <button
+                                mat-raised-button
+                                type="submit"
+                                color="primary"
+                                (click)="onSubmit()"
+                                [disabled]="!frmAddNew.valid || isInProgress"
+                            >
+                                <mat-icon>save</mat-icon>
+                                {{ 'Save' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

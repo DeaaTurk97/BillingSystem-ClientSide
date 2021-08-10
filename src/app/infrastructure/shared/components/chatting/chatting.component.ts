@@ -80,10 +80,10 @@ export class ChattingComponent implements OnInit, AfterViewChecked {
         this.notificationService.sendMessage(this.frmAddNew.value).subscribe(
             (data: Message) => {
                 this.messages.push(data);
-                this.notificationService.invokeNewMessage(
-                    data,
-                    this.recipientId,
-                );
+                // this.notificationService.invokeNewMessage(
+                //     data,
+                //     this.recipientId,
+                // );
                 this.resetFormBuilder();
             },
             (error) => {

@@ -45,4 +45,11 @@ export class ComingBillsService {
             billsIds,
         );
     }
+
+    payBills(billsIds: number[]): Observable<any> {
+        return this.apiService.put(
+            `${environment.apiRoute}/ComingBills/PayBills`,
+            billsIds,
+        );
+    }
 }

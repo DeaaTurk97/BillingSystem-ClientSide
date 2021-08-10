@@ -21,6 +21,7 @@ import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { RoleModel } from '@app/infrastructure/models/RoleModel';
 import { of } from 'rxjs';
 import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
+import { AddUserComponent } from '../add-user/add-user.component';
 
 @Component({
     selector: 'app-users-list',
@@ -48,6 +49,14 @@ export class UsersListComponent implements OnInit {
         this.loadUsers(this.pageIndex, this.pageSize);
     }
 
+    onEditControlClick(resultClick: State) {
+        switch (resultClick) {
+            case State.Add:
+                this.onAddRecord();
+                break;
+        }
+    }
+
     applyFilter(searchKey: string): void {
         this.dataSource.filter = searchKey
             ? searchKey.trim().toLocaleLowerCase()
@@ -58,9 +67,8 @@ export class UsersListComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.position = { top: '5em' };
-        dialogConfig.width = '30em';
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        dialogConfig.position = { top: '80px' };
+        dialogConfig.width = '60%';
         dialogConfig.data = data;
         return dialogConfig;
     }
@@ -103,30 +111,55 @@ export class UsersListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    onEdit(userModel: UserModel) {
+    onAddRecord() {
         const dialog = this.dialog.open(
-            UsersRolesComponent,
-            this.getConfigDialog({
-                allRoles: this.roles,
-                roleId: userModel.roleId,
-            }),
+            AddUserComponent,
+            this.getConfigDialog(null),
         );
 
         return dialog
             .afterClosed()
             .pipe(
-                switchMap((newRoleId) => {
-                    if (newRoleId && newRoleId != userModel.roleId) {
-                        userModel.roleId = newRoleId;
-                        return this.userService.updateRoleUser(userModel);
+                switchMap((dialogResult: string) => {
+                    if (dialogResult) {
+                        this.loadUsers(1, this.pageSize);
+                        this.notify.showTranslateMessage(
+                            'AddedSuccessfully',
+                            false,
+                        );
+                        return of({});
                     } else {
-                        return of('');
+                        this.notify.showTranslateMessage('CancelAdd');
+                        return of({});
                     }
                 }),
-                map((isUpdated) => {
-                    if (isUpdated) {
-                        this.loadUsers(this.pageIndex, this.pageSize);
-                        this.notify.showTranslateMessage('UpdatedSuccessfully');
+                catchError((): any => {
+                    this.notify.showTranslateMessage('ErrorOnAdd', true);
+                }),
+            )
+            .subscribe((result) => {});
+    }
+
+    onEdit(userModel: UserModel) {
+        const dialog = this.dialog.open(
+            AddUserComponent,
+            this.getConfigDialog(userModel),
+        );
+
+        return dialog
+            .afterClosed()
+            .pipe(
+                switchMap((dialogResult: string) => {
+                    if (dialogResult) {
+                        this.loadUsers(1, this.pageSize);
+                        this.notify.showTranslateMessage(
+                            'UpdatedSuccessfully',
+                            false,
+                        );
+                        return of({});
+                    } else {
+                        this.notify.showTranslateMessage('CancelUpdate');
+                        return of({});
                     }
                 }),
                 catchError((): any => {
