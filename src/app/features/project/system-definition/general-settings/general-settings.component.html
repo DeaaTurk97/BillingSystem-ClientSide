@@ -67,6 +67,7 @@
                                     }}"
                                     formControlName="DefaultPassword"
                                     type="Password"
+                                    [pattern]="passwordPattern"
                                     autocomplete="off"
                                 />
                                 <mat-icon
@@ -77,6 +78,20 @@
                                             ? 'visibility_off'
                                             : 'visibility'
                                     }}</mat-icon
+                                >
+                                <small
+                                    *ngIf="
+                                    frmGeneralSettings.controls[
+                                            'DefaultPassword'
+                                        ].hasError('pattern') &&
+                                        frmGeneralSettings.controls[
+                                            'DefaultPassword'
+                                        ].touched
+                                    "
+                                    class="text-danger support-text"
+                                    >{{
+                                        'PasswordConsistsNineDigits' | translate
+                                    }}</small
                                 >
                             </mat-form-field>
                         </div>

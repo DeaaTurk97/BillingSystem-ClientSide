@@ -6,9 +6,9 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { BillsSummaryService } from '@app/infrastructure/core/services/billingSystem/bills-summary.service';
 import { ComingBillsService } from '@app/infrastructure/core/services/billingSystem/coming-bills.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
+import { TokenService } from '@app/infrastructure/core/services/token.service';
 import { BillsSummaryModel } from '@app/infrastructure/models/project/billsSummary';
 import { StatusCycleBills } from '@app/infrastructure/models/SystemEnum';
 import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
@@ -17,7 +17,7 @@ import {
     ActionRowGrid,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -44,11 +44,15 @@ export class ComingBillsListComponent implements OnInit {
         return StatusCycleBills;
     }
 
+    get isSuperAdminUser(): Observable<boolean> {
+        return this.tokenService.isSuperAdmin();
+    }
+
     constructor(
         private comingBillsService: ComingBillsService,
         private notify: NotificationService,
         private dialog: MatDialog,
-        private billsSummaryService: BillsSummaryService,
+        private tokenService: TokenService,
     ) {}
 
     ngOnInit(): void {

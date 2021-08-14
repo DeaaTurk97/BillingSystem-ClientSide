@@ -74,7 +74,7 @@ export class AddUserComponent implements OnInit {
 
     setUserDeails() {
         if (this.userModel) {
-            this.frmAddNew.controls.Id.setValue(this.userModel.userId);
+            this.frmAddNew.controls.Id.setValue(this.userModel.id);
             this.frmAddNew.controls.UserName.setValue(this.userModel.userName);
 
             this.frmAddNew.controls.Email.setValue(this.userModel.email);
