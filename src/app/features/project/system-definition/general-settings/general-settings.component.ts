@@ -20,6 +20,7 @@ export class GeneralSettingsComponent implements OnInit {
     public frmGeneralSettings: FormGroup;
     public isHidePassword: boolean = true;
     public typePhonesNumbers: TypePhoneNumber[] = [];
+    public passwordPattern: RegExp = Constants.patterns.DIGIT_REGEX;
 
     constructor(
         private generalSettingsService: GeneralSettingsService,

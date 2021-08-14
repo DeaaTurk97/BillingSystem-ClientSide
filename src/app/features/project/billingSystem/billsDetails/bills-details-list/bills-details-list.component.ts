@@ -57,7 +57,6 @@ export class BillsDetailsListComponent implements OnInit {
         private userService: UserService,
         private changeDetectorRef: ChangeDetectorRef,
         private dialog: MatDialog,
-        private route: Router,
     ) {}
 
     ngOnInit(): void {
@@ -77,7 +76,6 @@ export class BillsDetailsListComponent implements OnInit {
                 this.activatedRoute.snapshot.paramMap.get('isSubmitByAdmin'),
             ),
         );
-
         this.activatedRoute.data
             .pipe(
                 mergeMap((dataRoute) => {

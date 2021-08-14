@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
                     .pipe(
                         map((isSupperAdmin) => {
                             if (isSupperAdmin) {
-                                this.router.navigateByUrl('bills/upload-bills');
+                                this.router.navigateByUrl('bills/comingBills-list');
                             } else {
                                 this.router.navigateByUrl(
                                     'bills/billsSummary-list',

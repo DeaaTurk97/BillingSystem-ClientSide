@@ -188,7 +188,7 @@ export class UsersListComponent implements OnInit {
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
                         return this.userService.deleteUser(
-                            Number(userModel.userId),
+                            Number(userModel.id),
                         );
                     } else {
                         this.notify.showTranslateMessage('CancelDelete');

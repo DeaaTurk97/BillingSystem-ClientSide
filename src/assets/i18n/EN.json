@@ -14,7 +14,7 @@
     "MustIncludeValidEmailAddress": "You must include a valid email address.",
     "MustIncludePhoneNo": "You must include a phone number.",
     "MustIncludePassword": "You must include password.",
-    "PasswordConsistsNumbersAndLetters": "The password is 9 digits",
+    "PasswordConsistsNineDigits": "The password is 9 digits",
     "MustIncludeConfirmPassword": "You must include confirm password.",
     "PasswordsDonotMatch": "Passwords do not match.",
     "AgreeAll": "I agree to the all",
@@ -293,5 +293,12 @@
     "Reset": "Reset",
     "ResetPasswordFailed": "Reset Password Failed",
     "ResetPasswordSuccessfully": "Reset Password Successfully",
-    "ResetPasswordSent": "Reset Password Sent on your email"
+    "ResetPasswordSent": "Reset Password Sent on your email",
+    "EmailForTest": "Test Email",
+    "SendTest": "Send Test Email",
+    "ValueOfAllowedCallsToTheEmployee": "Allowed Employee Value",
+    "TheNumberOfDaysGrantedToTheEmployeeToSendTheBill": "Days Are Allowed For Employees To Send The Bill",
+    "AbilityOfTheAdministratorToControlEmployeeBills": "The Possibility Of The Administrator To Control Employee Bills",
+    "ReminderByEmail": "Reminder By Email",
+    "ReminderBySystem": "Reminder By System"
 }
