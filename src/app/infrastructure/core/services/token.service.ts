@@ -47,6 +47,12 @@ export class TokenService {
         );
     }
 
+    public isAdminGroup(): Observable<boolean> {
+        return this.getAuthToken().pipe(
+            map((user) => user.role && RoleDTO.isAdminGroupRoleType(user.role)),
+        );
+    }
+
     public isAdmin(): Observable<boolean> {
         return this.getAuthToken().pipe(
             map((user) => user.role && RoleDTO.isAdminRoleType(user.role)),

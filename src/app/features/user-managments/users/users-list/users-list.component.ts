@@ -12,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import {
     ActionRowGrid,
+    ResultActions,
     State,
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
@@ -120,15 +121,20 @@ export class UsersListComponent implements OnInit {
         return dialog
             .afterClosed()
             .pipe(
-                switchMap((dialogResult: string) => {
-                    if (dialogResult) {
+                switchMap((dialogResult: ResultActions) => {
+                    if (dialogResult === ResultActions.Added) {
                         this.loadUsers(1, this.pageSize);
                         this.notify.showTranslateMessage(
                             'AddedSuccessfully',
                             false,
                         );
                         return of({});
-                    } else {
+                    } else if (dialogResult === ResultActions.AlreadyExist) {
+                        this.notify.showTranslateMessage(
+                            'PhoneNumberAlreadyExist',
+                            true,
+                        );
+                    } else if (dialogResult === ResultActions.CancelAdd) {
                         this.notify.showTranslateMessage('CancelAdd');
                         return of({});
                     }

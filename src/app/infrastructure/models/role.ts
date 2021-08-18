@@ -23,13 +23,13 @@ export class RoleDTO implements IRoleDTO {
         return typeList.includes(role);
     }
 
-    static isAdminRoleType(role: UserType): role is UserType {
-        const typeList: UserType[] = [UserType.Admin];
+    static isAdminGroupRoleType(role: UserType): role is UserType {
+        const typeList: UserType[] = [UserType.AdminGroup];
         return typeList.includes(role);
     }
 
-    static isAdminGroupRoleType(role: UserType): role is UserType {
-        const typeList: UserType[] = [UserType.AdminGroup];
+    static isAdminRoleType(role: UserType): role is UserType {
+        const typeList: UserType[] = [UserType.Admin];
         return typeList.includes(role);
     }
 

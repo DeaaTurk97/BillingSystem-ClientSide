@@ -4,6 +4,7 @@ import {
     AuthGuard,
     SuperAdminAuthGuard,
 } from '@app/infrastructure/core/guards';
+import { AdminGroupGuard } from '@app/infrastructure/core/guards/admin-group.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
@@ -24,8 +25,8 @@ const routes: Routes = [
     },
     {
         path: 'users',
-        canActivate: [SuperAdminAuthGuard],
-        canActivateChild: [SuperAdminAuthGuard],
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
             import('../user-managments/users/users.module').then(
                 (m) => m.UsersModule,
@@ -114,8 +115,8 @@ const routes: Routes = [
     },
     {
         path: 'phonesBook',
-        canActivate: [SuperAdminAuthGuard],
-        canActivateChild: [SuperAdminAuthGuard],
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
             import(
                 '../project/billingSystem/comingNumbers/coming-numbers.module'
@@ -141,8 +142,8 @@ const routes: Routes = [
     },
     {
         path: 'bills',
-        canActivate: [SuperAdminAuthGuard],
-        canActivateChild: [SuperAdminAuthGuard],
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
             import(
                 '../project/billingSystem/comingBills/coming-bills.module'

@@ -25,6 +25,14 @@ export class UserService {
         );
     }
 
+    IsUserExists(userPhoneNumber: string) {
+        return this.apiService.get(
+            `${environment.apiRoute}/Authintecation/IsUserExistsByPhoneNumber` +
+                '?userPhoneNumber=' +
+                userPhoneNumber,
+        );
+    }
+
     updateUser(usersForm: UserModel): Observable<any> {
         return this.apiService.put(
             `${environment.apiRoute}/User/UpdateUser`,

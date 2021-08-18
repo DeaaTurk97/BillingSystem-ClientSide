@@ -14,9 +14,10 @@ import { GroupModel } from '@app/infrastructure/models/project/groupModel';
 import { LanguageModel } from '@app/infrastructure/models/project/LanguageModel';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
 import { RoleModel } from '@app/infrastructure/models/RoleModel';
+import { ResultActions } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { Constants } from '@app/infrastructure/utils/constants';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-add-user',
@@ -33,6 +34,7 @@ export class AddUserComponent implements OnInit {
     public languagesModel: LanguageModel[] = [];
     public rolesModel: RoleModel[] = [];
     public passwordPattern: RegExp = Constants.patterns.DIGIT_REGEX;
+    public resultActions: ResultActions = ResultActions.CancelAdd;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public userModel: UserModel,
@@ -119,13 +121,26 @@ export class AddUserComponent implements OnInit {
             .pipe(
                 mergeMap(() => {
                     return this.ID === 0
-                        ? this.userService.addUser(this.frmAddNew.value)
+                        ? this.userService.IsUserExists(this.PhoneNumber).pipe(
+                              mergeMap((data) => {
+                                  if (!data) {
+                                      return this.userService.addUser(
+                                          this.frmAddNew.value,
+                                      );
+                                  } else {
+                                      this.dialogRef.close(
+                                          ResultActions.AlreadyExist,
+                                      );
+                                      return of(ResultActions.AlreadyExist);
+                                  }
+                              }),
+                          )
                         : this.userService.updateUser(this.frmAddNew.value);
                 }),
             )
             .subscribe((id) => {
                 if (id) {
-                    this.dialogRef.close(this.frmAddNew.value);
+                    this.dialogRef.close(ResultActions.Added);
                     this.frmAddNew.reset();
                 }
             });
