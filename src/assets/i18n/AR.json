@@ -313,5 +313,6 @@
     "Reset": "إعادة ضبط",
     "ResetPasswordFailed": "فشل إعادة ضبط كلمة المرور",
     "ResetPasswordSuccessfully": "تم إعادة ضبط كلمة المرور بنجاح",
-    "ResetPasswordSent": "تم إرسال البريد الإلكتروني الخاص بإعادة ضبط كلمة المرور"
+    "ResetPasswordSent": "تم إرسال البريد الإلكتروني الخاص بإعادة ضبط كلمة المرور",
+    "DeleteFreeNumberType": "حذف النوع مجاني من نوع الأرقام"
 }

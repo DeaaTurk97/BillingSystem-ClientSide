@@ -61,6 +61,7 @@ export interface IConstant {
     EmailTestSubject: string;
     EmailTestBody: string;
     DisplayNameEmail: string;
+    IsDeleteFreeTypeNumber: string;
 }
 
 export const Constants: IConstant = {
@@ -74,8 +75,8 @@ export const Constants: IConstant = {
     MAXFILESIZE: 1000000e6,
     MAXFILENAMELENGTH: 100,
     Default_Image_Setting_Name: 'default_image',
-    DefaultLanguageId: 1,
-    DefaultLanguageDirection: 'rtl',
+    DefaultLanguageId: 2,
+    DefaultLanguageDirection: 'ltr',
     TypePhoneNumberId: 'TypePhoneNumberId',
     DefaultPassword: 'DefaultPassword',
     ValueOfAllowedCallsToTheEmployee: 'ValueOfAllowedCallsToTheEmployee',
@@ -128,4 +129,5 @@ export const Constants: IConstant = {
     EmailTestSubject: 'EmailTestSubject',
     EmailTestBody: 'EmailTestBody',
     DisplayNameEmail: 'DisplayNameEmail',
+    IsDeleteFreeTypeNumber: 'IsDeleteFreeTypeNumber',
 };

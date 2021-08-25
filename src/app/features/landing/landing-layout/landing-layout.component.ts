@@ -10,6 +10,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { LanguageModel } from '@app/infrastructure/models/project/LanguageModel';
 import { Constants } from '@app/infrastructure/utils/constants';
+import { UserService } from '@app/infrastructure/core/services/auth/user.service';
 
 @Component({
     templateUrl: './landing-layout.component.html',
@@ -17,7 +18,7 @@ import { Constants } from '@app/infrastructure/utils/constants';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingLayoutComponent implements OnDestroy, AfterViewInit {
-    dir: string = Constants.DefaultLanguageDirection;
+    dir: string = '';
     green: boolean;
     blue: boolean;
     dark: boolean;
@@ -36,6 +37,7 @@ export class LandingLayoutComponent implements OnDestroy, AfterViewInit {
         changeDetectorRef: ChangeDetectorRef,
         media: MediaMatcher,
         public dialog: MatDialog,
+        private userService: UserService,
     ) {
         this.mobileQuery = media.matchMedia('(min-width: 768px)');
         this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -43,6 +45,8 @@ export class LandingLayoutComponent implements OnDestroy, AfterViewInit {
         this.mobileQuery.addEventListener('change', () => {
             this.mobileQueryListener();
         });
+
+        this.dir = this.userService.getLanguageDir();
     }
 
     openDialog(): void {

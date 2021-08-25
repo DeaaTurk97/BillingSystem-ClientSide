@@ -55,13 +55,22 @@ const MENUITEMS = [
         name: 'Bills',
         type: 'sub',
         icon: 'uploadfile',
-        roles: [UserType.SuperAdmin, UserType.AdminGroup, UserType.Employee],
+        roles: [
+            UserType.SuperAdmin,
+            UserType.AdminGroup,
+            UserType.Employee,
+            UserType.Finance,
+        ],
         children: [
             {
                 state: 'comingBills-list',
                 name: 'ComingBills',
                 type: 'link',
-                roles: [UserType.SuperAdmin, UserType.AdminGroup],
+                roles: [
+                    UserType.SuperAdmin,
+                    UserType.AdminGroup,
+                    UserType.Finance,
+                ],
             },
             {
                 state: 'upload-bills',

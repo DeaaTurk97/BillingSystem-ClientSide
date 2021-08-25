@@ -1,13 +1,15 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    EventEmitter,
     OnDestroy,
     OnInit,
+    Output,
 } from '@angular/core';
 import { ActivatedRoute, Data, NavigationEnd, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { filter, map, mergeMap, tap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { UserService } from '@app/infrastructure/core/services/auth/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguagesService } from '@app/infrastructure/core/services/language/language.service';
@@ -21,6 +23,13 @@ import { LanguageModel } from '@app/infrastructure/models/project/LanguageModel'
 })
 export class AppComponent implements OnInit, OnDestroy {
     public title: string = 'Billing-System';
+
+    @Output() public emitUserLanguageChanged = new EventEmitter<
+        LanguageModel
+    >();
+    public languages: LanguageModel[] = [];
+    public languageSelected: LanguageModel;
+    public selectLangId: number;
 
     private routerEventsSubscription: Subscription;
 
@@ -39,16 +48,22 @@ export class AppComponent implements OnInit, OnDestroy {
                     const availableLanguages: string[] = languageModels.map(
                         (l) => l.languageCode,
                     );
-                    translate.addLangs(availableLanguages);
-                    translate.setDefaultLang(availableLanguages[0]);
-                    //this for Guest user
-                    if (languageModels[0]) {
-                        this.userService.setLanguageId(
-                            languageModels[0].id.toString(),
+
+                    if (this.userService.isTokenExist()) {
+                        this.selectLangId = Number(
+                            this.userService.getLanguageId(),
                         );
-                        this.userService.setLanguageDir(
-                            languageModels[0].languageDirection,
+                        this.languageSelected = languageModels.filter(
+                            (lang) => lang.id === this.selectLangId,
+                        )[0];
+
+                        translate.setDefaultLang(
+                            this.languageSelected.languageCode,
                         );
+                        return of({});
+                    } else {
+                        translate.addLangs(availableLanguages);
+                        translate.setDefaultLang(availableLanguages[1]);
                     }
                 }),
             )

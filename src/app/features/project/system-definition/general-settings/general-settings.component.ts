@@ -103,6 +103,7 @@ export class GeneralSettingsComponent implements OnInit {
             IsRequiresAuthentication: [false, Validators.required],
             EmailForTest: ['', [Validators.required, Validators.email]],
             DisplayNameEmail: ['', Validators.required],
+            IsDeleteFreeTypeNumber: [false, Validators.required],
         });
     }
 
@@ -566,6 +567,20 @@ export class GeneralSettingsComponent implements OnInit {
                                     Constants.DisplayNameEmail,
                             )?.settingValue,
                         );
+
+                        this.frmGeneralSettings.controls.IsDeleteFreeTypeNumber.setValue(
+                            Boolean(
+                                JSON.parse(
+                                    generalSettings.find(
+                                        (
+                                            generalSetting: GeneralSettingsModel,
+                                        ) =>
+                                            generalSetting.settingName ===
+                                            Constants.IsDeleteFreeTypeNumber,
+                                    )?.settingValue ?? 'false',
+                                ),
+                            ),
+                        );
                     }
                     this.generalSettingsListCurrent = generalSettings;
                     return this.typePhoneNumberService.getAllTypesPhoneNumber();
@@ -874,6 +889,15 @@ export class GeneralSettingsComponent implements OnInit {
             generalSettingsModel = new GeneralSettingsModel();
             (generalSettingsModel.settingName = Constants.DisplayNameEmail),
                 (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.DisplayNameEmail.value);
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName =
+                Constants.IsDeleteFreeTypeNumber),
+                (generalSettingsModel.settingValue = String(
+                    this.frmGeneralSettings.controls.IsDeleteFreeTypeNumber
+                        .value,
+                ));
             this.generalSettingsListNew.push(generalSettingsModel);
 
             return this.generalSettingsService

@@ -300,5 +300,6 @@
     "TheNumberOfDaysGrantedToTheEmployeeToSendTheBill": "Days Are Allowed For Employees To Send The Bill",
     "AbilityOfTheAdministratorToControlEmployeeBills": "The Possibility Of The Administrator To Control Employee Bills",
     "ReminderByEmail": "Reminder By Email",
-    "ReminderBySystem": "Reminder By System"
+    "ReminderBySystem": "Reminder By System",
+    "DeleteFreeNumberType": "Delete Free Number Type"
 }

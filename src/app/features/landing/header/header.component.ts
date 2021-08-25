@@ -60,16 +60,16 @@ export class AppHeaderComponent implements OnInit {
                 mergeMap((languagesModel: LanguageModel[]) => {
                     this.languages = languagesModel;
                     if (!this.userService.isTokenExist()) {
-                        this.languageSelected = languagesModel.filter(
-                            (lang) =>
-                                lang.id == this.userService.getLanguageId(),
-                        )[0];
                         this.selectLangId = Number(
                             this.userService.getLanguageId(),
                         );
+                        this.languageSelected = languagesModel.filter(
+                            (lang) => lang.id === this.selectLangId,
+                        )[0];
                         this.emitUserLanguageChanged.emit(
                             this.languageSelected,
                         );
+                        return of(null);
                     } else {
                         return this.userService.getLanguageInformations();
                     }
@@ -84,7 +84,7 @@ export class AppHeaderComponent implements OnInit {
                         );
                         this.languageSelected = this.languages.filter(
                             (lang) =>
-                                lang.id == this.userService.getLanguageId(),
+                                lang.id === this.userService.getLanguageId(),
                         )[0];
                         this.selectLangId = Number(
                             this.userService.getLanguageId(),
@@ -125,7 +125,7 @@ export class AppHeaderComponent implements OnInit {
                 notificationInfo.notificationTypeId
         ) {
             this.notificationService
-                .UpdateReadNewNumbersAndBills(notificationInfo)
+                .updateReadNewNotification(notificationInfo)
                 .pipe(
                     mergeMap((data) => {
                         if (data) {
@@ -142,7 +142,7 @@ export class AppHeaderComponent implements OnInit {
                                     );
                                 });
                         }
-                        return this.notificationService.loadAddingNewNumbersAndBills();
+                        return this.notificationService.loadUnreadNotification();
                     }),
                     mergeMap(() =>
                         this.notificationService.getConversation(

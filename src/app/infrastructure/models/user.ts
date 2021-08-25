@@ -7,6 +7,7 @@ export enum UserType {
     AdminGroup = 'AdminGroup',
     Employee = 'Employee',
     Guest = 'Guest',
+    Finance = 'Finance',
 }
 export type StatusType = 'active' | 'inactive' | '';
 

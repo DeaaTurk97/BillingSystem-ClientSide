@@ -80,8 +80,8 @@ export class DescriptionAndTypeNumberComponent implements OnInit {
         this.typePhoneNumberService
             .getAllTypesPhoneNumber()
             .pipe(
-                map((data) => {
-                    this.typePhonesNumbers = data;
+                map((typePhoneNumber) => {
+                    this.typePhonesNumbers = typePhoneNumber;
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage('ErrorOnLoadData');

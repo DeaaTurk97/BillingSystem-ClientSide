@@ -13,7 +13,7 @@ export class TypePhoneNumberService {
 
     getAllTypesPhoneNumber(): Observable<any> {
         return this.apiService.get(
-            `${environment.apiRoute}/TypePhonesNumber/GetAllTypesPhoneNumber`,
+            `${environment.apiRoute}/TypePhonesNumber/GetAllTypesWithoutFreeType`,
         );
     }
 

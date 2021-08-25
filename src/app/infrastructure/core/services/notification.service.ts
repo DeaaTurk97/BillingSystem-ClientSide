@@ -124,10 +124,6 @@ export class NotificationService {
         //     this.loadUnreadNotification().subscribe();
         // });
 
-        this.hubConnection.on('AddedNewNumbersAndBills', () => {
-            this.loadAddingNewNumbersAndBills().subscribe();
-        });
-
         this.hubConnection.on('ApprovalsCycleNumbersAndBills', () => {
             this.loadUnreadNotification().subscribe();
         });
@@ -137,7 +133,7 @@ export class NotificationService {
         [SystemNotification[], SystemNotification[]]
     > {
         return combineLatest([
-            this.loadAddingNewNumbersAndBills(),
+            this.loadAddingNewNumbersAndBillsByRoleId(),
             this.loadUnreadNotification(),
         ]).pipe(
             tap(
@@ -164,14 +160,10 @@ export class NotificationService {
     //     ]);
     // }
 
-    public invokeAddedNewNumbersAndBills(): any {
-        return this.hubConnection.invoke('AddedNewNumbersAndBills');
-    }
-
-    public invokeApprovalsCycleNumbersAndBills(userId: Array<string>): any {
+    public invokeApprovalsCycleNumbersAndBills(usersId: Array<string>): any {
         return this.hubConnection.invoke(
             'ApprovalsCycleNumbersAndBills',
-            userId,
+            usersId,
         );
     }
 
@@ -185,9 +177,13 @@ export class NotificationService {
             );
     }
 
-    public loadAddingNewNumbersAndBills(): Observable<SystemNotification[]> {
+    public loadAddingNewNumbersAndBillsByRoleId(): Observable<
+        SystemNotification[]
+    > {
         return this.apiService
-            .get(`${environment.apiRoute}/Notification/GetNewNumbersAndBills`)
+            .get(
+                `${environment.apiRoute}/Notification/GetNewNumbersAndBillsByRoleId`,
+            )
             .pipe(
                 tap((data: SystemNotification[]) => {
                     this.notificationSubject.next(data.reverse());

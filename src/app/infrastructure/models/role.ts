@@ -43,6 +43,11 @@ export class RoleDTO implements IRoleDTO {
         return typeList.includes(role);
     }
 
+    static isFinanceRoleType(role: UserType): role is UserType {
+        const typeList: UserType[] = [UserType.Finance];
+        return typeList.includes(role);
+    }
+
     static isMatchRoleType(
         role: UserType,
         roleMatch: UserType[],

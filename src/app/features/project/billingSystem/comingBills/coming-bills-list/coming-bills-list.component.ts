@@ -48,6 +48,10 @@ export class ComingBillsListComponent implements OnInit {
         return this.tokenService.isSuperAdmin();
     }
 
+    get isFinanceUser(): Observable<boolean> {
+        return this.tokenService.isFinance();
+    }
+
     constructor(
         private comingBillsService: ComingBillsService,
         private notify: NotificationService,

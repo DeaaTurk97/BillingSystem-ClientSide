@@ -70,6 +70,7 @@
             <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
                 <button
                     *ngIf="
+                        (isFinanceUser | async) &&
                         selectedStatusBill == StatusCycleResult.Approved &&
                         billsStatus.length > 0
                     "
@@ -86,7 +87,8 @@
             [gridDataSource]="dataSource"
             [displayedColumns]="[
             'id',
-            'userId',
+            'userName',
+            'groupName',
             'billMonth',
             'billYear',
             'isPaid',

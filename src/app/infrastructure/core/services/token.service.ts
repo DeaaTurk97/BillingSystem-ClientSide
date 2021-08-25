@@ -65,6 +65,12 @@ export class TokenService {
         );
     }
 
+    public isFinance(): Observable<boolean> {
+        return this.getAuthToken().pipe(
+            map((user) => user.role && RoleDTO.isFinanceRoleType(user.role)),
+        );
+    }
+
     public isGuest(): Observable<boolean> {
         return this.getAuthToken().pipe(
             map((user) => user.role && RoleDTO.isGuestRoleType(user.role)),

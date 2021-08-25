@@ -81,7 +81,7 @@
                                 >
                                 <small
                                     *ngIf="
-                                    frmGeneralSettings.controls[
+                                        frmGeneralSettings.controls[
                                             'DefaultPassword'
                                         ].hasError('pattern') &&
                                         frmGeneralSettings.controls[
@@ -269,6 +269,20 @@
                                 formControlName="IsReminderBySystem"
                                 >{{
                                     'ReminderBySystem' | translate
+                                }}</mat-checkbox
+                            >
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-checkbox
+                                formControlName="IsDeleteFreeTypeNumber"
+                                >{{
+                                    'DeleteFreeNumberType' | translate
                                 }}</mat-checkbox
                             >
                         </div>

@@ -166,9 +166,12 @@ export class BillsDetailsListComponent implements OnInit {
                             'UpdatedSuccessfully',
                             false,
                         );
-                        //Invoke For SuperAdmin only
-                        this.notify.invokeAddedNewNumbersAndBills();
+                        //Invoke For SuperAdmin and admin group
+                        this.notify.invokeApprovalsCycleNumbersAndBills(
+                            dialogResult,
+                        );
 
+                        // Adding this to refresh undefind numbers data
                         return this.callDetailsService.GetAllUndefinedNumbers(
                             this.billId,
                         );
@@ -222,15 +225,15 @@ export class BillsDetailsListComponent implements OnInit {
                     this.notify.showTranslateMessage('ErrorOnSubmitBill');
                 }),
             )
-            .subscribe((result) => {
+            .subscribe((result: Array<string>) => {
                 if (result) {
                     this.notify.showTranslateMessage(
                         'SubmittedSuccessfully',
                         false,
                     );
 
-                    //Invoke For SuperAdmin only
-                    this.notify.invokeAddedNewNumbersAndBills();
+                    //Invoke For SuperAdmin and admin group only
+                    this.notify.invokeApprovalsCycleNumbersAndBills(result);
                 }
             });
     }
