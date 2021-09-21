@@ -117,19 +117,21 @@
                     *ngIf="showServiceType"
                 >
                     <mat-form-field>
-                        <mat-label>{{ 'serviceTypes' | translate }}</mat-label>
+                        <mat-label>{{
+                            'serviceUsedName' | translate
+                        }}</mat-label>
                         <mat-select
-                            placeholder="{{ 'serviceTypes' | translate }}"
-                            formControlName="serviceTypeId"
+                            placeholder="{{ 'serviceUsedName' | translate }}"
+                            formControlName="serviceUsedId"
                         >
                             <mat-option [value]="0">{{
                                 'all' | translate
                             }}</mat-option>
                             <mat-option
-                                *ngFor="let serviceType of serviceTypeData"
-                                [value]="serviceType.id"
+                                *ngFor="let serviceUsed of servicesUsedData"
+                                [value]="serviceUsed.id"
                             >
-                                {{ serviceType.serviceTypeNameEn }}
+                                {{ serviceUsed.serviceUsedNameEn }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

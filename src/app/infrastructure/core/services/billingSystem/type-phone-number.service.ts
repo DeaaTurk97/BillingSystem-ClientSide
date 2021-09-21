@@ -29,4 +29,17 @@ export class TypePhoneNumberService {
             { params: params },
         );
     }
+
+    ServicesSubmitted(
+        unDefinedService: UnDefinedNumberModel[],
+        billId: number,
+    ): Observable<any> {
+        const params = new HttpParams().set('billId', String(billId));
+
+        return this.apiService.post(
+            `${environment.apiRoute}/BillsDetails/ServicesSubmitted`,
+            unDefinedService,
+            { params: params },
+        );
+    }
 }

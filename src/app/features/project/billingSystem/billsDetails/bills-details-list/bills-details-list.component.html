@@ -26,7 +26,9 @@
                             type="submit"
                             color="primary"
                             [disabled]="
-                                countDefinedNumbers > 0 || isSubmitByAdmin
+                                countDefinedNumbers > 0 ||
+                                countServicesNeedApproved > 0 ||
+                                isSubmitByAdmin
                             "
                             (click)="submitBill()"
                         >
@@ -36,8 +38,8 @@
 
                     <div
                         class="p-10"
-                        fxFlex.gt-sm="15"
-                        fxFlex.gt-xs="15"
+                        fxFlex.gt-sm="20"
+                        fxFlex.gt-xs="20"
                         fxFlex="100"
                     >
                         <button
@@ -56,6 +58,29 @@
 
                     <div
                         class="p-10"
+                        fxFlex.gt-sm="20"
+                        fxFlex.gt-xs="20"
+                        fxFlex="100"
+                    >
+                        <button
+                            mat-raised-button
+                            type="submit"
+                            color="primary"
+                            (click)="onSetServiceType()"
+                            [matBadge]="countServicesNeedApproved"
+                            matBadgePosition="after"
+                            matBadgeColor="warn"
+                            [disabled]="
+                                countServicesNeedApproved === 0 ||
+                                isSubmitByAdmin
+                            "
+                        >
+                            {{ 'isNeedApproval' | translate }}
+                        </button>
+                    </div>
+
+                    <div
+                        class="p-10"
                         fxFlex.gt-sm="100"
                         fxFlex.gt-xs="100"
                         fxFlex="100"
@@ -67,13 +92,13 @@
                                 'userName',
                                 'phoneNumber',
                                 'dialledNumber',
-                                'typePhoneNumberAr',
-                                'typePhoneNumberEn',
+                                'typePhoneNumberName',
                                 'callDateTime',
                                 'callDuration',
                                 'callDiscountPrice',
                                 'callRetailPrice',
-                                'serviceTypeNameEn'
+                                'serviceUsedName',
+                                'typeServiceUsedName'
                             ]"
                             (onPagination)="onActionRowGrid($event)"
                             [lengthData]="length"

@@ -1,0 +1,147 @@
+<div fxLayout="row wrap">
+    <div class="p-10" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <div class="example-container mat-elevation-z8">
+            <form [formGroup]="form">
+                <mat-table
+                    #table
+                    [dataSource]="dataSource"
+                    formArrayName="unDefinedNumber"
+                >
+                    <!-- id Column -->
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ 'id' | translate }}
+                        </mat-header-cell>
+                        <mat-cell
+                            *matCellDef="let element; let serialNo = index"
+                        >
+                            {{ element.id }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- StatusNumberName Column -->
+                    <ng-container matColumnDef="StatusNumberName">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ 'StatusNumberName' | translate }}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ element.statusNumberName | translate }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- dialledNumber Column -->
+                    <ng-container matColumnDef="dialledNumber">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ 'dialledNumber' | translate }}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ element.dialledNumber }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- phoneName Column -->
+                    <ng-container matColumnDef="phoneName">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ 'phoneName' | translate }}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ element.phoneName }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- typeServiceUsedId Column -->
+                    <ng-container matColumnDef="typeServiceUsedId">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ 'typeServiceUsedName' | translate }}
+                        </mat-header-cell>
+                        <mat-cell
+                            *matCellDef="let element; let i = index"
+                            [formGroupName]="i"
+                        >
+                            <mat-select
+                                formControlName="typeServiceUsedId"
+                                placeholder="{{
+                                    'typeServiceUsedName' | translate
+                                }}"
+                            >
+                                <mat-option
+                                    *ngFor="let typeNumber of typePhonesNumbers"
+                                    [value]="typeNumber.id"
+                                >
+                                    {{ typeNumber.typeNameEn }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- serviceUsedName Column -->
+                    <ng-container matColumnDef="serviceUsedName">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ 'serviceUsedName' | translate }}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ element.serviceUsedName }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- callDateTime Column -->
+                    <ng-container matColumnDef="callDateTime">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ 'callDateTime' | translate }}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{
+                                element.callDateTime
+                                    | date: 'dd - MM - yyyy h:mm:ss a'
+                            }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- callDuration Column -->
+                    <ng-container matColumnDef="callDuration">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ 'callDuration' | translate }}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ element.callDuration }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- callRetailPrice Column -->
+                    <ng-container matColumnDef="callRetailPrice">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ 'callRetailPrice' | translate }}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ element.callRetailPrice }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row
+                        *matHeaderRowDef="displayedColumns"
+                    ></mat-header-row>
+                    <mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                    ></mat-row>
+                </mat-table>
+            </form>
+        </div>
+    </div>
+    <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+        <button mat-raised-button [mat-dialog-close]="false" color="warn">
+            <mat-icon>close</mat-icon>
+            {{ 'Close' | translate }}
+        </button>
+    </div>
+
+    <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="servicesNeedApproved()"
+        >
+            <mat-icon>save</mat-icon>
+            {{ 'Save' | translate }}
+        </button>
+    </div>
+</div>

@@ -88,6 +88,12 @@ const MENUITEMS = [
                     UserType.SuperAdmin,
                 ],
             },
+            {
+                state: 'comingServices-list',
+                name: 'ComingServices',
+                type: 'link',
+                roles: [UserType.SuperAdmin, UserType.AdminGroup],
+            },
         ],
     },
 
@@ -205,8 +211,8 @@ const MENUITEMS = [
                 roles: [UserType.SuperAdmin],
             },
             {
-                state: 'servicesTypes-list',
-                name: 'ServicesTypes',
+                state: 'servicesUsed-list',
+                name: 'ServicesUsed',
                 type: 'link',
                 roles: [UserType.SuperAdmin],
             },

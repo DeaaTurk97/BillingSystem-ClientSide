@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingLayoutComponent } from '@app/features/landing';
-import { AddServiceTypeComponent } from './add-service-type/add-service-type.component';
-import { ServiceTypeListComponent } from './service-type-list/service-type-list.component';
+import { AddServiceUsedComponent } from './add-service-used/add-service-used.component';
+import { ServiceUsedListComponent } from './service-used-list/service-used-list.component';
 
 const routes: Routes = [
     {
@@ -11,12 +11,12 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'servicesTypes-list',
+                redirectTo: 'servicesUsed-list',
                 pathMatch: 'full',
             },
             {
-                path: 'servicesTypes-list',
-                component: ServiceTypeListComponent,
+                path: 'servicesUsed-list',
+                component: ServiceUsedListComponent,
             },
         ],
     },
@@ -26,6 +26,6 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class ServiceTypeRoutingModule {}
+export class ServiceUsedRoutingModule {}
 
-export const components = [ServiceTypeListComponent, AddServiceTypeComponent];
+export const components = [ServiceUsedListComponent, AddServiceUsedComponent];

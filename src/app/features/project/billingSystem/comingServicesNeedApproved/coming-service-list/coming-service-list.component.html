@@ -1,0 +1,89 @@
+<mat-card>
+    <mat-card-content>
+        <div fxLayout="row wrap">
+            <div class="p-10" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <mat-form-field>
+                    <mat-label>{{ 'statusNumberName' | translate }}</mat-label>
+                    <mat-select
+                        (selectionChange)="changeIncomingNumbers($event.value)"
+                        placeholder="{{ 'statusNumberName' | translate }}"
+                        [(value)]="selectedStatusNumber"
+                    >
+                        <mat-option
+                            *ngFor="
+                                let satusNumber of statusCycleBills;
+                                let i = index
+                            "
+                            [value]="i + 1"
+                        >
+                            {{ satusNumber | translate }}</mat-option
+                        >
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+                <button
+                    mat-raised-button
+                    type="submit"
+                    color="primary"
+                    (click)="onInprogressRow()"
+                    [disabled]="
+                        selectedStatusNumber ==
+                            StatusCycleResult.InprogressToApproved ||
+                        ServicesStatus.length === 0
+                    "
+                >
+                    {{ 'Inprogress' | translate }}
+                </button>
+            </div>
+            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+                <button
+                    mat-raised-button
+                    type="submit"
+                    color="primary"
+                    (click)="onApproveRow()"
+                    [disabled]="
+                        selectedStatusNumber == StatusCycleResult.Approved ||
+                        ServicesStatus.length === 0
+                    "
+                >
+                    {{ 'Approve' | translate }}
+                </button>
+            </div>
+            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+                <button
+                    mat-raised-button
+                    type="submit"
+                    color="primary"
+                    (click)="onRejectRow()"
+                    [disabled]="
+                        selectedStatusNumber == StatusCycleResult.Rejected ||
+                        ServicesStatus.length === 0
+                    "
+                >
+                    {{ 'Reject' | translate }}
+                </button>
+            </div>
+        </div>
+        <app-data-grid-view
+            [gridDataSource]="dataSource"
+            [displayedColumns]="[
+            'dialledNumber',
+            'typePhoneNumberName',
+            'phoneName',
+            'serviceUsedName',
+            'typeServiceUsedName',
+            'callDateTime',
+            'callDuration',
+            'callRetailPrice',
+            ]"
+            (onCheckRow)="onActionRowGrid($event)"
+            (onPagination)="onActionRowGrid($event)"
+            [lengthData]="length"
+            [PaginatorIndex]="paginationIndex"
+            [isShowMainActionControls]="false"
+            [isShowBoxSelectAll]="true"
+        >
+        </app-data-grid-view>
+    </mat-card-content>
+</mat-card>
