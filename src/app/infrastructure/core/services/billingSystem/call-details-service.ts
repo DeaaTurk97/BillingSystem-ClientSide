@@ -38,6 +38,14 @@ export class CallDetailsService {
         );
     }
 
+    GetServicesNeedApproval(billId: number): Observable<any> {
+        return this.apiService.get(
+            `${environment.apiRoute}/BillsDetails/GetServicesNeedApproval` +
+                '?billId=' +
+                billId,
+        );
+    }
+
     updateSubmitedBill(billId: number) {
         const params = new HttpParams().set('billId', String(billId));
 

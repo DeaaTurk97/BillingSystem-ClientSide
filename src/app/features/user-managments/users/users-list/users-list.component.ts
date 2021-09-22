@@ -17,7 +17,6 @@ import {
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
 import { UserService } from '@app/infrastructure/core/services/auth/user.service';
-import { UsersRolesComponent } from '../users-roles/users-roles.component';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { RoleModel } from '@app/infrastructure/models/RoleModel';
 import { of } from 'rxjs';

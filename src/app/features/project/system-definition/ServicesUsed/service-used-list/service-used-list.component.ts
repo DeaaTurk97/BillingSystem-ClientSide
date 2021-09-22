@@ -1,10 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ServiceTypeService } from '@app/infrastructure/core/services/billingSystem/service-type.service';
+import { ServiceUsedService } from '@app/infrastructure/core/services/billingSystem/service-used.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
-import { ServiceTypeModel } from '@app/infrastructure/models/project/serviceTypeModel';
+import { ServiceUsedModel } from '@app/infrastructure/models/project/serviceUsedModel';
 import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
 import {
     ActionRowGrid,
@@ -12,23 +11,23 @@ import {
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { AddServiceTypeComponent } from '../add-service-type/add-service-type.component';
+import { AddServiceUsedComponent } from '../add-service-used/add-service-used.component';
 
 @Component({
-    selector: 'app-service-type-list',
-    templateUrl: './service-type-list.component.html',
-    styleUrls: ['./service-type-list.component.scss'],
+    selector: 'app-service-used-list',
+    templateUrl: './service-used-list.component.html',
+    styleUrls: ['./service-used-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ServiceTypeListComponent implements OnInit {
+export class ServiceUsedListComponent implements OnInit {
     public paginationIndex = 0;
     public pageIndex = 1;
     public pageSize = 10;
     public length = 0;
-    public dataSource = new MatTableDataSource<ServiceTypeModel>([]);
+    public dataSource = new MatTableDataSource<ServiceUsedModel>([]);
 
     constructor(
-        private sericeTypeService: ServiceTypeService,
+        private sericeUsedService: ServiceUsedService,
         private dialog: MatDialog,
         private notify: NotificationService,
     ) {}
@@ -44,7 +43,7 @@ export class ServiceTypeListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.LoadServicesTypes(this.pageIndex, this.pageSize);
+        this.LoadServicesUsed(this.pageIndex, this.pageSize);
     }
 
     onEditControlClick(resultClick: State) {
@@ -70,7 +69,7 @@ export class ServiceTypeListComponent implements OnInit {
                 this.onDelete(ActionGrid.row);
                 break;
             case State.Pagination:
-                this.LoadServicesTypes(
+                this.LoadServicesUsed(
                     ActionGrid.row.pageIndex,
                     ActionGrid.row.pageSize,
                 );
@@ -78,9 +77,9 @@ export class ServiceTypeListComponent implements OnInit {
         }
     }
 
-    LoadServicesTypes(pageIndex: number, pageSize: number) {
-        this.sericeTypeService
-            .getServicesTypes(pageIndex, pageSize)
+    LoadServicesUsed(pageIndex: number, pageSize: number) {
+        this.sericeUsedService
+            .getServicesUsed(pageIndex, pageSize)
             .pipe(
                 map((paginationRecord) => {
                     this.dataSource.data = paginationRecord.dataRecord;
@@ -95,7 +94,7 @@ export class ServiceTypeListComponent implements OnInit {
 
     onAddRecord() {
         const dialog = this.dialog.open(
-            AddServiceTypeComponent,
+            AddServiceUsedComponent,
             this.getConfigDialog(null),
         );
 
@@ -104,7 +103,7 @@ export class ServiceTypeListComponent implements OnInit {
             .pipe(
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
-                        this.LoadServicesTypes(1, this.pageSize);
+                        this.LoadServicesUsed(1, this.pageSize);
                         this.notify.showTranslateMessage(
                             'AddedSuccessfully',
                             false,
@@ -122,10 +121,10 @@ export class ServiceTypeListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    onEdit(serviceTypeModel: ServiceTypeModel) {
+    onEdit(serviceUsedModel: ServiceUsedModel) {
         const dialog = this.dialog.open(
-            AddServiceTypeComponent,
-            this.getConfigDialog(serviceTypeModel),
+            AddServiceUsedComponent,
+            this.getConfigDialog(serviceUsedModel),
         );
 
         return dialog
@@ -133,7 +132,7 @@ export class ServiceTypeListComponent implements OnInit {
             .pipe(
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
-                        this.LoadServicesTypes(1, this.pageSize);
+                        this.LoadServicesUsed(1, this.pageSize);
                         this.notify.showTranslateMessage(
                             'UpdatedSuccessfully',
                             false,
@@ -151,7 +150,7 @@ export class ServiceTypeListComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    onDelete(serviceTypeModel: ServiceTypeModel) {
+    onDelete(serviceUsedModel: ServiceUsedModel) {
         return this.dialog
             .open(ConfirmDialogComponent, {
                 width: '28em',
@@ -169,8 +168,8 @@ export class ServiceTypeListComponent implements OnInit {
             .pipe(
                 switchMap((dialogResult: string) => {
                     if (dialogResult) {
-                        return this.sericeTypeService.deleteServiceType(
-                            serviceTypeModel.id,
+                        return this.sericeUsedService.deleteServiceUsed(
+                            serviceUsedModel.id,
                         );
                     } else {
                         this.notify.showTranslateMessage('CancelDelete');
@@ -182,7 +181,7 @@ export class ServiceTypeListComponent implements OnInit {
                 }),
             )
             .subscribe((result) => {
-                this.LoadServicesTypes(1, this.pageSize);
+                this.LoadServicesUsed(1, this.pageSize);
                 this.notify.showTranslateMessage('DeletedSuccessfully');
             });
     }

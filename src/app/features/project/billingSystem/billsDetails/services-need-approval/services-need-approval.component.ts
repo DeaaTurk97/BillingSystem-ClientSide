@@ -14,34 +14,38 @@ import {
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TypePhoneNumberService } from '@app/infrastructure/core/services/billingSystem/type-phone-number.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
+import { servicesNeedApprovedModel } from '@app/infrastructure/models/project/servicesNeedApprovedModel';
 import { TypePhoneNumber } from '@app/infrastructure/models/project/TypePhoneNumberModel';
 import { UnDefinedNumberModel } from '@app/infrastructure/models/project/UnDefinedNumberModel';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-description-and-type-number',
-    templateUrl: './description-and-type-number.component.html',
-    styleUrls: ['./description-and-type-number.component.scss'],
+    selector: 'app-services-need-approval',
+    templateUrl: './services-need-approval.component.html',
+    styleUrls: ['./services-need-approval.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DescriptionAndTypeNumberComponent implements OnInit {
+export class ServicesNeedApprovalComponent implements OnInit {
     public typePhonesNumbers: TypePhoneNumber[] = [];
     displayedColumns = [
-        'StatusNumberName',
         'dialledNumber',
-        'typePhoneNumberId',
+        'typeServiceUsedId',
+        'serviceUsedName',
         'phoneName',
+        'callDateTime',
+        'callDuration',
+        'callRetailPrice',
     ];
-    dataSource: UnDefinedNumberModel[] = this.dataRecived[
-        'unDefinedNumberModel'
+    dataSource: servicesNeedApprovedModel[] = this.dataRecived[
+        'servicesNeedApprovedModel'
     ];
     form: FormGroup;
 
     constructor(
         @Inject(MAT_DIALOG_DATA)
         public dataRecived: UnDefinedNumberModel[],
-        private dialogRef: MatDialogRef<DescriptionAndTypeNumberComponent>,
+        private dialogRef: MatDialogRef<ServicesNeedApprovalComponent>,
         private typePhoneNumberService: TypePhoneNumberService,
         private notify: NotificationService,
         private fb: FormBuilder,
@@ -61,12 +65,8 @@ export class DescriptionAndTypeNumberComponent implements OnInit {
                     new FormGroup({
                         id: new FormControl(item.id),
                         dialledNumber: new FormControl(item.dialledNumber),
-                        typePhoneNumberId: new FormControl(
-                            item.typePhoneNumberId,
-                            Validators.required,
-                        ),
-                        phoneName: new FormControl(
-                            item.phoneName,
+                        typeServiceUsedId: new FormControl(
+                            item.typeServiceUsedId,
                             Validators.required,
                         ),
                     }),
@@ -88,9 +88,9 @@ export class DescriptionAndTypeNumberComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    addingNewNumbers() {
+    servicesNeedApproved() {
         this.typePhoneNumberService
-            .addingNewNumbers(
+            .ServicesSubmitted(
                 this.form.controls.unDefinedNumber.value,
                 Number(this.dataRecived['billId']),
             )

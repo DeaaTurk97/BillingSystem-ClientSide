@@ -10,9 +10,10 @@
             [gridDataSource]="dataSource"
             [displayedColumns]="[
                 'id',
-                'serviceTypeNameAr',
-                'serviceTypeNameEn',
-                'isCalculatedValue'
+                'serviceUsedNameAr',
+                'serviceUsedNameEn',
+                'isCalculatedValue',
+                'isNeedApproved'
             ]"
             (onEditRow)="onActionRowGrid($event)"
             (onDeleteRow)="onActionRowGrid($event)"

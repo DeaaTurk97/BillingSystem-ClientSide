@@ -14,6 +14,7 @@ export class RoleDTO implements IRoleDTO {
             UserType.AdminGroup,
             UserType.Employee,
             UserType.Guest,
+            UserType.Finance,
         ];
         return roleTypeList.includes(role);
     }

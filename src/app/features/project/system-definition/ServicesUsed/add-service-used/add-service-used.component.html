@@ -34,14 +34,14 @@
                         >
                             <mat-form-field style="width: 100%">
                                 <mat-label>{{
-                                    'serviceTypeNameAr' | translate
+                                    'serviceUsedNameAr' | translate
                                 }}</mat-label>
                                 <input
                                     matInput
                                     placeholder="{{
-                                        'serviceTypeNameAr' | translate
+                                        'serviceUsedNameAr' | translate
                                     }}"
-                                    formControlName="ServiceTypeNameAr"
+                                    formControlName="ServiceUsedNameAr"
                                     type="text"
                                     autocomplete="off"
                                 />
@@ -56,14 +56,14 @@
                         >
                             <mat-form-field style="width: 100%">
                                 <mat-label>{{
-                                    'serviceTypeNameEn' | translate
+                                    'serviceUsedNameEn' | translate
                                 }}</mat-label>
                                 <input
                                     matInput
                                     placeholder="{{
-                                        'serviceTypeNameEn' | translate
+                                        'serviceUsedNameEn' | translate
                                     }}"
-                                    formControlName="ServiceTypeNameEn"
+                                    formControlName="ServiceUsedNameEn"
                                     type="text"
                                     autocomplete="off"
                                 />
@@ -72,12 +72,23 @@
 
                         <div
                             class="p-10"
-                            fxFlex.gt-sm="100"
-                            fxFlex.gt-xs="100"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
                             fxFlex="100"
                         >
                             <mat-checkbox formControlName="IsCalculatedValue">{{
                                 'isCalculatedValue' | translate
+                            }}</mat-checkbox>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-checkbox formControlName="IsNeedApproved">{{
+                                'isNeedApproval' | translate
                             }}</mat-checkbox>
                         </div>
 

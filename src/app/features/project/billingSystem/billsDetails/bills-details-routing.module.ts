@@ -4,6 +4,7 @@ import { LandingLayoutComponent } from '@app/features/landing';
 import { BillDetailsResolveService } from '@app/infrastructure/core/services/bill-details-resolve.service';
 import { BillsDetailsListComponent } from './bills-details-list/bills-details-list.component';
 import { DescriptionAndTypeNumberComponent } from './description-and-type-number/description-and-type-number.component';
+import { ServicesNeedApprovalComponent } from './services-need-approval/services-need-approval.component';
 
 const routes: Routes = [
     {
@@ -37,4 +38,5 @@ export class BillsDetailsRoutingModule {}
 export const components = [
     BillsDetailsListComponent,
     DescriptionAndTypeNumberComponent,
+    ServicesNeedApprovalComponent,
 ];

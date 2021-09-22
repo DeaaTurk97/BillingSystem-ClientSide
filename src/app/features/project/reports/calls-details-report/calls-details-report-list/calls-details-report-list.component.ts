@@ -19,16 +19,15 @@ import {
 } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { catchError, map } from 'rxjs/operators';
 import { GroupService } from '@app/infrastructure/core/services/billingSystem/group.service';
-import { ThrowStmt } from '@angular/compiler';
 import { UserService } from '@app/infrastructure/core/services/auth/user.service';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
-import { ServiceTypeService } from '@app/infrastructure/core/services/billingSystem/service-type.service';
 import { ExportReportService } from '@app/infrastructure/core/services/billingSystem//export-report-service';
-import { ServiceTypeModel } from '@app/infrastructure/models/project/serviceTypeModel';
 import { CountryService } from '@app/infrastructure/core/services/billingSystem/country.service';
 import { CountryModel } from '@app/infrastructure/models/project/CountryModel';
 import { TypePhoneNumberService } from '@app/infrastructure/core/services/billingSystem/type-phone-number.service';
 import { TypePhoneNumber } from '@app/infrastructure/models/project/TypePhoneNumberModel';
+import { ServiceUsedModel } from '@app/infrastructure/models/project/serviceUsedModel';
+import { ServiceUsedService } from '@app/infrastructure/core/services/billingSystem/service-used.service';
 
 @Component({
     selector: 'app-calls-details-report-list',
@@ -46,7 +45,7 @@ export class CallsDetailsReportListComponent implements OnInit {
     public reportFilterModel: ReportFilterModel = new ReportFilterModel();
     public groupsModel: GroupModel[] = [];
     public usersModel: UserModel[] = [];
-    public serviceTypesModel: ServiceTypeModel[] = [];
+    public servicesUsedModel: ServiceUsedModel[] = [];
     public countryModel: CountryModel[] = [];
     public countryExcludeModel: CountryModel[] = [];
     public typePhoneNumberModel: TypePhoneNumber[] = [];
@@ -56,7 +55,7 @@ export class CallsDetailsReportListComponent implements OnInit {
         private notify: NotificationService,
         private groupService: GroupService,
         private userService: UserService,
-        private serviceTypeService: ServiceTypeService,
+        private serviceUsedService: ServiceUsedService,
         private countryService: CountryService,
         private typePhoneNumberService: TypePhoneNumberService,
         private exportReportService: ExportReportService,
@@ -139,12 +138,12 @@ export class CallsDetailsReportListComponent implements OnInit {
     }
 
     LoadServiceTypes() {
-        this.serviceTypeService
-            .getAllServicesTypes()
+        this.serviceUsedService
+            .getAllServicesUsed()
             .pipe(
                 map((data) => {
                     if (data) {
-                        this.serviceTypesModel = data;
+                        this.servicesUsedModel = data;
                     }
                 }),
             )

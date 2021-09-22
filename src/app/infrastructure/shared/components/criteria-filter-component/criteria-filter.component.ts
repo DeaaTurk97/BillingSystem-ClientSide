@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CountryModel } from '@app/infrastructure/models/project/CountryModel';
 import { GroupModel } from '@app/infrastructure/models/project/groupModel';
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
-import { ServiceTypeModel } from '@app/infrastructure/models/project/serviceTypeModel';
+import { ServiceUsedModel } from '@app/infrastructure/models/project/serviceUsedModel';
 import { TypePhoneNumber } from '@app/infrastructure/models/project/TypePhoneNumberModel';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
 import { MonthsNames } from '../../Services/CommonMemmber';
@@ -37,7 +37,7 @@ export class CriteriaFilterComponent implements OnInit {
 
     @Input() public groupData: GroupModel[] = [];
     @Input() public userData: UserModel[] = [];
-    @Input() public serviceTypeData: ServiceTypeModel[] = [];
+    @Input() public servicesUsedData: ServiceUsedModel[] = [];
     @Input() public countryData: CountryModel[] = [];
     @Input() public countryExcludeData: CountryModel[] = [];
     @Input() public typesPhoneNumberData: TypePhoneNumber[] = [];
@@ -74,7 +74,7 @@ export class CriteriaFilterComponent implements OnInit {
             toDate: [],
             groupId: [],
             userId: [this.selectUserId],
-            serviceTypeId: [],
+            serviceUsedId: [],
             countryId: [],
             countryIdExclude: [],
             typePhoneNumberId: [],

@@ -6,26 +6,26 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ServiceTypeService } from '@app/infrastructure/core/services/billingSystem/service-type.service';
-import { ServiceTypeModel } from '@app/infrastructure/models/project/serviceTypeModel';
+import { ServiceUsedService } from '@app/infrastructure/core/services/billingSystem/service-used.service';
+import { ServiceUsedModel } from '@app/infrastructure/models/project/serviceUsedModel';
 import { of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-add-service-type',
-    templateUrl: './add-service-type.component.html',
-    styleUrls: ['./add-service-type.component.scss'],
+    selector: 'app-add-service-used',
+    templateUrl: './add-service-used.component.html',
+    styleUrls: ['./add-service-used.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddServiceTypeComponent implements OnInit {
+export class AddServiceUsedComponent implements OnInit {
     public isInProgress = false;
     public frmAddNew: FormGroup;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) public serviceTypeModel: ServiceTypeModel,
+        @Inject(MAT_DIALOG_DATA) public serviceUsedModel: ServiceUsedModel,
         private formBuilder: FormBuilder,
-        private serviceTypeService: ServiceTypeService,
-        private dialogRef: MatDialogRef<AddServiceTypeComponent>,
+        private serviceUsedService: ServiceUsedService,
+        private dialogRef: MatDialogRef<AddServiceUsedComponent>,
     ) {}
 
     get ID() {
@@ -40,23 +40,27 @@ export class AddServiceTypeComponent implements OnInit {
     ngInitialControlForm() {
         this.frmAddNew = this.formBuilder.group({
             Id: [0],
-            ServiceTypeNameAr: ['', Validators.required],
-            ServiceTypeNameEn: ['', Validators.required],
+            ServiceUsedNameAr: ['', Validators.required],
+            ServiceUsedNameEn: ['', Validators.required],
             IsCalculatedValue: [false, Validators.required],
+            IsNeedApproved: [false, Validators.required],
         });
     }
 
     setServiceTypeDetails() {
-        if (this.serviceTypeModel) {
-            this.frmAddNew.controls.Id.setValue(this.serviceTypeModel.id);
-            this.frmAddNew.controls.ServiceTypeNameAr.setValue(
-                this.serviceTypeModel.serviceTypeNameAr,
+        if (this.serviceUsedModel) {
+            this.frmAddNew.controls.Id.setValue(this.serviceUsedModel.id);
+            this.frmAddNew.controls.ServiceUsedNameAr.setValue(
+                this.serviceUsedModel.serviceUsedNameAr,
             );
-            this.frmAddNew.controls.ServiceTypeNameEn.setValue(
-                this.serviceTypeModel.serviceTypeNameEn,
+            this.frmAddNew.controls.ServiceUsedNameEn.setValue(
+                this.serviceUsedModel.serviceUsedNameEn,
             );
             this.frmAddNew.controls.IsCalculatedValue.setValue(
-                this.serviceTypeModel.isCalculatedValue,
+                this.serviceUsedModel.isCalculatedValue,
+            );
+            this.frmAddNew.controls.IsNeedApproved.setValue(
+                this.serviceUsedModel.isNeedApproved,
             );
         }
     }
@@ -69,10 +73,10 @@ export class AddServiceTypeComponent implements OnInit {
             .pipe(
                 mergeMap(() => {
                     return this.ID === 0
-                        ? this.serviceTypeService.addServiceType(
+                        ? this.serviceUsedService.addServiceUsed(
                               this.frmAddNew.value,
                           )
-                        : this.serviceTypeService.updateServiceType(
+                        : this.serviceUsedService.updateServiceUsed(
                               this.frmAddNew.value,
                           );
                 }),

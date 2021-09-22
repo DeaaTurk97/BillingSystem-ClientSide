@@ -122,6 +122,8 @@ export class AppHeaderComponent implements OnInit {
             NotificationType.PhoneNumbersSubmitted ==
                 notificationInfo.notificationTypeId ||
             NotificationType.BillSubmitted ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.ServicesSubmitted ==
                 notificationInfo.notificationTypeId
         ) {
             this.notificationService
@@ -138,7 +140,10 @@ export class AppHeaderComponent implements OnInit {
                                         NotificationType.PhoneNumbersSubmitted ===
                                             notificationInfo.notificationTypeId
                                             ? 'phonesBook/comingNumbers-list'
-                                            : 'bills/comingBills-list',
+                                            : NotificationType.BillSubmitted ===
+                                              notificationInfo.notificationTypeId
+                                            ? 'bills/comingBills-list'
+                                            : 'bills/comingServices-list',
                                     );
                                 });
                         }
@@ -171,7 +176,13 @@ export class AppHeaderComponent implements OnInit {
                 notificationInfo.notificationTypeId ||
             NotificationType.BillRejected ==
                 notificationInfo.notificationTypeId ||
-            NotificationType.BillPaid == notificationInfo.notificationTypeId
+            NotificationType.BillPaid == notificationInfo.notificationTypeId ||
+            NotificationType.ServicesApproved ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.ServicesInProgress ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.ServicesRejected ==
+                notificationInfo.notificationTypeId
         ) {
             this.notificationService
                 .updateReadNewNotification(notificationInfo)

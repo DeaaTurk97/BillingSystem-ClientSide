@@ -4,7 +4,6 @@ import {
     AuthGuard,
     SuperAdminAuthGuard,
 } from '@app/infrastructure/core/guards';
-import { AdminGroupGuard } from '@app/infrastructure/core/guards/admin-group.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
@@ -101,8 +100,8 @@ const routes: Routes = [
         canActivateChild: [SuperAdminAuthGuard],
         loadChildren: () =>
             import(
-                '../project/system-definition/ServicesTypes/ServiceType.module'
-            ).then((m) => m.ServiceTypeModule),
+                '../project/system-definition/ServicesUsed/serviceUsed.module'
+            ).then((m) => m.ServiceUsedModule),
     },
     {
         path: 'phonesBook',
@@ -157,6 +156,15 @@ const routes: Routes = [
             import(
                 '../project/billingSystem/billsDetails/bills-Details.module'
             ).then((m) => m.BillsDetailsModule),
+    },
+    {
+        path: 'bills',
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/billingSystem/comingServicesNeedApproved/coming-services.module'
+            ).then((m) => m.ComingServicesModule),
     },
     {
         path: 'reports',

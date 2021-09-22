@@ -7,13 +7,14 @@ import {
 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from '@app/infrastructure/core/services/auth/user.service';
 import { CallDetailsService } from '@app/infrastructure/core/services/billingSystem/call-details-service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { DynamicColumn } from '@app/infrastructure/models/gridAddColumns-model';
 import { CallDetailsModel } from '@app/infrastructure/models/project/callDetailsModel';
 import { ReportFilterModel } from '@app/infrastructure/models/project/reportFilterModel';
+import { servicesNeedApprovedModel } from '@app/infrastructure/models/project/servicesNeedApprovedModel';
 import { UnDefinedNumberModel } from '@app/infrastructure/models/project/UnDefinedNumberModel';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
 import { ConfirmDialogComponent } from '@app/infrastructure/shared/components/confirm-dialog/confirm-dialog.component';
@@ -25,6 +26,7 @@ import {
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { DescriptionAndTypeNumberComponent } from '../description-and-type-number/description-and-type-number.component';
+import { ServicesNeedApprovalComponent } from '../services-need-approval/services-need-approval.component';
 
 @Component({
     selector: 'app-bills-details-list',
@@ -48,6 +50,8 @@ export class BillsDetailsListComponent implements OnInit {
     public usersModel: UserModel[] = [];
     public unDefinedNumberModel: UnDefinedNumberModel[] = [];
     public countDefinedNumbers: number = 0;
+    public servicesNeedApprovedModel: servicesNeedApprovedModel[] = [];
+    public countServicesNeedApproved: number = 0;
     @ViewChild(DataGridViewComponent) sharedDataGridView: DataGridViewComponent;
 
     constructor(
@@ -89,9 +93,17 @@ export class BillsDetailsListComponent implements OnInit {
                         this.billId,
                     );
                 }),
-                map((unDefinedNumbers) => {
+                mergeMap((unDefinedNumbers) => {
                     this.unDefinedNumberModel = unDefinedNumbers.dataRecord;
                     this.countDefinedNumbers = unDefinedNumbers.countRecord;
+
+                    return this.callDetailsService.GetServicesNeedApproval(
+                        this.billId,
+                    );
+                }),
+                map((needApproval) => {
+                    this.servicesNeedApprovedModel = needApproval.dataRecord;
+                    this.countServicesNeedApproved = needApproval.countRecord;
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage('ErrorOnLoadData');
@@ -236,5 +248,52 @@ export class BillsDetailsListComponent implements OnInit {
                     this.notify.invokeApprovalsCycleNumbersAndBills(result);
                 }
             });
+    }
+
+    public onSetServiceType() {
+        const dialog = this.dialog.open(
+            ServicesNeedApprovalComponent,
+            this.getConfigDialog({
+                servicesNeedApprovedModel: this.servicesNeedApprovedModel,
+                billId: this.billId,
+            }),
+        );
+
+        return dialog
+            .afterClosed()
+            .pipe(
+                switchMap((dialogResult) => {
+                    if (dialogResult) {
+                        this.notify.showTranslateMessage(
+                            'UpdatedSuccessfully',
+                            false,
+                        );
+                        //Invoke For SuperAdmin and admin group
+                        this.notify.invokeApprovalsCycleNumbersAndBills(
+                            dialogResult,
+                        );
+
+                        // Adding this to refresh undefind numbers data
+                        return this.callDetailsService.GetAllUndefinedNumbers(
+                            this.billId,
+                        );
+                    } else {
+                        this.notify.showTranslateMessage('CancelUpdate');
+                        return of(null); //Must return null
+                    }
+                }),
+                mergeMap((unDefinedNumbers) => {
+                    if (unDefinedNumbers) {
+                        this.unDefinedNumberModel = unDefinedNumbers.dataRecord;
+                        this.countDefinedNumbers = unDefinedNumbers.countRecord;
+                    }
+
+                    return of({});
+                }),
+                catchError((): any => {
+                    this.notify.showTranslateMessage('ErrorOnUpdate');
+                }),
+            )
+            .subscribe((result) => {});
     }
 }

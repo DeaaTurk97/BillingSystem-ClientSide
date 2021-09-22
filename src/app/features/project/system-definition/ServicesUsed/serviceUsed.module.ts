@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import {
-    ServiceTypeRoutingModule,
+    ServiceUsedRoutingModule,
     components as serviceTypeComponents,
-} from './serviceType-routing.module';
+} from './serviceUsed-routing.module';
 import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
     declarations: [serviceTypeComponents],
-    imports: [SharedModule, ServiceTypeRoutingModule],
+    imports: [SharedModule, ServiceUsedRoutingModule],
 })
-export class ServiceTypeModule {}
+export class ServiceUsedModule {}
