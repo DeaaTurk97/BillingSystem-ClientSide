@@ -31,7 +31,7 @@ export class MatTableResponsiveDirective
 
     constructor(private table: ElementRef, private renderer: Renderer2) {}
 
-    public ngOnInit(): void {
+    ngOnInit() {
         this.thead = this.table.nativeElement.querySelector('thead');
         this.tbody = this.table.nativeElement.querySelector('tbody');
 
@@ -42,9 +42,9 @@ export class MatTableResponsiveDirective
         this.tbodyObserver.observe(this.tbody, { childList: true });
     }
 
-    public ngAfterViewInit(): void {
+    ngAfterViewInit() {
         /**
-         * Set the 'data-column-name' attribute for every body row cell, either on
+         * Set the "data-column-name" attribute for every body row cell, either on
          * thead row changes (e.g. language changes) or tbody rows changes (add, delete).
          */
         combineLatest([this.theadChanged$, this.tbodyChanged$])
@@ -77,7 +77,7 @@ export class MatTableResponsiveDirective
             );
     }
 
-    public ngOnDestroy(): void {
+    ngOnDestroy(): void {
         this.theadObserver.disconnect();
         this.tbodyObserver.disconnect();
 

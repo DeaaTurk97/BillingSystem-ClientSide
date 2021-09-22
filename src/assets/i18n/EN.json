@@ -318,5 +318,6 @@
     "freeServicesSum": "Free Services Amount",
     "officialServicesSum": "Official Services Amount",
     "personalServicesSum": "Personal Services Amount",
-    "unknownServicesSum": "Unknown Services Amount"
+    "unknownServicesSum": "Unknown Services Amount",
+    "isNeedApproved": "Need Approval"
 }

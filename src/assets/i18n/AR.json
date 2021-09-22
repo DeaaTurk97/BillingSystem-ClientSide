@@ -331,5 +331,6 @@
     "freeServicesSum": "مبلغ الخدمات المجانية",
     "officialServicesSum": "مبلغ الخدمات الرسمية",
     "personalServicesSum": "مبلغ الخدمات الشخصية",
-    "unknownServicesSum": "مبلغ الخدمات الغير معرفة"
+    "unknownServicesSum": "مبلغ الخدمات الغير معرفة",
+    "isNeedApproved": "تحتاج إلى موافقة"
 }

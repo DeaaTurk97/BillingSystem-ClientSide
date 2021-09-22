@@ -1,23 +1,29 @@
-<div class="example-container mat-elevation-z8">
-    <mat-table #table [dataSource]="gridDataSource" matSort matSortStart="desc">
+<div class="example-container">
+    <table
+        mat-table
+        appMatTableResponsive
+        [dataSource]="gridDataSource"
+        matSort
+        matSortStart="desc"
+    >
         <ng-container
             [matColumnDef]="column"
             *ngFor="let column of displayedColumns"
         >
-            <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 {{ column | translate }}
-            </mat-header-cell>
+            </th>
 
             <ng-container *ngIf="column == 'id'">
-                <mat-cell *matCellDef="let element; let serialNo = index">
+                <td mat-cell *matCellDef="let element; let serialNo = index">
                     {{
                         paginator.pageIndex * paginator.pageSize +
                             (serialNo + 1)
                     }}
-                </mat-cell>
+                </td>
             </ng-container>
             <ng-container *ngIf="column != 'id'">
-                <mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element">
                     {{
                         column === 'createdDate' ||
                         column === 'updatedDate' ||
@@ -26,21 +32,21 @@
                               | date: 'dd - MM - yyyy h:mm:ss a')
                             : element[column]
                     }}
-                </mat-cell>
+                </td>
             </ng-container>
         </ng-container>
 
         <ng-container matColumnDef="NoData">
-            <mat-footer-cell *matFooterCellDef>{{
-                'NoDataFound' | translate
-            }}</mat-footer-cell>
+            <td mat-footer-cell *matFooterCellDef>
+                {{ 'NoDataFound' | translate }}
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="Actions">
-            <mat-header-cell *matHeaderCellDef>{{
-                'Control' | translate
-            }}</mat-header-cell>
-            <mat-cell *matCellDef="let row">
+            <th mat-header-cell *matHeaderCellDef>
+                {{ 'Control' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row">
                 <button mat-icon-button (click)="onEditClick(row)">
                     <mat-icon>edit</mat-icon>{{ 'Edit' | translate }}</button
                 >&nbsp;&nbsp;&nbsp;&nbsp;
@@ -51,35 +57,35 @@
                 >
                     <mat-icon>delete</mat-icon>{{ 'Delete' | translate }}
                 </button>
-            </mat-cell>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="Selection">
-            <mat-header-cell *matHeaderCellDef>
+            <th mat-header-cell *matHeaderCellDef>
                 <mat-checkbox
                     (change)="$event ? masterToggle() : null"
                     [checked]="selection.hasValue() && isAllSelected()"
                     [indeterminate]="selection.hasValue() && !isAllSelected()"
                 >
                 </mat-checkbox>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row">
+            </th>
+            <td mat-cell *matCellDef="let row">
                 <mat-checkbox
                     (click)="$event.stopPropagation()"
                     (change)="onSelectedRow(row, true, false)"
                     [checked]="selection.isSelected(row)"
                 ></mat-checkbox>
-            </mat-cell>
+            </td>
         </ng-container>
 
         <ng-container
             *ngFor="let additionalColumn of additionalColumns; let i = index"
         >
             <ng-container matColumnDef="{{ additionalColumn.headerName }}">
-                <mat-header-cell *matHeaderCellDef>
+                <th mat-header-cell *matHeaderCellDef>
                     {{ additionalColumn.headerName | translate }}
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row">
+                </th>
+                <td mat-cell *matCellDef="let row">
                     <ng-container *ngIf="additionalColumn.childColumn">
                         <button
                             mat-icon-button
@@ -115,28 +121,27 @@
                             <mat-icon>{{ additionalColumn.icon }}</mat-icon>
                         </button>
                     </ng-container>
-                </mat-cell>
+                </td>
             </ng-container>
         </ng-container>
 
-        <mat-footer-row
+        <tr
+            mat-footer-row
             *matFooterRowDef="['NoData']"
             [ngClass]="{ hide: gridDataSource.data.length > 0 }"
-        >
-        </mat-footer-row>
+        ></tr>
 
-        <mat-header-row *matHeaderRowDef="getDisplayColumns()">
-        </mat-header-row>
-        <mat-row
+        <tr mat-header-row *matHeaderRowDef="getDisplayColumns()"></tr>
+        <tr
+            mat-row
             *matRowDef="let row; columns: getDisplayColumns()"
             [ngClass]="{
                 hovered: row.hovered
             }"
             (mouseover)="row.hovered = true"
             (mouseout)="row.hovered = false"
-        >
-        </mat-row>
-    </mat-table>
+        ></tr>
+    </table>
 
     <mat-paginator
         #paginator

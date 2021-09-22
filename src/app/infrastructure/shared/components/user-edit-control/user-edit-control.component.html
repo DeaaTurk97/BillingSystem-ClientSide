@@ -1,47 +1,74 @@
-<form novalidate [formGroup]="UserEditControl">
-    <div fxLayout="row wrap">
-        <ng-container *ngIf="IsShowAddButton">
-            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
-                <mat-card-actions>
-                    <button
-                        mat-raised-button
-                        (click)="onAddClick()"
-                        type="button"
-                        color="primary"
-                    >
-                        <mat-icon>add</mat-icon> {{ 'Add' | translate }}
-                    </button>
-                </mat-card-actions>
-            </div>
-        </ng-container>
-        <div class="p-10" fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100">
-            <div class="input-group no-border">
-                <mat-form-field>
-                    <input
-                        matInput
-                        id="searchInput"
-                        formControlName="searchInput"
-                        type="text"
-                        autocomplete="off"
-                        (keyup.enter)="onKeyUpEnterFilter($event)"
-                        (ngModelChange)="applyFilter($event)"
-                        placeholder="{{ SearchPlaceHolder }}"
-                    />
-                    <mat-icon
-                        matSuffix
-                        *ngIf="!UserEditControl.controls.searchInput.value"
-                    >
-                        search</mat-icon
-                    >
-                    <mat-icon
-                        matSuffix
-                        *ngIf="UserEditControl.controls.searchInput.value"
-                        title="Clear"
-                        (click)="clear($event)"
-                        >close</mat-icon
-                    >
-                </mat-form-field>
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+                <form novalidate [formGroup]="UserEditControl">
+                    <div fxLayout="row wrap">
+                        <ng-container *ngIf="IsShowAddButton">
+                            <div
+                                class="p-5"
+                                fxFlex.gt-sm="25"
+                                fxFlex.gt-xs="25"
+                                fxFlex="100"
+                            >
+                                <mat-card-actions>
+                                    <button
+                                        mat-raised-button
+                                        (click)="onAddClick()"
+                                        type="button"
+                                        color="primary"
+                                    >
+                                        <mat-icon>add</mat-icon>
+                                        {{ 'Add' | translate }}
+                                    </button>
+                                </mat-card-actions>
+                            </div>
+                        </ng-container>
+                        <div
+                            class="p-5"
+                            fxFlex.gt-sm="40"
+                            fxFlex.gt-xs="40 "
+                            fxFlex="100"
+                        >
+                            <div class="input-group no-border">
+                                <mat-form-field>
+                                    <input
+                                        matInput
+                                        id="searchInput"
+                                        formControlName="searchInput"
+                                        type="text"
+                                        autocomplete="off"
+                                        (keyup.enter)="
+                                            onKeyUpEnterFilter($event)
+                                        "
+                                        (ngModelChange)="applyFilter($event)"
+                                        placeholder="{{ SearchPlaceHolder }}"
+                                    />
+                                    <mat-icon
+                                        matSuffix
+                                        *ngIf="
+                                            !UserEditControl.controls
+                                                .searchInput.value
+                                        "
+                                    >
+                                        search</mat-icon
+                                    >
+                                    <mat-icon
+                                        matSuffix
+                                        *ngIf="
+                                            UserEditControl.controls.searchInput
+                                                .value
+                                        "
+                                        title="Clear"
+                                        (click)="clear($event)"
+                                        >close</mat-icon
+                                    >
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</form>
+</div>
