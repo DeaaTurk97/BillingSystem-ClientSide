@@ -41,10 +41,10 @@ export class LoginComponent implements OnInit {
         this.authService.login(this.loginForm.value).subscribe(
             (next) => {
                 this.tokenService
-                    .isSuperAdmin()
+                    .isFinance()
                     .pipe(
-                        map((isSupperAdmin) => {
-                            if (isSupperAdmin) {
+                        map((isFinance) => {
+                            if (isFinance) {
                                 this.router.navigateByUrl(
                                     'bills/comingBills-list',
                                 );

@@ -69,11 +69,7 @@
             </div>
             <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
                 <button
-                    *ngIf="
-                        (isFinanceUser | async) &&
-                        selectedStatusBill == StatusCycleResult.Approved &&
-                        billsStatus.length > 0
-                    "
+                    *ngIf="isFinanceUser | async"
                     mat-raised-button
                     type="submit"
                     color="primary"

@@ -202,6 +202,9 @@ export class ComingBillsListComponent implements OnInit {
     }
 
     onPay() {
+        if (this.billsStatus.length <= 0) {
+            return;
+        }
         return this.dialog
             .open(ConfirmDialogComponent, {
                 width: '28em',
