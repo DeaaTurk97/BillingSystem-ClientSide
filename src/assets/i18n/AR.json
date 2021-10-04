@@ -332,5 +332,8 @@
     "officialServicesSum": "مبلغ الخدمات الرسمية",
     "personalServicesSum": "مبلغ الخدمات الشخصية",
     "unknownServicesSum": "مبلغ الخدمات الغير معرفة",
-    "isNeedApproved": "تحتاج إلى موافقة"
+    "isNeedApproved": "تحتاج إلى موافقة",
+    "allocatedServices": "الخدمات المخصصة",
+    "servicePrice": "سعر الخدمة",
+    "servicesPrices": "أسعار الخدمات"
 }

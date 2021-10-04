@@ -7,17 +7,29 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from '@app/infrastructure/core/services/auth/user.service';
+import { AllocatedServicesService } from '@app/infrastructure/core/services/billingSystem/allocated-services.service';
 import { GroupService } from '@app/infrastructure/core/services/billingSystem/group.service';
+import { ServiceUsedService } from '@app/infrastructure/core/services/billingSystem/service-used.service';
+import { SimCardTypeService } from '@app/infrastructure/core/services/billingSystem/sim-card-type.service';
+import { SimProfileService } from '@app/infrastructure/core/services/billingSystem/sim-profile.service';
 import { LanguagesService } from '@app/infrastructure/core/services/language/language.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { GroupModel } from '@app/infrastructure/models/project/groupModel';
 import { LanguageModel } from '@app/infrastructure/models/project/LanguageModel';
+import { ServiceUsedModel } from '@app/infrastructure/models/project/serviceUsedModel';
+import { SimCardTypeModel } from '@app/infrastructure/models/project/SimCardTypeModel';
+import { SimProfileModel } from '@app/infrastructure/models/project/SimProfileModel';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
 import { RoleModel } from '@app/infrastructure/models/RoleModel';
 import { ResultActions } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { Constants } from '@app/infrastructure/utils/constants';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
+
+interface Food {
+    value: string;
+    viewValue: string;
+}
 
 @Component({
     selector: 'app-add-user',
@@ -33,6 +45,11 @@ export class AddUserComponent implements OnInit {
     public groupsModel: GroupModel[] = [];
     public languagesModel: LanguageModel[] = [];
     public rolesModel: RoleModel[] = [];
+    public servicesUsedModel: ServiceUsedModel[] = [];
+    public allocatedServices: Array<number> = [];
+    public simCardTypesModel: SimCardTypeModel[] = [];
+    public simProfilesModel: SimProfileModel[] = [];
+    public serviceAmount: number = 0;
     public passwordPattern: RegExp = Constants.patterns.DIGIT_REGEX;
     public resultActions: ResultActions = ResultActions.CancelAdd;
 
@@ -44,6 +61,10 @@ export class AddUserComponent implements OnInit {
         private languageService: LanguagesService,
         private userService: UserService,
         private dialogRef: MatDialogRef<AddUserComponent>,
+        private sericeUsedService: ServiceUsedService,
+        private allocatedServicesService: AllocatedServicesService,
+        private simCardTypeService: SimCardTypeService,
+        private simProfileService: SimProfileService,
     ) {}
 
     get ID() {
@@ -71,6 +92,9 @@ export class AddUserComponent implements OnInit {
             GroupId: [null, Validators.required],
             LanguageId: [null, Validators.required],
             RoleId: [null, Validators.required],
+            ServicesUsedId: [null],
+            SimCardTypeId: [null],
+            SimProfileId: [null],
         });
     }
 
@@ -88,6 +112,13 @@ export class AddUserComponent implements OnInit {
                 this.userModel.languageId,
             );
             this.frmAddNew.controls.RoleId.setValue(this.userModel.roleId);
+
+            this.frmAddNew.controls.SimCardTypeId.setValue(
+                this.userModel.simCardTypeId,
+            );
+            this.frmAddNew.controls.SimProfileId.setValue(
+                this.userModel.simProfileId,
+            );
         }
     }
 
@@ -103,8 +134,33 @@ export class AddUserComponent implements OnInit {
                     this.languagesModel = languagesData;
                     return this.userService.getAllRoles();
                 }),
-                map((rolesData) => {
+                mergeMap((rolesData) => {
                     this.rolesModel = rolesData;
+                    return this.sericeUsedService.getAllServicesUsed();
+                }),
+                mergeMap((servicesUsed) => {
+                    this.servicesUsedModel = servicesUsed;
+                    return this.allocatedServicesService.getAllocatedServices(
+                        this.frmAddNew.controls.Id.value,
+                    );
+                }),
+                mergeMap((allocatedServices) => {
+                    allocatedServices.forEach((element) => {
+                        this.allocatedServices.push(element.serviceId);
+                    });
+
+                    this.frmAddNew.controls.ServicesUsedId.setValue(
+                        this.allocatedServices,
+                    );
+                    this.sumServicesPrices();
+                    return this.simCardTypeService.getAllSimCardTypes();
+                }),
+                mergeMap((cardTypes) => {
+                    this.simCardTypesModel = cardTypes;
+                    return this.simProfileService.getAllSimProfiles();
+                }),
+                map((simProfilesStatus) => {
+                    this.simProfilesModel = simProfilesStatus;
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage('ErrorOnLoadData');
@@ -144,6 +200,17 @@ export class AddUserComponent implements OnInit {
                     this.frmAddNew.reset();
                 }
             });
+    }
+
+    sumServicesPrices() {
+        this.serviceAmount = 0;
+        this.frmAddNew.controls.ServicesUsedId.value.forEach((element) => {
+            debugger;
+            let serviceSelected = this.servicesUsedModel.find(
+                (x) => x.id === element,
+            );
+            this.serviceAmount += serviceSelected.servicePrice;
+        });
     }
 
     ResetControls() {

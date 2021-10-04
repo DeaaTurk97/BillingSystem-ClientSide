@@ -79,6 +79,12 @@ const MENUITEMS = [
                 roles: [UserType.SuperAdmin],
             },
             {
+                state: 'upload-bills-lebanon',
+                name: 'UploadBills',
+                type: 'link',
+                roles: [UserType.SuperAdmin],
+            },
+            {
                 state: 'billsSummary-list',
                 name: 'BillsSummary',
                 type: 'link',

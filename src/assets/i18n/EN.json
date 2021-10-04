@@ -319,5 +319,10 @@
     "officialServicesSum": "Official services amount",
     "personalServicesSum": "Personal services amount",
     "unknownServicesSum": "Unknown services amount",
-    "isNeedApproved": "Need approval"
+    "isNeedApproved": "Need approval",
+    "allocatedServices": "Allocated services",
+    "simProfileStatus": "SIM Profile Status",
+    "simCardType": "SIM Card Type",
+    "servicePrice": "service Price",
+    "servicesPrices": "services Prices"
 }

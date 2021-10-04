@@ -42,6 +42,7 @@ export class AddServiceUsedComponent implements OnInit {
             Id: [0],
             ServiceUsedNameAr: ['', Validators.required],
             ServiceUsedNameEn: ['', Validators.required],
+            ServicePrice: [null],
             IsCalculatedValue: [false, Validators.required],
             IsNeedApproved: [false, Validators.required],
         });
@@ -61,6 +62,9 @@ export class AddServiceUsedComponent implements OnInit {
             );
             this.frmAddNew.controls.IsNeedApproved.setValue(
                 this.serviceUsedModel.isNeedApproved,
+            );
+            this.frmAddNew.controls.ServicePrice.setValue(
+                this.serviceUsedModel.servicePrice,
             );
         }
     }

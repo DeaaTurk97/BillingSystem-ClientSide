@@ -11,4 +11,6 @@ export interface UserModel {
     groupId: number;
     roleName: string;
     languageId: number;
+    simCardTypeId: number;
+    simProfileId: number;
 }
