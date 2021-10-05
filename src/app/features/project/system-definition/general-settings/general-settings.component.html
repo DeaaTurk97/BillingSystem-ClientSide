@@ -168,6 +168,26 @@
 
                         <div
                             class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'TaxAmount' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'TaxAmount' | translate }}"
+                                    formControlName="TaxAmount"
+                                    type="number"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-10"
                             fxFlex.gt-sm="100"
                             fxFlex.gt-xs="100"
                             fxFlex="100"

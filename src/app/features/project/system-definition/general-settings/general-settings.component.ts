@@ -104,6 +104,7 @@ export class GeneralSettingsComponent implements OnInit {
             EmailForTest: ['', [Validators.required, Validators.email]],
             DisplayNameEmail: ['', Validators.required],
             IsDeleteFreeTypeNumber: [false, Validators.required],
+            TaxAmount: [''],
         });
     }
 
@@ -581,6 +582,14 @@ export class GeneralSettingsComponent implements OnInit {
                                 ),
                             ),
                         );
+
+                        this.frmGeneralSettings.controls.TaxAmount.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.TaxAmount,
+                            )?.settingValue ?? '0',
+                        );
                     }
                     this.generalSettingsListCurrent = generalSettings;
                     return this.typePhoneNumberService.getAllTypesPhoneNumber();
@@ -897,6 +906,13 @@ export class GeneralSettingsComponent implements OnInit {
                 (generalSettingsModel.settingValue = String(
                     this.frmGeneralSettings.controls.IsDeleteFreeTypeNumber
                         .value,
+                ));
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName = Constants.TaxAmount),
+                (generalSettingsModel.settingValue = String(
+                    this.frmGeneralSettings.controls.TaxAmount.value,
                 ));
             this.generalSettingsListNew.push(generalSettingsModel);
 

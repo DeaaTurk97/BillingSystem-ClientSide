@@ -62,6 +62,7 @@ export interface IConstant {
     EmailTestBody: string;
     DisplayNameEmail: string;
     IsDeleteFreeTypeNumber: string;
+    TaxAmount: string;
 }
 
 export const Constants: IConstant = {
@@ -130,4 +131,5 @@ export const Constants: IConstant = {
     EmailTestBody: 'EmailTestBody',
     DisplayNameEmail: 'DisplayNameEmail',
     IsDeleteFreeTypeNumber: 'IsDeleteFreeTypeNumber',
+    TaxAmount: '0',
 };

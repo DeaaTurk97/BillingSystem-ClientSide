@@ -324,5 +324,6 @@
     "simProfileStatus": "SIM Profile Status",
     "simCardType": "SIM Card Type",
     "servicePrice": "service Price",
-    "servicesPrices": "services Prices"
+    "servicesPrices": "services Prices",
+    "TaxAmount": "Tax Amount"
 }

@@ -335,5 +335,6 @@
     "isNeedApproved": "تحتاج إلى موافقة",
     "allocatedServices": "الخدمات المخصصة",
     "servicePrice": "سعر الخدمة",
-    "servicesPrices": "أسعار الخدمات"
+    "servicesPrices": "أسعار الخدمات",
+    "TaxAmount": "قيمة الضريبة"
 }
