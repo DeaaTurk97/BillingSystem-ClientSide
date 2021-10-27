@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { ApiService } from '../api/api.service';

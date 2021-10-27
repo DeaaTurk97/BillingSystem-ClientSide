@@ -161,10 +161,19 @@ export class NotificationService {
     // }
 
     public invokeApprovalsCycleNumbersAndBills(usersId: Array<string>): any {
-        return this.hubConnection.invoke(
-            'ApprovalsCycleNumbersAndBills',
-            usersId,
-        );
+        if (!this.hubConnection.state) {
+            this.hubConnection.start().then(() => {
+                return this.hubConnection.invoke(
+                    'ApprovalsCycleNumbersAndBills',
+                    usersId,
+                );
+            });
+        } else {
+            return this.hubConnection.invoke(
+                'ApprovalsCycleNumbersAndBills',
+                usersId,
+            );
+        }
     }
 
     public loadUnreadNotification(): Observable<SystemNotification[]> {

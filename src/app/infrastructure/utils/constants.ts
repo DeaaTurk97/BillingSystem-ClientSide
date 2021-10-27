@@ -62,6 +62,10 @@ export interface IConstant {
     EmailTestBody: string;
     DisplayNameEmail: string;
     IsDeleteFreeTypeNumber: string;
+    IsAutomatedApprovalBills: string;
+    IsAutomatedApprovalServices: string;
+    IsAutomatedApprovalPhoneNumbers: string;
+    IsJoinEmployeesWithLimitValue: string;
     TaxAmount: string;
 }
 
@@ -132,4 +136,8 @@ export const Constants: IConstant = {
     DisplayNameEmail: 'DisplayNameEmail',
     IsDeleteFreeTypeNumber: 'IsDeleteFreeTypeNumber',
     TaxAmount: '0',
+    IsAutomatedApprovalBills: 'IsAutomatedApprovalBills',
+    IsAutomatedApprovalServices: 'IsAutomatedApprovalServices',
+    IsAutomatedApprovalPhoneNumbers: 'IsAutomatedApprovalPhoneNumbers',
+    IsJoinEmployeesWithLimitValue: 'IsJoinEmployeesWithLimitValue',
 };

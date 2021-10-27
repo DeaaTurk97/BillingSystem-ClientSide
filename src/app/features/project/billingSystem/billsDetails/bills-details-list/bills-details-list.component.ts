@@ -44,6 +44,7 @@ export class BillsDetailsListComponent implements OnInit {
     public billYearId = null;
     public billUserId = null;
     public isSubmitByAdmin: boolean = false;
+    public isPaid: boolean = false;
     public reportFilterModel: ReportFilterModel = new ReportFilterModel();
     public dataSource = new MatTableDataSource<CallDetailsModel>([]);
     public columns: DynamicColumn[] = [];
@@ -51,7 +52,7 @@ export class BillsDetailsListComponent implements OnInit {
     public unDefinedNumberModel: UnDefinedNumberModel[] = [];
     public countDefinedNumbers: number = 0;
     public servicesNeedApprovedModel: servicesNeedApprovedModel[] = [];
-    public countServicesNeedApproved: number = 0;
+    public countServicesNeedApproval: number = 0;
     @ViewChild(DataGridViewComponent) sharedDataGridView: DataGridViewComponent;
 
     constructor(
@@ -80,6 +81,10 @@ export class BillsDetailsListComponent implements OnInit {
                 this.activatedRoute.snapshot.paramMap.get('isSubmitByAdmin'),
             ),
         );
+
+        this.isPaid = Boolean(
+            JSON.parse(this.activatedRoute.snapshot.paramMap.get('isPaid')),
+        );
         this.activatedRoute.data
             .pipe(
                 mergeMap((dataRoute) => {
@@ -89,21 +94,32 @@ export class BillsDetailsListComponent implements OnInit {
                 }),
                 mergeMap((userData) => {
                     this.usersModel = userData;
-                    return this.callDetailsService.GetAllUndefinedNumbers(
-                        this.billId,
-                    );
+
+                    if (!this.isPaid) {
+                        return this.callDetailsService.GetAllUndefinedNumbers(
+                            this.billId,
+                        );
+                    }
+                    return of(null);
                 }),
                 mergeMap((unDefinedNumbers) => {
-                    this.unDefinedNumberModel = unDefinedNumbers.dataRecord;
-                    this.countDefinedNumbers = unDefinedNumbers.countRecord;
+                    if (!this.isPaid) {
+                        this.unDefinedNumberModel = unDefinedNumbers.dataRecord;
+                        this.countDefinedNumbers = unDefinedNumbers.countRecord;
 
-                    return this.callDetailsService.GetServicesNeedApproval(
-                        this.billId,
-                    );
+                        return this.callDetailsService.GetServicesNeedApproval(
+                            this.billId,
+                        );
+                    }
+                    return of(null);
                 }),
                 map((needApproval) => {
-                    this.servicesNeedApprovedModel = needApproval.dataRecord;
-                    this.countServicesNeedApproved = needApproval.countRecord;
+                    if (!this.isPaid) {
+                        this.servicesNeedApprovedModel =
+                            needApproval.dataRecord;
+                        this.countServicesNeedApproval =
+                            needApproval.countRecord;
+                    }
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage('ErrorOnLoadData');

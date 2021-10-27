@@ -83,6 +83,7 @@ export class BillsSummaryListComponent implements OnInit {
                     ActionGrid.row.billYear,
                     ActionGrid.row.userId,
                     ActionGrid.row.submittedByAdmin,
+                    ActionGrid.row.isPaid,
                 );
                 break;
         }
@@ -109,6 +110,7 @@ export class BillsSummaryListComponent implements OnInit {
         billYear: number,
         billUser: number,
         isSubmittedByAdmin: boolean,
+        isPaid: boolean,
     ) {
         this.router.navigate([
             '/bills/billsDetails-list/' +
@@ -120,7 +122,9 @@ export class BillsSummaryListComponent implements OnInit {
                 '/' +
                 billUser +
                 '/' +
-                isSubmittedByAdmin,
+                isSubmittedByAdmin +
+                '/' +
+                isPaid,
         ]);
     }
 }

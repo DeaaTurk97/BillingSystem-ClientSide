@@ -1,14 +1,50 @@
 <mat-card>
     <mat-card-content>
-        <button
-            mat-raised-button
-            type="submit"
-            color="primary"
-            (click)="uploadBill()"
-            [disabled]="fileListFormControl.errors || isSubmitted"
-        >
-            <mat-icon>upload</mat-icon> {{ 'UploadBills' | translate }}
-        </button>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+                        <div
+                            class="p-12"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <button
+                                name="uploadBills"
+                                mat-raised-button
+                                type="submit"
+                                color="primary"
+                                (click)="ImportType()"
+                                [disabled]="
+                                    fileListFormControl.errors || isSubmitted
+                                "
+                            >
+                                <mat-icon>upload</mat-icon>
+                                {{ 'UploadBills' | translate }}
+                            </button>
+                        </div>
+
+                        <div
+                            class="p-12"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <button
+                                name="uploadBills"
+                                mat-raised-button
+                                type="submit"
+                                color="primary"
+                                (click)="ReminderStaff()"
+                            >
+                                {{ 'ReminderStaff' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </mat-card-content>
 </mat-card>
 
@@ -25,16 +61,25 @@
                                 fxFlex.gt-xs="100"
                                 fxFlex="100"
                             >
-                                <mat-radio-group>
+                                <mat-radio-group [(ngModel)]="billType">
                                     <mat-radio-button
-                                        [value]="true"
-                                        [checked]="IsMTNBills"
-                                        (change)="IsMTNBills = $event.value"
-                                        >Voice</mat-radio-button
-                                    >
+                                        [value]="'Calls'"
+                                        [checked]="true"
+                                        >Local & International Call </mat-radio-button
+                                    >&nbsp;
                                     <mat-radio-button
-                                        [value]="false"
-                                        (change)="IsMTNBills = $event.value"
+                                        [value]="'Roaming'"
+                                        [checked]="false"
+                                        >Roaming</mat-radio-button
+                                    >&nbsp;
+                                    <mat-radio-button
+                                        [value]="'DataRoaming'"
+                                        [checked]="false"
+                                        >Data Roaming</mat-radio-button
+                                    >&nbsp;
+                                    <mat-radio-button
+                                        [value]="'Data'"
+                                        [checked]="false"
                                         >Data</mat-radio-button
                                     >
                                 </mat-radio-group>

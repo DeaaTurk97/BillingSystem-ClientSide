@@ -11,14 +11,16 @@ export class GeneralSettingsService {
     constructor(private apiService: ApiService) {}
 
     getGeneralSettings(): Observable<GeneralSettingsModel[]> {
-        return this.apiService.get(`${environment.apiRoute}/generalSettings`);
+        return this.apiService.get(
+            `${environment.apiRoute}/GeneralSettings/GetGeneralSettings`,
+        );
     }
 
     setGeneralSettings(
         generalSettings: GeneralSettingsModel[],
     ): Observable<any> {
         return this.apiService.post(
-            `${environment.apiRoute}/generalSettings`,
+            `${environment.apiRoute}/GeneralSettings`,
             generalSettings,
         );
     }
@@ -27,6 +29,13 @@ export class GeneralSettingsService {
         return this.apiService.post(
             `${environment.apiRoute}/Emails/SendTestEmail`,
             null,
+        );
+    }
+
+    getSettingValueFromSettingName(settingName: string): Observable<any> {
+        return this.apiService.get(
+            `${environment.apiRoute}/GeneralSettings/GetSettingValueFromSettingName?settingName=` +
+                settingName,
         );
     }
 }

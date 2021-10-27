@@ -13,13 +13,13 @@ const routes: Routes = [
         children: [
             {
                 path:
-                    'billsDetails-list/:id/:billMonth/:billYear/:billUser/:isSubmitByAdmin',
+                    'billsDetails-list/:id/:billMonth/:billYear/:billUser/:isSubmitByAdmin/:isPaid',
                 redirectTo: 'billsDetails-list',
                 pathMatch: 'full',
             },
             {
                 path:
-                    'billsDetails-list/:id/:billMonth/:billYear/:billUser/:isSubmitByAdmin',
+                    'billsDetails-list/:id/:billMonth/:billYear/:billUser/:isSubmitByAdmin/:isPaid',
                 component: BillsDetailsListComponent,
                 resolve: {
                     billsDetails: BillDetailsResolveService,

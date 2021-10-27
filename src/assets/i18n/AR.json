@@ -336,5 +336,12 @@
     "allocatedServices": "الخدمات المخصصة",
     "servicePrice": "سعر الخدمة",
     "servicesPrices": "أسعار الخدمات",
-    "TaxAmount": "قيمة الضريبة"
+    "TaxAmount": "قيمة الضريبة",
+    "AutomatedApprovalBills": "إعتماد الفواتير بشكل تلقائي",
+    "AutomatedApprovalServices": "إعتماد الخدمات بشكل تلقائي",
+    "AutomatedApprovalPhoneNumbers": "إعتماد أرقام الهواتف بشكل تلقائي",
+    "ReminderStaff": "تذكير الموظفين",
+    "SureWantReminderStaff": "هل أنت متأكد من تذكير الموظفين",
+    "JoinEmployeesWithLimitValue": "ربط المستخدمين بقيمة الفاتورة المسموح بها",
+    "ReminderStaffSuccessfully": "تم تذكير الموظفين بنجاح"
 }

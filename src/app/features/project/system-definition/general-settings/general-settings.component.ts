@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GeneralSettingsService } from '@app/infrastructure/core/services/general-settings.service';
 import { GeneralSettingsModel } from '@models/project/general-settings';
 import { of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { Constants } from '@app/infrastructure/utils/constants';
@@ -105,6 +105,10 @@ export class GeneralSettingsComponent implements OnInit {
             DisplayNameEmail: ['', Validators.required],
             IsDeleteFreeTypeNumber: [false, Validators.required],
             TaxAmount: [''],
+            IsAutomatedApprovalBills: [false, Validators.required],
+            IsAutomatedApprovalServices: [false, Validators.required],
+            IsAutomatedApprovalPhoneNumbers: [false, Validators.required],
+            IsJoinEmployeesWithLimitValue: [false, Validators.required],
         });
     }
 
@@ -590,6 +594,61 @@ export class GeneralSettingsComponent implements OnInit {
                                     Constants.TaxAmount,
                             )?.settingValue ?? '0',
                         );
+
+                        this.frmGeneralSettings.controls.IsAutomatedApprovalBills.setValue(
+                            Boolean(
+                                JSON.parse(
+                                    generalSettings.find(
+                                        (
+                                            generalSetting: GeneralSettingsModel,
+                                        ) =>
+                                            generalSetting.settingName ===
+                                            Constants.IsAutomatedApprovalBills,
+                                    )?.settingValue ?? 'false',
+                                ),
+                            ),
+                        );
+
+                        this.frmGeneralSettings.controls.IsAutomatedApprovalServices.setValue(
+                            Boolean(
+                                JSON.parse(
+                                    generalSettings.find(
+                                        (
+                                            generalSetting: GeneralSettingsModel,
+                                        ) =>
+                                            generalSetting.settingName ===
+                                            Constants.IsAutomatedApprovalServices,
+                                    )?.settingValue ?? 'false',
+                                ),
+                            ),
+                        );
+                        this.frmGeneralSettings.controls.IsAutomatedApprovalPhoneNumbers.setValue(
+                            Boolean(
+                                JSON.parse(
+                                    generalSettings.find(
+                                        (
+                                            generalSetting: GeneralSettingsModel,
+                                        ) =>
+                                            generalSetting.settingName ===
+                                            Constants.IsAutomatedApprovalPhoneNumbers,
+                                    )?.settingValue ?? 'false',
+                                ),
+                            ),
+                        );
+
+                        this.frmGeneralSettings.controls.IsJoinEmployeesWithLimitValue.setValue(
+                            Boolean(
+                                JSON.parse(
+                                    generalSettings.find(
+                                        (
+                                            generalSetting: GeneralSettingsModel,
+                                        ) =>
+                                            generalSetting.settingName ===
+                                            Constants.IsJoinEmployeesWithLimitValue,
+                                    )?.settingValue ?? 'false',
+                                ),
+                            ),
+                        );
                     }
                     this.generalSettingsListCurrent = generalSettings;
                     return this.typePhoneNumberService.getAllTypesPhoneNumber();
@@ -913,6 +972,42 @@ export class GeneralSettingsComponent implements OnInit {
             (generalSettingsModel.settingName = Constants.TaxAmount),
                 (generalSettingsModel.settingValue = String(
                     this.frmGeneralSettings.controls.TaxAmount.value,
+                ));
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName =
+                Constants.IsAutomatedApprovalBills),
+                (generalSettingsModel.settingValue = String(
+                    this.frmGeneralSettings.controls.IsAutomatedApprovalBills
+                        .value,
+                ));
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName =
+                Constants.IsAutomatedApprovalServices),
+                (generalSettingsModel.settingValue = String(
+                    this.frmGeneralSettings.controls.IsAutomatedApprovalServices
+                        .value,
+                ));
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName =
+                Constants.IsAutomatedApprovalPhoneNumbers),
+                (generalSettingsModel.settingValue = String(
+                    this.frmGeneralSettings.controls
+                        .IsAutomatedApprovalPhoneNumbers.value,
+                ));
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName =
+                Constants.IsJoinEmployeesWithLimitValue),
+                (generalSettingsModel.settingValue = String(
+                    this.frmGeneralSettings.controls
+                        .IsJoinEmployeesWithLimitValue.value,
                 ));
             this.generalSettingsListNew.push(generalSettingsModel);
 

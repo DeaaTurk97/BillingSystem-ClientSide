@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './imports/material.module';
 import { components } from './components';
 import { directives } from './directives';
@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         MaterialModule,
         ReactiveFormsModule,
         FlexLayoutModule,
@@ -21,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ],
     exports: [
         CommonModule,
+        FormsModule,
         MaterialModule,
         ReactiveFormsModule,
         FlexLayoutModule,

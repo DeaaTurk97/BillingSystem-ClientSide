@@ -27,7 +27,7 @@
                             color="primary"
                             [disabled]="
                                 countDefinedNumbers > 0 ||
-                                countServicesNeedApproved > 0 ||
+                                countServicesNeedApproval > 0 ||
                                 isSubmitByAdmin
                             "
                             (click)="submitBill()"
@@ -67,11 +67,11 @@
                             type="submit"
                             color="primary"
                             (click)="onSetServiceType()"
-                            [matBadge]="countServicesNeedApproved"
+                            [matBadge]="countServicesNeedApproval"
                             matBadgePosition="after"
                             matBadgeColor="warn"
                             [disabled]="
-                                countServicesNeedApproved === 0 ||
+                                countServicesNeedApproval === 0 ||
                                 isSubmitByAdmin
                             "
                         >

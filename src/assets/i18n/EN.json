@@ -325,5 +325,12 @@
     "simCardType": "SIM Card Type",
     "servicePrice": "service Price",
     "servicesPrices": "services Prices",
-    "TaxAmount": "Tax Amount"
+    "TaxAmount": "Tax Amount",
+    "AutomatedApprovalBills": "Automated approval of bills",
+    "AutomatedApprovalServices": "Automated Approval of Services",
+    "AutomatedApprovalPhoneNumbers": "Automated Approval of Phone Numbers",
+    "ReminderStaff": "Reminder Staff",
+    "SureWantReminderStaff": "Are you sure you want to Reminder Staff ?",
+    "JoinEmployeesWithLimitValue": "Join Employees to the allowed bill value",
+    "ReminderStaffSuccessfully": "Reminder Staff Successfully"
 }
