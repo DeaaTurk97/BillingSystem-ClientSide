@@ -45,6 +45,7 @@ export class AddServiceUsedComponent implements OnInit {
             ServicePrice: [null],
             IsCalculatedValue: [false, Validators.required],
             IsNeedApproved: [false, Validators.required],
+            NonOfficial: [false, Validators.required],
         });
     }
 
@@ -65,6 +66,9 @@ export class AddServiceUsedComponent implements OnInit {
             );
             this.frmAddNew.controls.ServicePrice.setValue(
                 this.serviceUsedModel.servicePrice,
+            );
+            this.frmAddNew.controls.NonOfficial.setValue(
+                this.serviceUsedModel.nonOfficial,
             );
         }
     }

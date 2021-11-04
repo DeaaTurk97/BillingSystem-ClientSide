@@ -8,7 +8,6 @@ import { LanguagesService } from '@app/infrastructure/core/services/language/lan
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { LanguageModel } from '@app/infrastructure/models/project/LanguageModel';
 import { NotificationType } from '@app/infrastructure/models/SystemEnum';
-import { ChattingComponent } from '@app/infrastructure/shared/components/chatting/chatting.component';
 import { MonthsNames } from '@app/infrastructure/shared/Services/CommonMemmber';
 import { TranslateService } from '@ngx-translate/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -211,7 +210,9 @@ export class AppHeaderComponent implements OnInit {
                                             '/' +
                                             billSummary.userId +
                                             '/' +
-                                            billSummary.submittedByAdmin,
+                                            billSummary.submittedByAdmin +
+                                            '/' +
+                                            billSummary.isPaid,
                                     ]);
                                 });
                         } else {

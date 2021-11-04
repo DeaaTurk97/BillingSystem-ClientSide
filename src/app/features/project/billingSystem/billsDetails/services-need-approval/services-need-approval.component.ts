@@ -88,7 +88,7 @@ export class ServicesNeedApprovalComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    servicesNeedApproved() {
+    servicesNeedApproval() {
         this.typePhoneNumberService
             .ServicesSubmitted(
                 this.form.controls.unDefinedNumber.value,

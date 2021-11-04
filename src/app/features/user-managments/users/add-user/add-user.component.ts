@@ -205,7 +205,6 @@ export class AddUserComponent implements OnInit {
     sumServicesPrices() {
         this.serviceAmount = 0;
         this.frmAddNew.controls.ServicesUsedId.value.forEach((element) => {
-            debugger;
             let serviceSelected = this.servicesUsedModel.find(
                 (x) => x.id === element,
             );

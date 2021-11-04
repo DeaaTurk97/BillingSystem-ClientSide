@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '@app/infrastructure/core/services/auth/user.service';
 import { CallDetailsService } from '@app/infrastructure/core/services/billingSystem/call-details-service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
@@ -62,6 +62,7 @@ export class BillsDetailsListComponent implements OnInit {
         private userService: UserService,
         private changeDetectorRef: ChangeDetectorRef,
         private dialog: MatDialog,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -262,6 +263,8 @@ export class BillsDetailsListComponent implements OnInit {
 
                     //Invoke For SuperAdmin and admin group only
                     this.notify.invokeApprovalsCycleNumbersAndBills(result);
+                    //add this to redirect bills summary
+                    this.router.navigateByUrl('bills/billsSummary-list');
                 }
             });
     }
@@ -289,8 +292,8 @@ export class BillsDetailsListComponent implements OnInit {
                             dialogResult,
                         );
 
-                        // Adding this to refresh undefind numbers data
-                        return this.callDetailsService.GetAllUndefinedNumbers(
+                        // Adding this to refresh undefind service data
+                        return this.callDetailsService.GetServicesNeedApproval(
                             this.billId,
                         );
                     } else {
@@ -298,10 +301,12 @@ export class BillsDetailsListComponent implements OnInit {
                         return of(null); //Must return null
                     }
                 }),
-                mergeMap((unDefinedNumbers) => {
-                    if (unDefinedNumbers) {
-                        this.unDefinedNumberModel = unDefinedNumbers.dataRecord;
-                        this.countDefinedNumbers = unDefinedNumbers.countRecord;
+                mergeMap((servicesNeedApproval) => {
+                    if (servicesNeedApproval) {
+                        this.servicesNeedApprovedModel =
+                            servicesNeedApproval.dataRecord;
+                        this.countServicesNeedApproval =
+                            servicesNeedApproval.countRecord;
                     }
 
                     return of({});

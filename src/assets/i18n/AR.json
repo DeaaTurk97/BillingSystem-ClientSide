@@ -343,5 +343,6 @@
     "ReminderStaff": "تذكير الموظفين",
     "SureWantReminderStaff": "هل أنت متأكد من تذكير الموظفين",
     "JoinEmployeesWithLimitValue": "ربط المستخدمين بقيمة الفاتورة المسموح بها",
-    "ReminderStaffSuccessfully": "تم تذكير الموظفين بنجاح"
+    "ReminderStaffSuccessfully": "تم تذكير الموظفين بنجاح",
+    "nonOfficial": "غير رسمي"
 }

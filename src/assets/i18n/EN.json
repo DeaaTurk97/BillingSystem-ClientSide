@@ -280,7 +280,7 @@
     "CancelBillSubmit": "CancelBillSubmit",
     "ErrorOnSubmitBill": "Error On Submit Bill",
     "SubmittedSuccessfully": "Submitted Successfully",
-    "NewBillsWasUploaded": "NewBillsWasUploaded",
+    "NewBillsWasUploaded": "New Bills Was Uploaded",
     "PhoneNumbersSubmittedWasRejected": "Phone Numbers Submitted Was Rejected",
     "ComingBills": "Coming Bills",
     "statusBill": "statusBill",
@@ -332,5 +332,6 @@
     "ReminderStaff": "Reminder Staff",
     "SureWantReminderStaff": "Are you sure you want to Reminder Staff ?",
     "JoinEmployeesWithLimitValue": "Join Employees to the allowed bill value",
-    "ReminderStaffSuccessfully": "Reminder Staff Successfully"
+    "ReminderStaffSuccessfully": "Reminder Staff Successfully",
+    "nonOfficial": "Non Official"
 }

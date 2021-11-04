@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { State, ActionRowGrid } from '../../Services/CommonMemmber';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { DynamicColumn } from '@app/infrastructure/models/gridAddColumns-model';

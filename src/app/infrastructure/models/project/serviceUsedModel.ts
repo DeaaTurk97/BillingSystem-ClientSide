@@ -5,4 +5,5 @@ export interface ServiceUsedModel {
     servicePrice: number;
     isCalculatedValue: boolean;
     isNeedApproved: boolean;
+    nonOfficial: boolean;
 }
