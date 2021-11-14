@@ -14,7 +14,7 @@
     "MustIncludeValidEmailAddress": "You must include a valid email address.",
     "MustIncludePhoneNo": "You must include a phone number.",
     "MustIncludePassword": "You must include password.",
-    "PasswordConsistsNineDigits": "The password is 9 digits",
+    "PasswordConsistsNineDigits": "The password is more than 8 digits and complexe",
     "MustIncludeConfirmPassword": "You must include confirm password.",
     "PasswordsDonotMatch": "Passwords do not match.",
     "AgreeAll": "I agree to the all",
@@ -333,5 +333,11 @@
     "SureWantReminderStaff": "Are you sure you want to Reminder Staff ?",
     "JoinEmployeesWithLimitValue": "Join Employees to the allowed bill value",
     "ReminderStaffSuccessfully": "Reminder Staff Successfully",
-    "nonOfficial": "Non Official"
+    "nonOfficial": "Non Official",
+    "changePassword": "Change password",
+    "oldPassword": "Old password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "PasswordChangedSuccessfully": "Password Changed Successfully",
+    "PasswordChangedNotSuccessfully": "Password Changed Not Successfully"
 }

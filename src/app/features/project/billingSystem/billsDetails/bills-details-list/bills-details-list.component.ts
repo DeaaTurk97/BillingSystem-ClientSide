@@ -221,7 +221,9 @@ export class BillsDetailsListComponent implements OnInit {
                     this.notify.showTranslateMessage('ErrorOnUpdate');
                 }),
             )
-            .subscribe((result) => {});
+            .subscribe((result) => {
+                this.changeDetectorRef.detectChanges();
+            });
     }
 
     submitBill() {
@@ -315,6 +317,8 @@ export class BillsDetailsListComponent implements OnInit {
                     this.notify.showTranslateMessage('ErrorOnUpdate');
                 }),
             )
-            .subscribe((result) => {});
+            .subscribe((result) => {
+                this.changeDetectorRef.detectChanges();
+            });
     }
 }

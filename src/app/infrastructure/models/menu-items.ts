@@ -367,13 +367,24 @@ const MENUITEMS = [
         name: 'users',
         type: 'sub',
         icon: 'people',
-        roles: [UserType.SuperAdmin, UserType.AdminGroup],
+        roles: [UserType.SuperAdmin, UserType.AdminGroup, UserType.Employee],
         children: [
             {
                 state: 'users-list',
                 name: 'users',
                 type: 'link',
                 roles: [UserType.SuperAdmin, UserType.AdminGroup],
+            },
+            {
+                state: 'change-password',
+                name: 'changePassword',
+                type: 'link',
+                roles: [
+                    UserType.SuperAdmin,
+                    UserType.AdminGroup,
+                    UserType.Employee,
+                    UserType.Guest,
+                ],
             },
         ],
     },

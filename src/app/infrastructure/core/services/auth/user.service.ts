@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
 import { LanguageModel } from '@app/infrastructure/models/project/LanguageModel';
 import { Constants } from '@app/infrastructure/utils/constants';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root',
@@ -102,6 +103,17 @@ export class UserService {
     getUsersByCurrentRole(): Observable<any> {
         return this.apiService.get(
             `${environment.apiRoute}/User/GetUsersByCurrentRole`,
+        );
+    }
+    changePassword(oldPassword: string, newPassword: string): Observable<any> {
+        const params = new HttpParams()
+            .set('oldPassword', oldPassword)
+            .set('newPassword', newPassword);
+
+        return this.apiService.post(
+            `${environment.apiRoute}/User/ChangePassword`,
+            null,
+            { params: params },
         );
     }
 }

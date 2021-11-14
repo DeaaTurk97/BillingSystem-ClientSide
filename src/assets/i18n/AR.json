@@ -344,5 +344,11 @@
     "SureWantReminderStaff": "هل أنت متأكد من تذكير الموظفين",
     "JoinEmployeesWithLimitValue": "ربط المستخدمين بقيمة الفاتورة المسموح بها",
     "ReminderStaffSuccessfully": "تم تذكير الموظفين بنجاح",
-    "nonOfficial": "غير رسمي"
+    "nonOfficial": "غير رسمي",
+    "changePassword": "تغيير كلمة المرور",
+    "oldPassword": "كلمة المرور القديمة",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "PasswordChangedSuccessfully": "تم تغيير الرقم السري بنجاح",
+    "PasswordChangedNotSuccessfully": "لم تم تغيير الرقم السري بنجاح"
 }

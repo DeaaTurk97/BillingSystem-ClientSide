@@ -225,6 +225,7 @@ export class UploadBillsLebanonComponent implements OnInit {
                     this.notify.invokeApprovalsCycleNumbersAndBills(result);
                     this.notify.showTranslateMessage(
                         'ReminderStaffSuccessfully',
+                        false,
                     );
                 }
             });
