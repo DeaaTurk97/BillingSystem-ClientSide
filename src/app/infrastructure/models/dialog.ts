@@ -4,6 +4,7 @@ export interface IConfirmDialogConfig {
     messageList: string[];
     action: string;
     showCancel: boolean;
+    email: string;
 }
 
 export class ConfirmDialogConfig implements IConfirmDialogConfig {
@@ -12,6 +13,7 @@ export class ConfirmDialogConfig implements IConfirmDialogConfig {
     messageList: string[] = ['Do you want to continue?'];
     action: string = 'Confirm';
     showCancel: boolean = true;
+    email: string = '';
 
     constructor(configOverride?: Partial<IConfirmDialogConfig>) {
         if (configOverride) {

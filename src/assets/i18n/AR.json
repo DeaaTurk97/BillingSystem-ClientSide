@@ -350,5 +350,8 @@
     "newPassword": "كلمة المرور الجديدة",
     "confirmPassword": "تأكيد كلمة المرور",
     "PasswordChangedSuccessfully": "تم تغيير الرقم السري بنجاح",
-    "PasswordChangedNotSuccessfully": "لم تم تغيير الرقم السري بنجاح"
+    "PasswordChangedNotSuccessfully": "لم تم تغيير الرقم السري بنجاح",
+    "OtpCodeHaveBeenSentSuccessfully": "تم إرسال كود التحقق على الإيميل بنجاح",
+    "VerifyEmailOtpCode": "رمز التحقق من الايميل",
+    "VerificationCode ": "رمز التحقق"
 }

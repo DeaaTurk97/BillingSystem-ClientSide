@@ -1,8 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+    Inject,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@app/infrastructure/core/services/auth/auth.service';
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
+import { ResetPasswordModel } from '@app/infrastructure/models/resetPasswordModel';
 import { Constants } from '@app/infrastructure/utils/constants';
 import { tap } from 'rxjs/operators';
 
@@ -16,33 +23,30 @@ export class ResetPasswordComponent implements OnInit {
     frmResetPassword: FormGroup;
     public isHidePassword: boolean = true;
     public isHidePasswordConfirm: boolean = true;
-    public passwordPattern: RegExp = Constants.patterns.DIGIT_REGEX;
+    public passwordPattern: RegExp = Constants.patterns.PASSWORD_REGEX;
     public tokenUrl: string = '';
     public email: string = '';
 
     constructor(
         private formBuilder: FormBuilder,
-        private activatedRoute: ActivatedRoute,
         private authService: AuthService,
         private router: Router,
         private notify: NotificationService,
-    ) {}
+    ) {
+        this.email = this.router.getCurrentNavigation().extras.state.email;
+        this.tokenUrl = this.router.getCurrentNavigation().extras.state.tokenCode;
+    }
 
     ngOnInit(): void {
-        this.tokenUrl = String(
-            this.activatedRoute.snapshot.paramMap.get('token'),
-        );
-        this.email = String(this.activatedRoute.snapshot.paramMap.get('email'));
-
         this.ngInitialControlForm();
     }
 
     ngInitialControlForm() {
         this.frmResetPassword = this.formBuilder.group({
             Email: [this.email],
+            Token: [this.tokenUrl],
             PasswordHash: [null, Validators.required],
             ConfirmPassword: [null, Validators.required],
-            Token: [this.tokenUrl],
         });
     }
 

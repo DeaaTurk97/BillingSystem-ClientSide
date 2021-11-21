@@ -28,7 +28,7 @@ const routes: Routes = [
                 data: { title: 'Register' },
             },
             {
-                path: 'reset-password/:token/:email',
+                path: 'reset-password',
                 component: ResetPasswordComponent,
                 data: { title: 'ResetPassword' },
             },

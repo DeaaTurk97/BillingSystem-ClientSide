@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { environment } from '@env/environment';
 import { TokenService } from '../token.service';
+import { VerificationCodeModel } from '@app/infrastructure/models/verificationCode';
 const CONTROLLER_NAME: string = 'Authintecation';
 
 @Injectable({
@@ -38,14 +39,13 @@ export class AuthService {
     }
 
     forgotPassword(forgotPassword: string): Observable<any> {
-        return this.apiService
-            .post(`${environment.apiRoute}/${CONTROLLER_NAME}/ForgotPassword`, {
-                email: forgotPassword,
-            })
-            .pipe(
-                tap((response: any) => {}),
-                catchError((e) => throwError(e)),
-            );
+        const params = new HttpParams().set('userEmail', forgotPassword);
+
+        return this.apiService.post(
+            `${environment.apiRoute}/${CONTROLLER_NAME}/ForgotPassword`,
+            null,
+            { params: params },
+        );
     }
 
     resetPassword(resetEmail: any): Observable<any> {
@@ -121,5 +121,14 @@ export class AuthService {
 
     private clearSession(): void {
         this.tokenService.resetAuthToken();
+    }
+
+    verifyEmailCode(
+        verificationCodeModel: VerificationCodeModel,
+    ): Observable<any> {
+        return this.apiService.post(
+            `${environment.apiRoute}/Authintecation/VerifyEmailCode`,
+            verificationCodeModel,
+        );
     }
 }

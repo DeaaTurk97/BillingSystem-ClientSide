@@ -1,0 +1,127 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+                <h2 mat-dialog-title>{{ dialog.title }}</h2>
+                <mat-dialog-content class="content-container">
+                    <ng-container *ngFor="let message of dialog.messageList">
+                        <p class="content-span full-width">
+                            {{ message | translate }}
+                        </p>
+                    </ng-container>
+                </mat-dialog-content>
+                <div fxLayout="row wrap">
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                        <ng-template>
+                            <mat-form-field style="width: 100%">
+                                <input
+                                    value="dialog.email"
+                                    matInput
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </ng-template>
+                    </div>
+                    <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100">
+                        <mat-form-field style="width: 100%">
+                            <input
+                                [(ngModel)]="FirstNumber"
+                                matInput
+                                type="text"
+                                autocomplete="off"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100">
+                        <mat-form-field style="width: 100%">
+                            <input
+                                [(ngModel)]="SecondNumbre"
+                                matInput
+                                type="text"
+                                autocomplete="off"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100">
+                        <mat-form-field style="width: 100%">
+                            <input
+                                [(ngModel)]="ThirdNumber"
+                                matInput
+                                type="text"
+                                autocomplete="off"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100">
+                        <mat-form-field style="width: 100%">
+                            <input
+                                [(ngModel)]="FourthNumber"
+                                matInput
+                                type="text"
+                                autocomplete="off"
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-dialog-actions>
+                    <ng-container *ngIf="dialog.showCancel">
+                        <button
+                            id="cancel-button"
+                            class="mat-elevation-z0"
+                            type="button"
+                            mat-raised-button
+                            [mat-dialog-close]="false"
+                        >
+                            {{ 'Cancel' | translate | uppercase }}
+                        </button>
+                    </ng-container>
+                    <button
+                        id="form-submit-button"
+                        class="mat-elevation-z8"
+                        type="submit"
+                        mat-raised-button
+                        color="accent"
+                        [mat-dialog-close]="true"
+                        cdkFocusInitial
+                        (click)="submit()"
+                    >
+                        {{ dialog.action | translate | uppercase }}
+                    </button>
+                </mat-dialog-actions>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <h2 mat-dialog-title>{{ dialog.title }}</h2>
+<mat-dialog-content class="content-container">
+    <ng-container *ngFor="let message of dialog.messageList">
+        <p class="content-span full-width">{{ message | translate }}</p>
+    </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <ng-container *ngIf="dialog.showCancel">
+        <button
+            id="cancel-button"
+            class="mat-elevation-z0"
+            type="button"
+            mat-raised-button
+            [mat-dialog-close]="false"
+        >
+            {{ 'Cancel' | translate | uppercase }}
+        </button>
+    </ng-container>
+    <button
+        id="form-submit-button"
+        class="mat-elevation-z0"
+        type="submit"
+        mat-raised-button
+        color="accent"
+        [mat-dialog-close]="true"
+        cdkFocusInitial
+        (click)="submit()"
+    >
+        {{ dialog.action | translate | uppercase }}
+    </button>
+</mat-dialog-actions> -->

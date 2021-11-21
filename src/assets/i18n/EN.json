@@ -339,5 +339,8 @@
     "newPassword": "New password",
     "confirmPassword": "Confirm password",
     "PasswordChangedSuccessfully": "Password Changed Successfully",
-    "PasswordChangedNotSuccessfully": "Password Changed Not Successfully"
+    "PasswordChangedNotSuccessfully": "Password Changed Not Successfully",
+    "OtpCodeHaveBeenSentSuccessfully": "The Verification Code has been sent successfully.",
+    "VerifyEmailOtpCode": "Verification Email Otp Code",
+    "VerificationCode ": "Verification Code"
 }
