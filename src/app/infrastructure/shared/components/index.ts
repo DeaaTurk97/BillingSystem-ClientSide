@@ -13,6 +13,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ChattingComponent } from './chatting/chatting.component';
 import { CriteriaFilterComponent } from './criteria-filter-component/criteria-filter.component';
 import { ReportExportComponent } from './report-export/report-export.component';
+import { VerificationOtpCodeComponent } from './verification-otp-code/verification-otp-code.component';
 
 /**
  * Add components that do not need to be specifically referenced.
@@ -33,4 +34,5 @@ export const components = [
     ChattingComponent,
     CriteriaFilterComponent,
     ReportExportComponent,
+    VerificationOtpCodeComponent,
 ];
