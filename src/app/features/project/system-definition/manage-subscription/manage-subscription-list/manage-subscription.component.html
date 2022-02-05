@@ -1,0 +1,67 @@
+<mat-card>
+    <div>
+        <h4 class="padding-header">Manage Subscription</h4>
+    </div>
+
+    <mat-card-content>
+        <mat-form-field class="fields padding-fields">
+            <mat-label>{{ 'Mobile Number' | translate }}</mat-label>
+            <input
+                matInput
+                placeholder="{{ 'Mobile Number' | translate }}"
+                type="text"
+                type="number"
+                autocomplete="off"
+            />
+        </mat-form-field>
+
+        <mat-form-field class="fields padding-fields">
+            <mat-label>{{ 'Current Subscriber' | translate }}</mat-label>
+            <input
+                matInput
+                placeholder="{{ 'Current Subscriber' | translate }}"
+                type="text"
+                type="number"
+                autocomplete="off"
+            />
+        </mat-form-field>
+
+        <mat-form-field class="fields padding-fields">
+            <mat-label>{{ 'Change to' | translate }}</mat-label>
+            <input
+                matInput
+                placeholder="{{ 'Change to' | translate }}"
+                type="text"
+                type="number"
+                autocomplete="off"
+            />
+        </mat-form-field>
+
+        <mat-form-field class="fields padding-fields">
+            <mat-label>{{ 'Effective Date' | translate }}</mat-label>
+            <input
+                matInput
+                placeholder="{{ 'Mobile Number' | translate }}"
+                type="text"
+                type="number"
+                autocomplete="off"
+            />
+        </mat-form-field>
+
+        <mat-card-content>
+            <button mat-raised-button color="primary" class="button">
+                {{ 'Show History' | translate }}
+            </button>
+
+            <button
+                mat-raised-button
+                type="submit"
+                color="primary"
+                [disabled]=""
+                class="button"
+            >
+                {{ 'Save' | translate }}
+            </button>
+        </mat-card-content>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,276 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+                <form novalidate [formGroup]="formAddNew">
+                    <div fxLayout="row wrap">
+                        <div
+                            class="p-12"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <ng-template>
+                                <mat-form-field style="width: 100%">
+                                    <input
+                                        matInput
+                                        placeholder="Id"
+                                        formControlName="Id"
+                                        type="text"
+                                    />
+                                </mat-form-field>
+                            </ng-template>
+                        </div>
+
+                        <div
+                            class="p-12"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <mat-label>{{ 'Name' | translate }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'Name' | translate }}"
+                                    formControlName="Name"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-12"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'Description' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'Description' | translate
+                                    }}"
+                                    formControlName="Description"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-12"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <mat-label>{{ 'Code' | translate }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'Code' | translate }}"
+                                    formControlName="Code"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-12"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <mat-label>{{ 'Price' | translate }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'Price' | translate }}"
+                                    formControlName="Price"
+                                    type="number"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <ng-container formArrayName="PlanServices">
+                            <div
+                                class="p-12"
+                                fxFlex.gt-sm="100"
+                                fxFlex.gt-xs="100"
+                                fxFlex="100"
+                                *ngFor="
+                                    let service of PlanServicesForm.controls;
+                                    let i = index
+                                "
+                                [formGroupName]="i"
+                            >
+                                <mat-form-field style="width: 100%">
+                                    <mat-label>{{
+                                        'Services' | translate
+                                    }}</mat-label>
+                                    <mat-select
+                                        placeholder="{{
+                                            'allocatedServices' | translate
+                                        }}"
+                                        formControlName="PlanService"
+                                    >
+                                        <mat-option
+                                            *ngFor="let service of services"
+                                            [value]="service.id"
+                                        >
+                                            {{ service.serviceUsedNameAr }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <div
+                                    class="p-12"
+                                    fxFlex.gt-sm="100"
+                                    fxFlex.gt-xs="100"
+                                    fxFlex="100"
+                                >
+                                    <mat-form-field style="width: 100%">
+                                        <mat-label>{{
+                                            'Limit' | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'Limit' | translate
+                                            }}"
+                                            formControlName="Limit"
+                                            type="number"
+                                            autocomplete="off"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    class="p-12"
+                                    fxFlex.gt-sm="100"
+                                    fxFlex.gt-xs="100"
+                                    fxFlex="100"
+                                >
+                                    <mat-form-field style="width: 100%">
+                                        <mat-label>{{
+                                            'Unit' | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'Unit' | translate
+                                            }}"
+                                            formControlName="Unit"
+                                            type="text"
+                                            autocomplete="off"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    class="p-12"
+                                    fxFlex.gt-sm="100"
+                                    fxFlex.gt-xs="100"
+                                    fxFlex="100"
+                                >
+                                    <mat-form-field style="width: 100%">
+                                        <mat-label>{{
+                                            'Additional Unit' | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'Additional Unit' | translate
+                                            }}"
+                                            formControlName="AdditionalUnit"
+                                            type="text"
+                                            autocomplete="off"
+                                        />
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    class="p-12"
+                                    fxFlex.gt-sm="100"
+                                    fxFlex.gt-xs="100"
+                                    fxFlex="100"
+                                >
+                                    <mat-form-field style="width: 100%">
+                                        <mat-label>{{
+                                            'Additional Unit Price' | translate
+                                        }}</mat-label>
+                                        <input
+                                            matInput
+                                            placeholder="{{
+                                                'Additional Unit Price'
+                                                    | translate
+                                            }}"
+                                            formControlName="AdditionalUnitPrice"
+                                            type="number"
+                                            autocomplete="off"
+                                        />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="15"
+                            fxFlex.gt-xs="15"
+                            fxFlex="100"
+                            style="float: right"
+                        >
+                            <button
+                                mat-raised-button
+                                (click)="addService()"
+                                color="primary"
+                            >
+                                {{ 'Add Service' | translate }}
+                            </button>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="15"
+                            fxFlex.gt-xs="15"
+                            fxFlex="100"
+                        >
+                            <button
+                                mat-raised-button
+                                [mat-dialog-close]="false"
+                                color="warn"
+                            >
+                                <mat-icon>close</mat-icon>
+                                {{ 'Close' | translate }}
+                            </button>
+                        </div>
+
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="15"
+                            fxFlex.gt-xs="15"
+                            fxFlex="100"
+                        >
+                            <button
+                                mat-raised-button
+                                type="submit"
+                                color="primary"
+                                (click)="onSubmit()"
+                                [disabled]="!formAddNew.valid || isInProgress"
+                            >
+                                <mat-icon>save</mat-icon>
+                                {{ 'Save' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
