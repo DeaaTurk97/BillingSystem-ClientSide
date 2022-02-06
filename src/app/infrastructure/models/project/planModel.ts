@@ -6,5 +6,5 @@ export class PlanModel {
     description: string;
     code: string;
     price: number;
-    PlanServices: PlanServiceModel;
+    planServices: PlanServiceModel;
 }

@@ -59,6 +59,7 @@ export class CreatePlanComponent implements OnInit {
     loadServiceUsedData() {
         this.sericeUsedService.getAllServicesUsed().subscribe((result) => {
             this.services = result;
+            console.log(this.services);
         });
     }
 
@@ -79,6 +80,10 @@ export class CreatePlanComponent implements OnInit {
         return this.formBuilder.control('');
     }
 
+    removeService() {
+        this.PlanServicesForm.clearAsyncValidators();
+    }
+
     ngInitialControlForm() {
         this.formAddNew = this.formBuilder.group({
             Id: [0],
@@ -88,11 +93,11 @@ export class CreatePlanComponent implements OnInit {
             Price: [null],
             PlanServices: this.formBuilder.array([
                 this.formBuilder.group({
-                    PlanService: [null],
-                    Limit: [null],
-                    Unit: [''],
-                    AdditionalUnit: [''],
-                    AdditionalUnitPrice: [null],
+                    planService: [null],
+                    limit: [null],
+                    unit: [''],
+                    additionalUnit: [''],
+                    additionalUnitPrice: [null],
                 }),
             ]),
         });
@@ -106,6 +111,7 @@ export class CreatePlanComponent implements OnInit {
 
     setPlanDetails() {
         if (this.planModel) {
+            console.log(this.planModel);
             this.formAddNew.controls.Id.setValue(this.planModel.id);
             this.formAddNew.controls.Name.setValue(this.planModel.name);
             this.formAddNew.controls.Description.setValue(
@@ -113,22 +119,24 @@ export class CreatePlanComponent implements OnInit {
             );
             this.formAddNew.controls.Code.setValue(this.planModel.code);
             this.formAddNew.controls.Price.setValue(this.planModel.price);
-            this.formAddNew.controls.PlanService.setValue(
-                this.planServiceModel.planService,
+
+            this.formAddNew.controls.PlanServices.setValue(
+                this.planModel.planServices[0].planService,
             );
             this.formAddNew.controls.Limit.setValue(
-                this.planServiceModel.limit,
+                this.planModel.planServices[0].limit,
             );
-            this.formAddNew.controls.Unit.setValue(this.planServiceModel.unit);
+            this.formAddNew.controls.Unit.setValue(
+                this.planModel.planServices[0].unit,
+            );
             this.formAddNew.controls.AdditionalUnit.setValue(
-                this.planServiceModel.additionalUnit,
+                this.planModel.planServices[0].additionalUnit,
             );
             this.formAddNew.controls.AdditionalUnitPrice.setValue(
-                this.planServiceModel.additionalUnitPrice,
+                this.planModel.planServices[0].additionalUnitPrice,
             );
         }
     }
-
     // updateData(index: number) {
     //   this.PlanServicesForm.at(index).get('PlanServices').setValue([
     //     this.formAddNew.controls.PlanService.setValue(this.planServiceModel.planService),

@@ -142,6 +142,28 @@
                             fxFlex="100"
                         >
                             <mat-form-field>
+                                <mat-label>{{ 'Plans' | translate }}</mat-label>
+                                <mat-select
+                                    placeholder="{{ 'Plans' | translate }}"
+                                    formControlName="PlanId"
+                                >
+                                    <mat-option
+                                        *ngFor="let plan of plans"
+                                        [value]="plan.id"
+                                    >
+                                        {{ plan.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- <div
+                            class="p-10"
+                            fxFlex.gt-sm="75"
+                            fxFlex.gt-xs="75"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
                                 <mat-label>{{
                                     'allocatedServices' | translate
                                 }}</mat-label>
@@ -163,7 +185,7 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                        </div>
+                        </div> -->
 
                         <div
                             class="p-10"

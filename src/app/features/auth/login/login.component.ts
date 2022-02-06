@@ -60,11 +60,10 @@ export class LoginComponent implements OnInit {
             (error) => {
                 this.isInProgress = false;
                 this.notify.showTranslateMessage('InvalidPhoneNumberMessge');
-            },
-            () => {
                 this.loginForm.reset();
                 this.isInProgress = false;
             },
+            () => {},
         );
     }
 
