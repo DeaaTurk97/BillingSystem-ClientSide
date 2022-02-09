@@ -6,20 +6,48 @@
                     <div fxLayout="row wrap">
                         <!-- col full-->
                         <div
+                            *ngIf="ID === 0"
                             class="p-10"
                             fxFlex.gt-sm="33.333"
                             fxFlex.gt-xs="33.333"
                             fxFlex="100"
                         >
                             <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'User Name' | translate
+                                }}</mat-label>
                                 <input
                                     matInput
-                                    placeholder="{{ 'userName' | translate }}"
+                                    placeholder="{{ 'User Name' | translate }}"
                                     type="text"
                                     [formControl]="
                                         frmAddNew.controls['UserName']
                                     "
                                     autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            *ngIf="ID"
+                            class="p-10"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'User Name' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'User Name' | translate }}"
+                                    type="text"
+                                    [formControl]="
+                                        frmAddNew.controls['UserName']
+                                    "
+                                    autocomplete="off"
+                                    readonly
                                 />
                             </mat-form-field>
                         </div>
@@ -31,10 +59,13 @@
                             fxFlex="100"
                         >
                             <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'Email Address' | translate
+                                }}</mat-label>
                                 <input
                                     matInput
                                     placeholder="{{
-                                        'EmailAddress' | translate
+                                        'Email Address' | translate
                                     }}"
                                     type="email"
                                     [formControl]="frmAddNew.controls['Email']"
@@ -50,10 +81,13 @@
                             fxFlex="100"
                         >
                             <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'Phone Number' | translate
+                                }}</mat-label>
                                 <input
                                     matInput
                                     placeholder="{{
-                                        'PhoneNumber' | translate
+                                        'Phone Number' | translate
                                     }}"
                                     type="text"
                                     [formControl]="

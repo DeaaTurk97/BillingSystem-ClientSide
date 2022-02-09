@@ -62,7 +62,7 @@
                             </mat-form-field>
                         </div>
 
-                        <div
+                        <!-- <div
                             class="p-12"
                             fxFlex.gt-sm="100"
                             fxFlex.gt-xs="100"
@@ -78,7 +78,7 @@
                                     autocomplete="off"
                                 />
                             </mat-form-field>
-                        </div>
+                        </div> -->
 
                         <div
                             class="p-12"
@@ -97,11 +97,12 @@
                                 />
                             </mat-form-field>
                         </div>
+
                         <ng-container formArrayName="PlanServices">
                             <div
                                 class="p-12"
-                                fxFlex.gt-sm="100"
-                                fxFlex.gt-xs="100"
+                                fxFlex.gt-sm="110"
+                                fxFlex.gt-xs="110"
                                 fxFlex="100"
                                 *ngFor="
                                     let service of PlanServicesForm.controls;
@@ -109,7 +110,7 @@
                                 "
                                 [formGroupName]="i"
                             >
-                                <mat-form-field style="width: 100%">
+                                <mat-form-field>
                                     <mat-label>{{
                                         'Services' | translate
                                     }}</mat-label>
@@ -117,7 +118,7 @@
                                         placeholder="{{
                                             'allocatedServices' | translate
                                         }}"
-                                        formControlName="PlanService"
+                                        formControlName="planService"
                                     >
                                         <mat-option
                                             *ngFor="let service of services"
@@ -130,11 +131,11 @@
 
                                 <div
                                     class="p-12"
-                                    fxFlex.gt-sm="100"
-                                    fxFlex.gt-xs="100"
+                                    fxFlex.gt-sm="30"
+                                    fxFlex.gt-xs="30"
                                     fxFlex="100"
                                 >
-                                    <mat-form-field style="width: 100%">
+                                    <mat-form-field>
                                         <mat-label>{{
                                             'Limit' | translate
                                         }}</mat-label>
@@ -143,7 +144,7 @@
                                             placeholder="{{
                                                 'Limit' | translate
                                             }}"
-                                            formControlName="Limit"
+                                            formControlName="limit"
                                             type="number"
                                             autocomplete="off"
                                         />
@@ -152,55 +153,37 @@
 
                                 <div
                                     class="p-12"
-                                    fxFlex.gt-sm="100"
-                                    fxFlex.gt-xs="100"
+                                    fxFlex.gt-sm="30"
+                                    fxFlex.gt-xs="30"
                                     fxFlex="100"
                                 >
-                                    <mat-form-field style="width: 100%">
+                                    <mat-form-field>
                                         <mat-label>{{
                                             'Unit' | translate
                                         }}</mat-label>
-                                        <input
-                                            matInput
+                                        <mat-select
                                             placeholder="{{
                                                 'Unit' | translate
                                             }}"
-                                            formControlName="Unit"
-                                            type="text"
-                                            autocomplete="off"
-                                        />
+                                            formControlName="unit"
+                                        >
+                                            <mat-option
+                                                *ngFor="let unit of units"
+                                                [value]="unit.value"
+                                            >
+                                                {{ unit.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
 
                                 <div
                                     class="p-12"
-                                    fxFlex.gt-sm="100"
-                                    fxFlex.gt-xs="100"
+                                    fxFlex.gt-sm="30"
+                                    fxFlex.gt-xs="30"
                                     fxFlex="100"
                                 >
-                                    <mat-form-field style="width: 100%">
-                                        <mat-label>{{
-                                            'Additional Unit' | translate
-                                        }}</mat-label>
-                                        <input
-                                            matInput
-                                            placeholder="{{
-                                                'Additional Unit' | translate
-                                            }}"
-                                            formControlName="AdditionalUnit"
-                                            type="text"
-                                            autocomplete="off"
-                                        />
-                                    </mat-form-field>
-                                </div>
-
-                                <div
-                                    class="p-12"
-                                    fxFlex.gt-sm="100"
-                                    fxFlex.gt-xs="100"
-                                    fxFlex="100"
-                                >
-                                    <mat-form-field style="width: 100%">
+                                    <mat-form-field>
                                         <mat-label>{{
                                             'Additional Unit Price' | translate
                                         }}</mat-label>
@@ -210,11 +193,61 @@
                                                 'Additional Unit Price'
                                                     | translate
                                             }}"
-                                            formControlName="AdditionalUnitPrice"
+                                            formControlName="additionalUnitPrice"
                                             type="number"
                                             autocomplete="off"
                                         />
                                     </mat-form-field>
+                                </div>
+
+                                <div
+                                    class="p-12"
+                                    fxFlex.gt-sm="30"
+                                    fxFlex.gt-xs="30"
+                                    fxFlex="100"
+                                >
+                                    <mat-form-field>
+                                        <mat-label>{{
+                                            'Additional Unit' | translate
+                                        }}</mat-label>
+                                        <mat-select
+                                            placeholder="{{
+                                                'Additional Unit' | translate
+                                            }}"
+                                            formControlName="additionalUnit"
+                                        >
+                                            <mat-option
+                                                *ngFor="let unit of units"
+                                                [value]="unit.value"
+                                            >
+                                                {{ unit.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div
+                                    style="
+                                        padding-left: 0;
+                                        padding-top: 4px;
+                                        width: 45px;
+                                    "
+                                    class="p-10"
+                                    fxFlex.gt-sm="30"
+                                    fxFlex.gt-xs="30"
+                                    fxFlex="100"
+                                >
+                                    <button
+                                        style="height: 3.6rem; padding-top: 0"
+                                        mat-raised-button
+                                        (click)="removeService(i)"
+                                    >
+                                        <img
+                                            class="remove-icon"
+                                            alt="homepage"
+                                            src="assets/images/icon/remove.png"
+                                        />
+                                    </button>
                                 </div>
                             </div>
                         </ng-container>
@@ -243,22 +276,6 @@
                         >
                             <button
                                 mat-raised-button
-                                [mat-dialog-close]="false"
-                                color="warn"
-                            >
-                                <mat-icon>close</mat-icon>
-                                {{ 'Close' | translate }}
-                            </button>
-                        </div>
-
-                        <div
-                            class="p-10"
-                            fxFlex.gt-sm="15"
-                            fxFlex.gt-xs="15"
-                            fxFlex="100"
-                        >
-                            <button
-                                mat-raised-button
                                 type="submit"
                                 color="primary"
                                 (click)="onSubmit()"
@@ -266,6 +283,23 @@
                             >
                                 <mat-icon>save</mat-icon>
                                 {{ 'Save' | translate }}
+                            </button>
+                        </div>
+
+                        <div
+                            style="float: right"
+                            class="p-10"
+                            fxFlex.gt-sm="15"
+                            fxFlex.gt-xs="15"
+                            fxFlex="100"
+                        >
+                            <button
+                                mat-raised-button
+                                [mat-dialog-close]="false"
+                                color="warn"
+                            >
+                                <mat-icon>close</mat-icon>
+                                {{ 'Close' | translate }}
                             </button>
                         </div>
                     </div>

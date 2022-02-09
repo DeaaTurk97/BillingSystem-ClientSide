@@ -45,8 +45,9 @@ export class PlansListComponent implements OnInit {
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.position = { top: '80px' };
-        dialogConfig.width = '60%';
+        dialogConfig.width = '74%';
         dialogConfig.data = data;
+        (dialogConfig.autoFocus = false), (dialogConfig.maxHeight = '90vh');
         return dialogConfig;
     }
 

@@ -17,7 +17,7 @@ import { ServiceUsedService } from '@app/infrastructure/core/services/billingSys
 import { PlanModel } from '@app/infrastructure/models/project/planModel';
 import { PlanServiceModel } from '@app/infrastructure/models/project/planServiceModel';
 import { ServiceUsedModel } from '@app/infrastructure/models/project/serviceUsedModel';
-import { number } from 'ngx-custom-validators/src/app/number/validator';
+import { Unit } from '@app/infrastructure/models/project/unitModel';
 import { of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
@@ -35,6 +35,12 @@ export class CreatePlanComponent implements OnInit {
     public services: ServiceUsedModel;
     public planServiceModel: PlanServiceModel;
     public index;
+    public units: Unit[] = [
+        { value: 'GB', viewValue: 'GB' },
+        { value: 'MB', viewValue: 'MB' },
+        { value: 'Min', viewValue: 'Min' },
+        { value: 'SMS', viewValue: 'SMS' },
+    ];
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public planModel: PlanModel,
@@ -67,11 +73,11 @@ export class CreatePlanComponent implements OnInit {
         console.log(this.PlanServicesForm);
         this.PlanServicesForm.push(
             this.formBuilder.group({
-                PlanService: [null],
-                Limit: [null],
-                Unit: [''],
-                AdditionalUnit: [''],
-                AdditionalUnitPrice: [null],
+                planService: [null],
+                limit: [null],
+                unit: [''],
+                additionalUnit: [''],
+                additionalUnitPrice: [null],
             }),
         );
     }
@@ -80,26 +86,14 @@ export class CreatePlanComponent implements OnInit {
         return this.formBuilder.control('');
     }
 
-    removeService() {
-        this.PlanServicesForm.clearAsyncValidators();
-    }
-
     ngInitialControlForm() {
         this.formAddNew = this.formBuilder.group({
             Id: [0],
             Name: ['', Validators.required],
             Description: ['', Validators.required],
-            Code: ['', Validators.required],
+            Code: [''],
             Price: [null],
-            PlanServices: this.formBuilder.array([
-                this.formBuilder.group({
-                    planService: [null],
-                    limit: [null],
-                    unit: [''],
-                    additionalUnit: [''],
-                    additionalUnitPrice: [null],
-                }),
-            ]),
+            PlanServices: this.formBuilder.array([]),
         });
 
         console.log(this.PlanServicesForm);
@@ -120,20 +114,8 @@ export class CreatePlanComponent implements OnInit {
             this.formAddNew.controls.Code.setValue(this.planModel.code);
             this.formAddNew.controls.Price.setValue(this.planModel.price);
 
-            this.formAddNew.controls.PlanServices.setValue(
-                this.planModel.planServices[0].planService,
-            );
-            this.formAddNew.controls.Limit.setValue(
-                this.planModel.planServices[0].limit,
-            );
-            this.formAddNew.controls.Unit.setValue(
-                this.planModel.planServices[0].unit,
-            );
-            this.formAddNew.controls.AdditionalUnit.setValue(
-                this.planModel.planServices[0].additionalUnit,
-            );
-            this.formAddNew.controls.AdditionalUnitPrice.setValue(
-                this.planModel.planServices[0].additionalUnitPrice,
+            this.planModel.planServices.map((e) =>
+                this.PlanServicesForm.push(this.formBuilder.group(e)),
             );
         }
     }
@@ -170,5 +152,9 @@ export class CreatePlanComponent implements OnInit {
     resetFormBuilder() {
         this.formAddNew.reset();
         this.isInProgress = false;
+    }
+
+    removeService(i: number) {
+        this.PlanServicesForm.removeAt(i);
     }
 }
