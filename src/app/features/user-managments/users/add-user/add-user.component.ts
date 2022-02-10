@@ -55,6 +55,7 @@ export class AddUserComponent implements OnInit {
     public passwordPattern: RegExp = Constants.patterns.DIGIT_REGEX;
     public resultActions: ResultActions = ResultActions.CancelAdd;
     public plans: PlanModel;
+    public totalPrice: number;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public userModel: UserModel,
@@ -69,7 +70,9 @@ export class AddUserComponent implements OnInit {
         private simCardTypeService: SimCardTypeService,
         private simProfileService: SimProfileService,
         private planService: PlanService,
-    ) {}
+    ) {
+        this.loadPlans();
+    }
 
     get ID() {
         return this.frmAddNew.controls.Id.value;
@@ -82,13 +85,16 @@ export class AddUserComponent implements OnInit {
         this.ngInitialControlForm();
         this.loadAllData();
         this.setUserDeails();
-        this.loadPlans();
     }
 
     loadPlans() {
         this.planService.getAllPlans().subscribe((result) => {
             this.plans = result;
         });
+    }
+
+    price(plan) {
+        this.totalPrice = plan.price;
     }
 
     ngInitialControlForm() {
@@ -107,6 +113,8 @@ export class AddUserComponent implements OnInit {
             SimCardTypeId: [null],
             SimProfileId: [null],
             PlanId: [null],
+            Notes: [null],
+            Price: [null],
         });
     }
 
@@ -131,6 +139,7 @@ export class AddUserComponent implements OnInit {
             this.frmAddNew.controls.SimProfileId.setValue(
                 this.userModel.simProfileId,
             );
+            this.frmAddNew.controls.Notes.setValue(this.userModel.notes);
             this.frmAddNew.controls.PlanId.setValue(this.userModel.planId);
         }
     }

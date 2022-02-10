@@ -14,4 +14,5 @@ export interface UserModel {
     simCardTypeId: number;
     simProfileId: number;
     planId: number;
+    notes: string;
 }
