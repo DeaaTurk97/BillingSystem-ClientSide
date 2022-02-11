@@ -439,6 +439,20 @@ const MENUITEMS = [
                 settingName: '',
             },
             {
+                state: 'plans-list',
+                name: 'Plans',
+                type: 'link',
+                roles: [UserType.SuperAdmin],
+                settingName: '',
+            },
+            {
+                state: 'manage-subscription',
+                name: 'Manage Subscription',
+                type: 'link',
+                roles: [UserType.SuperAdmin],
+                settingName: '',
+            },
+            {
                 state: 'servicesUsed-list',
                 name: 'ServicesUsed',
                 type: 'link',

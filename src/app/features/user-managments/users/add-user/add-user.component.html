@@ -6,15 +6,19 @@
                     <div fxLayout="row wrap">
                         <!-- col full-->
                         <div
-                            class="p-10"
+                            *ngIf="ID === 0"
+                            class="p-8"
                             fxFlex.gt-sm="33.333"
                             fxFlex.gt-xs="33.333"
                             fxFlex="100"
                         >
                             <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'User Name' | translate
+                                }}</mat-label>
                                 <input
                                     matInput
-                                    placeholder="{{ 'userName' | translate }}"
+                                    placeholder="{{ 'User Name' | translate }}"
                                     type="text"
                                     [formControl]="
                                         frmAddNew.controls['UserName']
@@ -23,18 +27,45 @@
                                 />
                             </mat-form-field>
                         </div>
-                        <!-- col full-->
+
                         <div
-                            class="p-10"
+                            *ngIf="ID"
+                            class="p-8"
                             fxFlex.gt-sm="33.333"
                             fxFlex.gt-xs="33.333"
                             fxFlex="100"
                         >
                             <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'User Name' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{ 'User Name' | translate }}"
+                                    type="text"
+                                    [formControl]="
+                                        frmAddNew.controls['UserName']
+                                    "
+                                    autocomplete="off"
+                                    readonly
+                                />
+                            </mat-form-field>
+                        </div>
+                        <!-- col full-->
+                        <div
+                            class="p-8"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'Email Address' | translate
+                                }}</mat-label>
                                 <input
                                     matInput
                                     placeholder="{{
-                                        'EmailAddress' | translate
+                                        'Email Address' | translate
                                     }}"
                                     type="email"
                                     [formControl]="frmAddNew.controls['Email']"
@@ -44,16 +75,19 @@
                         </div>
                         <!-- col full-->
                         <div
-                            class="p-10"
+                            class="p-8"
                             fxFlex.gt-sm="33.333"
                             fxFlex.gt-xs="33.333"
                             fxFlex="100"
                         >
                             <mat-form-field style="width: 100%">
+                                <mat-label>{{
+                                    'Phone Number' | translate
+                                }}</mat-label>
                                 <input
                                     matInput
                                     placeholder="{{
-                                        'PhoneNumber' | translate
+                                        'Phone Number' | translate
                                     }}"
                                     type="text"
                                     [formControl]="
@@ -66,7 +100,7 @@
                         </div>
 
                         <div
-                            class="p-10"
+                            class="p-8"
                             fxFlex.gt-sm="33.333"
                             fxFlex.gt-xs="33.333"
                             fxFlex="100"
@@ -90,7 +124,7 @@
                         </div>
 
                         <div
-                            class="p-10"
+                            class="p-8"
                             fxFlex.gt-sm="33.333"
                             fxFlex.gt-xs="33.333"
                             fxFlex="100"
@@ -114,7 +148,7 @@
                         </div>
 
                         <div
-                            class="p-10"
+                            class="p-8"
                             fxFlex.gt-sm="33.333"
                             fxFlex.gt-xs="33.333"
                             fxFlex="100"
@@ -136,7 +170,30 @@
                         </div>
 
                         <div
-                            class="p-10"
+                            class="p-8"
+                            fxFlex.gt-sm="75"
+                            fxFlex.gt-xs="75"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{ 'Plans' | translate }}</mat-label>
+                                <mat-select
+                                    placeholder="{{ 'Plans' | translate }}"
+                                    formControlName="PlanId"
+                                >
+                                    <mat-option
+                                        *ngFor="let plan of plans"
+                                        (click)="price(plan)"
+                                        [value]="plan.id"
+                                    >
+                                        {{ plan.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- <div
+                            class="p-8"
                             fxFlex.gt-sm="75"
                             fxFlex.gt-xs="75"
                             fxFlex="100"
@@ -163,34 +220,32 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                        </div>
+                        </div> -->
 
                         <div
-                            class="p-10"
+                            class="p-8"
                             fxFlex.gt-sm="25"
                             fxFlex.gt-xs="25"
                             fxFlex="100"
                         >
                             <mat-form-field style="width: 100%">
                                 <mat-label>{{
-                                    'servicesPrices' | translate
+                                    'Prices' | translate
                                 }}</mat-label>
                                 <input
                                     matInput
-                                    placeholder="{{
-                                        'servicesPrices' | translate
-                                    }}"
+                                    placeholder="{{ 'Prices' | translate }}"
                                     type="text"
                                     type="number"
                                     autocomplete="off"
-                                    disabled
-                                    value="{{ serviceAmount }}"
+                                    readonly
+                                    value="{{ totalPrice }}"
                                 />
                             </mat-form-field>
                         </div>
 
                         <div
-                            class="p-10"
+                            class="p-8"
                             fxFlex.gt-sm="50"
                             fxFlex.gt-xs="50"
                             fxFlex="100"
@@ -218,7 +273,7 @@
                         </div>
 
                         <div
-                            class="p-10"
+                            class="p-8"
                             fxFlex.gt-sm="50"
                             fxFlex.gt-xs="50"
                             fxFlex="100"
@@ -246,7 +301,27 @@
                         </div>
 
                         <div
-                            class="p-10"
+                            class="p-8"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field style="width: 100%">
+                                <mat-label>{{ 'Notes' | translate }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{ 'Notes' | translate }}"
+                                    type="text"
+                                    [formControl]="frmAddNew.controls['Notes']"
+                                    type="text"
+                                    autocomplete="off"
+                                >
+                                </textarea>
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-8"
                             fxFlex.gt-sm="15"
                             fxFlex.gt-xs="15"
                             fxFlex="100"
@@ -262,7 +337,7 @@
                         </div>
 
                         <div
-                            class="p-10"
+                            class="p-8"
                             fxFlex.gt-sm="15"
                             fxFlex.gt-xs="15"
                             fxFlex="100"
@@ -280,7 +355,7 @@
                         </div>
 
                         <div
-                            class="p-10"
+                            class="p-8"
                             fxFlex.gt-sm="15"
                             fxFlex.gt-xs="15"
                             fxFlex="100"

@@ -9,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from '@app/infrastructure/core/services/auth/user.service';
 import { AllocatedServicesService } from '@app/infrastructure/core/services/billingSystem/allocated-services.service';
 import { GroupService } from '@app/infrastructure/core/services/billingSystem/group.service';
+import { PlanService } from '@app/infrastructure/core/services/billingSystem/plan.service';
 import { ServiceUsedService } from '@app/infrastructure/core/services/billingSystem/service-used.service';
 import { SimCardTypeService } from '@app/infrastructure/core/services/billingSystem/sim-card-type.service';
 import { SimProfileService } from '@app/infrastructure/core/services/billingSystem/sim-profile.service';
@@ -16,6 +17,7 @@ import { LanguagesService } from '@app/infrastructure/core/services/language/lan
 import { NotificationService } from '@app/infrastructure/core/services/notification.service';
 import { GroupModel } from '@app/infrastructure/models/project/groupModel';
 import { LanguageModel } from '@app/infrastructure/models/project/LanguageModel';
+import { PlanModel } from '@app/infrastructure/models/project/planModel';
 import { ServiceUsedModel } from '@app/infrastructure/models/project/serviceUsedModel';
 import { SimCardTypeModel } from '@app/infrastructure/models/project/SimCardTypeModel';
 import { SimProfileModel } from '@app/infrastructure/models/project/SimProfileModel';
@@ -52,6 +54,8 @@ export class AddUserComponent implements OnInit {
     public serviceAmount: number = 0;
     public passwordPattern: RegExp = Constants.patterns.DIGIT_REGEX;
     public resultActions: ResultActions = ResultActions.CancelAdd;
+    public plans: PlanModel;
+    public totalPrice: number;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public userModel: UserModel,
@@ -65,7 +69,10 @@ export class AddUserComponent implements OnInit {
         private allocatedServicesService: AllocatedServicesService,
         private simCardTypeService: SimCardTypeService,
         private simProfileService: SimProfileService,
-    ) {}
+        private planService: PlanService,
+    ) {
+        this.loadPlans();
+    }
 
     get ID() {
         return this.frmAddNew.controls.Id.value;
@@ -78,6 +85,16 @@ export class AddUserComponent implements OnInit {
         this.ngInitialControlForm();
         this.loadAllData();
         this.setUserDeails();
+    }
+
+    loadPlans() {
+        this.planService.getAllPlans().subscribe((result) => {
+            this.plans = result;
+        });
+    }
+
+    price(plan) {
+        this.totalPrice = plan.price;
     }
 
     ngInitialControlForm() {
@@ -95,6 +112,9 @@ export class AddUserComponent implements OnInit {
             ServicesUsedId: [null],
             SimCardTypeId: [null],
             SimProfileId: [null],
+            PlanId: [null],
+            Notes: [null],
+            Price: [null],
         });
     }
 
@@ -119,6 +139,8 @@ export class AddUserComponent implements OnInit {
             this.frmAddNew.controls.SimProfileId.setValue(
                 this.userModel.simProfileId,
             );
+            this.frmAddNew.controls.Notes.setValue(this.userModel.notes);
+            this.frmAddNew.controls.PlanId.setValue(this.userModel.planId);
         }
     }
 

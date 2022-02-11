@@ -104,6 +104,24 @@ const routes: Routes = [
             ).then((m) => m.ServiceUsedModule),
     },
     {
+        path: 'system-definition',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import('../project/system-definition/plans/plans.module').then(
+                (m) => m.PlansModule,
+            ),
+    },
+    {
+        path: 'system-definition',
+        canActivate: [SuperAdminAuthGuard],
+        canActivateChild: [SuperAdminAuthGuard],
+        loadChildren: () =>
+            import(
+                '../project/system-definition/manage-subscription/manage-subscription.module'
+            ).then((m) => m.ManageSubscriptionModule),
+    },
+    {
         path: 'phonesBook',
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
