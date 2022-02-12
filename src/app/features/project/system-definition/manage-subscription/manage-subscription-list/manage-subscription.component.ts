@@ -1,11 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { UserService } from '@app/infrastructure/core/services/auth/user.service';
 import { ManageSubscriptionService } from '@app/infrastructure/core/services/billingSystem/manage-subscription.service';
 import { UserModel } from '@app/infrastructure/models/project/UserModel';
-import { isEmpty, mergeMap } from 'rxjs/operators';
-import { isEmptyBindingElement } from 'typescript';
 import { HistoryComponent } from '../history/history.component';
 
 @Component({
@@ -26,7 +23,6 @@ export class ManageSubscriptionComponent implements OnInit {
     constructor(
         private dialog: MatDialog,
         private manageSvc: ManageSubscriptionService,
-        private userSvc: UserService,
         private formBuilder: FormBuilder,
     ) {}
 
@@ -73,12 +69,6 @@ export class ManageSubscriptionComponent implements OnInit {
             EffectiveDate: [null],
             OldUserName: ['', null],
             PhoneNumber: [''],
-            // GroupId: [null, Validators.required],
-            // LanguageId: [null, Validators.required],
-            // RoleId: [null, Validators.required],
-            // SimCardTypeId: [null],
-            // SimProfileId: [null],
-            // PlanId: [null],
         });
     }
 
@@ -87,19 +77,12 @@ export class ManageSubscriptionComponent implements OnInit {
             Id: this.user.id,
             PhoneNumber: this.user.phoneNumber,
             OldUserName: this.user.userName,
-            // GroupId: this.user.groupId,
-            // LanguageId: this.user.languageId,
-            // RoleId: this.user.roleId,
-            // SimCardTypeId: this.user.simCardTypeId,
-            // SimProfileId: this.user.simProfileId,
-            // PlanId: this.user.planId,
         });
     }
 
     PhoneNumber(phoneNumber) {
         this.manageSvc.getUserByPhoneNumber(phoneNumber).subscribe((result) => {
             this.user = result;
-            console.log(this.user);
             this.name = this.user?.userName || '';
             this.Id = this.user?.id;
             this.patchFormValue();
@@ -122,7 +105,7 @@ export class ManageSubscriptionComponent implements OnInit {
             .subscribe((result) => {});
     }
 
-    gitHistoriesByPhoneNumber() {
+    getHistoriesByPhoneNumber() {
         const phoneNumber = this.user.phoneNumber;
         this.manageSvc
             .getHistoriesByPhoneNumber(phoneNumber)
@@ -130,9 +113,4 @@ export class ManageSubscriptionComponent implements OnInit {
                 this.openHistory(result);
             });
     }
-
-    // phoneNumber(userPhoneNumber){
-    //   console.log(userPhoneNumber);
-    //   this.userSvc.IsUserExists(userPhoneNumber).subscribe((result) => {});;
-    // }
 }

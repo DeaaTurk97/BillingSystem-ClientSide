@@ -342,5 +342,6 @@
     "PasswordChangedNotSuccessfully": "Password Changed Not Successfully",
     "OtpCodeHaveBeenSentSuccessfully": "The Verification Code has been sent successfully.",
     "VerifyEmailOtpCode": "Verification Email Otp Code",
-    "VerificationCode ": "Verification Code"
+    "VerificationCode ": "Verification Code",
+    "ShowHistory": "Show History"
 }

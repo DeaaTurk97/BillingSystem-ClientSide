@@ -42,7 +42,6 @@ export class PlanService {
     }
 
     updatePlan(plansForm): Observable<any> {
-        console.log(PlanModel);
         return this.apiService.put(
             `${environment.apiRoute}/Plan/UpdatePlan`,
             plansForm,

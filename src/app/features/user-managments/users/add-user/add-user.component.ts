@@ -3,6 +3,7 @@ import {
     OnInit,
     ChangeDetectionStrategy,
     Inject,
+    ChangeDetectorRef,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -70,9 +71,8 @@ export class AddUserComponent implements OnInit {
         private simCardTypeService: SimCardTypeService,
         private simProfileService: SimProfileService,
         private planService: PlanService,
-    ) {
-        this.loadPlans();
-    }
+        private changeDetectorRef: ChangeDetectorRef,
+    ) {}
 
     get ID() {
         return this.frmAddNew.controls.Id.value;
@@ -85,12 +85,6 @@ export class AddUserComponent implements OnInit {
         this.ngInitialControlForm();
         this.loadAllData();
         this.setUserDeails();
-    }
-
-    loadPlans() {
-        this.planService.getAllPlans().subscribe((result) => {
-            this.plans = result;
-        });
     }
 
     price(plan) {
@@ -181,14 +175,22 @@ export class AddUserComponent implements OnInit {
                     this.simCardTypesModel = cardTypes;
                     return this.simProfileService.getAllSimProfiles();
                 }),
-                map((simProfilesStatus) => {
+                mergeMap((simProfilesStatus) => {
                     this.simProfilesModel = simProfilesStatus;
+                    return this.planService.getAllPlans();
+                }),
+                map((plan) => {
+                    debugger;
+                    this.plans = plan;
+                    this.totalPrice = plan[0].price;
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage('ErrorOnLoadData');
                 }),
             )
-            .subscribe((result) => {});
+            .subscribe((result) => {
+                this.changeDetectorRef.detectChanges();
+            });
     }
 
     onSubmit() {

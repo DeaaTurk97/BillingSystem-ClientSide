@@ -45,6 +45,7 @@
                     formControlName="EffectiveDate"
                     matInput
                     [matDatepicker]="picker"
+                    required
                 />
                 <mat-datepicker-toggle
                     matSuffix
@@ -57,19 +58,19 @@
 
     <button
         style="padding-top: 0; margin-top: 0"
-        (click)="gitHistoriesByPhoneNumber()"
+        (click)="getHistoriesByPhoneNumber()"
         color="primary"
         [disabled]="!user"
         mat-raised-button
         class="button"
     >
-        {{ 'Show History' | translate }}
+        {{ 'ShowHistory' | translate }}
     </button>
 
     <button
         mat-raised-button
         color="primary"
-        [disabled]="!user"
+        [disabled]="!usersForm.valid"
         class="button"
         (click)="Update()"
     >

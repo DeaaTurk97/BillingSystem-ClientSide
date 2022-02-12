@@ -59,18 +59,15 @@ export class CreatePlanComponent implements OnInit {
         this.loadServiceUsedData();
         this.setPlanDetails();
         this.newService();
-        // this.updateData(this.index);
     }
 
     loadServiceUsedData() {
         this.sericeUsedService.getAllServicesUsed().subscribe((result) => {
             this.services = result;
-            console.log(this.services);
         });
     }
 
     addService() {
-        console.log(this.PlanServicesForm);
         this.PlanServicesForm.push(
             this.formBuilder.group({
                 planService: [null],
@@ -95,8 +92,6 @@ export class CreatePlanComponent implements OnInit {
             Price: [null],
             PlanServices: this.formBuilder.array([]),
         });
-
-        console.log(this.PlanServicesForm);
     }
 
     get PlanServicesForm(): FormArray {
@@ -105,7 +100,6 @@ export class CreatePlanComponent implements OnInit {
 
     setPlanDetails() {
         if (this.planModel) {
-            console.log(this.planModel);
             this.formAddNew.controls.Id.setValue(this.planModel.id);
             this.formAddNew.controls.Name.setValue(this.planModel.name);
             this.formAddNew.controls.Description.setValue(
@@ -119,15 +113,6 @@ export class CreatePlanComponent implements OnInit {
             );
         }
     }
-    // updateData(index: number) {
-    //   this.PlanServicesForm.at(index).get('PlanServices').setValue([
-    //     this.formAddNew.controls.PlanService.setValue(this.planServiceModel.planService),
-    //     this.formAddNew.controls.Limit.setValue(this.planServiceModel.limit),
-    //     this.formAddNew.controls.Unit.setValue(this.planServiceModel.unit),
-    //     this.formAddNew.controls.AdditionalUnit.setValue(this.planServiceModel.additionalUnit),
-    //     this.formAddNew.controls.AdditionalUnitPrice.setValue(this.planServiceModel.additionalUnitPrice),
-    //   ]);
-    // }
 
     onSubmit() {
         this.isInProgress = true;

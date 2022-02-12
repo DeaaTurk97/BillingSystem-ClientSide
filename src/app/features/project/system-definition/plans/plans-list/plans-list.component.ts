@@ -101,7 +101,6 @@ export class PlansListComponent implements OnInit {
             .subscribe((result) => {
                 result = this.plans;
             });
-        console.log(this.plans);
     }
 
     onAddRecord() {
