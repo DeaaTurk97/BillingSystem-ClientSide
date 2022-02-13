@@ -29,11 +29,6 @@ import { Constants } from '@app/infrastructure/utils/constants';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 
-interface Food {
-    value: string;
-    viewValue: string;
-}
-
 @Component({
     selector: 'app-add-user',
     templateUrl: './add-user.component.html',
@@ -55,7 +50,7 @@ export class AddUserComponent implements OnInit {
     public serviceAmount: number = 0;
     public passwordPattern: RegExp = Constants.patterns.DIGIT_REGEX;
     public resultActions: ResultActions = ResultActions.CancelAdd;
-    public plans: PlanModel;
+    public plans: PlanModel[] = [];
     public totalPrice: number;
 
     constructor(
@@ -80,15 +75,14 @@ export class AddUserComponent implements OnInit {
     get PhoneNumber() {
         return this.frmAddNew.controls.PhoneNumber.value;
     }
+    get PlanID() {
+        return this.frmAddNew.controls.PlanId.value;
+    }
 
     ngOnInit(): void {
         this.ngInitialControlForm();
         this.loadAllData();
         this.setUserDeails();
-    }
-
-    price(plan) {
-        this.totalPrice = plan.price;
     }
 
     ngInitialControlForm() {
@@ -180,9 +174,13 @@ export class AddUserComponent implements OnInit {
                     return this.planService.getAllPlans();
                 }),
                 map((plan) => {
-                    debugger;
                     this.plans = plan;
-                    this.totalPrice = plan[0].price;
+
+                    if (this.PlanID) {
+                        this.totalPrice = this.plans.find(
+                            (item) => item.id === this.PlanID,
+                        )?.price;
+                    }
                 }),
                 catchError((error): any => {
                     this.notify.showTranslateMessage('ErrorOnLoadData');
@@ -234,6 +232,10 @@ export class AddUserComponent implements OnInit {
             );
             this.serviceAmount += serviceSelected.servicePrice;
         });
+    }
+
+    price(plan) {
+        this.totalPrice = plan.price;
     }
 
     ResetControls() {
