@@ -162,7 +162,6 @@ export class AddUserComponent implements OnInit {
                     this.frmAddNew.controls.ServicesUsedId.setValue(
                         this.allocatedServices,
                     );
-                    this.sumServicesPrices();
                     return this.simCardTypeService.getAllSimCardTypes();
                 }),
                 mergeMap((cardTypes) => {
@@ -222,16 +221,6 @@ export class AddUserComponent implements OnInit {
                     this.frmAddNew.reset();
                 }
             });
-    }
-
-    sumServicesPrices() {
-        this.serviceAmount = 0;
-        this.frmAddNew.controls.ServicesUsedId.value.forEach((element) => {
-            let serviceSelected = this.servicesUsedModel.find(
-                (x) => x.id === element,
-            );
-            this.serviceAmount += serviceSelected.servicePrice;
-        });
     }
 
     price(plan) {
