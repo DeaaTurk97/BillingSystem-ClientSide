@@ -343,5 +343,8 @@
     "OtpCodeHaveBeenSentSuccessfully": "The Verification Code has been sent successfully.",
     "VerifyEmailOtpCode": "Verification Email Otp Code",
     "VerificationCode ": "Verification Code",
-    "ShowHistory": "Show History"
+    "ShowHistory": "Show History",
+    "NewServiceAdded": "You have New Service Added",
+    "ServiceRemoved": "You have Service Removed",
+    "ServicePriceGraterThanServicePlan": "You have Service Price Grater Than Service Plan"
 }

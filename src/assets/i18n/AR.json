@@ -353,5 +353,8 @@
     "PasswordChangedNotSuccessfully": "لم تم تغيير الرقم السري بنجاح",
     "OtpCodeHaveBeenSentSuccessfully": "تم إرسال كود التحقق على الإيميل بنجاح",
     "VerifyEmailOtpCode": "رمز التحقق من الايميل",
-    "VerificationCode ": "رمز التحقق"
+    "VerificationCode ": "رمز التحقق",
+    "NewServiceAdded": "لديك خدمات جديدة تم إضافتها",
+    "ServiceRemoved": "لديك خدمات تم حذفها",
+    "ServicePriceGraterThanServicePlan": "لديك سعر خدمات اكبر من خدمات الخطة"
 }

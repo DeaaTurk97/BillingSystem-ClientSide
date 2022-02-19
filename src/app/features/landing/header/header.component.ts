@@ -181,6 +181,12 @@ export class AppHeaderComponent implements OnInit {
             NotificationType.ServicesInProgress ==
                 notificationInfo.notificationTypeId ||
             NotificationType.ServicesRejected ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.NewServiceAdded ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.ServiceRemoved ==
+                notificationInfo.notificationTypeId ||
+            NotificationType.ServicePriceGraterThanServicePlan ==
                 notificationInfo.notificationTypeId
         ) {
             this.notificationService
