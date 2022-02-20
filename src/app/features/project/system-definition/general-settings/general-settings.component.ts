@@ -95,6 +95,18 @@ export class GeneralSettingsComponent implements OnInit {
             EmailTestSubject: ['', Validators.required],
             EmailTestBody: ['', Validators.required],
 
+            NewServiceAddedCC: ['', [Validators.email]],
+            NewServiceAddedSubject: ['', Validators.required],
+            NewServiceAddedBody: ['', Validators.required],
+
+            ServiceRemovedCC: ['', [Validators.email]],
+            ServiceRemovedSubject: ['', Validators.required],
+            ServiceRemovedBody: ['', Validators.required],
+
+            ServicePriceGraterThanServicePlanCC: ['', [Validators.email]],
+            ServicePriceGraterThanServicePlanSubject: ['', Validators.required],
+            ServicePriceGraterThanServicePlanBody: ['', Validators.required],
+
             SMTPServer: ['', Validators.required],
             SMTPUserEmail: ['', [Validators.required, Validators.email]],
             SMTPUserPassword: ['', Validators.required],
