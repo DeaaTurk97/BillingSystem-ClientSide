@@ -148,7 +148,7 @@
         [length]="lengthData"
         [pageSize]="pageSize"
         [pageIndex]="PaginatorIndex"
-        [pageSizeOptions]="[5, 10, 20, 50]"
+        [pageSizeOptions]="[5, 10, 20, 50, lengthData]"
         (page)="onPaginationClick($event)"
         showFirstLastButtons
     >

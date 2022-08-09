@@ -5,6 +5,7 @@ import {
     ViewChild,
     ChangeDetectorRef,
 } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -35,6 +36,7 @@ import { ServicesNeedApprovalComponent } from '../services-need-approval/service
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BillsDetailsListComponent implements OnInit {
+    public billDetailsForm: FormGroup;
     public paginationIndex = 0;
     public pageIndex = 1;
     public pageSize = 10;
@@ -56,6 +58,7 @@ export class BillsDetailsListComponent implements OnInit {
     @ViewChild(DataGridViewComponent) sharedDataGridView: DataGridViewComponent;
 
     constructor(
+        private formBuilder: FormBuilder,
         private callDetailsService: CallDetailsService,
         private notify: NotificationService,
         private activatedRoute: ActivatedRoute,
@@ -66,6 +69,7 @@ export class BillsDetailsListComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.InitDetailsForm();
         //Adding this to get data from rout after execute Resolver
         this.billId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
         this.billMonthId = Number(
@@ -224,6 +228,17 @@ export class BillsDetailsListComponent implements OnInit {
             .subscribe((result) => {
                 this.changeDetectorRef.detectChanges();
             });
+    }
+
+    InitDetailsForm() {
+        this.billDetailsForm = this.formBuilder.group({
+            TotalOfficialCallsCost: [null],
+            TotalEmptyCallsCost: [null],
+            TotalPersonalCallsCost: [null],
+            TotalUnknownCallsCost: [null],
+            FixedAmount: [null],
+            GrandTotal: [null],
+        });
     }
 
     submitBill() {

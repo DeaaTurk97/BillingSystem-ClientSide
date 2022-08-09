@@ -285,18 +285,18 @@ const MENUITEMS = [
             UserType.Finance,
         ],
         children: [
-            // {
-            //     state: 'comingBills-list',
-            //     name: 'ComingBills',
-            //     type: 'link',
-            //     roles: [
-            //         UserType.SuperAdmin,
-            //         UserType.AdminGroup,
-            //         UserType.Finance,
-            //     ],
-            // },
             {
-                state: 'upload-bills-lebanon',
+                state: 'comingBills-list',
+                name: 'ComingBills',
+                type: 'link',
+                roles: [
+                    UserType.SuperAdmin,
+                    UserType.AdminGroup,
+                    UserType.Finance,
+                ],
+            },
+            {
+                state: 'upload-bills',
                 name: 'UploadBills',
                 type: 'link',
                 roles: [UserType.SuperAdmin],

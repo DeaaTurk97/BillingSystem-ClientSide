@@ -15,4 +15,5 @@ export interface UserModel {
     simProfileId: number;
     planId: number;
     notes: string;
+    fixedAmount: number;
 }

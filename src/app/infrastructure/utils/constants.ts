@@ -67,6 +67,15 @@ export interface IConstant {
     IsAutomatedApprovalPhoneNumbers: string;
     IsJoinEmployeesWithLimitValue: string;
     TaxAmount: string;
+    NewServiceAddedCC: string;
+    NewServiceAddedSubject: string;
+    NewServiceAddedBody: string;
+    ServiceRemovedCC: string;
+    ServiceRemovedSubject: string;
+    ServiceRemovedBody: string;
+    ServicePriceGraterThanServicePlanCC: string;
+    ServicePriceGraterThanServicePlanSubject: string;
+    ServicePriceGraterThanServicePlanBody: string;
 }
 
 export const Constants: IConstant = {
@@ -140,4 +149,16 @@ export const Constants: IConstant = {
     IsAutomatedApprovalServices: 'IsAutomatedApprovalServices',
     IsAutomatedApprovalPhoneNumbers: 'IsAutomatedApprovalPhoneNumbers',
     IsJoinEmployeesWithLimitValue: 'IsJoinEmployeesWithLimitValue',
+
+    NewServiceAddedCC: 'NewServiceAddedCC',
+    NewServiceAddedSubject: 'NewServiceAddedSubject',
+    NewServiceAddedBody: 'NewServiceAddedBody',
+    ServiceRemovedCC: 'ServiceRemovedCC',
+    ServiceRemovedSubject: 'ServiceRemovedSubject',
+    ServiceRemovedBody: 'ServiceRemovedBody',
+    ServicePriceGraterThanServicePlanCC: 'ServicePriceGraterThanServicePlanCC',
+    ServicePriceGraterThanServicePlanSubject:
+        'ServicePriceGraterThanServicePlanSubject',
+    ServicePriceGraterThanServicePlanBody:
+        'ServicePriceGraterThanServicePlanBody',
 };

@@ -577,6 +577,78 @@ export class GeneralSettingsComponent implements OnInit {
                             )?.settingValue,
                         );
 
+                        this.frmGeneralSettings.controls.NewServiceAddedCC.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.NewServiceAddedCC,
+                            )?.settingValue,
+                        );
+
+                        this.frmGeneralSettings.controls.NewServiceAddedSubject.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.NewServiceAddedSubject,
+                            )?.settingValue,
+                        );
+
+                        this.frmGeneralSettings.controls.NewServiceAddedBody.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.NewServiceAddedBody,
+                            )?.settingValue,
+                        );
+
+                        this.frmGeneralSettings.controls.ServiceRemovedCC.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.ServiceRemovedCC,
+                            )?.settingValue,
+                        );
+
+                        this.frmGeneralSettings.controls.ServiceRemovedSubject.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.ServiceRemovedSubject,
+                            )?.settingValue,
+                        );
+
+                        this.frmGeneralSettings.controls.ServiceRemovedBody.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.ServiceRemovedBody,
+                            )?.settingValue,
+                        );
+
+                        this.frmGeneralSettings.controls.ServicePriceGraterThanServicePlanCC.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.ServicePriceGraterThanServicePlanCC,
+                            )?.settingValue,
+                        );
+
+                        this.frmGeneralSettings.controls.ServicePriceGraterThanServicePlanSubject.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.ServicePriceGraterThanServicePlanSubject,
+                            )?.settingValue,
+                        );
+
+                        this.frmGeneralSettings.controls.ServicePriceGraterThanServicePlanBody.setValue(
+                            generalSettings.find(
+                                (generalSetting: GeneralSettingsModel) =>
+                                    generalSetting.settingName ===
+                                    Constants.ServicePriceGraterThanServicePlanBody,
+                            )?.settingValue,
+                        );
+
                         this.frmGeneralSettings.controls.DisplayNameEmail.setValue(
                             generalSettings.find(
                                 (generalSetting: GeneralSettingsModel) =>
@@ -1021,6 +1093,59 @@ export class GeneralSettingsComponent implements OnInit {
                     this.frmGeneralSettings.controls
                         .IsJoinEmployeesWithLimitValue.value,
                 ));
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            //
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName = Constants.NewServiceAddedCC),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.NewServiceAddedCC.value);
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName =
+                Constants.NewServiceAddedSubject),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.NewServiceAddedSubject.value);
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName = Constants.NewServiceAddedBody),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.NewServiceAddedBody.value);
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            //
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName = Constants.ServiceRemovedCC),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ServiceRemovedCC.value);
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName =
+                Constants.ServiceRemovedSubject),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ServiceRemovedSubject.value);
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName = Constants.ServiceRemovedBody),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ServiceRemovedBody.value);
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            //
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName =
+                Constants.ServicePriceGraterThanServicePlanCC),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ServicePriceGraterThanServicePlanCC.value);
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName =
+                Constants.ServicePriceGraterThanServicePlanSubject),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ServicePriceGraterThanServicePlanSubject.value);
+            this.generalSettingsListNew.push(generalSettingsModel);
+
+            generalSettingsModel = new GeneralSettingsModel();
+            (generalSettingsModel.settingName =
+                Constants.ServicePriceGraterThanServicePlanBody),
+                (generalSettingsModel.settingValue = this.frmGeneralSettings.controls.ServicePriceGraterThanServicePlanBody.value);
             this.generalSettingsListNew.push(generalSettingsModel);
 
             return this.generalSettingsService

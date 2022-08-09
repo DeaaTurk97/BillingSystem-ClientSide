@@ -69,11 +69,15 @@
             </div>
             <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
                 <button
-                    *ngIf="isFinanceUser | async"
+                    *ngIf="isSuperAdminUser | async"
                     mat-raised-button
                     type="submit"
                     color="primary"
                     (click)="onPay()"
+                    [disabled]="
+                        selectedStatusBill !== StatusCycleResult.Approved ||
+                        billsStatus.length === 0
+                    "
                 >
                     {{ 'Pay' | translate }}
                 </button>
@@ -89,7 +93,7 @@
             'billYear',
             'isPaid',
             'billStatus',
-            'billNote',                
+            'billNote',
         ]"
             (onCheckRow)="onActionRowGrid($event)"
             (onPagination)="onActionRowGrid($event)"

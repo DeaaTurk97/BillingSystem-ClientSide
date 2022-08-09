@@ -33,6 +33,7 @@ export class CallsSummaryReportListComponent implements OnInit {
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
     public paginationIndex = 0;
     public pageIndex = 1;
+    Total: number;
     public pageSize = 10;
     public length = 0;
     public reportFilterModel: ReportFilterModel = new ReportFilterModel();
@@ -83,6 +84,7 @@ export class CallsSummaryReportListComponent implements OnInit {
             .pipe(
                 map((paginationRecord) => {
                     this.dataSource.data = paginationRecord.dataRecord;
+                    this.Total = paginationRecord.dataRecord.freeSum;
                     this.length = paginationRecord.countRecord;
                 }),
                 catchError((error): any => {

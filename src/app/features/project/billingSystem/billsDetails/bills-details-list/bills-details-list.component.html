@@ -1,15 +1,8 @@
 <div fxLayout="row wrap">
     <div class="p-10" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <app-criteria-filter
-            [showUsers]="true"
-            [showMonthsNames]="true"
-            [showYearsNumbers]="true"
-            [userData]="usersModel"
-            [selectBillMonthId]="billMonthId"
-            [selectBillYearId]="billYearId"
-            [selectUserId]="billUserId"
-        >
-        </app-criteria-filter>
+        <!-- <app-criteria-filter [showUsers]="true" [showMonthsNames]="true" [showYearsNumbers]="true" [userData]="usersModel"
+      [selectBillMonthId]="billMonthId" [selectBillYearId]="billYearId" [selectUserId]="billUserId" (emitSearch)="onSearch($event)">
+    </app-criteria-filter> -->
     </div>
     <div class="p-10" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
         <mat-card>
@@ -52,7 +45,7 @@
                             matBadgeColor="warn"
                             [disabled]="countDefinedNumbers === 0"
                         >
-                            {{ 'DefinitionUnknownNumbers' | translate }}
+                            {{ 'New Numbers' | translate }}
                         </button>
                     </div>
 
@@ -78,6 +71,59 @@
                             {{ 'isNeedApproval' | translate }}
                         </button>
                     </div>
+
+                    <!-- <form [formGroup]="billDetailsForm" style="width: 100%">
+            <div class="p-10" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+
+              <mat-form-field style="width: 33.3%">
+                <mat-label>{{
+                  'TotalOfficialCallsCost' | translate
+                  }}</mat-label>
+                <input formControlName="TotalOfficialCallsCost" matInput placeholder="{{ 'TotalOfficialCallsCost' | translate }}" type="text" autocomplete="off"
+                  readonly />
+              </mat-form-field>
+
+              <mat-form-field style="width: 33.3%">
+                <mat-label>{{
+                  'TotalEmptyCallsCost' | translate
+                  }}</mat-label>
+                <input formControlName="TotalEmptyCallsCost" matInput placeholder="{{ 'TotalEmptyCallsCost' | translate }}" type="text" autocomplete="off"
+                  readonly />
+              </mat-form-field>
+
+              <mat-form-field style="width: 33.3%">
+                <mat-label>{{
+                  'TotalPersonalCallsCost' | translate
+                  }}</mat-label>
+                <input formControlName="TotalPersonalCallsCost" matInput placeholder="{{ 'TotalPersonalCallsCost' | translate }}" type="text" autocomplete="off"
+                  readonly />
+              </mat-form-field>
+
+              <mat-form-field style="width: 33.3%">
+                <mat-label>{{
+                  'TotalUnknownCallsCost' | translate
+                  }}</mat-label>
+                <input formControlName="TotalUnknownCallsCost" matInput placeholder="{{ 'TotalUnknownCallsCost' | translate }}" type="text" autocomplete="off"
+                  readonly />
+              </mat-form-field>
+
+              <mat-form-field style="width: 33.3%">
+                <mat-label>{{
+                  'FixedAmount' | translate
+                  }}</mat-label>
+                <input formControlName="FixedAmount" matInput placeholder="{{ 'FixedAmount' | translate }}" type="text" autocomplete="off" readonly />
+              </mat-form-field>
+
+              <mat-form-field style="width: 33.3%">
+                <mat-label>{{
+                  'GrandTotal' | translate
+                  }}</mat-label>
+                <input formControlName="GrandTotal" matInput placeholder="{{ 'GrandTotal' | translate }}" type="text" autocomplete="off" readonly />
+              </mat-form-field>
+
+            </div>
+
+          </form> -->
 
                     <div
                         class="p-10"

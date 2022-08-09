@@ -103,6 +103,7 @@ export class AddUserComponent implements OnInit {
             PlanId: [null],
             Notes: [null],
             Price: [null],
+            FixedAmount: [null],
         });
     }
 
@@ -129,6 +130,9 @@ export class AddUserComponent implements OnInit {
             );
             this.frmAddNew.controls.Notes.setValue(this.userModel.notes);
             this.frmAddNew.controls.PlanId.setValue(this.userModel.planId);
+            this.frmAddNew.controls.FixedAmount.setValue(
+                this.userModel.fixedAmount,
+            );
         }
     }
 

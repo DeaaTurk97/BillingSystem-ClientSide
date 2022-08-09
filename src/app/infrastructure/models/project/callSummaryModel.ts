@@ -9,4 +9,5 @@ export interface CallSummaryModel {
     officialSum: number;
     personalSum: number;
     unknownSum: number;
+    fixedAmount: number;
 }

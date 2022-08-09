@@ -246,8 +246,8 @@
 
                         <div
                             class="p-8"
-                            fxFlex.gt-sm="50"
-                            fxFlex.gt-xs="50"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
                             fxFlex="100"
                         >
                             <mat-form-field>
@@ -274,8 +274,8 @@
 
                         <div
                             class="p-8"
-                            fxFlex.gt-sm="50"
-                            fxFlex.gt-xs="50"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
                             fxFlex="100"
                         >
                             <mat-form-field>
@@ -297,6 +297,30 @@
                                         {{ simProfile.profileName }}
                                     </mat-option>
                                 </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div
+                            class="p-8"
+                            fxFlex.gt-sm="33.333"
+                            fxFlex.gt-xs="33.333"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'FixedAmount' | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'FixedAmount' | translate
+                                    }}"
+                                    type="number"
+                                    autocomplete="off"
+                                    [formControl]="
+                                        frmAddNew.controls['FixedAmount']
+                                    "
+                                />
                             </mat-form-field>
                         </div>
 
