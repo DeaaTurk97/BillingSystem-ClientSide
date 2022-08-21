@@ -113,6 +113,8 @@ export class ComingBillsListComponent implements OnInit {
 
     onCheckRow(rowsBills: number[]) {
         this.billsStatus = rowsBills;
+        console.log(this.billsStatus);
+        console.log(rowsBills);
     }
 
     onApproveRow() {
