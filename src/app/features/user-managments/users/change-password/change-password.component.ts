@@ -40,7 +40,7 @@ export class ChangePasswordComponent implements OnInit {
     ngInitialControlForm() {
         this.frmChangePassword = this.formBuilder.group(
             {
-                OldPassword: [null],
+                OldPassword: [null, Validators.required],
                 NewPassword: [null, Validators.required],
                 ComfirmPassword: [null, Validators.required],
             },
