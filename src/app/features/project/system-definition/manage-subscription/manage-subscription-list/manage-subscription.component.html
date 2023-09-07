@@ -1,79 +1,79 @@
 <mat-card>
-    <div>
-        <h4 class="padding-header">Manage Subscription</h4>
-    </div>
-    <form novalidate [formGroup]="usersForm">
-        <mat-card-content>
-            <mat-form-field class="fields padding-fields">
-                <mat-label>{{ 'Mobile Number' | translate }}</mat-label>
-                <input
-                    matInput
-                    placeholder="{{ 'Mobile Number' | translate }}"
-                    type="text"
-                    autocomplete="off"
-                    (keyup.enter)="PhoneNumber($event.target.value)"
-                />
-            </mat-form-field>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="manageSub">
+            <form novalidate [formGroup]="usersForm" class="fromSty">
+                <h2 class="title">{{ 'manageSubscription' | translate }}</h2>
+                <mat-form-field class="fields padding-fields">
+                    <mat-label>{{ 'mobileNumber' | translate }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'mobileNumber' | translate }}"
+                        type="text"
+                        autocomplete="off"
+                        (keyup.enter)="PhoneNumber($event.target.value)"
+                    />
+                </mat-form-field>
 
-            <mat-form-field class="fields padding-fields">
-                <mat-label>{{ 'Current Subscriber' | translate }}</mat-label>
-                <input
-                    matInput
-                    placeholder="{{ 'Current Subscriber' | translate }}"
-                    type="text"
-                    autocomplete="off"
-                    readonly
-                    formControlName="OldUserName"
-                    [value]="name"
-                />
-            </mat-form-field>
+                <mat-form-field class="fields padding-fields">
+                    <mat-label>{{ 'currentSubscriber' | translate }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'currentSubscriber' | translate }}"
+                        type="text"
+                        autocomplete="off"
+                        readonly
+                        formControlName="OldUserName"
+                        [value]="name"
+                    />
+                </mat-form-field>
 
-            <mat-form-field class="fields padding-fields">
-                <mat-label>{{ 'Change to' | translate }}</mat-label>
-                <input
-                    matInput
-                    placeholder="{{ 'Change to' | translate }}"
-                    type="text"
-                    autocomplete="off"
-                    formControlName="UserName"
-                />
-            </mat-form-field>
+                <mat-form-field class="fields padding-fields">
+                    <mat-label>{{ 'changeTo' | translate }}</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ 'changeTo' | translate }}"
+                        type="text"
+                        autocomplete="off"
+                        formControlName="UserName"
+                    />
+                </mat-form-field>
 
-            <mat-form-field class="fields padding-fields">
-                <mat-label>Effective Date</mat-label>
-                <input
-                    formControlName="EffectiveDate"
-                    matInput
-                    [matDatepicker]="picker"
-                    required
-                />
-                <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker"
-                ></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </mat-card-content>
-    </form>
+                <mat-form-field class="fields padding-fields">
+                    <mat-label>{{ 'effectiveDate' | translate }}</mat-label>
+                    <input
+                        formControlName="EffectiveDate"
+                        matInput
+                        [matDatepicker]="picker"
+                        required
+                    />
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="managrButtons">
+                    <button
+                        (click)="getHistoriesByPhoneNumber()"
+                        color="primary"
+                        [disabled]="!user"
+                        mat-raised-button
+                        class="saveButton"
+                    >
+                        {{ 'ShowHistory' | translate }}
+                    </button>
 
-    <button
-        style="padding-top: 0; margin-top: 0"
-        (click)="getHistoriesByPhoneNumber()"
-        color="primary"
-        [disabled]="!user"
-        mat-raised-button
-        class="button"
-    >
-        {{ 'ShowHistory' | translate }}
-    </button>
-
-    <button
-        mat-raised-button
-        color="primary"
-        [disabled]="!usersForm.valid"
-        class="button"
-        (click)="Update()"
-    >
-        {{ 'Save' | translate }}
-    </button>
+                    <button
+                        mat-raised-button
+                        [disabled]="!usersForm.valid"
+                        class="saveButton"
+                        (click)="Update()"
+                    >
+                        <mat-icon>save</mat-icon>
+                        {{ 'Save' | translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </mat-card-content>
 </mat-card>

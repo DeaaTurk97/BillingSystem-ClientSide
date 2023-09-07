@@ -67,8 +67,8 @@ export class UsersListComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.position = { top: '80px' };
-        dialogConfig.width = '60%';
+        dialogConfig.position = { top: '30px' };
+        dialogConfig.width = '75%';
         dialogConfig.data = data;
         return dialogConfig;
     }
@@ -177,8 +177,8 @@ export class UsersListComponent implements OnInit {
     onDelete(userModel: UserModel) {
         return this.dialog
             .open(ConfirmDialogComponent, {
-                width: '28em',
-                height: '11em',
+                width: '45rem',
+                height: '14rem',
                 panelClass: 'confirm-dialog-container',
                 position: { top: '5em' },
                 disableClose: true,

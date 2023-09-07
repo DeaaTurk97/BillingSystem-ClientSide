@@ -1,9 +1,8 @@
 <mat-card>
     <mat-card-content>
-        <div fxLayout="row wrap">
-            <div class="p-10" fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100">
-                <mat-form-field>
-                    <mat-label>{{ 'statusBill' | translate }}</mat-label>
+        <div>
+            <div class="dropDownDiv">
+                <mat-form-field class="dropDownField">
                     <mat-select
                         (selectionChange)="changeIncomingBills($event.value)"
                         placeholder="{{ 'statusNumberName' | translate }}"
@@ -21,12 +20,64 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+
+            <div class="billActionsButtonsCont">
                 <button
                     *ngIf="isSuperAdminUser | async"
                     mat-raised-button
                     type="submit"
-                    color="primary"
+                    class="billActionsButtons"
+                    (click)="onPay()"
+                    [disabled]="
+                        selectedStatusBill !== StatusCycleResult.Approved ||
+                        billsStatus.length === 0
+                    "
+                >
+                    {{ 'Pay' | translate }}
+                    <div class="payIcon"></div>
+                </button>
+            </div>
+
+            <div class="billActionsButtonsCont">
+                <button
+                    *ngIf="isSuperAdminUser | async"
+                    mat-raised-button
+                    type="submit"
+                    class="billActionsButtons"
+                    (click)="onRejectRow()"
+                    [disabled]="
+                        selectedStatusBill == StatusCycleResult.Rejected ||
+                        billsStatus.length === 0
+                    "
+                >
+                    {{ 'Reject' | translate }}
+                    <div class="rejectIcon"></div>
+                </button>
+            </div>
+
+            <div class="billActionsButtonsCont">
+                <button
+                    *ngIf="isSuperAdminUser | async"
+                    mat-raised-button
+                    type="submit"
+                    class="billActionsButtons"
+                    (click)="onApproveRow()"
+                    [disabled]="
+                        selectedStatusBill == StatusCycleResult.Approved ||
+                        billsStatus.length === 0
+                    "
+                >
+                    {{ 'Approve' | translate }}
+                    <div class="approveIcon"></div>
+                </button>
+            </div>
+
+            <div class="billActionsButtonsCont">
+                <button
+                    *ngIf="isSuperAdminUser | async"
+                    mat-raised-button
+                    type="submit"
+                    class="billActionsButtons"
                     (click)="onInprogressRow()"
                     [disabled]="
                         selectedStatusBill ==
@@ -35,51 +86,7 @@
                     "
                 >
                     {{ 'Inprogress' | translate }}
-                </button>
-            </div>
-            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
-                <button
-                    *ngIf="isSuperAdminUser | async"
-                    mat-raised-button
-                    type="submit"
-                    color="primary"
-                    (click)="onApproveRow()"
-                    [disabled]="
-                        selectedStatusBill == StatusCycleResult.Approved ||
-                        billsStatus.length === 0
-                    "
-                >
-                    {{ 'Approve' | translate }}
-                </button>
-            </div>
-            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
-                <button
-                    *ngIf="isSuperAdminUser | async"
-                    mat-raised-button
-                    type="submit"
-                    color="primary"
-                    (click)="onRejectRow()"
-                    [disabled]="
-                        selectedStatusBill == StatusCycleResult.Rejected ||
-                        billsStatus.length === 0
-                    "
-                >
-                    {{ 'Reject' | translate }}
-                </button>
-            </div>
-            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
-                <button
-                    *ngIf="isSuperAdminUser | async"
-                    mat-raised-button
-                    type="submit"
-                    color="primary"
-                    (click)="onPay()"
-                    [disabled]="
-                        selectedStatusBill !== StatusCycleResult.Approved ||
-                        billsStatus.length === 0
-                    "
-                >
-                    {{ 'Pay' | translate }}
+                    <div class="inProgressIcon"></div>
                 </button>
             </div>
         </div>

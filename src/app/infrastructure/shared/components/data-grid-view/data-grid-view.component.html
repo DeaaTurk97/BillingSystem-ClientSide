@@ -1,4 +1,4 @@
-<div class="example-container">
+<div class="table-container">
     <table
         mat-table
         appMatTableResponsive
@@ -10,7 +10,12 @@
             [matColumnDef]="column"
             *ngFor="let column of displayedColumns"
         >
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <th
+                class="Hcolor"
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+            >
                 {{ column | translate }}
             </th>
 
@@ -36,114 +41,126 @@
             </ng-container>
         </ng-container>
 
-        <ng-container matColumnDef="NoData">
-            <td mat-footer-cell *matFooterCellDef>
-                {{ 'NoDataFound' | translate }}
-            </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Actions">
-            <th mat-header-cell *matHeaderCellDef>
-                {{ 'Control' | translate }}
-            </th>
-            <td mat-cell *matCellDef="let row">
-                <button mat-icon-button (click)="onEditClick(row)">
-                    <mat-icon>edit</mat-icon>{{ 'Edit' | translate }}</button
-                >&nbsp;&nbsp;&nbsp;&nbsp;
-                <button
-                    mat-icon-button
-                    color="warn"
-                    (click)="onDeleteClick(row)"
-                >
-                    <mat-icon>delete</mat-icon>{{ 'Delete' | translate }}
-                </button>
-            </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Selection">
-            <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox
-                    (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()"
-                >
-                </mat-checkbox>
-            </th>
-            <td mat-cell *matCellDef="let row">
-                <mat-checkbox
-                    (click)="$event.stopPropagation()"
-                    (change)="onSelectedRow(row, true, false)"
-                    [checked]="selection.isSelected(row)"
-                ></mat-checkbox>
-            </td>
-        </ng-container>
-
-        <ng-container
-            *ngFor="let additionalColumn of additionalColumns; let i = index"
-        >
-            <ng-container matColumnDef="{{ additionalColumn.headerName }}">
-                <th mat-header-cell *matHeaderCellDef>
-                    {{ additionalColumn.headerName | translate }}
-                </th>
-                <td mat-cell *matCellDef="let row">
-                    <ng-container *ngIf="additionalColumn.childColumn">
-                        <button
-                            mat-icon-button
-                            color="Primary"
-                            [matMenuTriggerFor]="i"
-                        >
-                            <mat-icon>{{ additionalColumn.icon }}</mat-icon>
-                        </button>
-                        <mat-menu #i="matMenu" yPosition="above">
-                            <ng-container
-                                *ngFor="
-                                    let child of additionalColumn.childColumn
-                                "
-                            >
-                                <button
-                                    mat-menu-item
-                                    (click)="onStatusClick(row, child.status)"
-                                >
-                                    {{ child.name | translate }}
-                                </button>
-                            </ng-container>
-                        </mat-menu>
-                    </ng-container>
-
-                    <ng-container *ngIf="!additionalColumn.childColumn">
-                        <button
-                            mat-icon-button
-                            color="Primary"
-                            (click)="
-                                onStatusClick(row, additionalColumn.status)
-                            "
-                        >
-                            <mat-icon>{{ additionalColumn.icon }}</mat-icon>
-                        </button>
-                    </ng-container>
+        <div class="tableRows">
+            <ng-container matColumnDef="NoData">
+                <td mat-footer-cell *matFooterCellDef>
+                    {{ 'NoDataFound' | translate }}
                 </td>
             </ng-container>
-        </ng-container>
 
-        <tr
-            mat-footer-row
-            *matFooterRowDef="['NoData']"
-            [ngClass]="{ hide: gridDataSource.data.length > 0 }"
-        ></tr>
+            <ng-container matColumnDef="Actions">
+                <th class="Hcolor" mat-header-cell *matHeaderCellDef>
+                    {{ 'Control' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button (click)="onEditClick(row)">
+                        <mat-icon>edit</mat-icon
+                        >{{ 'Edit' | translate }}</button
+                    >&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button
+                        mat-icon-button
+                        color="warn"
+                        (click)="onDeleteClick(row)"
+                    >
+                        <mat-icon>delete</mat-icon>{{ 'Delete' | translate }}
+                    </button>
+                </td>
+            </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="getDisplayColumns()"></tr>
-        <tr
-            mat-row
-            *matRowDef="let row; columns: getDisplayColumns()"
-            [ngClass]="{
-                hovered: row.hovered
-            }"
-            (mouseover)="row.hovered = true"
-            (mouseout)="row.hovered = false"
-        ></tr>
+            <ng-container matColumnDef="Selection">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox
+                        (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="
+                            selection.hasValue() && !isAllSelected()
+                        "
+                    >
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox
+                        (click)="$event.stopPropagation()"
+                        (change)="onSelectedRow(row, true, false)"
+                        [checked]="selection.isSelected(row)"
+                    ></mat-checkbox>
+                </td>
+            </ng-container>
+
+            <ng-container
+                *ngFor="
+                    let additionalColumn of additionalColumns;
+                    let i = index
+                "
+            >
+                <ng-container matColumnDef="{{ additionalColumn.headerName }}">
+                    <th mat-header-cell *matHeaderCellDef>
+                        {{ additionalColumn.headerName | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <ng-container *ngIf="additionalColumn.childColumn">
+                            <button
+                                mat-icon-button
+                                color="Primary"
+                                [matMenuTriggerFor]="i"
+                            >
+                                <mat-icon>{{ additionalColumn.icon }}</mat-icon>
+                            </button>
+                            <mat-menu #i="matMenu" yPosition="above">
+                                <ng-container
+                                    *ngFor="
+                                        let child of additionalColumn.childColumn
+                                    "
+                                >
+                                    <button
+                                        mat-menu-item
+                                        (click)="
+                                            onStatusClick(row, child.status)
+                                        "
+                                    >
+                                        {{ child.name | translate }}
+                                    </button>
+                                </ng-container>
+                            </mat-menu>
+                        </ng-container>
+
+                        <ng-container *ngIf="!additionalColumn.childColumn">
+                            <button
+                                mat-icon-button
+                                color="Primary"
+                                (click)="
+                                    onStatusClick(row, additionalColumn.status)
+                                "
+                            >
+                                <mat-icon>{{ additionalColumn.icon }}</mat-icon>
+                            </button>
+                        </ng-container>
+                    </td>
+                </ng-container>
+            </ng-container>
+
+            <tr
+                mat-footer-row
+                *matFooterRowDef="['NoData']"
+                [ngClass]="{ hide: gridDataSource.data.length > 0 }"
+            ></tr>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayColumns()"></tr>
+            <tr
+                mat-row
+                *matRowDef="let row; columns: getDisplayColumns()"
+                [ngClass]="{
+                    hovered: row.hovered
+                }"
+                (mouseover)="row.hovered = true"
+                (mouseout)="row.hovered = false"
+            ></tr>
+        </div>
     </table>
 
+    <hr class="theLine" />
     <mat-paginator
+        class="paginator"
         #paginator
         [length]="lengthData"
         [pageSize]="pageSize"

@@ -1,14 +1,4 @@
-<div
-    class="user-profile"
-    style="
-        background: url(assets/images/background/mukalmat.gif) no-repeat;
-        height: 135px;
-        background-size: contain;
-        margin-left: 12px;
-        margin-top: 6px;
-    "
-></div>
-<div>
+<div class="sideMenu">
     <mat-nav-list appAccordion>
         <mat-list-item
             appAccordionLink
@@ -17,6 +7,7 @@
             group="{{ menuitem.state }}"
         >
             <a
+                (click)="subItem(menuitem)"
                 class=""
                 appAccordionToggle
                 [routerLink]="['/', menuitem.state]"
@@ -33,6 +24,7 @@
             </a>
 
             <a
+                (click)="subItem(menuitem)"
                 class=""
                 appAccordionToggle
                 href="{{ menuitem.state }}"
@@ -48,6 +40,7 @@
                 >
             </a>
             <a
+                (click)="subItem(menuitem)"
                 class=""
                 appAccordionToggle
                 href="{{ menuitem.state }}"
@@ -65,70 +58,24 @@
             </a>
 
             <a
-                class=""
+                (click)="subItem(menuitem)"
+                class="Item"
                 appAccordionToggle
                 href="javascript:;"
                 *ngIf="menuitem.type === 'sub' && isRoleMatch(menuitem.roles)"
             >
-                <mat-icon>{{ menuitem.icon }}</mat-icon>
-                <span>{{ menuitem.name | translate }}</span>
-                <span fxFlex></span>
-                <span
-                    class="label label-{{ badge.type }}"
-                    *ngFor="let badge of menuitem.badge"
-                    >{{ badge.value }}</span
-                >
-                <mat-icon class="dd-icon">keyboard_arrow_down</mat-icon>
+                <div class="itemLabel">
+                    <span class="itemIcon"
+                        ><mat-icon>{{ menuitem.icon }}</mat-icon></span
+                    >
+
+                    <span class="itemText">{{
+                        menuitem.name | translate
+                    }}</span>
+                </div>
+
+                <!-- <mat-icon class="dd-icon">keyboard_arrow_down</mat-icon> -->
             </a>
-            <mat-nav-list class="sub-item" *ngIf="menuitem.type === 'sub'">
-                <mat-list-item
-                    *ngFor="let childitem of menuitem.children"
-                    routerLinkActive="selected"
-                >
-                    <a
-                        [routerLink]="['/', menuitem.state, childitem.state]"
-                        *ngIf="
-                            childitem.type === 'link' &&
-                            isRoleMatch(childitem.roles)
-                        "
-                        class="relative"
-                        routerLinkActive="selected"
-                        >{{ childitem.name | translate }}</a
-                    >
-                </mat-list-item>
-                <mat-list-item *ngFor="let childitem of menuitem.children">
-                    <a
-                        class=""
-                        href="javascript: void(0);"
-                        *ngIf="childitem.type === 'subchild'"
-                        routerLinkActive="selected"
-                    >
-                        <span>{{ childitem.name | translate }}</span>
-                        <span fxFlex></span>
-                        <mat-icon class="dd-icon">keyboard_arrow_down</mat-icon>
-                    </a>
-                    <mat-nav-list
-                        class="child-sub-item"
-                        *ngIf="childitem.type === 'subchild'"
-                    >
-                        <mat-list-item
-                            *ngFor="let child of childitem.subchildren"
-                            routerLinkActive="selected"
-                        >
-                            <a
-                                [routerLink]="[
-                                    '/',
-                                    menuitem.state,
-                                    childitem.state,
-                                    child.state
-                                ]"
-                                routerLinkActive="selected"
-                                >{{ child.name | translate }}</a
-                            >
-                        </mat-list-item>
-                    </mat-nav-list>
-                </mat-list-item>
-            </mat-nav-list>
 
             <div
                 class="saperator text-muted"
@@ -136,6 +83,54 @@
             >
                 <span>{{ menuitem.name | translate }}</span>
             </div>
+        </mat-list-item>
+    </mat-nav-list>
+</div>
+
+<div class="sideNavList">
+    <mat-nav-list class="subNavList" *ngIf="sub.type === 'sub'">
+        <mat-list-item
+            class="subItems"
+            *ngFor="let childitem of sub.children"
+            routerLinkActive="selected"
+        >
+            <a
+                [routerLink]="['/', sub.state, childitem.state]"
+                *ngIf="
+                    childitem.type === 'link' && isRoleMatch(childitem.roles)
+                "
+                class="relative"
+                routerLinkActive="selected"
+                >{{ childitem.name | translate }}</a
+            >
+        </mat-list-item>
+        <mat-list-item *ngFor="let childitem of sub.children">
+            <a
+                href="javascript: void(0);"
+                *ngIf="childitem.type === 'subchild'"
+                routerLinkActive="selected"
+            >
+                <span>{{ childitem.name | translate }}</span>
+                <span fxFlex></span>
+                <mat-icon class="dd-icon">keyboard_arrow_down</mat-icon>
+            </a>
+            <mat-nav-list *ngIf="childitem.type === 'subchild'">
+                <mat-list-item
+                    *ngFor="let child of childitem.subchildren"
+                    routerLinkActive="selected"
+                >
+                    <a
+                        [routerLink]="[
+                            '/',
+                            sub.state,
+                            childitem.state,
+                            child.state
+                        ]"
+                        routerLinkActive="selected"
+                        >{{ child.name | translate }}</a
+                    >
+                </mat-list-item>
+            </mat-nav-list>
         </mat-list-item>
     </mat-nav-list>
 </div>

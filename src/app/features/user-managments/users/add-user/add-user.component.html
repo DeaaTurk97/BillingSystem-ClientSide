@@ -1,198 +1,132 @@
-<div fxLayout="row" fxLayoutWrap="wrap">
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <div fxLayout="row" fxLayoutWrap="wrap">
-            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
-                <form [formGroup]="frmAddNew">
-                    <div fxLayout="row wrap">
-                        <!-- col full-->
-                        <div
-                            *ngIf="ID === 0"
-                            class="p-8"
-                            fxFlex.gt-sm="33.333"
-                            fxFlex.gt-xs="33.333"
-                            fxFlex="100"
-                        >
-                            <mat-form-field style="width: 100%">
-                                <mat-label>{{
-                                    'User Name' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{ 'User Name' | translate }}"
-                                    type="text"
-                                    [formControl]="
-                                        frmAddNew.controls['UserName']
-                                    "
-                                    autocomplete="off"
-                                />
-                            </mat-form-field>
-                        </div>
+<form [formGroup]="frmAddNew">
+    <div fxLayout="row wrap" class="dialogContainer">
+        <div class="Title" *ngIf="ID === 0">{{ 'addUser' | translate }}</div>
+        <div class="Title" *ngIf="ID != 0">{{ 'editUser' | translate }}</div>
+        <!-- col full-->
+        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="32" *ngIf="ID === 0">
+            <mat-form-field>
+                <mat-label>{{ 'User Name' | translate }}</mat-label>
+                <input
+                    matInput
+                    placeholder="{{ 'User Name' | translate }}"
+                    type="text"
+                    [formControl]="frmAddNew.controls['UserName']"
+                    autocomplete="off"
+                />
+            </mat-form-field>
+        </div>
 
-                        <div
-                            *ngIf="ID"
-                            class="p-8"
-                            fxFlex.gt-sm="33.333"
-                            fxFlex.gt-xs="33.333"
-                            fxFlex="100"
-                        >
-                            <mat-form-field style="width: 100%">
-                                <mat-label>{{
-                                    'User Name' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{ 'User Name' | translate }}"
-                                    type="text"
-                                    [formControl]="
-                                        frmAddNew.controls['UserName']
-                                    "
-                                    autocomplete="off"
-                                    readonly
-                                />
-                            </mat-form-field>
-                        </div>
-                        <!-- col full-->
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="33.333"
-                            fxFlex.gt-xs="33.333"
-                            fxFlex="100"
-                        >
-                            <mat-form-field style="width: 100%">
-                                <mat-label>{{
-                                    'Email Address' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{
-                                        'Email Address' | translate
-                                    }}"
-                                    type="email"
-                                    [formControl]="frmAddNew.controls['Email']"
-                                    autocomplete="off"
-                                />
-                            </mat-form-field>
-                        </div>
-                        <!-- col full-->
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="33.333"
-                            fxFlex.gt-xs="33.333"
-                            fxFlex="100"
-                        >
-                            <mat-form-field style="width: 100%">
-                                <mat-label>{{
-                                    'Phone Number' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{
-                                        'Phone Number' | translate
-                                    }}"
-                                    type="text"
-                                    [formControl]="
-                                        frmAddNew.controls['PhoneNumber']
-                                    "
-                                    type="number"
-                                    autocomplete="off"
-                                />
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="32" *ngIf="ID">
+            <mat-form-field>
+                <mat-label>{{ 'User Name' | translate }}</mat-label>
+                <input
+                    matInput
+                    placeholder="{{ 'User Name' | translate }}"
+                    type="text"
+                    [formControl]="frmAddNew.controls['UserName']"
+                    autocomplete="off"
+                    readonly
+                />
+            </mat-form-field>
+        </div>
+        <!-- col full-->
+        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="32">
+            <mat-form-field>
+                <mat-label>{{ 'Email Address' | translate }}</mat-label>
+                <input
+                    matInput
+                    placeholder="{{ 'Email Address' | translate }}"
+                    type="email"
+                    [formControl]="frmAddNew.controls['Email']"
+                    autocomplete="off"
+                />
+            </mat-form-field>
+        </div>
+        <!-- col full-->
+        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="32">
+            <mat-form-field>
+                <mat-label>{{ 'Phone Number' | translate }}</mat-label>
+                <input
+                    matInput
+                    placeholder="{{ 'Phone Number' | translate }}"
+                    type="text"
+                    [formControl]="frmAddNew.controls['PhoneNumber']"
+                    type="number"
+                    autocomplete="off"
+                />
+            </mat-form-field>
+        </div>
 
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="33.333"
-                            fxFlex.gt-xs="33.333"
-                            fxFlex="100"
-                        >
-                            <mat-form-field>
-                                <mat-label>{{
-                                    'Groups' | translate
-                                }}</mat-label>
-                                <mat-select
-                                    placeholder="{{ 'Groups' | translate }}"
-                                    formControlName="GroupId"
-                                >
-                                    <mat-option
-                                        *ngFor="let group of groupsModel"
-                                        [value]="group.id"
-                                    >
-                                        {{ group.groupNameEn | translate }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="32">
+            <mat-form-field>
+                <mat-label>{{ 'Groups' | translate }}</mat-label>
+                <mat-select
+                    placeholder="{{ 'Groups' | translate }}"
+                    formControlName="GroupId"
+                >
+                    <mat-option
+                        *ngFor="let group of groupsModel"
+                        [value]="group.id"
+                    >
+                        {{ group.groupNameEn | translate }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="33.333"
-                            fxFlex.gt-xs="33.333"
-                            fxFlex="100"
-                        >
-                            <mat-form-field>
-                                <mat-label>{{
-                                    'Languages' | translate
-                                }}</mat-label>
-                                <mat-select
-                                    placeholder="{{ 'Languages' | translate }}"
-                                    formControlName="LanguageId"
-                                >
-                                    <mat-option
-                                        *ngFor="let language of languagesModel"
-                                        [value]="language.id"
-                                    >
-                                        {{ language.languageCode }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="32">
+            <mat-form-field>
+                <mat-label>{{ 'Languages' | translate }}</mat-label>
+                <mat-select
+                    placeholder="{{ 'Languages' | translate }}"
+                    formControlName="LanguageId"
+                >
+                    <mat-option
+                        *ngFor="let language of languagesModel"
+                        [value]="language.id"
+                    >
+                        {{ language.languageCode }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="33.333"
-                            fxFlex.gt-xs="33.333"
-                            fxFlex="100"
-                        >
-                            <mat-form-field>
-                                <mat-label>{{ 'Roles' | translate }}</mat-label>
-                                <mat-select
-                                    placeholder="{{ 'Roles' | translate }}"
-                                    formControlName="RoleId"
-                                >
-                                    <mat-option
-                                        *ngFor="let role of rolesModel"
-                                        [value]="role.id"
-                                    >
-                                        {{ role.name }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="32">
+            <mat-form-field>
+                <mat-label>{{ 'Roles' | translate }}</mat-label>
+                <mat-select
+                    placeholder="{{ 'Roles' | translate }}"
+                    formControlName="RoleId"
+                >
+                    <mat-option
+                        *ngFor="let role of rolesModel"
+                        [value]="role.id"
+                    >
+                        {{ role.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="75"
-                            fxFlex.gt-xs="75"
-                            fxFlex="100"
-                        >
-                            <mat-form-field>
-                                <mat-label>{{ 'Plans' | translate }}</mat-label>
-                                <mat-select
-                                    placeholder="{{ 'Plans' | translate }}"
-                                    formControlName="PlanId"
-                                >
-                                    <mat-option
-                                        *ngFor="let plan of plans"
-                                        (click)="price(plan)"
-                                        [value]="plan.id"
-                                    >
-                                        {{ plan.name }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="32">
+            <mat-form-field>
+                <mat-label>{{ 'Plans' | translate }}</mat-label>
+                <mat-select
+                    placeholder="{{ 'Plans' | translate }}"
+                    formControlName="PlanId"
+                >
+                    <mat-option
+                        *ngFor="let plan of plans"
+                        (click)="price(plan)"
+                        [value]="plan.id"
+                    >
+                        {{ plan.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-                        <!-- <div
+        <!-- <div
                             class="p-8"
                             fxFlex.gt-sm="75"
                             fxFlex.gt-xs="75"
@@ -222,183 +156,115 @@
                             </mat-form-field>
                         </div> -->
 
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="25"
-                            fxFlex.gt-xs="25"
-                            fxFlex="100"
-                        >
-                            <mat-form-field style="width: 100%">
-                                <mat-label>{{
-                                    'Prices' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{ 'Prices' | translate }}"
-                                    type="text"
-                                    type="number"
-                                    autocomplete="off"
-                                    readonly
-                                    value="{{ totalPrice }}"
-                                />
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="32">
+            <mat-form-field>
+                <mat-label>{{ 'Prices' | translate }}</mat-label>
+                <input
+                    matInput
+                    placeholder="{{ 'Prices' | translate }}"
+                    type="text"
+                    type="number"
+                    autocomplete="off"
+                    readonly
+                    value="{{ totalPrice }}"
+                />
+            </mat-form-field>
+        </div>
 
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="33.333"
-                            fxFlex.gt-xs="33.333"
-                            fxFlex="100"
-                        >
-                            <mat-form-field>
-                                <mat-label>{{
-                                    'simCardType' | translate
-                                }}</mat-label>
-                                <mat-select
-                                    placeholder="{{
-                                        'simCardType' | translate
-                                    }}"
-                                    formControlName="SimCardTypeId"
-                                >
-                                    <mat-option
-                                        *ngFor="
-                                            let simCardType of simCardTypesModel
-                                        "
-                                        [value]="simCardType.id"
-                                    >
-                                        {{ simCardType.typeName }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="32">
+            <mat-form-field>
+                <mat-label>{{ 'simCardType' | translate }}</mat-label>
+                <mat-select
+                    placeholder="{{ 'simCardType' | translate }}"
+                    formControlName="SimCardTypeId"
+                >
+                    <mat-option
+                        *ngFor="let simCardType of simCardTypesModel"
+                        [value]="simCardType.id"
+                    >
+                        {{ simCardType.typeName }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="33.333"
-                            fxFlex.gt-xs="33.333"
-                            fxFlex="100"
-                        >
-                            <mat-form-field>
-                                <mat-label>{{
-                                    'simProfileStatus' | translate
-                                }}</mat-label>
-                                <mat-select
-                                    placeholder="{{
-                                        'simProfileStatus' | translate
-                                    }}"
-                                    formControlName="SimProfileId"
-                                >
-                                    <mat-option
-                                        *ngFor="
-                                            let simProfile of simProfilesModel
-                                        "
-                                        [value]="simProfile.id"
-                                    >
-                                        {{ simProfile.profileName }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="48.5" fxFlex.gt-xs="48.5" fxFlex="48.5">
+            <mat-form-field>
+                <mat-label>{{ 'simProfileStatus' | translate }}</mat-label>
+                <mat-select
+                    placeholder="{{ 'simProfileStatus' | translate }}"
+                    formControlName="SimProfileId"
+                >
+                    <mat-option
+                        *ngFor="let simProfile of simProfilesModel"
+                        [value]="simProfile.id"
+                    >
+                        {{ simProfile.profileName }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="33.333"
-                            fxFlex.gt-xs="33.333"
-                            fxFlex="100"
-                        >
-                            <mat-form-field>
-                                <mat-label>{{
-                                    'FixedAmount' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{
-                                        'FixedAmount' | translate
-                                    }}"
-                                    type="number"
-                                    autocomplete="off"
-                                    [formControl]="
-                                        frmAddNew.controls['FixedAmount']
-                                    "
-                                />
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="48.5" fxFlex.gt-xs="48.5" fxFlex="48.5">
+            <mat-form-field>
+                <mat-label>{{ 'FixedAmount' | translate }}</mat-label>
+                <input
+                    matInput
+                    placeholder="{{ 'FixedAmount' | translate }}"
+                    type="number"
+                    autocomplete="off"
+                    [formControl]="frmAddNew.controls['FixedAmount']"
+                />
+            </mat-form-field>
+        </div>
 
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="100"
-                            fxFlex.gt-xs="100"
-                            fxFlex="100"
-                        >
-                            <mat-form-field style="width: 100%">
-                                <mat-label>{{ 'Notes' | translate }}</mat-label>
-                                <textarea
-                                    matInput
-                                    placeholder="{{ 'Notes' | translate }}"
-                                    type="text"
-                                    [formControl]="frmAddNew.controls['Notes']"
-                                    type="text"
-                                    autocomplete="off"
-                                >
-                                </textarea>
-                            </mat-form-field>
-                        </div>
-
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="15"
-                            fxFlex.gt-xs="15"
-                            fxFlex="100"
-                        >
-                            <button
-                                mat-raised-button
-                                [mat-dialog-close]="false"
-                                color="warn"
-                            >
-                                <mat-icon>close</mat-icon>
-                                {{ 'Close' | translate }}
-                            </button>
-                        </div>
-
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="15"
-                            fxFlex.gt-xs="15"
-                            fxFlex="100"
-                            [hidden]="frmAddNew.controls['Id'].value != 0"
-                        >
-                            <button
-                                mat-raised-button
-                                type="submit"
-                                color="primary"
-                                (click)="onSubmit()"
-                                [disabled]="!frmAddNew.valid || isInProgress"
-                            >
-                                <mat-icon>add</mat-icon> {{ 'Add' | translate }}
-                            </button>
-                        </div>
-
-                        <div
-                            class="p-8"
-                            fxFlex.gt-sm="15"
-                            fxFlex.gt-xs="15"
-                            fxFlex="100"
-                            [hidden]="frmAddNew.controls['Id'].value == 0"
-                        >
-                            <button
-                                mat-raised-button
-                                type="submit"
-                                color="primary"
-                                (click)="onSubmit()"
-                                [disabled]="!frmAddNew.valid || isInProgress"
-                            >
-                                <mat-icon>save</mat-icon>
-                                {{ 'Save' | translate }}
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+            <mat-form-field>
+                <mat-label>{{ 'Notes' | translate }}</mat-label>
+                <textarea
+                    matInput
+                    placeholder="{{ 'Notes' | translate }}"
+                    type="text"
+                    [formControl]="frmAddNew.controls['Notes']"
+                    type="text"
+                    autocomplete="off"
+                >
+                </textarea>
+            </mat-form-field>
         </div>
     </div>
-</div>
+
+    <div class="actionButtonsCont">
+        <button
+            mat-raised-button
+            [mat-dialog-close]="false"
+            class="closeButton"
+        >
+            <mat-icon>close</mat-icon>
+            {{ 'Close' | translate }}
+        </button>
+
+        <button
+            *ngIf="ID === 0"
+            mat-raised-button
+            type="submit"
+            class="addButton"
+            (click)="onSubmit()"
+            [disabled]="!frmAddNew.valid || isInProgress"
+        >
+            <mat-icon>add</mat-icon> {{ 'Add' | translate }}
+        </button>
+
+        <button
+            *ngIf="ID != 0"
+            mat-raised-button
+            type="submit"
+            class="saveButton"
+            (click)="onSubmit()"
+            [disabled]="!frmAddNew.valid || isInProgress"
+        >
+            <mat-icon>save</mat-icon>
+            {{ 'Save' | translate }}
+        </button>
+    </div>
+</form>

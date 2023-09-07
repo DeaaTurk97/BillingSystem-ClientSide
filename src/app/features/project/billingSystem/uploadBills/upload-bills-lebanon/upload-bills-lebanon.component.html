@@ -1,114 +1,69 @@
 <mat-card>
     <mat-card-content>
-        <div fxLayout="row" fxLayoutWrap="wrap">
-            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                <div fxLayout="row" fxLayoutWrap="wrap">
-                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
-                        <div
-                            class="p-12"
-                            fxFlex.gt-sm="100"
-                            fxFlex.gt-xs="100"
-                            fxFlex="100"
-                        >
-                            <button
-                                name="uploadBills"
-                                mat-raised-button
-                                type="submit"
-                                color="primary"
-                                (click)="ImportType()"
-                                [disabled]="
-                                    fileListFormControl.errors || isSubmitted
-                                "
-                            >
-                                <mat-icon>upload</mat-icon>
-                                {{ 'UploadBills' | translate }}
-                            </button>
-                        </div>
+        <button
+            class="uploadButton"
+            mat-raised-button
+            type="submit"
+            (click)="ImportType()"
+            [disabled]="fileListFormControl.errors || isSubmitted"
+        >
+            <mat-icon>upload</mat-icon> {{ 'UploadBills' | translate }}
+        </button>
 
-                        <div
-                            class="p-12"
-                            fxFlex.gt-sm="100"
-                            fxFlex.gt-xs="100"
-                            fxFlex="100"
-                        >
-                            <button
-                                name="uploadBills"
-                                mat-raised-button
-                                type="submit"
-                                color="primary"
-                                (click)="ReminderStaff()"
+        <mat-card class="uploadCard">
+            <mat-card-content>
+                <h2 class="uploadTitle">
+                    {{ 'chooseOperatorType' | translate }}
+                </h2>
+                <div fxLayout="row wrap">
+                    <div
+                        class="p-12 uploadContent"
+                        fxFlex.gt-sm="100"
+                        fxFlex.gt-xs="100"
+                        fxFlex="100"
+                    >
+                        <mat-radio-group [(ngModel)]="billType">
+                            <mat-radio-button [value]="'Calls'" [checked]="true"
+                                >Local & International Call </mat-radio-button
+                            >&nbsp;
+                            <mat-radio-button
+                                [value]="'Roaming'"
+                                [checked]="false"
+                                >Roaming</mat-radio-button
+                            >&nbsp;
+                            <mat-radio-button
+                                [value]="'DataRoaming'"
+                                [checked]="false"
+                                >Data Roaming</mat-radio-button
+                            >&nbsp;
+                            <mat-radio-button [value]="'Data'" [checked]="false"
+                                >Data</mat-radio-button
                             >
-                                {{ 'ReminderStaff' | translate }}
-                            </button>
-                        </div>
+                        </mat-radio-group>
+                    </div>
+
+                    <h2 class="uploadTitle">{{ 'UploadBill' | translate }}</h2>
+
+                    <div
+                        class="p-12 uploadContent"
+                        fxFlex.gt-sm="100"
+                        fxFlex.gt-xs="100"
+                        fxFlex="100"
+                    >
+                        <app-file-upload
+                            class="inline-block"
+                            [fileConfig]="fileConfig"
+                            [fileListFormControl]="fileListFormControl"
+                            [form]="formGroup"
+                            [formConfig]="formConfig"
+                            title="{{ 'DocumentUpload' | translate }}"
+                            [validationMessageList]="validationMessageList"
+                            (emitFileSelect)="onFileSelect($event)"
+                            (emitSubmit)="uploadDocument()"
+                        ></app-file-upload>
                     </div>
                 </div>
-            </div>
-        </div>
-    </mat-card-content>
-</mat-card>
-
-<mat-card>
-    <mat-card-content>
-        <div fxLayout="row" fxLayoutWrap="wrap">
-            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                <div fxLayout="row" fxLayoutWrap="wrap">
-                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
-                        <div fxLayout="row wrap">
-                            <div
-                                class="p-12"
-                                fxFlex.gt-sm="100"
-                                fxFlex.gt-xs="100"
-                                fxFlex="100"
-                            >
-                                <mat-radio-group [(ngModel)]="billType">
-                                    <mat-radio-button
-                                        [value]="'Calls'"
-                                        [checked]="true"
-                                        >Local & International Call </mat-radio-button
-                                    >&nbsp;
-                                    <mat-radio-button
-                                        [value]="'Roaming'"
-                                        [checked]="false"
-                                        >Roaming</mat-radio-button
-                                    >&nbsp;
-                                    <mat-radio-button
-                                        [value]="'DataRoaming'"
-                                        [checked]="false"
-                                        >Data Roaming</mat-radio-button
-                                    >&nbsp;
-                                    <mat-radio-button
-                                        [value]="'Data'"
-                                        [checked]="false"
-                                        >Data</mat-radio-button
-                                    >
-                                </mat-radio-group>
-                            </div>
-
-                            <div
-                                class="p-12"
-                                fxFlex.gt-sm="100"
-                                fxFlex.gt-xs="100"
-                                fxFlex="100"
-                            >
-                                <app-file-upload
-                                    class="inline-block"
-                                    [fileConfig]="fileConfig"
-                                    [fileListFormControl]="fileListFormControl"
-                                    [form]="formGroup"
-                                    [formConfig]="formConfig"
-                                    title="{{ 'DocumentUpload' | translate }}"
-                                    [validationMessageList]="
-                                        validationMessageList
-                                    "
-                                    (emitFileSelect)="onFileSelect($event)"
-                                    (emitSubmit)="uploadDocument()"
-                                ></app-file-upload>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </mat-card-content>
+        </mat-card>
     </mat-card-content>
 </mat-card>

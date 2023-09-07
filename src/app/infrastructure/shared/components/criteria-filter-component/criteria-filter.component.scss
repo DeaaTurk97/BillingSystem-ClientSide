@@ -1,0 +1,93 @@
+::ng-deep .dateField {
+    .mat-form-field-infix {
+        border-top: 0;
+        padding: 0 !important;
+        height: 5rem !important;
+    }
+
+    .mat-form-field-flex {
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 3.3rem !important;
+    }
+
+    .mat-form-field-wrapper {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .mat-form-field-outline-start {
+        border: none !important;
+    }
+
+    .mat-form-field-outline-end {
+        border: none !important;
+    }
+
+    .mat-form-field-outline {
+        border-radius: 15px 15px 15px 15px !important;
+        background-color: white;
+    }
+
+    .mat-date-range-input {
+        padding-top: 1.4rem !important;
+        padding-left: 1rem;
+    }
+}
+
+::ng-deep .searchFields {
+    .mat-form-field-wrapper {
+        margin-bottom: 0rem !important;
+        margin-top: 0rem !important;
+        padding-bottom: 0rem !important;
+        padding-top: 0rem !important;
+    }
+
+    .mat-form-field-outline-start {
+        border-radius: 15px 0 0 15px !important;
+        min-width: 28px !important;
+        background-color: white;
+    }
+
+    .mat-form-field-outline-end {
+        border-radius: 0 15px 15px 0 !important;
+        background-color: white;
+    }
+
+    .mat-form-field-infix {
+        border-top: 0.5rem !important;
+    }
+
+    .mat-select-arrow-wrapper {
+        padding-top: 1rem;
+    }
+
+    .mat-select-value {
+        padding-top: 0.4rem;
+    }
+}
+
+.fieldsDiv {
+    margin-right: 0.5rem;
+}
+
+.dateField {
+    margin-top: -3px;
+}
+
+.searchButton {
+    margin-top: 1px;
+    height: 3rem;
+    width: 9rem;
+    background-color: rgba(22, 98, 243, 255);
+    color: white;
+    border-radius: 15px 15px 15px 15px !important ;
+}
+
+.checkBox {
+    margin-top: 0.7rem;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: rgba(22, 98, 243, 255) !important;
+}

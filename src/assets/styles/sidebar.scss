@@ -74,8 +74,8 @@ Main sidebar
             }
         }
         &.selected .sub-item .mat-list-item-content a.selected {
-            background: transparent;
-            color: $inverse;
+            background: #1662f3;
+            color: white;
             font-weight: 500;
         }
     }
@@ -114,6 +114,7 @@ Main sidebar
             .selected + {
                 .child-sub-item {
                     display: block;
+                    color: white;
                 }
             }
         }
@@ -260,7 +261,7 @@ use profile section
                 display: none;
             }
             .mat-list-item > .mat-list-item-content > a > span.menu-badge {
-                position: absolute;
+                //position: absolute;
                 top: 10px;
                 right: 16px;
             }

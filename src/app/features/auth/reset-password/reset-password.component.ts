@@ -21,6 +21,11 @@ import { tap } from 'rxjs/operators';
 })
 export class ResetPasswordComponent implements OnInit {
     frmResetPassword: FormGroup;
+    footerIcon = '../../../../assets/images/icon/Group.svg';
+    loginIcon = '../../../../assets/images/icon/bills-icon.svg';
+    mukalamatIcon = '../../../../assets/images/icon/mukalamat.svg';
+    PhoneBillingSystemIcon =
+        '../../../../assets/images/icon/PhoneBillingSystem.svg';
     public isHidePassword: boolean = true;
     public isHidePasswordConfirm: boolean = true;
     public passwordPattern: RegExp = Constants.patterns.PASSWORD_REGEX;

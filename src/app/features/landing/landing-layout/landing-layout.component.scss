@@ -1,4 +1,30 @@
-// .mat-toolbar.mat-primary {
-//     background: #4a7882;
-//     color: #fff;
-//   }
+.mat-toolbar.mat-primary {
+    background: #051e3c;
+    color: #fff;
+}
+
+.sideNav {
+    background-color: #051e3c;
+    width: 300px !important;
+}
+
+hr.toolBarLine {
+    border-top: 2.5px solid #19417d !important;
+    padding: 0;
+    margin: 0;
+}
+
+.logo-margin {
+    margin-top: 0.5rem;
+}
+
+.footerIcon {
+    width: 13rem;
+}
+
+.footer {
+    z-index: 1;
+    background-color: #051e3c;
+    width: 100%;
+    text-align: center;
+}

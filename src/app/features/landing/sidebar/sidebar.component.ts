@@ -1,12 +1,14 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { MenuItems } from '@models/menu-items';
+import { Menu, MenuItems } from '@models/menu-items';
 import { AuthService } from '@app/infrastructure/core/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { TokenService } from '@app/infrastructure/core/services/token.service';
 import { UserType } from '@app/infrastructure/models/user';
 import { map } from 'rxjs/operators';
+import { appendFile } from 'fs';
+import { number } from 'ngx-custom-validators/src/app/number/validator';
 
 @Component({
     selector: 'app-sidebar',
@@ -16,10 +18,11 @@ import { map } from 'rxjs/operators';
 export class AppSidebarComponent implements OnDestroy {
     public config: PerfectScrollbarConfigInterface = {};
     mobileQuery: MediaQueryList;
-
     private mobileQueryListener: () => void;
     status: boolean = true;
     itemSelect: number[] = [];
+    sub: Menu;
+    subItems: Menu[];
 
     subclickEvent() {
         this.status = true;
@@ -39,6 +42,19 @@ export class AppSidebarComponent implements OnDestroy {
         this.mobileQuery.addEventListener('change', () => {
             this.mobileQueryListener();
         });
+
+        this.subItems = this.menuItems.getMenuitem();
+
+        let Url = this.router.url;
+        for (let i = 0; i < this.subItems.length; i++) {
+            if (Url.includes(this.subItems[i].state)) {
+                this.sub = this.subItems[i];
+            }
+        }
+    }
+
+    subItem(menuitem) {
+        this.sub = menuitem;
     }
 
     ngOnDestroy(): void {

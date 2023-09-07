@@ -149,8 +149,8 @@ export class LanguagesListComponent implements OnInit {
     onDelete(row: LanguageModel) {
         return this.matDialog
             .open(ConfirmDialogComponent, {
-                width: '28em',
-                height: '11em',
+                width: '45rem',
+                height: '14rem',
                 panelClass: 'confirm-dialog-container',
                 position: { top: '5em' },
                 disableClose: true,

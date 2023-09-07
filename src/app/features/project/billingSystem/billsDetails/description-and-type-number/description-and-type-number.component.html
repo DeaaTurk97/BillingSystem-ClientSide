@@ -1,111 +1,105 @@
-<div fxLayout="row wrap">
-    <div class="p-10" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <div class="example-container mat-elevation-z8">
-            <form [formGroup]="form">
-                <mat-table
-                    #table
-                    [dataSource]="dataSource"
-                    formArrayName="unDefinedNumber"
+<form [formGroup]="form">
+    <div class="dialogContainer">
+        <mat-table
+            class="container-list"
+            #table
+            [dataSource]="dataSource"
+            formArrayName="unDefinedNumber"
+        >
+            <!-- Name Column -->
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef>
+                    {{ 'id' | translate }}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element; let serialNo = index">
+                    {{ element.id }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="StatusNumberName">
+                <mat-header-cell *matHeaderCellDef>
+                    {{ 'StatusNumberName' | translate }}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{ element.statusNumberName | translate }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="dialledNumber">
+                <mat-header-cell *matHeaderCellDef>
+                    {{ 'dialledNumber' | translate }}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{ element.dialledNumber }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="typePhoneNumberId">
+                <mat-header-cell *matHeaderCellDef>
+                    {{ 'typePhoneNumberName' | translate }}
+                </mat-header-cell>
+                <mat-cell
+                    *matCellDef="let element; let i = index"
+                    [formGroupName]="i"
                 >
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="id">
-                        <mat-header-cell *matHeaderCellDef>
-                            {{ 'id' | translate }}
-                        </mat-header-cell>
-                        <mat-cell
-                            *matCellDef="let element; let serialNo = index"
+                    <mat-form-field>
+                        <mat-select
+                            formControlName="typePhoneNumberId"
+                            placeholder="{{
+                                'typePhoneNumberName' | translate
+                            }}"
                         >
-                            {{ element.id }}
-                        </mat-cell>
-                    </ng-container>
-
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="StatusNumberName">
-                        <mat-header-cell *matHeaderCellDef>
-                            {{ 'StatusNumberName' | translate }}
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                            {{ element.statusNumberName | translate }}
-                        </mat-cell>
-                    </ng-container>
-
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="dialledNumber">
-                        <mat-header-cell *matHeaderCellDef>
-                            {{ 'dialledNumber' | translate }}
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                            {{ element.dialledNumber }}
-                        </mat-cell>
-                    </ng-container>
-
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="typePhoneNumberId">
-                        <mat-header-cell *matHeaderCellDef>
-                            {{ 'typePhoneNumberName' | translate }}
-                        </mat-header-cell>
-                        <mat-cell
-                            *matCellDef="let element; let i = index"
-                            [formGroupName]="i"
-                        >
-                            <mat-select
-                                formControlName="typePhoneNumberId"
-                                placeholder="{{
-                                    'typePhoneNumberName' | translate
-                                }}"
+                            <mat-option
+                                *ngFor="let typeNumber of typePhonesNumbers"
+                                [value]="typeNumber.id"
                             >
-                                <mat-option
-                                    *ngFor="let typeNumber of typePhonesNumbers"
-                                    [value]="typeNumber.id"
-                                >
-                                    {{ typeNumber.typeNameEn }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-cell>
-                    </ng-container>
+                                {{ typeNumber.typeNameEn }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
 
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="phoneName">
-                        <mat-header-cell *matHeaderCellDef>
-                            {{ 'phoneName' | translate }}
-                        </mat-header-cell>
-                        <mat-cell
-                            *matCellDef="let element; let i = index"
-                            [formGroupName]="i"
-                        >
-                            <mat-form-field style="width: 300px">
-                                <input
-                                    formControlName="phoneName"
-                                    matInput
-                                    placeholder="{{ 'phoneName' | translate }}"
-                                    type="text"
-                                    autocomplete="off"
-                                />
-                            </mat-form-field>
-                        </mat-cell>
-                    </ng-container>
+            <!-- Position Column -->
+            <ng-container matColumnDef="phoneName">
+                <mat-header-cell *matHeaderCellDef>
+                    {{ 'phoneName' | translate }}
+                </mat-header-cell>
+                <mat-cell
+                    *matCellDef="let element; let i = index"
+                    [formGroupName]="i"
+                >
+                    <mat-form-field style="width: 300px">
+                        <input
+                            formControlName="phoneName"
+                            matInput
+                            placeholder="{{ 'phoneName' | translate }}"
+                            type="text"
+                            autocomplete="off"
+                        />
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
 
-                    <mat-header-row
-                        *matHeaderRowDef="displayedColumns"
-                    ></mat-header-row>
-                    <mat-row
-                        *matRowDef="let row; columns: displayedColumns"
-                    ></mat-row>
-                </mat-table>
-            </form>
-        </div>
+            <mat-header-row
+                *matHeaderRowDef="displayedColumns"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
     </div>
-    <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
-        <button mat-raised-button [mat-dialog-close]="false" color="warn">
-            <mat-icon>close</mat-icon>
-            {{ 'Close' | translate }}
-        </button>
-    </div>
+</form>
 
-    <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
-        <button mat-raised-button color="primary" (click)="addingNewNumbers()">
-            <mat-icon>save</mat-icon>
-            {{ 'Save' | translate }}
-        </button>
-    </div>
+<div class="actionButtonsCont">
+    <button mat-raised-button [mat-dialog-close]="false" class="closeButton">
+        <mat-icon>close</mat-icon>
+        {{ 'Close' | translate }}
+    </button>
+
+    <button mat-raised-button class="addButton" (click)="addingNewNumbers()">
+        <mat-icon>save</mat-icon>
+        {{ 'Save' | translate }}
+    </button>
 </div>

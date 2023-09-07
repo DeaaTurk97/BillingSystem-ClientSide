@@ -1,14 +1,15 @@
-<h2 mat-dialog-title>{{ dialog.title }}</h2>
-<mat-dialog-content class="content-container">
+<div fxLayout="row wrap" class="dialogContainer">
     <ng-container *ngFor="let message of dialog.messageList">
-        <p class="content-span full-width">{{ message | translate }}</p>
+        <p class="content-span full-width" class="Title">
+            {{ message | translate }}
+        </p>
     </ng-container>
-</mat-dialog-content>
-<mat-dialog-actions>
+</div>
+
+<div class="actionButtonsCont">
     <ng-container *ngIf="dialog.showCancel">
         <button
-            id="cancel-button"
-            class="mat-elevation-z0"
+            class="saveButton"
             type="button"
             mat-raised-button
             [mat-dialog-close]="false"
@@ -17,8 +18,7 @@
         </button>
     </ng-container>
     <button
-        id="form-submit-button"
-        class="mat-elevation-z0"
+        class="closeButton"
         type="submit"
         mat-raised-button
         color="accent"
@@ -28,4 +28,4 @@
     >
         {{ dialog.action | translate | uppercase }}
     </button>
-</mat-dialog-actions>
+</div>

@@ -1,106 +1,147 @@
 <div class="login-register">
     <div class="login-register-box">
-        <mat-card>
-            <mat-card-content>
-                <form [formGroup]="loginForm">
-                    <div class="text-center">
-                        <!-- <img alt="homepage" src="assets/images/logo-icon.png" /> -->
-                        <img
-                            class="loginIcon"
-                            alt="homepage"
-                            src="assets/images/mukalmat.png"
-                        />
-                        <h4 class="m-t-0">{{ 'LoginToApp' | translate }}</h4>
-                    </div>
+        <form [formGroup]="loginForm">
+            <div class="text-center">
+                <!-- <img alt="homepage" src="assets/images/logo-icon.png" /> -->
+                <img class="loginIcon" alt="homepage" [src]="loginIcon" />
 
-                    <div fxLayout="row wrap">
-                        <!-- col full-->
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <mat-form-field>
-                                <mat-label>{{
+                <img
+                    class="mukalamatIcon"
+                    alt="homepage"
+                    [src]="mukalamatIcon"
+                />
+
+                <img
+                    class="PhoneBillingIcon"
+                    alt="homepage"
+                    [src]="PhoneBillingSystemIcon"
+                />
+                <h4 class="m-t-0 loginText">{{ 'LoginToApp' | translate }}</h4>
+            </div>
+
+            <div fxLayout="row wrap">
+                <!-- col full-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field class="loginFields">
+                        <!-- <mat-label>{{
                                     'PhoneNumber' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{
-                                        'PhoneNumber' | translate
-                                    }}"
-                                    formControlName="PhoneNumber"
-                                />
-                            </mat-form-field>
-                            <small
-                                *ngIf="
-                                    loginForm.controls['PhoneNumber'].hasError(
-                                        'required'
-                                    ) &&
-                                    loginForm.controls['PhoneNumber'].touched
-                                "
-                                class="text-danger support-text"
-                                >{{ 'PhoneNumberRequired' | translate }}</small
-                            >
-                        </div>
-                        <!-- col full-->
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <mat-form-field>
-                                <mat-label>{{
-                                    'Password' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    [type]="
-                                        isHidePassword ? 'password' : 'text'
-                                    "
-                                    placeholder="{{ 'Password' | translate }}"
-                                    formControlName="Password"
-                                />
-                                <mat-icon
-                                    matSuffix
-                                    (click)="isHidePassword = !isHidePassword"
-                                    >{{
-                                        isHidePassword
-                                            ? 'visibility_off'
-                                            : 'visibility'
-                                    }}</mat-icon
-                                >
-                            </mat-form-field>
-                            <small
-                                *ngIf="
-                                    loginForm.controls['Password'].hasError(
-                                        'required'
-                                    ) && loginForm.controls['Password'].touched
-                                "
-                                class="text-danger support-text"
-                                >{{ 'PasswordRequired' | translate }}</small
-                            >
-                        </div>
+                                }}</mat-label> -->
+                        <input
+                            matInput
+                            placeholder="{{ 'PhoneNumber' | translate }}"
+                            formControlName="PhoneNumber"
+                        />
 
-                        <div
-                            fxFlex.gt-sm="50"
-                            fxFlex.gt-xs="50"
-                            class="text-right"
+                        <mat-icon
+                            *ngIf="
+                                !loginForm.controls['PhoneNumber'].hasError(
+                                    'required'
+                                ) || !loginForm.controls['PhoneNumber'].touched
+                            "
+                            matSuffix
+                            class="loginIcons"
                         >
-                            <a
-                                [routerLink]="['/auth/forgot-password']"
-                                class="link"
-                                >{{ 'ForgotPassword' | translate }}</a
-                            >
-                        </div>
+                            person_outline
+                        </mat-icon>
 
-                        <!-- col full-->
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <button
-                                mat-raised-button
-                                color="primary"
-                                class="btn-block btn-lg m-t-20 m-b-20"
-                                type="submit"
-                                (click)="logIn()"
-                                [disabled]="!loginForm.valid"
-                            >
-                                {{ 'Login' | translate }}
-                            </button>
-                        </div>
-                        <!-- col full-->
-                        <!-- <div
+                        <mat-icon
+                            matSuffix
+                            class="loginIconsRed"
+                            *ngIf="
+                                loginForm.controls['PhoneNumber'].hasError(
+                                    'required'
+                                ) && loginForm.controls['PhoneNumber'].touched
+                            "
+                        >
+                            person_outline
+                        </mat-icon>
+                    </mat-form-field>
+                    <small
+                        *ngIf="
+                            loginForm.controls['PhoneNumber'].hasError(
+                                'required'
+                            ) && loginForm.controls['PhoneNumber'].touched
+                        "
+                        class="text-danger support-text"
+                        >{{ 'PhoneNumberRequired' | translate }}</small
+                    >
+                </div>
+                <!-- col full-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-form-field class="loginFields">
+                        <!-- <mat-label>{{
+                                    'Password' | translate
+                                }}</mat-label> -->
+                        <input
+                            matInput
+                            [type]="isHidePassword ? 'password' : 'text'"
+                            placeholder="{{ 'Password' | translate }}"
+                            formControlName="Password"
+                        />
+
+                        <mat-icon
+                            *ngIf="
+                                loginForm.controls['Password'].hasError(
+                                    'required'
+                                ) && loginForm.controls['Password'].touched
+                            "
+                            matSuffix
+                            class="loginIconsRed cursor"
+                            (click)="isHidePassword = !isHidePassword"
+                        >
+                            {{
+                                isHidePassword ? 'visibility_off' : 'visibility'
+                            }}
+                        </mat-icon>
+
+                        <mat-icon
+                            *ngIf="
+                                !loginForm.controls['Password'].hasError(
+                                    'required'
+                                ) || !loginForm.controls['Password'].touched
+                            "
+                            matSuffix
+                            class="loginIcons cursor"
+                            (click)="isHidePassword = !isHidePassword"
+                        >
+                            {{
+                                isHidePassword ? 'visibility_off' : 'visibility'
+                            }}
+                        </mat-icon>
+                    </mat-form-field>
+                    <small
+                        *ngIf="
+                            loginForm.controls['Password'].hasError(
+                                'required'
+                            ) && loginForm.controls['Password'].touched
+                        "
+                        class="text-danger support-text"
+                        >{{ 'PasswordRequired' | translate }}</small
+                    >
+                </div>
+
+                <!-- col full-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <button
+                        mat-raised-button
+                        class="btn-block btn-lg m-t-20 m-b-20 loginButton"
+                        (click)="logIn()"
+                        [disabled]="!loginForm.valid"
+                    >
+                        {{ 'Login' | translate }}
+                        <div class="loginImg"></div>
+                    </button>
+                </div>
+
+                <div class="forgotDiv">
+                    <a
+                        [routerLink]="['/auth/forgot-password']"
+                        class="forgotLink"
+                        >{{ 'ForgotPassword' | translate }}</a
+                    >
+                </div>
+                <!-- col full-->
+                <!-- <div
                             fxFlex.gt-sm="100"
                             fxFlex.gt-xs="100"
                             fxFlex="100"
@@ -115,9 +156,10 @@
                                 >
                             </span>
                         </div> -->
-                    </div>
-                </form>
-            </mat-card-content>
-        </mat-card>
+            </div>
+        </form>
     </div>
 </div>
+<footer class="footer">
+    <img [src]="footerIcon" class="footerIcon" />
+</footer>

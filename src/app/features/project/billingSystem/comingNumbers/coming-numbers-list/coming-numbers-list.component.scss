@@ -1,0 +1,115 @@
+::ng-deep .dropDownField {
+    .mat-form-field-wrapper {
+        margin-bottom: 0rem !important;
+        margin-top: 0rem !important;
+        padding-bottom: 0rem !important;
+        padding-top: 0rem !important;
+    }
+
+    .mat-form-field-outline-start {
+        border-radius: 15px 0 0 15px !important;
+        min-width: 28px !important;
+        background-color: white;
+    }
+
+    .mat-form-field-outline-end {
+        border-radius: 0 15px 15px 0 !important;
+        background-color: white;
+    }
+
+    .mat-form-field-infix {
+        border-top: 0.5rem !important;
+    }
+
+    .mat-select-arrow-wrapper {
+        padding-top: 1rem;
+    }
+
+    .mat-select-value {
+        padding-top: 0.4rem;
+    }
+}
+
+.dropDownField {
+    width: 35rem;
+}
+
+.billActionsButtons {
+    padding: 0;
+    height: 3rem;
+    width: 9rem;
+    background-color: rgba(22, 98, 243, 255);
+    color: white;
+    border-radius: 15px 15px 15px 15px !important ;
+}
+
+.billActionsButtonsCont {
+    padding: 0;
+    display: inline-block;
+    float: right;
+    margin-left: 1rem;
+}
+
+.dropDownDiv {
+    display: inline-block;
+}
+
+.payIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+    float: right;
+    margin-top: 0.4rem;
+    margin-right: 1rem;
+    mask: url(../../../../../../assets/images/icon/Frame.svg) no-repeat center;
+    background-color: white;
+}
+
+.approveIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+    float: right;
+    margin-top: 0.4rem;
+    margin-right: 1rem;
+    mask: url(../../../../../../assets/images/icon/checkIcon.svg) no-repeat
+        center;
+    background-color: white;
+}
+
+.rejectIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+    float: right;
+    margin-top: 0.4rem;
+    margin-right: 1rem;
+    mask: url(../../../../../../assets/images/icon/xIcon.svg) no-repeat center;
+    background-color: white;
+}
+
+.inProgressIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+    float: right;
+    margin-top: 0.4rem;
+    margin-right: 1rem;
+    mask: url(../../../../../../assets/images/icon/inProgressIcon.svg) no-repeat
+        center;
+    background-color: white;
+}
+
+.billActionsButtons:disabled {
+    .payIcon {
+        background-color: gray;
+    }
+
+    .inProgressIcon {
+        background-color: gray;
+    }
+
+    .rejectIcon {
+        background-color: gray;
+    }
+
+    .approveIcon {
+        background-color: gray;
+    }
+}

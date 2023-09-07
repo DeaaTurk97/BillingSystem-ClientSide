@@ -16,6 +16,11 @@ import { map, switchMap } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotPasswordComponent implements OnInit {
+    footerIcon = '../../../../assets/images/icon/Group.svg';
+    loginIcon = '../../../../assets/images/icon/bills-icon.svg';
+    mukalamatIcon = '../../../../assets/images/icon/mukalamat.svg';
+    PhoneBillingSystemIcon =
+        '../../../../assets/images/icon/PhoneBillingSystem.svg';
     public frmForgotPassword: FormGroup;
     public isInProgress: boolean = false;
     constructor(
@@ -62,7 +67,7 @@ export class ForgotPasswordComponent implements OnInit {
 
     verifyEmailOtp() {
         const dialog = this.dialog.open(VerificationOtpCodeComponent, {
-            width: '40em',
+            width: '60em',
             height: '16em',
             panelClass: 'confirm-dialog-container',
             position: { top: '5em' },

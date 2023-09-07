@@ -1,187 +1,141 @@
-<div fxLayout="row" fxLayoutWrap="wrap">
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <div fxLayout="row" fxLayoutWrap="wrap">
-            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
-                <form novalidate [formGroup]="frmAddNew">
-                    <div fxLayout="row wrap">
-                        <div
-                            class="p-12"
-                            fxFlex.gt-sm="100"
-                            fxFlex.gt-xs="100"
-                            fxFlex="100"
+<form novalidate [formGroup]="frmAddNew">
+    <div fxLayout="row wrap" class="dialogContainer">
+        <h1 class="Title" [hidden]="frmAddNew.controls['Id'].value != 0">
+            {{ 'addPhoneBook' | translate }}
+        </h1>
+        <h1 class="Title" [hidden]="frmAddNew.controls['Id'].value == 0">
+            {{ 'editPhoneBook' | translate }}
+        </h1>
+        <div class="p-12" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+            <ng-template>
+                <mat-form-field>
+                    <input
+                        matInput
+                        placeholder="Id"
+                        formControlName="Id"
+                        type="text"
+                    />
+                </mat-form-field>
+            </ng-template>
+        </div>
+
+        <div class="p-10" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+            <mat-form-field>
+                <input
+                    matInput
+                    placeholder="{{ 'phoneNumber' | translate }}"
+                    formControlName="PhoneNumber"
+                    type="text"
+                    autocomplete="off"
+                />
+            </mat-form-field>
+        </div>
+
+        <div class="p-10" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+            <mat-form-field>
+                <input
+                    matInput
+                    placeholder="{{ 'phoneName' | translate }}"
+                    formControlName="PhoneName"
+                    type="text"
+                    autocomplete="off"
+                />
+            </mat-form-field>
+        </div>
+
+        <ng-template>
+            <div class="p-10" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <mat-form-field>
+                    <mat-select
+                        placeholder="{{ 'typePhoneNumberName' | translate }}"
+                        [(value)]="selectedTypePhoneNumber"
+                        formControlName="TypePhoneNumberId"
+                    >
+                        <mat-option
+                            *ngFor="let typeNumber of typePhonesNumbers"
+                            [value]="typeNumber.id"
                         >
-                            <ng-template>
-                                <mat-form-field>
-                                    <input
-                                        matInput
-                                        placeholder="Id"
-                                        formControlName="Id"
-                                        type="text"
-                                    />
-                                </mat-form-field>
-                            </ng-template>
-                        </div>
-
-                        <div
-                            class="p-10"
-                            fxFlex.gt-sm="50"
-                            fxFlex.gt-xs="50"
-                            fxFlex="100"
-                        >
-                            <mat-form-field>
-                                <mat-label>{{
-                                    'phoneNumber' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{
-                                        'phoneNumber' | translate
-                                    }}"
-                                    formControlName="PhoneNumber"
-                                    type="text"
-                                    autocomplete="off"
-                                />
-                            </mat-form-field>
-                        </div>
-
-                        <div
-                            class="p-10"
-                            fxFlex.gt-sm="50"
-                            fxFlex.gt-xs="50"
-                            fxFlex="100"
-                        >
-                            <mat-form-field>
-                                <mat-label>{{
-                                    'phoneName' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{ 'phoneName' | translate }}"
-                                    formControlName="PhoneName"
-                                    type="text"
-                                    autocomplete="off"
-                                />
-                            </mat-form-field>
-                        </div>
-
-                        <ng-template>
-                            <div
-                                class="p-10"
-                                fxFlex.gt-sm="50"
-                                fxFlex.gt-xs="50"
-                                fxFlex="100"
-                            >
-                                <mat-form-field>
-                                    <mat-label>{{
-                                        'typePhoneNumberName' | translate
-                                    }}</mat-label>
-                                    <mat-select
-                                        placeholder="{{
-                                            'typePhoneNumberName' | translate
-                                        }}"
-                                        [(value)]="selectedTypePhoneNumber"
-                                        formControlName="TypePhoneNumberId"
-                                    >
-                                        <mat-option
-                                            *ngFor="
-                                                let typeNumber of typePhonesNumbers
-                                            "
-                                            [value]="typeNumber.id"
-                                        >
-                                            {{ typeNumber.typeNameAr }}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-
-                            <div
-                                class="p-10"
-                                fxFlex.gt-sm="50"
-                                fxFlex.gt-xs="50"
-                                fxFlex="100"
-                            >
-                                <mat-form-field>
-                                    <mat-label>{{
-                                        'statusNumberName' | translate
-                                    }}</mat-label>
-                                    <mat-select
-                                        placeholder="{{
-                                            'statusNumberName' | translate
-                                        }}"
-                                        [(value)]="selectedStatusNumber"
-                                        formControlName="statusNumberId"
-                                    >
-                                        <mat-option
-                                            *ngFor="
-                                                let satusNumber of statusCycleBills;
-                                                let i = index
-                                            "
-                                            [value]="i + 1"
-                                        >
-                                            {{
-                                                satusNumber | translate
-                                            }}</mat-option
-                                        >
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                        </ng-template>
-
-                        <div
-                            class="p-10"
-                            fxFlex.gt-sm="15"
-                            fxFlex.gt-xs="15"
-                            fxFlex="100"
-                        >
-                            <button
-                                mat-raised-button
-                                [mat-dialog-close]="false"
-                                color="warn"
-                            >
-                                <mat-icon>close</mat-icon>
-                                {{ 'Close' | translate }}
-                            </button>
-                        </div>
-
-                        <div
-                            class="p-10"
-                            fxFlex.gt-sm="15"
-                            fxFlex.gt-xs="15"
-                            fxFlex="100"
-                            [hidden]="frmAddNew.controls['Id'].value != 0"
-                        >
-                            <button
-                                mat-raised-button
-                                type="submit"
-                                color="primary"
-                                [disabled]="!frmAddNew.valid || isInProgress"
-                                (click)="onAdd()"
-                            >
-                                <mat-icon>add</mat-icon> {{ 'Add' | translate }}
-                            </button>
-                        </div>
-
-                        <div
-                            class="p-10"
-                            fxFlex.gt-sm="15"
-                            fxFlex.gt-xs="15"
-                            fxFlex="100"
-                            [hidden]="frmAddNew.controls['Id'].value == 0"
-                        >
-                            <button
-                                mat-raised-button
-                                type="submit"
-                                color="primary"
-                                [disabled]="!frmAddNew.valid || isInProgress"
-                                (click)="onEdit()"
-                            >
-                                <mat-icon>save</mat-icon>
-                                {{ 'Save' | translate }}
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                            {{ typeNumber.typeNameAr }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
+
+            <div class="p-10" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+                <mat-form-field>
+                    <mat-select
+                        placeholder="{{ 'statusNumberName' | translate }}"
+                        [(value)]="selectedStatusNumber"
+                        formControlName="statusNumberId"
+                    >
+                        <mat-option
+                            *ngFor="
+                                let satusNumber of statusCycleBills;
+                                let i = index
+                            "
+                            [value]="i + 1"
+                        >
+                            {{ satusNumber | translate }}</mat-option
+                        >
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </ng-template>
+    </div>
+
+    <div style="display: block">
+        <div
+            class="actionButtonsCont"
+            fxFlex.gt-sm="50"
+            fxFlex.gt-xs="50"
+            fxFlex="100"
+        >
+            <button
+                class="actionButtons close"
+                mat-raised-button
+                [mat-dialog-close]="false"
+            >
+                {{ 'Close' | translate }}
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+        <div
+            class="actionButtonsCont"
+            fxFlex.gt-sm="50"
+            fxFlex.gt-xs="50"
+            fxFlex="100"
+            [hidden]="frmAddNew.controls['Id'].value != 0"
+        >
+            <button
+                class="actionButtons saveAndadd"
+                mat-raised-button
+                type="submit"
+                [disabled]="!frmAddNew.valid || isInProgress"
+                (click)="onAdd()"
+            >
+                {{ 'Add' | translate }}
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+
+        <div
+            class="actionButtonsCont"
+            fxFlex.gt-sm="50"
+            fxFlex.gt-xs="50"
+            fxFlex="100"
+            [hidden]="frmAddNew.controls['Id'].value == 0"
+        >
+            <button
+                class="actionButtons saveAndadd"
+                mat-raised-button
+                type="submit"
+                [disabled]="!frmAddNew.valid || isInProgress"
+                (click)="onEdit()"
+            >
+                {{ 'Save' | translate }}
+                <mat-icon>save</mat-icon>
+            </button>
         </div>
     </div>
-</div>
+</form>

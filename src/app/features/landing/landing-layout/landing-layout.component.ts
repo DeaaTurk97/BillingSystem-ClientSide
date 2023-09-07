@@ -29,6 +29,8 @@ export class LandingLayoutComponent implements OnDestroy, AfterViewInit {
     sidebarOpened;
     isShowSearchBar: boolean = false;
     mobileQuery: MediaQueryList;
+    headIcon = '../../../../assets/images/icon/mukalamat-logo.svg';
+    footerIcon = '../../../../assets/images/icon/Group.svg';
 
     private mobileQueryListener: () => void;
     public config: PerfectScrollbarConfigInterface = {};

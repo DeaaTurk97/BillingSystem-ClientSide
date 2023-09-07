@@ -1,150 +1,106 @@
-<mat-card>
-    <mat-card-content>
-        <form novalidate [formGroup]="frmFilter" (ngSubmit)="onSearch()">
-            <div fxLayout="row wrap">
-                <div
-                    class="p-10"
-                    fxFlex.gt-sm="33.333"
-                    fxFlex.gt-xs="33.333"
-                    fxFlex="100"
-                    *ngIf="showDateRange"
+<form novalidate [formGroup]="frmFilter" (ngSubmit)="onSearch()">
+    <div>
+        <div class="fieldsDiv" fxFlex="100" *ngIf="showDateRange">
+            <mat-form-field class="dateField">
+                <mat-form-field>
+                    <mat-date-range-input
+                        [formGroup]="frmFilter"
+                        [rangePicker]="picker"
+                    >
+                        <input
+                            matStartDate
+                            formControlName="fromDate"
+                            placeholder="{{ 'startDate' | translate }}"
+                            disabled
+                        />
+                        <input
+                            matEndDate
+                            formControlName="toDate"
+                            placeholder="{{ 'endDate' | translate }}"
+                            disabled
+                        />
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker"
+                        disabled="false"
+                    ></mat-datepicker-toggle>
+                    <mat-date-range-picker
+                        #picker
+                        disabled="false"
+                    ></mat-date-range-picker>
+                    <mat-error
+                        *ngIf="
+                            frmFilter.controls.fromDate.hasError(
+                                'matStartDateInvalid'
+                            )
+                        "
+                        >Invalid start date</mat-error
+                    >
+                    <mat-error
+                        *ngIf="
+                            frmFilter.controls.toDate.hasError(
+                                'matEndDateInvalid'
+                            )
+                        "
+                        >Invalid end date</mat-error
+                    >
+                </mat-form-field>
+            </mat-form-field>
+        </div>
+
+        <div class="fieldsDiv" fxFlex="100" *ngIf="showGroups">
+            <mat-form-field class="searchFields">
+                <mat-select
+                    placeholder="{{ 'groupName' | translate }}"
+                    formControlName="groupId"
                 >
-                    <mat-form-field style="width: 100%">
-                        <mat-form-field appearance="fill">
-                            <mat-label>{{
-                                'EnterAdateRange' | translate
-                            }}</mat-label>
-                            <mat-date-range-input
-                                [formGroup]="frmFilter"
-                                [rangePicker]="picker"
-                            >
-                                <input
-                                    matStartDate
-                                    formControlName="fromDate"
-                                    placeholder="Start date"
-                                    disabled
-                                />
-                                <input
-                                    matEndDate
-                                    formControlName="toDate"
-                                    placeholder="End date"
-                                    disabled
-                                />
-                            </mat-date-range-input>
-                            <mat-datepicker-toggle
-                                matSuffix
-                                [for]="picker"
-                                disabled="false"
-                            ></mat-datepicker-toggle>
-                            <mat-date-range-picker
-                                #picker
-                                disabled="false"
-                            ></mat-date-range-picker>
-                            <mat-error
-                                *ngIf="
-                                    frmFilter.controls.fromDate.hasError(
-                                        'matStartDateInvalid'
-                                    )
-                                "
-                                >Invalid start date</mat-error
-                            >
-                            <mat-error
-                                *ngIf="
-                                    frmFilter.controls.toDate.hasError(
-                                        'matEndDateInvalid'
-                                    )
-                                "
-                                >Invalid end date</mat-error
-                            >
-                        </mat-form-field>
-                    </mat-form-field>
-                </div>
-                <div
-                    class="p-10"
-                    fxFlex.gt-sm="33.333"
-                    fxFlex.gt-xs="33.333"
-                    fxFlex="100"
-                    *ngIf="showGroups"
+                    <mat-option [value]="0">{{ 'all' | translate }}</mat-option>
+                    <mat-option
+                        *ngFor="let group of groupData"
+                        [value]="group.id"
+                    >
+                        {{ group.groupNameAr }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="fieldsDiv" fxFlex="100" *ngIf="showUsers">
+            <mat-form-field class="searchFields">
+                <mat-select
+                    placeholder="{{ 'users' | translate }}"
+                    formControlName="userId"
                 >
-                    <mat-form-field>
-                        <mat-label>{{ 'groupName' | translate }}</mat-label>
-                        <mat-select
-                            placeholder="{{ 'groupName' | translate }}"
-                            formControlName="groupId"
-                        >
-                            <mat-option [value]="0">{{
-                                'all' | translate
-                            }}</mat-option>
-                            <mat-option
-                                *ngFor="let group of groupData"
-                                [value]="group.id"
-                            >
-                                {{ group.groupNameAr }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div
-                    class="p-10"
-                    fxFlex.gt-sm="33.333"
-                    fxFlex.gt-xs="33.333"
-                    fxFlex="100"
-                    *ngIf="showUsers"
+                    <mat-option [value]="0">{{ 'all' | translate }}</mat-option>
+                    <mat-option *ngFor="let user of userData" [value]="user.id">
+                        {{ user.userName }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="fieldsDiv" fxFlex="100" *ngIf="showServiceType">
+            <mat-form-field class="searchFields">
+                <mat-select
+                    placeholder="{{ 'serviceUsedName' | translate }}"
+                    formControlName="serviceUsedId"
                 >
-                    <mat-form-field>
-                        <mat-label>{{ 'users' | translate }}</mat-label>
-                        <mat-select
-                            placeholder="{{ 'users' | translate }}"
-                            formControlName="userId"
-                        >
-                            <mat-option [value]="0">{{
-                                'all' | translate
-                            }}</mat-option>
-                            <mat-option
-                                *ngFor="let user of userData"
-                                [value]="user.id"
-                            >
-                                {{ user.userName }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div
-                    class="p-10"
-                    fxFlex.gt-sm="33.333"
-                    fxFlex.gt-xs="33.333"
-                    fxFlex="100"
-                    *ngIf="showServiceType"
-                >
-                    <mat-form-field>
-                        <mat-label>{{
-                            'serviceUsedName' | translate
-                        }}</mat-label>
-                        <mat-select
-                            placeholder="{{ 'serviceUsedName' | translate }}"
-                            formControlName="serviceUsedId"
-                        >
-                            <mat-option [value]="0">{{
-                                'all' | translate
-                            }}</mat-option>
-                            <mat-option
-                                *ngFor="let serviceUsed of servicesUsedData"
-                                [value]="serviceUsed.id"
-                            >
-                                {{ serviceUsed.serviceUsedNameEn }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div
-                    class="p-10"
-                    fxFlex.gt-sm="33.333"
-                    fxFlex.gt-xs="33.333"
+                    <mat-option [value]="0">{{ 'all' | translate }}</mat-option>
+                    <mat-option
+                        *ngFor="let serviceUsed of servicesUsedData"
+                        [value]="serviceUsed.id"
+                    >
+                        {{ serviceUsed.serviceUsedNameEn }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!-- <div
+
+                    class="fieldsDiv"
                     fxFlex="100"
                     *ngIf="showCountries"
                 >
-                    <mat-form-field>
-                        <mat-label>{{ 'Countries' | translate }}</mat-label>
+                    <mat-form-field class="searchFields">
                         <mat-select
                             placeholder="{{ 'Countries' | translate }}"
                             formControlName="countryId"
@@ -160,137 +116,81 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                </div>
-                <div
-                    class="p-10"
-                    fxFlex.gt-sm="33.333"
-                    fxFlex.gt-xs="33.333"
-                    fxFlex="100"
-                    *ngIf="showExcludeCountries"
+                </div> -->
+        <div class="fieldsDiv" fxFlex="100" *ngIf="showExcludeCountries">
+            <mat-form-field class="searchFields">
+                <mat-select
+                    placeholder="{{ 'ExcludeCountries' | translate }}"
+                    formControlName="countryIdExclude"
                 >
-                    <mat-form-field>
-                        <mat-label>{{
-                            'ExcludeCountries' | translate
-                        }}</mat-label>
-                        <mat-select
-                            placeholder="{{ 'ExcludeCountries' | translate }}"
-                            formControlName="countryIdExclude"
-                        >
-                            <mat-option [value]="0">{{
-                                'all' | translate
-                            }}</mat-option>
-                            <mat-option
-                                *ngFor="let country of countryExcludeData"
-                                [value]="country.id"
-                            >
-                                {{ country.countryNameEn }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div
-                    class="p-10"
-                    fxFlex.gt-sm="33.333"
-                    fxFlex.gt-xs="33.333"
-                    fxFlex="100"
-                    *ngIf="showTypesPhoneNumber"
-                >
-                    <mat-form-field>
-                        <mat-label>{{
-                            'typePhoneNumberName' | translate
-                        }}</mat-label>
-                        <mat-select
-                            placeholder="{{
-                                'typePhoneNumberName' | translate
-                            }}"
-                            formControlName="typePhoneNumberId"
-                        >
-                            <mat-option [value]="0">{{
-                                'all' | translate
-                            }}</mat-option>
-                            <mat-option
-                                *ngFor="
-                                    let typePhoneNumber of typesPhoneNumberData
-                                "
-                                [value]="typePhoneNumber.id"
-                            >
-                                {{ typePhoneNumber.typeNameEn }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div
-                    class="p-10"
-                    fxFlex.gt-sm="33.333"
-                    fxFlex.gt-xs="33.333"
-                    fxFlex="100"
-                    *ngIf="showMonthsNames"
-                >
-                    <mat-form-field>
-                        <mat-label>{{ 'months' | translate }}</mat-label>
-                        <mat-select
-                            placeholder="{{ 'months' | translate }}"
-                            formControlName="billMonthId"
-                        >
-                            <mat-option
-                                *ngFor="let month of monthsNames; let i = index"
-                                [value]="i + 1"
-                            >
-                                {{ month | translate }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div
-                    class="p-10"
-                    fxFlex.gt-sm="33.333"
-                    fxFlex.gt-xs="33.333"
-                    fxFlex="100"
-                    *ngIf="showYearsNumbers"
-                >
-                    <mat-form-field>
-                        <mat-label>{{ 'years' | translate }}</mat-label>
-                        <mat-select
-                            placeholder="{{ 'years' | translate }}"
-                            formControlName="billYearId"
-                        >
-                            <mat-option
-                                *ngFor="let year of years"
-                                [value]="year"
-                            >
-                                {{ year }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div
-                    class="p-10"
-                    fxFlex.gt-sm="33.333"
-                    fxFlex.gt-xs="33.333"
-                    fxFlex="100"
-                    *ngIf="showIsSubmitted"
-                >
-                    <mat-checkbox formControlName="isSubmitted">{{
-                        'isSubmitted' | translate
-                    }}</mat-checkbox>
-                </div>
-                <div fxLayout="row wrap">
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="100"
-                        fxFlex.gt-xs="100"
-                        fxFlex="100"
+                    <mat-option [value]="0">{{ 'all' | translate }}</mat-option>
+                    <mat-option
+                        *ngFor="let country of countryExcludeData"
+                        [value]="country.id"
                     >
-                        <button mat-raised-button type="submit" color="primary">
-                            <mat-icon>search</mat-icon>
-                            {{ 'Search' | translate }}
-                        </button>
-                    </div>
-                </div>
+                        {{ country.countryNameEn }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="fieldsDiv" fxFlex="100" *ngIf="showTypesPhoneNumber">
+            <mat-form-field class="searchFields">
+                <mat-select
+                    placeholder="{{ 'typePhoneNumberName' | translate }}"
+                    formControlName="typePhoneNumberId"
+                >
+                    <mat-option [value]="0">{{ 'all' | translate }}</mat-option>
+                    <mat-option
+                        *ngFor="let typePhoneNumber of typesPhoneNumberData"
+                        [value]="typePhoneNumber.id"
+                    >
+                        {{ typePhoneNumber.typeNameEn }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="fieldsDiv" fxFlex="100" *ngIf="showMonthsNames">
+            <mat-form-field class="searchFields">
+                <mat-select
+                    placeholder="{{ 'months' | translate }}"
+                    formControlName="billMonthId"
+                >
+                    <mat-option
+                        *ngFor="let month of monthsNames; let i = index"
+                        [value]="i + 1"
+                    >
+                        {{ month | translate }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="fieldsDiv" fxFlex="100" *ngIf="showYearsNumbers">
+            <mat-form-field class="searchFields">
+                <mat-select
+                    placeholder="{{ 'years' | translate }}"
+                    formControlName="billYearId"
+                >
+                    <mat-option *ngFor="let year of years" [value]="year">
+                        {{ year }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="fieldsDiv checkBox" fxFlex="100" *ngIf="showIsSubmitted">
+            <mat-checkbox formControlName="isSubmitted">{{
+                'isSubmitted' | translate
+            }}</mat-checkbox>
+        </div>
+        <div fxLayout="row wrap">
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                <button mat-raised-button type="submit" class="searchButton">
+                    <mat-icon>search</mat-icon>
+                    {{ 'Search' | translate }}
+                </button>
             </div>
-        </form>
-    </mat-card-content>
-</mat-card>
+        </div>
+    </div>
+</form>

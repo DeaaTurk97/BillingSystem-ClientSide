@@ -27,6 +27,7 @@ import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComingBillsListComponent implements OnInit {
+    payIcon = '../../../../../../assets/images/icon/Frame.svg';
     public paginationIndex = 0;
     public pageIndex = 1;
     public pageSize = 10;
@@ -209,8 +210,8 @@ export class ComingBillsListComponent implements OnInit {
         }
         return this.dialog
             .open(ConfirmDialogComponent, {
-                width: '28em',
-                height: '11em',
+                width: '45rem',
+                height: '14rem',
                 panelClass: 'confirm-dialog-container',
                 position: { top: '5em' },
                 disableClose: true,

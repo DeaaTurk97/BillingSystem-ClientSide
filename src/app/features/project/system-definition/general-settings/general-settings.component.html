@@ -1,21 +1,16 @@
-<mat-card>
+<mat-card class="gsMatCard">
     <mat-card-actions>
-        <div class="p-10" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-            <button
-                mat-raised-button
-                type="submit"
-                color="primary"
-                (click)="saveSettings()"
-            >
-                <mat-icon>save</mat-icon>
-                {{ 'save' | translate }}
-            </button>
-        </div>
-    </mat-card-actions>
-</mat-card>
-<mat-card>
-    <mat-card-actions>
-        <mat-tab-group animationDuration="1ms">
+        <button
+            mat-raised-button
+            type="submit"
+            class="saveButton"
+            (click)="saveSettings()"
+        >
+            <mat-icon>save</mat-icon>
+            {{ 'save' | translate }}
+        </button>
+
+        <mat-tab-group animationDuration="1ms" class="matTapGroup">
             <form novalidate [formGroup]="frmGeneralSettings">
                 <mat-tab label="{{ 'defaultValues' | translate }}">
                     <div fxLayout="row wrap">
@@ -424,8 +419,8 @@
                                     autocomplete="off"
                                 ></textarea>
                             </mat-form-field>
+                            <hr />
                         </div>
-
                         <!-- ReminderEmail -->
                         <div
                             class="p-10"
@@ -494,6 +489,7 @@
                                     autocomplete="off"
                                 ></textarea>
                             </mat-form-field>
+                            <hr />
                         </div>
 
                         <!-- Rejection Number -->
@@ -560,6 +556,7 @@
                                     autocomplete="off"
                                 ></textarea>
                             </mat-form-field>
+                            <hr />
                         </div>
 
                         <!-- PaidCC -->
@@ -622,6 +619,7 @@
                                     autocomplete="off"
                                 ></textarea>
                             </mat-form-field>
+                            <hr />
                         </div>
                         <!-- UnPaidCC -->
                         <div
@@ -683,6 +681,7 @@
                                     autocomplete="off"
                                 ></textarea>
                             </mat-form-field>
+                            <hr />
                         </div>
                         <!-- SubmittedCC -->
                         <div
@@ -748,6 +747,7 @@
                                     autocomplete="off"
                                 ></textarea>
                             </mat-form-field>
+                            <hr />
                         </div>
                         <!-- ReminderTotalDueCC -->
                         <div
@@ -813,6 +813,7 @@
                                     autocomplete="off"
                                 ></textarea>
                             </mat-form-field>
+                            <hr />
                         </div>
                         <!-- ReminderStartPeriodSubmittBillCC -->
                         <div
@@ -884,6 +885,7 @@
                                     autocomplete="off"
                                 ></textarea>
                             </mat-form-field>
+                            <hr />
                         </div>
                         <!-- ReminderEndPeriodSubmittBillCC -->
                         <div
@@ -954,6 +956,7 @@
                                     autocomplete="off"
                                 ></textarea>
                             </mat-form-field>
+                            <hr />
                         </div>
 
                         <!-- Email Test -->
@@ -1020,210 +1023,213 @@
                                     autocomplete="off"
                                 ></textarea>
                             </mat-form-field>
+                            <hr />
                         </div>
-                    </div>
 
-                    <!-- NewServiceAddedCC -->
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="50"
-                        fxFlex.gt-xs="50"
-                        fxFlex="100"
-                    >
-                        <mat-form-field>
-                            <mat-label>{{
-                                'NewServiceAddedCC' | translate
-                            }}</mat-label>
-                            <input
-                                matInput
-                                placeholder="{{
+                        <!-- NewServiceAddedCC -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
                                     'NewServiceAddedCC' | translate
-                                }}"
-                                formControlName="NewServiceAddedCC"
-                                type="text"
-                                autocomplete="off"
-                            />
-                        </mat-form-field>
-                    </div>
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'NewServiceAddedCC' | translate
+                                    }}"
+                                    formControlName="NewServiceAddedCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
 
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="50"
-                        fxFlex.gt-xs="50"
-                        fxFlex="100"
-                    >
-                        <mat-form-field>
-                            <mat-label>{{
-                                'NewServiceAddedSubject' | translate
-                            }}</mat-label>
-                            <input
-                                matInput
-                                placeholder="{{
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
                                     'NewServiceAddedSubject' | translate
-                                }}"
-                                formControlName="NewServiceAddedSubject"
-                                type="text"
-                                autocomplete="off"
-                            />
-                        </mat-form-field>
-                    </div>
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="100"
-                        fxFlex.gt-xs="100"
-                        fxFlex="100"
-                    >
-                        <mat-form-field>
-                            <mat-label>{{
-                                'NewServiceAddedBody' | translate
-                            }}</mat-label>
-                            <textarea
-                                matInput
-                                placeholder="{{
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'NewServiceAddedSubject' | translate
+                                    }}"
+                                    formControlName="NewServiceAddedSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
                                     'NewServiceAddedBody' | translate
-                                }}"
-                                formControlName="NewServiceAddedBody"
-                                type="text"
-                                autocomplete="off"
-                            ></textarea>
-                        </mat-form-field>
-                    </div>
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{
+                                        'NewServiceAddedBody' | translate
+                                    }}"
+                                    formControlName="NewServiceAddedBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                            <hr />
+                        </div>
 
-                    <!-- ServiceRemovedCC -->
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="50"
-                        fxFlex.gt-xs="50"
-                        fxFlex="100"
-                    >
-                        <mat-form-field>
-                            <mat-label>{{
-                                'ServiceRemovedCC' | translate
-                            }}</mat-label>
-                            <input
-                                matInput
-                                placeholder="{{
+                        <!-- ServiceRemovedCC -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
                                     'ServiceRemovedCC' | translate
-                                }}"
-                                formControlName="ServiceRemovedCC"
-                                type="text"
-                                autocomplete="off"
-                            />
-                        </mat-form-field>
-                    </div>
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ServiceRemovedCC' | translate
+                                    }}"
+                                    formControlName="ServiceRemovedCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
 
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="50"
-                        fxFlex.gt-xs="50"
-                        fxFlex="100"
-                    >
-                        <mat-form-field>
-                            <mat-label>{{
-                                'ServiceRemovedSubject' | translate
-                            }}</mat-label>
-                            <input
-                                matInput
-                                placeholder="{{
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
                                     'ServiceRemovedSubject' | translate
-                                }}"
-                                formControlName="ServiceRemovedSubject"
-                                type="text"
-                                autocomplete="off"
-                            />
-                        </mat-form-field>
-                    </div>
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="100"
-                        fxFlex.gt-xs="100"
-                        fxFlex="100"
-                    >
-                        <mat-form-field>
-                            <mat-label>{{
-                                'ServiceRemovedBody' | translate
-                            }}</mat-label>
-                            <textarea
-                                matInput
-                                placeholder="{{
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ServiceRemovedSubject' | translate
+                                    }}"
+                                    formControlName="ServiceRemovedSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
                                     'ServiceRemovedBody' | translate
-                                }}"
-                                formControlName="ServiceRemovedBody"
-                                type="text"
-                                autocomplete="off"
-                            ></textarea>
-                        </mat-form-field>
-                    </div>
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{
+                                        'ServiceRemovedBody' | translate
+                                    }}"
+                                    formControlName="ServiceRemovedBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                            <hr />
+                        </div>
 
-                    <!-- ServicePriceGraterThanServicePlanCC -->
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="50"
-                        fxFlex.gt-xs="50"
-                        fxFlex="100"
-                    >
-                        <mat-form-field>
-                            <mat-label>{{
-                                'ServicePriceGraterThanServicePlanCC'
-                                    | translate
-                            }}</mat-label>
-                            <input
-                                matInput
-                                placeholder="{{
-                                    'ServiceRemovedCC' | translate
-                                }}"
-                                formControlName="ServicePriceGraterThanServicePlanCC"
-                                type="text"
-                                autocomplete="off"
-                            />
-                        </mat-form-field>
-                    </div>
+                        <!-- ServicePriceGraterThanServicePlanCC -->
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
+                                    'ServicePriceGraterThanServicePlanCC'
+                                        | translate
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ServiceRemovedCC' | translate
+                                    }}"
+                                    formControlName="ServicePriceGraterThanServicePlanCC"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
 
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="50"
-                        fxFlex.gt-xs="50"
-                        fxFlex="100"
-                    >
-                        <mat-form-field>
-                            <mat-label>{{
-                                'ServicePriceGraterThanServicePlanSubject'
-                                    | translate
-                            }}</mat-label>
-                            <input
-                                matInput
-                                placeholder="{{
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="50"
+                            fxFlex.gt-xs="50"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
                                     'ServicePriceGraterThanServicePlanSubject'
                                         | translate
-                                }}"
-                                formControlName="ServicePriceGraterThanServicePlanSubject"
-                                type="text"
-                                autocomplete="off"
-                            />
-                        </mat-form-field>
-                    </div>
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="100"
-                        fxFlex.gt-xs="100"
-                        fxFlex="100"
-                    >
-                        <mat-form-field>
-                            <mat-label>{{
-                                'ServicePriceGraterThanServicePlanBody'
-                                    | translate
-                            }}</mat-label>
-                            <textarea
-                                matInput
-                                placeholder="{{
+                                }}</mat-label>
+                                <input
+                                    matInput
+                                    placeholder="{{
+                                        'ServicePriceGraterThanServicePlanSubject'
+                                            | translate
+                                    }}"
+                                    formControlName="ServicePriceGraterThanServicePlanSubject"
+                                    type="text"
+                                    autocomplete="off"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div
+                            class="p-10"
+                            fxFlex.gt-sm="100"
+                            fxFlex.gt-xs="100"
+                            fxFlex="100"
+                        >
+                            <mat-form-field>
+                                <mat-label>{{
                                     'ServicePriceGraterThanServicePlanBody'
                                         | translate
-                                }}"
-                                formControlName="ServicePriceGraterThanServicePlanBody"
-                                type="text"
-                                autocomplete="off"
-                            ></textarea>
-                        </mat-form-field>
+                                }}</mat-label>
+                                <textarea
+                                    matInput
+                                    placeholder="{{
+                                        'ServicePriceGraterThanServicePlanBody'
+                                            | translate
+                                    }}"
+                                    formControlName="ServicePriceGraterThanServicePlanBody"
+                                    type="text"
+                                    autocomplete="off"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
                     </div>
                 </mat-tab>
 

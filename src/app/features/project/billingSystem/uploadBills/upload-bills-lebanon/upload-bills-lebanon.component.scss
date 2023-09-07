@@ -1,0 +1,34 @@
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+.uploadButton {
+    float: right;
+    border-radius: 15px;
+    height: 3rem;
+    width: 9rem;
+    background-color: #1662f3;
+    color: white;
+    margin-right: 0.8rem;
+}
+
+.uploadCard {
+    background-color: white;
+    height: 80%;
+    margin-top: 5rem;
+}
+
+.uploadCard mat-card-content {
+    height: 80%;
+}
+
+.uploadTitle {
+    color: #1662f3;
+    font-weight: bold;
+}
+
+.uploadContent {
+    margin-left: 3rem;
+    display: inline-block !important;
+    width: max-content !important;
+}

@@ -1,0 +1,20 @@
+.actionButtons {
+    padding: 0;
+    height: 3rem;
+    width: 8rem;
+    background-color: rgba(22, 98, 243, 255);
+    color: white;
+    border-radius: 15px 15px 15px 15px !important;
+}
+
+.actionButtonsToRight {
+    float: right;
+}
+
+.actionButtonsToRight .actionButtons {
+    margin-left: 10px;
+}
+
+.actionButtonsCon {
+    width: 95rem;
+}

@@ -1,29 +1,32 @@
-<div>
-    <h4>History</h4>
+<div fxLayout="row wrap" class="dialogContainer">
+    <div class="Title">{{ 'History' | translate }}</div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{{ 'from' | translate }}</th>
+                <th scope="col">{{ 'to' | translate }}</th>
+                <th scope="col">{{ 'effectiveDate' | translate }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let historyItem of userHistory">
+                <td>{{ historyItem.oldUserName }}</td>
+                <td>{{ historyItem.userName }}</td>
+                <td>{{ historyItem.effectiveDate }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">From</th>
-            <th scope="col">To</th>
-            <th scope="col">EffectiveDate</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let historyItem of userHistory">
-            <td>{{ historyItem.oldUserName }}</td>
-            <td>{{ historyItem.userName }}</td>
-            <td>{{ historyItem.effectiveDate }}</td>
-        </tr>
-    </tbody>
-</table>
-<button
-    mat-raised-button
-    [mat-dialog-close]="false"
-    color="warn"
-    (click)="closeDialog()"
->
-    <mat-icon>close</mat-icon>
-    {{ 'Close' | translate }}
-</button>
+<div class="actionButtonsCont">
+    <button
+        mat-raised-button
+        [mat-dialog-close]="false"
+        class="closeButton"
+        (click)="closeDialog()"
+    >
+        <mat-icon>close</mat-icon>
+        {{ 'Close' | translate }}
+    </button>
+</div>

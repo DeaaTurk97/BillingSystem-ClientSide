@@ -31,7 +31,7 @@ export class ManageSubscriptionComponent implements OnInit {
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.position = { top: '80px' };
-        dialogConfig.width = '95%';
+        dialogConfig.width = '50%';
         dialogConfig.data = data;
         (dialogConfig.autoFocus = false), (dialogConfig.maxHeight = '90vh');
         return dialogConfig;

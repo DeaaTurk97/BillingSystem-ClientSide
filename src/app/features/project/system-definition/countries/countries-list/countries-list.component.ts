@@ -153,8 +153,8 @@ export class CountriesListComponent implements OnInit {
     onDelete(countryModel: CountryModel) {
         return this.dialog
             .open(ConfirmDialogComponent, {
-                width: '28em',
-                height: '11em',
+                width: '45rem',
+                height: '14rem',
                 panelClass: 'confirm-dialog-container',
                 position: { top: '5em' },
                 disableClose: true,

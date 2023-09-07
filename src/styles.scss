@@ -49,7 +49,7 @@
 
 body {
     font-family: Roboto, Arial, sans-serif;
-    margin: 0;
+    margin: 4vh 4vh 0 4vh !important;
 }
 .basic-container {
     padding: 30px;
@@ -58,4 +58,9 @@ body {
     font-size: 8pt;
     float: right;
     margin: 8px;
+}
+
+.mainHtml {
+    background-color: black;
+    max-height: 80vh !important;
 }

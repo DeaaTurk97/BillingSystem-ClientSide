@@ -1,157 +1,116 @@
-<div fxLayout="row" fxLayoutWrap="wrap">
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <div fxLayout="row" fxLayoutWrap="wrap">
-            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
-                <form
-                    novalidate
-                    [formGroup]="frmAddNew"
-                    (ngSubmit)="OnSubmit()"
-                >
-                    <div fxLayout="row wrap">
-                        <div
-                            class="p-12"
-                            fxFlex.gt-sm="100"
-                            fxFlex.gt-xs="100"
-                            fxFlex="100"
-                        >
-                            <ng-template>
-                                <mat-form-field style="width: 100%">
-                                    <input
-                                        matInput
-                                        placeholder="Id"
-                                        formControlName="Id"
-                                        type="text"
-                                    />
-                                </mat-form-field>
-                            </ng-template>
-                        </div>
+<form novalidate [formGroup]="frmAddNew" (ngSubmit)="OnSubmit()">
+    <div fxLayout="row wrap" class="dialogContainer">
+        <div class="Title" *ngIf="ID === 0">
+            {{ 'addLanguage' | translate }}
+        </div>
+        <div class="Title" *ngIf="ID != 0">
+            {{ 'editLanguage' | translate }}
+        </div>
+        <div class="p-12" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+            <ng-template>
+                <mat-form-field style="width: 100%">
+                    <input
+                        matInput
+                        placeholder="Id"
+                        formControlName="Id"
+                        type="text"
+                    />
+                </mat-form-field>
+            </ng-template>
+        </div>
 
-                        <div fxFlex.gt-sm="50" fxFlex="100" class="p-10">
-                            <mat-form-field style="width: 100%">
-                                <mat-label>{{
-                                    'languageCode' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{
-                                        'languageCode' | translate
-                                    }}"
-                                    formControlName="LanguageCode"
-                                    type="text"
-                                    autocomplete="off"
-                                />
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="50" fxFlex="100" class="p-10">
+            <mat-form-field style="width: 100%">
+                <mat-label>{{ 'languageCode' | translate }}</mat-label>
+                <input
+                    matInput
+                    placeholder="{{ 'languageCode' | translate }}"
+                    formControlName="LanguageCode"
+                    type="text"
+                    autocomplete="off"
+                />
+            </mat-form-field>
+        </div>
 
-                        <div fxFlex.gt-sm="50" fxFlex="100" class="p-10">
-                            <mat-form-field style="width: 100%">
-                                <mat-label>{{
-                                    'languageDefaultDisply' | translate
-                                }}</mat-label>
-                                <input
-                                    matInput
-                                    placeholder="{{
-                                        'languageDefaultDisply' | translate
-                                    }}"
-                                    formControlName="LanguageDefaultDisply"
-                                    type="text"
-                                    autocomplete="off"
-                                />
-                            </mat-form-field>
-                        </div>
+        <div fxFlex.gt-sm="50" fxFlex="100" class="p-10">
+            <mat-form-field style="width: 100%">
+                <mat-label>{{ 'languageDefaultDisply' | translate }}</mat-label>
+                <input
+                    matInput
+                    placeholder="{{ 'languageDefaultDisply' | translate }}"
+                    formControlName="LanguageDefaultDisply"
+                    type="text"
+                    autocomplete="off"
+                />
+            </mat-form-field>
+        </div>
 
-                        <div
-                            class="p-12"
-                            fxFlex.gt-sm="100"
-                            fxFlex.gt-xs="100"
-                            fxFlex="100"
-                        >
-                            <mat-radio-group
-                                formControlName="LanguageDirection"
-                            >
-                                <mat-radio-button value="RTL">{{
-                                    'RTL' | translate
-                                }}</mat-radio-button>
-                                <mat-radio-button value="LTR">{{
-                                    'LTR' | translate
-                                }}</mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                        <div fxFlex.gt-sm="50" fxFlex="100" class="p-10">
-                            <img
-                                [src]="imageBase64 | async"
-                                alt="{{ 'BillingDefaultImage' | translate }}"
-                                width="150"
-                                height="200"
-                                class="inline-block"
-                            />
-                        </div>
-                        <div fxFlex.gt-sm="50" fxFlex="100" class="p-10">
-                            <app-file-upload
-                                class="inline-block"
-                                [fileConfig]="fileConfig"
-                                [fileListFormControl]="fileListFormControl"
-                                [form]="formFlagImage"
-                                [formConfig]="formConfig"
-                                title="{{ 'DocumentUpload' | translate }}"
-                                [validationMessageList]="validationMessageList"
-                                (emitFileSelect)="onFileSelect($event)"
-                                (emitSubmit)="uploadFlag()"
-                            ></app-file-upload>
-                        </div>
-                        <div
-                            class="p-10"
-                            fxFlex.gt-sm="15"
-                            fxFlex.gt-xs="15"
-                            fxFlex="100"
-                        >
-                            <button
-                                mat-raised-button
-                                [mat-dialog-close]="false"
-                                color="warn"
-                            >
-                                <mat-icon>close</mat-icon>
-                                {{ 'Close' | translate }}
-                            </button>
-                        </div>
+        <div class="p-12" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50">
+            <mat-radio-group formControlName="LanguageDirection">
+                <mat-radio-button value="RTL" class="radioButtons">{{
+                    'RTL' | translate
+                }}</mat-radio-button>
+                <mat-radio-button value="LTR" class="radioButtons">{{
+                    'LTR' | translate
+                }}</mat-radio-button>
+            </mat-radio-group>
 
-                        <div
-                            class="p-10"
-                            fxFlex.gt-sm="15"
-                            fxFlex.gt-xs="15"
-                            fxFlex="100"
-                            [hidden]="frmAddNew.controls['Id'].value != 0"
-                        >
-                            <button
-                                mat-raised-button
-                                type="submit"
-                                color="primary"
-                                [disabled]="!frmAddNew.valid || isInProgress"
-                            >
-                                <mat-icon>add</mat-icon>
-                                {{ 'Add' | translate }}
-                            </button>
-                        </div>
-                        <div
-                            class="p-10"
-                            fxFlex.gt-sm="15"
-                            fxFlex.gt-xs="15"
-                            fxFlex="100"
-                            [hidden]="frmAddNew.controls['Id'].value == 0"
-                        >
-                            <button
-                                mat-raised-button
-                                type="submit"
-                                color="primary"
-                                [disabled]="!frmAddNew.valid || isInProgress"
-                            >
-                                <mat-icon>save</mat-icon>
-                                {{ 'Save' | translate }}
-                            </button>
-                        </div>
-                    </div>
-                </form>
+            <div fxFlex.gt-sm="50" fxFlex="100" class="p-10">
+                <img
+                    [src]="imageBase64 | async"
+                    alt="{{ 'BillingDefaultImage' | translate }}"
+                    width="150"
+                    height="200"
+                    class="inline-block"
+                />
             </div>
         </div>
+
+        <div fxFlex.gt-sm="50" fxFlex="50" class="p-10" class="uploder">
+            <app-file-upload
+                class="inline-block"
+                [fileConfig]="fileConfig"
+                [fileListFormControl]="fileListFormControl"
+                [form]="formFlagImage"
+                [formConfig]="formConfig"
+                title="{{ 'DocumentUpload' | translate }}"
+                [validationMessageList]="validationMessageList"
+                (emitFileSelect)="onFileSelect($event)"
+                (emitSubmit)="uploadFlag()"
+            ></app-file-upload>
+        </div>
     </div>
-</div>
+
+    <div class="actionButtonsCont">
+        <button
+            mat-raised-button
+            [mat-dialog-close]="false"
+            class="closeButton"
+        >
+            <mat-icon>close</mat-icon>
+            {{ 'Close' | translate }}
+        </button>
+
+        <button
+            *ngIf="ID === 0"
+            mat-raised-button
+            type="submit"
+            class="addButton"
+            [disabled]="!frmAddNew.valid || isInProgress"
+        >
+            <mat-icon>add</mat-icon>
+            {{ 'Add' | translate }}
+        </button>
+
+        <button
+            *ngIf="ID != 0"
+            mat-raised-button
+            type="submit"
+            class="saveButton"
+            [disabled]="!frmAddNew.valid || isInProgress"
+        >
+            <mat-icon>save</mat-icon>
+            {{ 'Save' | translate }}
+        </button>
+    </div>
+</form>

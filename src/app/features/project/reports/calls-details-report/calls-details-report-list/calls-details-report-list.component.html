@@ -1,22 +1,21 @@
-<app-report-export (emitExport)="onExport($event)"></app-report-export>
-
-<app-criteria-filter
-    [showDateRange]="true"
-    [showGroups]="true"
-    [showUsers]="true"
-    [showServiceType]="true"
-    [showCountries]="true"
-    [showTypesPhoneNumber]="true"
-    [groupData]="groupsModel"
-    [userData]="usersModel"
-    [servicesUsedData]="servicesUsedModel"
-    [countryData]="countryModel"
-    [typesPhoneNumberData]="typePhoneNumberModel"
-    (emitSearch)="onSearch($event)"
->
-</app-criteria-filter>
 <mat-card>
-    <mat-card-content>
+    <mat-card-content class="cardContent">
+        <app-criteria-filter
+            [showDateRange]="true"
+            [showGroups]="true"
+            [showUsers]="true"
+            [showServiceType]="true"
+            [showCountries]="true"
+            [showTypesPhoneNumber]="true"
+            [groupData]="groupsModel"
+            [userData]="usersModel"
+            [servicesUsedData]="servicesUsedModel"
+            [countryData]="countryModel"
+            [typesPhoneNumberData]="typePhoneNumberModel"
+            (emitSearch)="onSearch($event)"
+        >
+        </app-criteria-filter>
+
         <app-data-grid-view
             [gridDataSource]="dataSource"
             [displayedColumns]="[
@@ -38,5 +37,10 @@
             [isShowMainActionControls]="false"
         >
         </app-data-grid-view>
+
+        <app-report-export
+            (emitExport)="onExport($event)"
+            class="exportButton"
+        ></app-report-export>
     </mat-card-content>
 </mat-card>

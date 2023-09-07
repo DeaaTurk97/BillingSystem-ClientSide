@@ -21,25 +21,25 @@
         <!-- Logo - style you can find in header.scss -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <span>{{ 'BillingMukalamat' | translate }}</span>
+            <img [src]="headIcon" class="logo-margin" />
         </div>
         <!-- ============================================================== -->
         <!-- sidebar toggle -->
         <!-- ============================================================== -->
 
-        <button mat-icon-button (click)="snav.toggle()" value="sidebarclosed">
-            <mat-icon>menu</mat-icon>
-        </button>
+        <!-- <button mat-icon-button (click)="snav.toggle()" value="sidebarclosed"> -->
+        <!-- <mat-icon>menu</mat-icon> -->
+        <!-- </button> -->
         <!-- ============================================================== -->
         <!-- Search - style you can find in header.scss -->
         <!-- ============================================================== -->
-        <button
+        <!-- <button
             mat-icon-button
             class="srh-btn"
             (click)="setSearchVisibility(true)"
         >
             <mat-icon>search</mat-icon>
-        </button>
+        </button> -->
         <form class="app-search" *ngIf="isShowSearchBar">
             <input
                 type="text"
@@ -58,6 +58,7 @@
             (emitUserLanguageChanged)="userLanguageChanged($event)"
         ></app-header>
     </mat-toolbar>
+    <hr class="toolBarLine" />
     <!-- ============================================================== -->
     <!-- End Topbar - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -72,7 +73,7 @@
         <mat-sidenav
             #snav
             id="snav"
-            class="pl-xs"
+            class="pl-xs sideNav"
             [mode]="mobileQuery.matches ? 'side' : 'over'"
             fixedTopGap="0"
             [opened]="mobileQuery.matches"
@@ -98,4 +99,7 @@
         <!-- Page container - style you can find in pages.scss -->
         <!-- ============================================================== -->
     </mat-sidenav-container>
+    <footer class="footer">
+        <img [src]="footerIcon" class="footerIcon" />
+    </footer>
 </div>

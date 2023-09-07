@@ -1,3 +1,126 @@
 .loginIcon {
-    height: 150px;
+    height: 9rem;
+}
+
+::ng-deep .loginFields {
+    .mat-form-field-outline {
+        background-color: rgba(235, 239, 243, 255);
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    .mat-form-field-flex {
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    .mat-form-field-outline-start {
+        border-radius: 10px 0 0 10px !important;
+        min-width: 28px !important;
+    }
+
+    .mat-form-field-outline-end {
+        border-radius: 0 10px 10px 0 !important;
+    }
+
+    .mat-form-field-infix {
+        border-top: 0;
+        padding-top: 20px;
+    }
+}
+
+.mukalamatIcon {
+    height: 14rem;
+    width: 20rem;
+    display: inline-block;
+    margin-top: -4rem;
+    margin-bottom: -4rem;
+}
+
+.forgotDiv {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.forgotLink {
+    color: red;
+    font-weight: bold;
+    font-size: small;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-register {
+    background-color: white;
+    height: 87vh;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px 15px 0 0;
+}
+
+.PhoneBillingIcon {
+    height: 14rem;
+    width: 8rem;
+    margin-top: -8rem;
+    margin-bottom: -5rem;
+    display: inline-block;
+}
+
+.loginText {
+    color: rgba(22, 98, 243, 255);
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.footerIcon {
+    width: 13rem;
+}
+
+.loginImg {
+    height: 1.5rem;
+    width: 1.5rem;
+    float: right;
+    margin-top: 0.8rem;
+    mask: url(../../../../assets/images/icon/logınIcon.svg) no-repeat center;
+    background-color: white;
+}
+
+.loginFields:focus-within .loginIcons {
+    color: rgba(22, 98, 243, 255);
+}
+
+.loginIconsRed {
+    color: red;
+}
+
+.cursor:hover {
+    cursor: pointer;
+}
+
+.loginButton {
+    margin-top: 0;
+    background-color: rgba(22, 98, 243, 255);
+    color: white;
+    border-radius: 12px 12px 12px 12px;
+}
+
+.loginButton:disabled {
+    background-color: rgba(160, 170, 190, 255);
+    color: rgba(201, 208, 219, 255);
+}
+
+.loginButton:disabled .loginImg {
+    background-color: rgba(201, 208, 219, 255);
+}
+
+.footer {
+    z-index: 1;
+    background-color: rgba(235, 239, 243, 255);
+    width: 100%;
+    padding-top: 10px;
+    margin-top: -15px;
+    border-radius: 0 0 15px 15px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }

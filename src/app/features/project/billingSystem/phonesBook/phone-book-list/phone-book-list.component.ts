@@ -51,7 +51,7 @@ export class PhoneBookListComponent implements OnInit {
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.position = { top: '80px' };
-        dialogConfig.width = '60%';
+        dialogConfig.width = '40%';
         dialogConfig.data = data;
         return dialogConfig;
     }
@@ -167,8 +167,8 @@ export class PhoneBookListComponent implements OnInit {
     onDelete(phoneBookModel: PhoneBookModel) {
         return this.dialog
             .open(ConfirmDialogComponent, {
-                width: '28em',
-                height: '11em',
+                width: '45rem',
+                height: '14rem',
                 panelClass: 'confirm-dialog-container',
                 position: { top: '5em' },
                 disableClose: true,

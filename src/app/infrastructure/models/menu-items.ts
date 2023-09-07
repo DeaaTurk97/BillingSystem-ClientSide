@@ -277,7 +277,7 @@ const MENUITEMS = [
         state: 'bills',
         name: 'Bills',
         type: 'sub',
-        icon: 'uploadfile',
+        icon: 'insert_drive_file',
         roles: [
             UserType.SuperAdmin,
             UserType.AdminGroup,
@@ -296,7 +296,7 @@ const MENUITEMS = [
                 ],
             },
             {
-                state: 'upload-bills',
+                state: 'upload-bills-lebanon',
                 name: 'UploadBills',
                 type: 'link',
                 roles: [UserType.SuperAdmin],

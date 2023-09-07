@@ -1,78 +1,52 @@
-<div fxLayout="row wrap">
-    <div class="p-10" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <!-- <app-criteria-filter [showUsers]="true" [showMonthsNames]="true" [showYearsNumbers]="true" [userData]="usersModel"
+<!-- <app-criteria-filter [showUsers]="true" [showMonthsNames]="true" [showYearsNumbers]="true" [userData]="usersModel"
       [selectBillMonthId]="billMonthId" [selectBillYearId]="billYearId" [selectUserId]="billUserId" (emitSearch)="onSearch($event)">
     </app-criteria-filter> -->
-    </div>
-    <div class="p-10" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <mat-card>
-            <mat-card-content>
-                <div fxLayout="row wrap">
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="15"
-                        fxFlex.gt-xs="15"
-                        fxFlex="100"
-                    >
-                        <button
-                            mat-raised-button
-                            type="submit"
-                            color="primary"
-                            [disabled]="
-                                countDefinedNumbers > 0 ||
-                                countServicesNeedApproval > 0 ||
-                                isSubmitByAdmin
-                            "
-                            (click)="submitBill()"
-                        >
-                            {{ 'submitBill' | translate }}
-                        </button>
-                    </div>
 
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="20"
-                        fxFlex.gt-xs="20"
-                        fxFlex="100"
-                    >
-                        <button
-                            mat-raised-button
-                            type="submit"
-                            color="primary"
-                            (click)="onSetPhoneNumberType()"
-                            [matBadge]="countDefinedNumbers"
-                            matBadgePosition="after"
-                            matBadgeColor="warn"
-                            [disabled]="countDefinedNumbers === 0"
-                        >
-                            {{ 'New Numbers' | translate }}
-                        </button>
-                    </div>
+<mat-card>
+    <mat-card-content>
+        <button
+            mat-raised-button
+            type="submit"
+            class="actionButtons submitPos"
+            [disabled]="
+                countDefinedNumbers > 0 ||
+                countServicesNeedApproval > 0 ||
+                isSubmitByAdmin
+            "
+            (click)="submitBill()"
+        >
+            {{ 'submitBill' | translate }}
+        </button>
 
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="20"
-                        fxFlex.gt-xs="20"
-                        fxFlex="100"
-                    >
-                        <button
-                            mat-raised-button
-                            type="submit"
-                            color="primary"
-                            (click)="onSetServiceType()"
-                            [matBadge]="countServicesNeedApproval"
-                            matBadgePosition="after"
-                            matBadgeColor="warn"
-                            [disabled]="
-                                countServicesNeedApproval === 0 ||
-                                isSubmitByAdmin
-                            "
-                        >
-                            {{ 'isNeedApproval' | translate }}
-                        </button>
-                    </div>
+        <div class="actionButtonsToRight">
+            <button
+                mat-raised-button
+                type="submit"
+                class="actionButtons"
+                (click)="onSetPhoneNumberType()"
+                [matBadge]="countDefinedNumbers"
+                matBadgePosition="after"
+                matBadgeColor="warn"
+                [disabled]="countDefinedNumbers === 0"
+            >
+                {{ 'NewNumbers' | translate }}
+            </button>
 
-                    <!-- <form [formGroup]="billDetailsForm" style="width: 100%">
+            <button
+                mat-raised-button
+                type="submit"
+                class="actionButtons"
+                (click)="onSetServiceType()"
+                [matBadge]="countServicesNeedApproval"
+                matBadgePosition="after"
+                matBadgeColor="warn"
+                [disabled]="countServicesNeedApproval === 0 || isSubmitByAdmin"
+            >
+                {{ 'isNeedApproval' | translate }}
+            </button>
+        </div>
+
+        <!-- <form [formGroup]="billDetailsForm" style="width: 100%">
             <div class="p-10" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
 
               <mat-form-field style="width: 33.3%">
@@ -125,37 +99,27 @@
 
           </form> -->
 
-                    <div
-                        class="p-10"
-                        fxFlex.gt-sm="100"
-                        fxFlex.gt-xs="100"
-                        fxFlex="100"
-                    >
-                        <app-data-grid-view
-                            [gridDataSource]="dataSource"
-                            [displayedColumns]="[
-                                'id',
-                                'userName',
-                                'phoneNumber',
-                                'dialledNumber',
-                                'typePhoneNumberName',
-                                'callDateTime',
-                                'callDuration',
-                                'callDiscountPrice',
-                                'callRetailPrice',
-                                'serviceUsedName',
-                                'typeServiceUsedName'
-                            ]"
-                            (onPagination)="onActionRowGrid($event)"
-                            [lengthData]="length"
-                            [PaginatorIndex]="paginationIndex"
-                            [isShowMainActionControls]="false"
-                            (emitSearch)="onSearch($event)"
-                        >
-                        </app-data-grid-view>
-                    </div>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
-</div>
+        <app-data-grid-view
+            [gridDataSource]="dataSource"
+            [displayedColumns]="[
+                'id',
+                'userName',
+                'phoneNumber',
+                'dialledNumber',
+                'typePhoneNumberName',
+                'callDateTime',
+                'callDuration',
+                'callDiscountPrice',
+                'callRetailPrice',
+                'serviceUsedName',
+                'typeServiceUsedName'
+            ]"
+            (onPagination)="onActionRowGrid($event)"
+            [lengthData]="length"
+            [PaginatorIndex]="paginationIndex"
+            [isShowMainActionControls]="false"
+            (emitSearch)="onSearch($event)"
+        >
+        </app-data-grid-view>
+    </mat-card-content>
+</mat-card>

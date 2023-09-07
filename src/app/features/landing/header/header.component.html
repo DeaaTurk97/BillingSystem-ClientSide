@@ -2,51 +2,51 @@
 <!-- Notification - style you can find in header.scss -->
 <!-- ============================================================== -->
 <div class="mainControls">
-    <mat-form-field>
+    <mat-form-field class="Lbutton">
         <mat-select
+            class="lDropSelect"
             [(value)]="selectLangId"
             (selectionChange)="updateSelectedLanguage($event.value)"
         >
             <mat-option
                 *ngFor="let language of languages"
                 [value]="language.id"
+                class="lDropOption"
             >
-                <div
-                    fxLayout="row"
-                    fxLayoutAlign="start center"
-                    fxLayoutGap="10px"
-                >
-                    <!-- <img
-                        [src]="getLanguageImageResource(language)"
-                        class="flag"
-                    /> -->
+                <div class="lDropdown">
                     <span>{{ language.languageDefaultDisply }}</span>
                 </div>
             </mat-option>
+
             <mat-select-trigger *ngIf="languages.length > 0">
                 <div
                     fxLayout="row"
                     fxLayoutAlign="start center"
                     fxLayoutGap="10px"
-                    style="padding: 0 16px"
                 >
                     <!-- <img
                         [src]="getLanguageImageResource(languageSelected)"
                         class="flag"
                     /> -->
-                    <span>{{ languageSelected?.languageDefaultDisply }}</span>
+                    <span class="Lfont">{{
+                        languageSelected?.languageDefaultDisply
+                    }}</span>
                 </div>
             </mat-select-trigger>
         </mat-select>
     </mat-form-field>
 
-    <button [matMenuTriggerFor]="notification" mat-icon-button class="m-r-10">
+    <button
+        [matMenuTriggerFor]="notification"
+        mat-icon-button
+        class="m-r-10 Nbutton"
+    >
         <mat-icon
             matBadge="{{ (notificationsList | async)?.length }}"
             matBadgeColor="warn"
-            matBadgePosition="before"
+            matBadgePosition="after"
         >
-            notifications</mat-icon
+            notifications_none</mat-icon
         >
     </button>
     <mat-menu #notification="matMenu" class="mymegamenu">
@@ -91,7 +91,7 @@
     <!-- ============================================================== -->
     <!-- Profile - style you can find in header.scss -->
     <!-- ============================================================== -->
-    <button (click)="logout()" mat-icon-button>
+    <button (click)="logout()" mat-icon-button class="logoutBut">
         <mat-icon>exit_to_app</mat-icon> {{ 'SignOut' | translate }}
     </button>
 </div>

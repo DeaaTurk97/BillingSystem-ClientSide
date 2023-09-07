@@ -3,11 +3,85 @@
     height: 25px;
     border-radius: 75%;
     box-sizing: border-box;
-  }
-  .mat-form-field {
+}
+.mat-form-field {
     width: 200px;
     padding: 10px;
-  }
-  .mainControls{
+}
+
+.mainControls {
     padding: 40px;
-  }
+}
+
+.logoutBut {
+    margin-right: 1rem;
+}
+
+.Lbutton {
+    width: 8.5rem;
+    margin-right: 1rem;
+}
+
+.lDropSelect {
+    border-radius: 10px !important;
+}
+
+.lDropOption {
+    margin: 5px;
+    line-height: 1em !important;
+    height: 3rem !important;
+    border-radius: 10px;
+}
+
+.mat-select-panel {
+    margin-top: 10rem !important;
+    border-radius: 10px !important;
+}
+
+.lDropdown {
+    width: 6rem;
+    size: small;
+}
+
+.Nbutton {
+    margin-right: 1rem;
+}
+
+.Lfont {
+    font-size: medium;
+    color: white !important;
+}
+
+::ng-deep .Lbutton {
+    .mat-select-arrow-wrapper {
+        display: flex !important;
+    }
+
+    .mat-form-field-infix {
+        font-family: Arial;
+        color: gray;
+        padding: 0;
+        border-top: 0;
+        padding-bottom: 0.5rem;
+        padding-top: 0.7rem;
+    }
+
+    .mat-form-field-wrapper {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .mat-form-field-flex {
+        padding: 0 10px 0 12px !important;
+    }
+
+    .mat-form-field-outline-start {
+        color: gray;
+        border-radius: 15px 0 0 15px !important;
+        min-width: 15px !important;
+    }
+    .mat-form-field-outline-end {
+        color: gray;
+        border-radius: 0 15px 15px 0 !important;
+    }
+}

@@ -1,0 +1,65 @@
+::ng-deep {
+    .mat-dialog-container {
+        box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%),
+            0px 24px 38px 3px rgb(0 0 0 / 14%),
+            0px 9px 46px 8px rgb(0 0 0 / 12%);
+        background: rgb(214, 214, 214, 0.9);
+        border-radius: 15px;
+    }
+}
+
+.dialogContainer {
+    background-color: white;
+    border-radius: 15px;
+}
+
+.Title {
+    color: #1662f3;
+    font-weight: bold;
+    font-size: xx-large;
+    text-align: center;
+    padding: 10px;
+    width: 100rem;
+    display: inline-block;
+}
+
+.actionButtonsCont {
+    padding: 10px 0 10px 0;
+}
+
+.saveButton {
+    float: right;
+    width: 10rem !important;
+    height: 3rem;
+    border-radius: 15px;
+    background-color: #1662f3;
+    color: white;
+    display: inline !important;
+}
+
+.addButton {
+    float: right;
+    width: 10rem !important;
+    height: 3rem;
+    border-radius: 15px;
+    background-color: #1662f3;
+    color: white;
+    display: inline !important;
+}
+
+.closeButton {
+    width: 10rem !important;
+    height: 3rem;
+    border-radius: 15px;
+    background-color: #ff190a;
+    color: white;
+    display: inline !important;
+}
+
+.radioButtons {
+    margin: 0.5rem;
+}
+
+.uploder {
+    margin-bottom: 3rem;
+}

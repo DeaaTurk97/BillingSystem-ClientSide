@@ -16,13 +16,13 @@ File: scss
  *	7. Widgets
  *	8. Custom Templates
  */
-/******************* 
-Global Styles 
+/*******************
+Global Styles
 *******************/
 
 * {
     outline: none;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
 body {
@@ -39,55 +39,59 @@ html {
     min-height: 100%;
     background: $white;
 }
-a:hover, a:focus, a{
+a:hover,
+a:focus,
+a {
     text-decoration: none;
 }
-a.link{
-    color:$headingtext;
+a.link {
+    color: $headingtext;
     text-decoration: none;
-    &:hover, &:focus{
-        color:$themecolor;
+    &:hover,
+    &:focus {
+        color: $themecolor;
     }
 }
-.link-hand{
+.link-hand {
     cursor: pointer;
 }
-.img-responsive{
+.img-responsive {
     width: 100%;
     height: auto;
     display: inline-block;
 }
 .img-fluid {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }
-.img-rounded{
+.img-rounded {
     border-radius: $radius;
 }
-html body .mdi:before, html body .mdi-set{
+html body .mdi:before,
+html body .mdi-set {
     line-height: initial;
 }
 code {
-    padding: .2rem .4rem;
+    padding: 0.2rem 0.4rem;
     font-size: 90%;
     color: $danger;
     background-color: $light-danger;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
 }
 
-.shadow-none{
-    box-shadow: none!important; 
+.shadow-none {
+    box-shadow: none !important;
 }
-.ml-auto{
+.ml-auto {
     margin-left: auto;
 }
-.m-auto{
+.m-auto {
     margin: auto;
 }
-.mr-auto{
+.mr-auto {
     margin-right: auto;
 }
-.rounded{
+.rounded {
     border-radius: $radius;
 }
 /*******************
@@ -100,29 +104,28 @@ h3,
 h4,
 h5,
 h6 {
-    
     font-family: $headingfont;
     font-weight: 400;
 }
 
 h1 {
     line-height: 40px;
-    font-size: 36px
+    font-size: 36px;
 }
 
 h2 {
     line-height: 36px;
-    font-size: 30px
+    font-size: 30px;
 }
 
 h3 {
     line-height: 30px;
-    font-size: 21px
+    font-size: 21px;
 }
 
 h4 {
     line-height: 22px;
-    font-size: 18px
+    font-size: 18px;
 }
 
 h5 {
@@ -136,50 +139,52 @@ h6 {
     font-size: 14px;
     font-weight: 400;
 }
-html, body{
-.display-5{
-    font-size:3rem;
+html,
+body {
+    .display-5 {
+        font-size: 3rem;
+    }
+    .display-6 {
+        font-size: 36px;
+    }
 }
-.display-6{
-    font-size:36px;
-}
-}    
-.box{
+.box {
     border-radius: $radius;
     padding: 10px;
 }
 html body {
-.dl{
-    display: inline-block;
-}
-.db{
-    display: block;
-}
-    .op-5{
-        opacity: 0.5
+    .dl {
+        display: inline-block;
     }
-    .op-3{
+    .db {
+        display: block;
+    }
+    .op-5 {
+        opacity: 0.5;
+    }
+    .op-3 {
         opacity: 0.3;
     }
-}    
-.no-wrap{
-    td, th{
+}
+.no-wrap {
+    td,
+    th {
         white-space: nowrap;
     }
 }
-.relative{
+.relative {
     position: relative;
 }
-.absolute{
+.absolute {
     position: absolute;
 }
-.d-flex{
+.d-flex {
     display: flex;
- }
-.no-shrink{
+}
+.no-shrink {
     flex-shrink: 0;
 }
-.oh{
+.oh {
     overflow: hidden;
 }
 /*******************
@@ -187,7 +192,6 @@ Blockquote
 *******************/
 
 html body blockquote {
-    
     border: 1px solid $border;
     border-left: 5px solid $themecolor;
     padding: 15px;
@@ -197,7 +201,7 @@ html body blockquote {
 .clear {
     clear: both;
 }
-ol li{
+ol li {
     margin: 5px 0;
 }
 
@@ -205,289 +209,289 @@ ol li{
 Paddings
 *******************/
 html body {
-.p-0 {
-    padding: 0px;
-}
+    .p-0 {
+        padding: 0px;
+    }
 
-.p-10 {
-    padding: 10px;
-}
+    .p-10 {
+        padding: 10px;
+    }
 
-.p-20 {
-    padding: 20px;
-}
+    .p-20 {
+        padding: 20px;
+    }
 
-.p-30 {
-    padding: 30px;
-}
+    .p-30 {
+        padding: 30px;
+    }
 
-.p-l-0 {
-    padding-left: 0px;
-}
+    .p-l-0 {
+        padding-left: 0px;
+    }
 
-.p-l-10 {
-    padding-left: 10px;
-}
+    .p-l-10 {
+        padding-left: 10px;
+    }
 
-.p-l-20 {
-    padding-left: 20px;
-}
+    .p-l-20 {
+        padding-left: 20px;
+    }
 
-.p-r-0 {
-    padding-right: 0px;
-}
+    .p-r-0 {
+        padding-right: 0px;
+    }
 
-.p-r-10 {
-    padding-right: 10px;
-}
+    .p-r-10 {
+        padding-right: 10px;
+    }
 
-.p-r-20 {
-    padding-right: 20px;
-}
+    .p-r-20 {
+        padding-right: 20px;
+    }
 
-.p-r-30 {
-    padding-right: 30px;
-}
+    .p-r-30 {
+        padding-right: 30px;
+    }
 
-.p-r-40 {
-    padding-right: 40px;
-}
+    .p-r-40 {
+        padding-right: 40px;
+    }
 
-.p-t-0 {
-    padding-top: 0px;
-}
+    .p-t-0 {
+        padding-top: 0px;
+    }
 
-.p-t-10 {
-    padding-top: 10px;
-}
+    .p-t-10 {
+        padding-top: 10px;
+    }
 
-.p-t-20 {
-    padding-top: 20px;
-}
+    .p-t-20 {
+        padding-top: 20px;
+    }
 
-.p-t-30 {
-    padding-top: 30px;
-}
+    .p-t-30 {
+        padding-top: 30px;
+    }
 
-.p-b-0 {
-    padding-bottom: 0px;
-}
+    .p-b-0 {
+        padding-bottom: 0px;
+    }
 
-.p-b-5 {
-    padding-bottom: 5px;
-}
+    .p-b-5 {
+        padding-bottom: 5px;
+    }
 
-.p-b-10 {
-    padding-bottom: 10px;
-}
+    .p-b-10 {
+        padding-bottom: 10px;
+    }
 
-.p-b-20 {
-    padding-bottom: 20px;
-}
+    .p-b-20 {
+        padding-bottom: 20px;
+    }
 
-.p-b-30 {
-    padding-bottom: 30px;
-}
+    .p-b-30 {
+        padding-bottom: 30px;
+    }
 
-.p-b-40 {
-    padding-bottom: 40px;
-}
+    .p-b-40 {
+        padding-bottom: 40px;
+    }
 }
 
 /*******************
 Margin
 *******************/
 html body {
-.m-0 {
-    margin: 0px;
-}
+    .m-0 {
+        margin: 0px;
+    }
 
-.m-l-5 {
-    margin-left: 5px;
-}
+    .m-l-5 {
+        margin-left: 5px;
+    }
 
-.m-l-10 {
-    margin-left: 10px;
-}
+    .m-l-10 {
+        margin-left: 10px;
+    }
 
-.m-l-15 {
-    margin-left: 15px;
-}
+    .m-l-15 {
+        margin-left: 15px;
+    }
 
-.m-l-20 {
-    margin-left: 20px;
-}
+    .m-l-20 {
+        margin-left: 20px;
+    }
 
-.m-l-30 {
-    margin-left: 30px;
-}
+    .m-l-30 {
+        margin-left: 30px;
+    }
 
-.m-l-40 {
-    margin-left: 40px;
-}
+    .m-l-40 {
+        margin-left: 40px;
+    }
 
-.m-r-5 {
-    margin-right: 5px;
-}
+    .m-r-5 {
+        margin-right: 5px;
+    }
 
-.m-r-10 {
-    margin-right: 10px;
-}
+    .m-r-10 {
+        margin-right: 10px;
+    }
 
-.m-r-15 {
-    margin-right: 15px;
-}
+    .m-r-15 {
+        margin-right: 15px;
+    }
 
-.m-r-20 {
-    margin-right: 20px;
-}
+    .m-r-20 {
+        margin-right: 20px;
+    }
 
-.m-r-30 {
-    margin-right: 30px;
-}
+    .m-r-30 {
+        margin-right: 30px;
+    }
 
-.m-r-40 {
-    margin-right: 40px;
-}
+    .m-r-40 {
+        margin-right: 40px;
+    }
 
-.m-t-0 {
-    margin-top: 0px;
-}
+    .m-t-0 {
+        margin-top: 0px;
+    }
 
-.m-t-5 {
-    margin-top: 5px;
-}
+    .m-t-5 {
+        margin-top: 5px;
+    }
 
-.m-t-10 {
-    margin-top: 10px;
-}
+    .m-t-10 {
+        margin-top: 10px;
+    }
 
-.m-t-15 {
-    margin-top: 15px;
-}
+    .m-t-15 {
+        margin-top: 15px;
+    }
 
-.m-t-20 {
-    margin-top: 20px;
-}
+    .m-t-20 {
+        margin-top: 20px;
+    }
 
-.m-t-30 {
-    margin-top: 30px;
-}
+    .m-t-30 {
+        margin-top: 30px;
+    }
 
-.m-t-40 {
-    margin-top: 40px;
-}
+    .m-t-40 {
+        margin-top: 40px;
+    }
 
-.m-b-0 {
-    margin-bottom: 0px;
-}
+    .m-b-0 {
+        margin-bottom: 0px;
+    }
 
-.m-b-5 {
-    margin-bottom: 5px;
-}
+    .m-b-5 {
+        margin-bottom: 5px;
+    }
 
-.m-b-10 {
-    margin-bottom: 10px;
-}
+    .m-b-10 {
+        margin-bottom: 10px;
+    }
 
-.m-b-15 {
-    margin-bottom: 15px;
-}
+    .m-b-15 {
+        margin-bottom: 15px;
+    }
 
-.m-b-20 {
-    margin-bottom: 20px;
-}
+    .m-b-20 {
+        margin-bottom: 20px;
+    }
 
-.m-b-30 {
-    margin-bottom: 30px ;
-}
+    .m-b-30 {
+        margin-bottom: 30px;
+    }
 
-.m-b-40 {
-    margin-bottom: 40px;
-}
+    .m-b-40 {
+        margin-bottom: 40px;
+    }
 }
 
 /*******************
 vertical alignment
 *******************/
 html body {
-.vt {
-    vertical-align: top;
-}
+    .vt {
+        vertical-align: top;
+    }
 
-.vm {
-    vertical-align: middle;
-}
+    .vm {
+        vertical-align: middle;
+    }
 
-.vb {
-    vertical-align: bottom; 
+    .vb {
+        vertical-align: bottom;
+    }
 }
-}    
 /*******************
 Opacity
 *******************/
-.op-5{
+.op-5 {
     opacity: 0.5;
 }
 /*******************
 font weight
 *******************/
 html body {
-.font-bold {
-    font-weight: 700;
-}
+    .font-bold {
+        font-weight: 700;
+    }
 
-.font-normal {
-    font-weight: normal;
-}
+    .font-normal {
+        font-weight: normal;
+    }
 
-.font-light {
-    font-weight: 300;
-}
-.font-medium {
-    font-weight: 500;
-}
-.font-16 {
-    font-size: 16px;
-}
-.font-14 {
-    font-size: 14px;
-}
-.font-10 {
-    font-size: 10px;
-}
-.font-12 {
-    font-size: 12px;
-}    
-.font-18 {
-    font-size: 18px;
-}
-.font-20 {
-    font-size: 20px;
+    .font-light {
+        font-weight: 300;
+    }
+    .font-medium {
+        font-weight: 500;
+    }
+    .font-16 {
+        font-size: 16px;
+    }
+    .font-14 {
+        font-size: 14px;
+    }
+    .font-10 {
+        font-size: 10px;
+    }
+    .font-12 {
+        font-size: 12px;
+    }
+    .font-18 {
+        font-size: 18px;
+    }
+    .font-20 {
+        font-size: 20px;
     }
 }
 /*******************
 Border
 *******************/
 html body {
-.b-0{
-    border:none;
-}
-.b-r{
-    border-right:1px solid $border;
-}
-.b-l{
-    border-left:1px solid $border;
-}
-.b-b{
-    border-bottom:1px solid $border;
-}
-.b-t{
-    border-top:1px solid $border;
-}
-.b-all{
-    border:1px solid $border;
-}
+    .b-0 {
+        border: none;
+    }
+    .b-r {
+        border-right: 1px solid $border;
+    }
+    .b-l {
+        border-left: 1px solid $border;
+    }
+    .b-b {
+        border-bottom: 1px solid $border;
+    }
+    .b-t {
+        border-top: 1px solid $border;
+    }
+    .b-all {
+        border: 1px solid $border;
+    }
 }
 /*******************
 Thumb size
@@ -507,76 +511,75 @@ Thumb size
     height: 88px;
     width: 88px;
 }
-.hide{
+.hide {
     display: none;
 }
-.img-circle{
+.img-circle {
     border-radius: 100%;
 }
-.radius{
+.radius {
     border-radius: $radius;
 }
 /*******************
 Text Colors
 *******************/
 .text-white {
-    color: $white!important;
+    color: $white !important;
 }
 
 .text-danger {
-    color: $danger!important;
+    color: $danger !important;
 }
 
 .text-muted {
-    color: $muted!important;
+    color: $muted !important;
 }
 
 .text-warning {
-    color: $warning!important;
+    color: $warning !important;
 }
 
 .text-success {
-    color: $success!important;
+    color: $success !important;
 }
 
 .text-info {
-    color: $info!important;
+    color: $info !important;
 }
 
 .text-inverse {
-    color: $inverse!important;
+    color: $inverse !important;
 }
 html body {
-.text-blue {
-    color: $blue;
-}
+    .text-blue {
+        color: $blue;
+    }
 
-.text-purple {
-    color: $purple;
-}
+    .text-purple {
+        color: $purple;
+    }
 
-.text-primary {
-    color: $primary;
-}
+    .text-primary {
+        color: $primary;
+    }
 
-.text-megna {
-    color: $megna;
-}
+    .text-megna {
+        color: $megna;
+    }
 
-.text-dark {
-    color: $bodytext;
-}
-.text-themecolor {
-    color: $themecolor;
-}
-    .text-center{
+    .text-dark {
+        color: $bodytext;
+    }
+    .text-themecolor {
+        color: $themecolor;
+    }
+    .text-center {
         text-align: center;
     }
-    .text-right{
+    .text-right {
         text-align: right;
-        
     }
-    .text-left{
+    .text-left {
         text-align: left;
     }
 }
@@ -604,70 +607,70 @@ Background Colors
     background-color: $danger !important;
 }
 html body {
-.bg-megna {
-    background-color: $megna;
-}
-.bg-theme {
-    background-color: $themecolor;
-}
-
-.bg-inverse {
-    background-color: $inverse;
-}
-
-.bg-purple {
-    background-color: $purple!important;
-}
-
-.bg-light-primary {
-    background-color: $light-primary;
-}
-
-.bg-light-success {
-    background-color: $light-success;
-}
-
-.bg-light-info {
-    background-color: $light-info;
-}
-.bg-light-extra {
-    background-color: $extra-light;
-}
-
-.bg-light-warning {
-    background-color: $light-warning;
-}
-
-.bg-light-danger {
-    background-color: $light-danger;
-}
-
-.bg-light-inverse {
-    background-color: $light-inverse;
-}
-.bg-light {
-    background-color: $light;
-}
-.bg-white {
-    background-color: $white;
-}
+    .bg-megna {
+        background-color: $megna;
     }
-.img-circle{
+    .bg-theme {
+        background-color: $themecolor;
+    }
+
+    .bg-inverse {
+        background-color: $inverse;
+    }
+
+    .bg-purple {
+        background-color: $purple !important;
+    }
+
+    .bg-light-primary {
+        background-color: $light-primary;
+    }
+
+    .bg-light-success {
+        background-color: $light-success;
+    }
+
+    .bg-light-info {
+        background-color: $light-info;
+    }
+    .bg-light-extra {
+        background-color: $extra-light;
+    }
+
+    .bg-light-warning {
+        background-color: $light-warning;
+    }
+
+    .bg-light-danger {
+        background-color: $light-danger;
+    }
+
+    .bg-light-inverse {
+        background-color: $light-inverse;
+    }
+    .bg-light {
+        background-color: $light;
+    }
+    .bg-white {
+        background-color: $white;
+    }
+}
+.img-circle {
     border-radius: 100%;
 }
-.no-shadow{
+.no-shadow {
     box-shadow: none;
 }
-hr{
+hr {
     border: 0px;
-    height:1px;
+    height: 1px;
     background: $border;
 }
 /*******************
 Rounds
 *******************/
-.round{
-    line-height:48px;
+.round {
+    line-height: 48px;
     color: $white;
     width: 45px;
     height: 45px;
@@ -676,29 +679,29 @@ Rounds
     text-align: center;
     border-radius: 100%;
     background: $info;
-    img{
+    img {
         border-radius: 100%;
     }
 }
-.round-lg{
-    line-height:65px;
+.round-lg {
+    line-height: 65px;
     width: 60px;
     height: 60px;
-    font-size:30px;
+    font-size: 30px;
 }
-.round.round-info{
+.round.round-info {
     background: $info;
 }
-.round.round-warning{
+.round.round-warning {
     background: $warning;
 }
-.round.round-danger{
+.round.round-danger {
     background: $danger;
 }
-.round.round-success{
+.round.round-success {
     background: $success;
 }
-.round.round-primary{
+.round.round-primary {
     background: $primary;
 }
 /*******************
@@ -766,43 +769,40 @@ Labels
     background-color: $white;
 }
 
-
 .label-light-success {
     background-color: $light-success;
-    color:$success;
+    color: $success;
 }
 
 .label-light-info {
     background-color: $light-info;
-    color:$info;
+    color: $info;
 }
 
 .label-light-warning {
     background-color: $light-warning;
-    color:$warning;
+    color: $warning;
 }
 
 .label-light-danger {
     background-color: $light-danger;
-    color:$danger;
+    color: $danger;
 }
 
 .label-light-megna {
     background-color: $light-megna;
-    color:$megna;
+    color: $megna;
 }
 
 .label-light-primary {
     background-color: $light-primary;
-    color:$primary;
+    color: $primary;
 }
 
 .label-light-inverse {
     background-color: $light-inverse;
-    color:$inverse;
+    color: $inverse;
 }
-
-
 
 /*******************
 Notify
@@ -811,14 +811,14 @@ Notify
 .notify {
     position: relative;
     top: -20px;
-    right:0px;
+    right: 0px;
     .heartbit {
         position: absolute;
         top: -20px;
         right: -4px;
         height: 25px;
         width: 25px;
-        
+
         border: 5px solid $danger;
         border-radius: 70px;
         -moz-animation: heartbit 1s ease-out;
@@ -845,7 +845,7 @@ Notify
 @-moz-keyframes heartbit {
     0% {
         -moz-transform: scale(0);
-        opacity: 0.0;
+        opacity: 0;
     }
     25% {
         -moz-transform: scale(0.1);
@@ -861,14 +861,14 @@ Notify
     }
     100% {
         -moz-transform: scale(1);
-        opacity: 0.0;
+        opacity: 0;
     }
 }
 
 @-webkit-keyframes heartbit {
     0% {
         -webkit-transform: scale(0);
-        opacity: 0.0;
+        opacity: 0;
     }
     25% {
         -webkit-transform: scale(0.1);
@@ -884,140 +884,144 @@ Notify
     }
     100% {
         -webkit-transform: scale(1);
-        opacity: 0.0;
+        opacity: 0;
     }
 }
-.btn-block{
+.btn-block {
     display: block;
     width: 100%;
 }
-.btn-lg{
-    line-height: 48px!important;
+.btn-lg {
+    line-height: 48px !important;
 }
 /*******************
 froms
 *******************/
-.form-control{
+.form-control {
     border: 0px;
     line-height: 25px;
     padding: 10px;
     width: 100%;
-    font-size:$font-16;
+    font-size: $font-16;
 }
-.mat-form-field-underline{
+.mat-form-field-underline {
     background-color: rgba(0, 0, 0, 0.25);
 }
-.mat-form-field{
-   width: 100%;
+.mat-form-field {
+    width: 100%;
 }
 /*******************
 Mat card
 *******************/
-.mat-card{
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)!important;  
-    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)!important; 
+.mat-card {
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05) !important;
+    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05) !important;
     margin: 15px;
-    padding: 0px!important;
+    padding: 0px !important;
     border-radius: $radius;
-    
-    .mat-card-content{
-        font-size:1rem;
+    background-color: #ebeff3;
+    border-radius: 15px !important;
+
+    .mat-card-content {
+        font-size: 1rem;
         line-height: 23px;
-        padding: 24px;    
+        padding: 24px;
+        margin-bottom: 4rem;
+        height: 75vh;
     }
     .mat-card-image {
         width: calc(100% + 0px);
         margin: 0 0px 0px 0px;
     }
-    .mat-card-header{
+    .mat-card-header {
         padding: 12px;
         border-radius: $radius $radius 0 0;
-        .mat-card-title{
+        .mat-card-title {
             margin-bottom: 2px;
             font-size: 20px;
         }
-        .mat-card-subtitle, .mat-card-subtitle:not(:first-child){
+        .mat-card-subtitle,
+        .mat-card-subtitle:not(:first-child) {
             margin-bottom: 0px;
             margin-top: 0px;
             font-size: 14px;
         }
-        &.text-white{
-           .mat-card-title{
-            color:$white;
+        &.text-white {
+            .mat-card-title {
+                color: $white;
             }
-            .mat-card-subtitle{
-                color:rgba(255, 255, 255, 0.7);
+            .mat-card-subtitle {
+                color: rgba(255, 255, 255, 0.7);
             }
         }
     }
-    .mat-card-title{
+    .mat-card-title {
         font-size: 20px;
         margin-bottom: 5px;
     }
-    .mat-card-subtitle{
+    .mat-card-subtitle {
         margin-bottom: 20px;
     }
-    .mat-card-actions{
-        margin: 0px!important;
+    .mat-card-actions {
+        margin: 0px !important;
     }
 }
 
 /*******************
 Grid
 *******************/
-.row{
+.row {
     margin: 0 -10px;
 }
 /*******************
 Table
 *******************/
-.table{
+.table {
     width: 100%;
     text-align: left;
 }
-.table-rasponsive{
-    overflow:auto;
-    .mat-table{
+.table-rasponsive {
+    overflow: auto;
+    .mat-table {
         min-width: 280px;
     }
-    .mat-header-row{
-        .mat-header-cell{
+    .mat-header-row {
+        .mat-header-cell {
             white-space: nowrap;
         }
     }
-    .mat-cell{
-            white-space: nowrap;
-        }
+    .mat-cell {
+        white-space: nowrap;
+    }
 }
 /*******************
 Sparkline chart tooltip
 *******************/
-.jqstooltip{
-  width: auto !important;
-  height: auto !important;
-  background: $inverse;
-  color: $white;
-  padding: 5px 15px; 
-  border: 0px;
-  border-radius: 60px;     
+.jqstooltip {
+    width: auto !important;
+    height: auto !important;
+    background: $inverse;
+    color: $white;
+    padding: 5px 15px;
+    border: 0px;
+    border-radius: 60px;
 }
 /*******************
 list inline
 *******************/
-.list-inline{
+.list-inline {
     margin-left: 0px;
     padding: 0px;
-    li{
+    li {
         display: inline-block;
         list-style: none;
         margin-right: 10px;
-        &:last-child{
+        &:last-child {
             margin-right: 0px;
         }
-        
     }
 }
-.button-row button{
-    margin-right:2px;
-    margin-left:2px;
+.button-row button {
+    margin-right: 2px;
+    margin-left: 2px;
 }

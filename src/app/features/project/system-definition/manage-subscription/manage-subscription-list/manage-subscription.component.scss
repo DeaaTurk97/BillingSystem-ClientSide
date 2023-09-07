@@ -7,11 +7,38 @@
     padding-top: 0;
 }
 
-.button {
-    margin-left: 1rem;
+.saveButton {
     float: right;
+    width: 10rem !important;
+    height: 3rem;
+    border-radius: 15px;
+    background-color: #1662f3;
+    color: white;
+    display: inline !important;
+    margin: 1rem;
 }
 
 .fields {
     width: 50%;
+}
+
+.manageSub {
+    background-color: white;
+    border-radius: 15px;
+    width: 50%;
+    margin: auto;
+}
+
+.title {
+    color: #1662f3;
+    font-weight: bold;
+    text-align: center;
+}
+
+.formSty {
+    margin: auto;
+}
+
+.managrButtons {
+    margin-bottom: 0.4rem;
 }

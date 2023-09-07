@@ -13,6 +13,11 @@ import { map } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
+    footerIcon = '../../../../assets/images/icon/Group.svg';
+    loginIcon = '../../../../assets/images/icon/bills-icon.svg';
+    mukalamatIcon = '../../../../assets/images/icon/mukalamat.svg';
+    PhoneBillingSystemIcon =
+        '../../../../assets/images/icon/PhoneBillingSystem.svg';
     public loginForm: FormGroup;
     public isInProgress: boolean = false;
     public isHidePassword: boolean = true;

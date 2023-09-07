@@ -1,9 +1,8 @@
 <mat-card>
     <mat-card-content>
-        <div fxLayout="row wrap">
-            <div class="p-10" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
-                <mat-form-field>
-                    <mat-label>{{ 'statusNumberName' | translate }}</mat-label>
+        <div>
+            <div class="dropDownDiv">
+                <mat-form-field class="dropDownField">
                     <mat-select
                         (selectionChange)="changeIncomingNumbers($event.value)"
                         placeholder="{{ 'statusNumberName' | translate }}"
@@ -21,11 +20,12 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+
+            <div class="billActionsButtonsCont">
                 <button
                     mat-raised-button
                     type="submit"
-                    color="primary"
+                    class="billActionsButtons"
                     (click)="onInprogressRow()"
                     [disabled]="
                         selectedStatusNumber ==
@@ -34,13 +34,15 @@
                     "
                 >
                     {{ 'Inprogress' | translate }}
+                    <div class="inProgressIcon"></div>
                 </button>
             </div>
-            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+
+            <div class="billActionsButtonsCont">
                 <button
                     mat-raised-button
                     type="submit"
-                    color="primary"
+                    class="billActionsButtons"
                     (click)="onApproveRow()"
                     [disabled]="
                         selectedStatusNumber == StatusCycleResult.Approved ||
@@ -48,13 +50,15 @@
                     "
                 >
                     {{ 'Approve' | translate }}
+                    <div class="approveIcon"></div>
                 </button>
             </div>
-            <div class="p-10" fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100">
+
+            <div class="billActionsButtonsCont">
                 <button
                     mat-raised-button
                     type="submit"
-                    color="primary"
+                    class="billActionsButtons"
                     (click)="onRejectRow()"
                     [disabled]="
                         selectedStatusNumber == StatusCycleResult.Rejected ||
@@ -62,6 +66,7 @@
                     "
                 >
                     {{ 'Reject' | translate }}
+                    <div class="rejectIcon"></div>
                 </button>
             </div>
         </div>
